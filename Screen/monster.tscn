@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw53eopscb1l0"]
+
+[ext_resource type="Script" uid="uid://cshsmtpt6rxcs" path="res://Screen/monster.gd" id="1_bgb31"]
+[ext_resource type="Texture2D" uid="uid://bl2n7d0lwxh1c" path="res://Icons/Texture2D/2.png" id="2_0r8oe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yh3sy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bgb31"]
+radius = 39.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c6s8"]
+bg_color = Color(0.35213405, 0.6923274, 0.3231413, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xiib3"]
+bg_color = Color(0.86898494, 0.86898494, 0.8689847, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0r8oe"]
+radius = 46.0
+
+[node name="Monster" type="CharacterBody2D"]
+collision_layer = 260
+collision_mask = 2
+script = ExtResource("1_bgb31")
+is_stationary = null
+protect_home_only = null
+aggro_radius = null
+leash_radius = null
+patience_time = null
+return_delay = null
+attack_range = null
+attack_damage_delay = null
+gold_reward = null
+exp_reward = null
+unit_type = null
+team = null
+base_stats = null
+passive_effects = null
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yh3sy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3, -29)
+texture = ExtResource("2_0r8oe")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_bgb31")
+
+[node name="StatusContainer" type="Node" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -73.0
+offset_top = -87.0
+offset_right = 78.0
+offset_bottom = -60.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_4c6s8")
+show_percentage = false
+
+[node name="PatienceBar" type="ProgressBar" parent="."]
+offset_left = -70.0
+offset_top = -58.0
+offset_right = 62.0
+offset_bottom = -51.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_xiib3")
+show_percentage = false
+
+[node name="SeparationArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
+shape = SubResource("CircleShape2D_0r8oe")

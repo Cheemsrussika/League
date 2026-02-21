@@ -43,6 +43,8 @@ bg_color = Color(0.56078434, 0.56078434, 0.56078434, 0.30980393)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 15
 script = ExtResource("1_x8lij")
 metadata/_custom_type_script = "uid://c5sltpmetslbx"
 

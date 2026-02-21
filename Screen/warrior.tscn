@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://6cscgq2y2g21"]
+[gd_scene load_steps=7 format=3 uid="uid://6cscgq2y2g21"]
 
 [ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_2olbg"]
 [ext_resource type="Script" uid="uid://if6imaeuhse2" path="res://Scripts/PlayerInputComponent.gd" id="3_1obmu"]
+[ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="3_mrby3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
 radius = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1obmu"]
 radius = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7b8u"]
+resource_local_to_scene = true
+shader = ExtResource("3_mrby3")
+shader_parameter/max_health = 1000.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
 
 [node name="Warrior" groups=["champion", "unit"] instance=ExtResource("1_2olbg")]
 unit_type = 0
@@ -63,9 +70,6 @@ collision_layer = 2
 shape = SubResource("CircleShape2D_1obmu")
 debug_color = Color(1, 0.019449828, 0.00029224993, 0.41960785)
 
-[node name="Hurtbox" parent="." index="7"]
-collision_layer = 4
-
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 debug_color = Color(0.24314028, 0.6317096, 0.23221233, 0.41960785)
 
@@ -74,6 +78,9 @@ offset_left = -76.0
 offset_top = -76.0
 offset_right = 87.0
 offset_bottom = -67.0
+
+[node name="ColorRect" parent="HealthBarRoot" index="3"]
+material = SubResource("ShaderMaterial_x7b8u")
 
 [node name="Resourcebar" parent="HealthBarRoot" index="4"]
 offset_left = 3.0
@@ -86,18 +93,3 @@ offset_left = -45.0
 offset_top = -24.0
 offset_right = -5.0
 offset_bottom = 16.0
-
-[node name="Label" parent="HealthBarRoot/LevelBox" index="0"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.5
-offset_top = -12.5
-offset_right = 16.5
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30

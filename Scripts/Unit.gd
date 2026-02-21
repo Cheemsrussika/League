@@ -8,11 +8,13 @@ signal stats_updated(text: String)
 
 # --- CONSTANTS & PRELOADS ---
 const FLOATING_TEXT_SCENE = preload("res://Screen/floating_text.tscn")
-
+@export_group("Reward")
+@export var gold_reward: float = 210.0
+@export var exp_reward: float = 100.0
 # --- ENUMS ---
+@export_group("Unit setting")
 enum UnitType { CHAMPION, MINION, MONSTER, TOWER, DUMMY }
 @export var unit_type: UnitType = UnitType.MINION
-
 enum Team { BLUE, RED, NEUTRAL, PURPLE }
 @export var team: Team = Team.NEUTRAL
 

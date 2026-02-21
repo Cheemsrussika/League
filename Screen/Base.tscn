@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://b0a1owia3oyvo"]
+[gd_scene load_steps=101 format=3 uid="uid://b0a1owia3oyvo"]
 
 [ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
 [ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
@@ -92,6 +92,8 @@
 [ext_resource type="Resource" uid="uid://jpv8vyn8b4td" path="res://Item/Legend/Morellonomicon.tres" id="82_0lxbk"]
 [ext_resource type="Resource" uid="uid://ce2spmok436t6" path="res://Item/Legend/Mortal Reminder.tres" id="83_0u3gt"]
 [ext_resource type="Resource" uid="uid://djqid12n2y33w" path="res://Item/Legend/BloodThirster.tres" id="84_0u3gt"]
+[ext_resource type="PackedScene" uid="uid://y31re3jctavs" path="res://Screen/monster_camp.tscn" id="93_yuddn"]
+[ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="94_x0tvv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfvv7"]
 bg_color = Color(0.33675686, 0.66117305, 0.67245364, 1)
@@ -305,17 +307,43 @@ position = Vector2(67, 204)
 
 [node name="Unit" parent="." instance=ExtResource("47_l1xab")]
 position = Vector2(975, 1004)
+base_max_hp = null
+base_attack_damage = null
+base_magic_resist = null
+base_move_speed = null
+base_attack_speed = null
+gold_reward = null
+exp_reward = null
 unit_type = 3
+team = null
+base_stats = null
+passive_effects = null
 
 [node name="Unit2" parent="." instance=ExtResource("47_l1xab")]
 position = Vector2(885, 1273)
 base_max_hp = 100.0
+base_attack_damage = null
+base_magic_resist = null
+base_move_speed = null
+base_attack_speed = null
+gold_reward = null
+exp_reward = null
 unit_type = 0
+team = null
+base_stats = null
+passive_effects = null
 
 [node name="Unit3" parent="." instance=ExtResource("47_l1xab")]
 position = Vector2(671, 1142)
 base_max_hp = 100.0
+base_attack_damage = null
+base_magic_resist = null
+base_move_speed = null
+base_attack_speed = null
+gold_reward = null
+exp_reward = null
 unit_type = 2
+team = null
 base_stats = {
 "Energy": 0.0,
 "Mana": 100.0,
@@ -341,9 +369,12 @@ base_stats = {
 "omnivamp": 0.0,
 "phys_dmg_take_modi": 1.0
 }
+passive_effects = null
 
 [node name="EnemyChampion" parent="." instance=ExtResource("66_6xwof")]
 position = Vector2(66, 1171)
+collision_layer = 1
+collision_mask = 1
 team = 0
 base_stats = {
 "Energy": 0.0,
@@ -373,3 +404,19 @@ base_stats = {
 
 [node name="Area2D2" parent="." instance=ExtResource("16_fwvyv")]
 position = Vector2(-704, -324)
+
+[node name="MonsterCamp" parent="." instance=ExtResource("93_yuddn")]
+position = Vector2(249, 1575)
+camp_roster = Array[PackedScene]([ExtResource("94_x0tvv"), ExtResource("94_x0tvv"), ExtResource("94_x0tvv"), ExtResource("94_x0tvv")])
+
+[node name="Pos3" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(-211, 52)
+
+[node name="Pos1" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(-201, -135)
+
+[node name="Pos2" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(196, -181)
+
+[node name="Pos4" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(206, 101)

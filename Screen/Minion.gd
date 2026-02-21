@@ -8,8 +8,7 @@ class_name Minion
 @export var base_magic_resist: float = 0.0
 @export var base_move_speed: float = 325.0
 @export var base_attack_speed: float = 0.65
-@export var gold_reward: float = 210.0
-@export var exp_reward: float = 100.0
+
 
 @onready var health_bar = $ProgressBar
 

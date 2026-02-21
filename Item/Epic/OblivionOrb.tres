@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://bokhv2ehnaa67"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_mg308"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_aqexv"]
+[ext_resource type="Script" uid="uid://ba4aywk8g7s4o" path="res://Scripts/Effects/EffectGrievousWounds.gd" id="2_le208"]
+[ext_resource type="Texture2D" uid="uid://6x241k4nr7au" path="res://Icons/Epic Items/40px-Oblivion_Orb_item.png" id="3_0lvcr"]
+
+[sub_resource type="Resource" id="Resource_tjfip"]
+script = ExtResource("2_le208")
+trigger_type = 1
+id = "GrievousWound"
+is_unique = true
+metadata/_custom_type_script = "uid://ba4aywk8g7s4o"
+
+[resource]
+script = ExtResource("2_aqexv")
+item_tier = 3
+item_name = "Oblivion Orb"
+icon = ExtResource("3_0lvcr")
+cost = 800
+stats = {
+"ability_power": 25.0
+}
+effects = Array[ExtResource("1_mg308")]([SubResource("Resource_tjfip")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

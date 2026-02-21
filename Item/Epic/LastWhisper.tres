@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://d4kuvr38mim0l"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_fxqj7"]
+[ext_resource type="Texture2D" uid="uid://bn4x0vujao2iq" path="res://Icons/Epic Items/40px-Last_Whisper_item.png" id="2_xjp7d"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_hbep3"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="4_cbxb8"]
+
+[resource]
+script = ExtResource("3_hbep3")
+item_tier = 3
+item_name = "Last Whisper"
+icon = ExtResource("2_xjp7d")
+cost = 1450
+recipe = Array[ExtResource("3_hbep3")]([ExtResource("4_cbxb8"), ExtResource("4_cbxb8")])
+stats = {
+"armor_pen_percent": 18.0,
+"attack_damage": 20.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

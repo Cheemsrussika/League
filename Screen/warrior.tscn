@@ -1,0 +1,103 @@
+[gd_scene load_steps=5 format=3 uid="uid://6cscgq2y2g21"]
+
+[ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_2olbg"]
+[ext_resource type="Script" uid="uid://if6imaeuhse2" path="res://Scripts/PlayerInputComponent.gd" id="3_1obmu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1obmu"]
+radius = 32.0
+
+[node name="Warrior" groups=["champion", "unit"] instance=ExtResource("1_2olbg")]
+unit_type = 0
+team = 3
+base_stats = {
+"Energy": 0.0,
+"Mana": 100.0,
+"Mana_Regen": 2.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 30.0,
+"armor_pen": 0.0,
+"attack_damage": 60.0,
+"attack_range": 600.0,
+"attack_speed": 0.625,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"gold_gen": 5.0,
+"health": 500.0,
+"health_regen": 5.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 30.0,
+"move_speed": 330.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0
+}
+
+[node name="ChampSelect" parent="." index="0"]
+scale = Vector2(1.8131905, 1.7385885)
+
+[node name="InventoryComponent" parent="." index="2" groups=["player"]]
+
+[node name="AttackRange" type="Area2D" parent="." index="3"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource("CircleShape2D_2olbg")
+debug_color = Color(6.8345666e-06, 0.6186841, 0.57870895, 0.41960785)
+
+[node name="PlayerInputComponent" type="Node" parent="." index="4"]
+script = ExtResource("3_1obmu")
+metadata/_custom_type_script = "uid://if6imaeuhse2"
+
+[node name="StatusContainer" type="Node" parent="." index="5"]
+
+[node name="InteractionArea" type="Area2D" parent="." index="6"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" index="0"]
+shape = SubResource("CircleShape2D_1obmu")
+debug_color = Color(1, 0.019449828, 0.00029224993, 0.41960785)
+
+[node name="Hurtbox" parent="." index="7"]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+debug_color = Color(0.24314028, 0.6317096, 0.23221233, 0.41960785)
+
+[node name="HealthBarRoot" parent="." index="9"]
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 87.0
+offset_bottom = -67.0
+
+[node name="Resourcebar" parent="HealthBarRoot" index="4"]
+offset_left = 3.0
+offset_top = 11.0
+offset_right = 148.0
+offset_bottom = 16.0
+
+[node name="LevelBox" parent="HealthBarRoot" index="5"]
+offset_left = -45.0
+offset_top = -24.0
+offset_right = -5.0
+offset_bottom = 16.0
+
+[node name="Label" parent="HealthBarRoot/LevelBox" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.5
+offset_top = -12.5
+offset_right = 16.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30

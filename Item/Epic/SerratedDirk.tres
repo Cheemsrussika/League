@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://tkxp1snombks"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_urb7i"]
+[ext_resource type="Texture2D" uid="uid://djl67p1itwrgr" path="res://Icons/Epic Items/40px-Serrated_Dirk_item.png" id="2_gpyig"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_ccot1"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="4_rs3eu"]
+
+[resource]
+script = ExtResource("3_ccot1")
+item_tier = 3
+item_name = "Serrated Dirk"
+icon = ExtResource("2_gpyig")
+cost = 1000
+recipe = Array[ExtResource("3_ccot1")]([ExtResource("4_rs3eu"), ExtResource("4_rs3eu")])
+stats = {
+"armor_pen": 10.0,
+"attack_damage": 20.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

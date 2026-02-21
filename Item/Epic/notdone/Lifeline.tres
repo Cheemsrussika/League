@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bg6oi1htk4kuc"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ph346"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_8dyba"]
+[ext_resource type="Texture2D" uid="uid://buxwj7i3dtws7" path="res://Icons/Epic Items/40px-Lifeline_item.png" id="2_43g55"]
+
+[resource]
+script = ExtResource("2_8dyba")
+item_tier = 3
+icon = ExtResource("2_43g55")
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

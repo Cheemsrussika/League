@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://ilej0hp42lwb"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_wjcpr"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_lpyfg"]
+[ext_resource type="Texture2D" uid="uid://cbple33dnte5d" path="res://Icons/Boots/40px-Boots_of_Swiftness_item.png" id="2_p6hab"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_b2dm5"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="3_lpyfg"]
+[ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="4_b2dm5"]
+
+[sub_resource type="Resource" id="Resource_p2pjp"]
+script = ExtResource("2_lpyfg")
+stat_type = 4
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_e7w2v"]
+script = ExtResource("3_lpyfg")
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[resource]
+script = ExtResource("3_b2dm5")
+item_tier = 5
+item_name = "Boots  of Swiftnes"
+icon = ExtResource("2_p6hab")
+cost = 1000
+recipe = Array[ExtResource("3_b2dm5")]([ExtResource("4_b2dm5")])
+stats = {
+"move_speed": 55.0
+}
+effects = Array[ExtResource("1_wjcpr")]([SubResource("Resource_p2pjp"), SubResource("Resource_e7w2v")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

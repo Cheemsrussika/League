@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://b5iys7c072tbi"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_8yws4"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_53e0s"]
+[ext_resource type="Script" uid="uid://dcox482gwq85a" path="res://Scripts/Effects/EffectSpellblade.gd" id="2_qa8st"]
+[ext_resource type="Texture2D" uid="uid://buvqgrst7b4je" path="res://Icons/Epic Items/40px-Sheen_item.png" id="3_jta4a"]
+
+[sub_resource type="Resource" id="Resource_jta4a"]
+script = ExtResource("2_qa8st")
+buff_duration = 6.0
+cooldown = 1.5
+metadata/_custom_type_script = "uid://dcox482gwq85a"
+
+[resource]
+script = ExtResource("2_53e0s")
+item_tier = 3
+item_name = "Sheen"
+icon = ExtResource("3_jta4a")
+cost = 900
+stats = {
+"ability_haste": 10.0
+}
+effects = Array[ExtResource("1_8yws4")]([SubResource("Resource_jta4a")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

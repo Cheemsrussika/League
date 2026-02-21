@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://vnx5o8lwm20j"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_u5pma"]
+[ext_resource type="Texture2D" uid="uid://gmrgs411k84e" path="res://Icons/Epic Items/40px-Verdant_Barrier_item.png" id="2_ovmix"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_ussx3"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="4_r6srs"]
+[ext_resource type="Resource" uid="uid://cpd6ls73e25ay" path="res://Item/Basic/NullMagicMantle.tres" id="5_ojxm6"]
+
+[resource]
+script = ExtResource("2_ussx3")
+item_tier = 3
+item_name = "Verdant Barrier"
+icon = ExtResource("2_ovmix")
+cost = 1600
+recipe = Array[ExtResource("2_ussx3")]([ExtResource("4_r6srs"), ExtResource("4_r6srs"), ExtResource("5_ojxm6")])
+stats = {
+"ability_power": 40.0,
+"magic_res": 25.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

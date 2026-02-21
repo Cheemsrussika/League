@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://dhotscub3g83g"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_pymnc"]
+[ext_resource type="Texture2D" uid="uid://bhav0ev3ks46n" path="res://Icons/Epic Items/40px-The_Brutalizer_item.png" id="2_pk6kq"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_obyhs"]
+[ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="4_yv4bk"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="5_nldgn"]
+
+[resource]
+script = ExtResource("3_obyhs")
+item_tier = 3
+item_name = "The Brutalizer"
+icon = ExtResource("2_pk6kq")
+cost = 1337
+recipe = Array[ExtResource("3_obyhs")]([ExtResource("4_yv4bk"), ExtResource("5_nldgn")])
+stats = {
+"ability_haste": 10.0,
+"armor_pen": 5.0,
+"attack_damage": 25.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

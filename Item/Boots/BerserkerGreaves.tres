@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://12wnypp1l3bv"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_bl7u8"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_excat"]
+[ext_resource type="Texture2D" uid="uid://bcic0r35iduip" path="res://Icons/Boots/40px-Berserker's_Greaves_item.png" id="2_xce18"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_su2h1"]
+[ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="4_excat"]
+[ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="5_be6xb"]
+
+[sub_resource type="Resource" id="Resource_be6xb"]
+script = ExtResource("2_excat")
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[resource]
+script = ExtResource("3_su2h1")
+item_tier = 5
+item_name = "Berserker's Greaves"
+icon = ExtResource("2_xce18")
+cost = 1100
+recipe = Array[ExtResource("3_su2h1")]([ExtResource("4_excat"), ExtResource("5_be6xb")])
+stats = {
+"attack_speed": 0.25,
+"move_speed": 45.0
+}
+effects = Array[ExtResource("1_bl7u8")]([SubResource("Resource_be6xb")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

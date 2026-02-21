@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b2p1o7bhugx2m"]
+
+[ext_resource type="Texture2D" uid="uid://cwp64tydj404g" path="res://Icons/Basis items/40px-Ruby_Crystal_item.png" id="1_hbjyd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="1_ljhqq"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_vfpur"]
+
+[resource]
+script = ExtResource("1_ljhqq")
+item_tier = 2
+item_name = "RubyCrystal"
+icon = ExtResource("1_hbjyd")
+cost = 400
+stats = {
+"health": 150.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

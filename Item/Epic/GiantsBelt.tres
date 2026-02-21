@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://4mnyc0u8hcjs"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_mg1en"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_dvjfx"]
+[ext_resource type="Texture2D" uid="uid://cw8fmjkq34xnw" path="res://Icons/Epic Items/40px-Giant's_Belt_item.png" id="3_dx45b"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_0r4gt"]
+
+[resource]
+script = ExtResource("2_dvjfx")
+item_tier = 3
+item_name = "Giant's Belt"
+icon = ExtResource("3_dx45b")
+cost = 900
+recipe = Array[ExtResource("2_dvjfx")]([ExtResource("5_0r4gt")])
+stats = {
+"health": 350.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

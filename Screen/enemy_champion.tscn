@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://b15dqfi6udv6p"]
+
+[ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_j1rd1"]
+[ext_resource type="Script" uid="uid://der6a5ihs533o" path="res://Scripts/EnemyGold.gd" id="2_6a1j5"]
+[ext_resource type="Script" uid="uid://cr5n2skcy1k6u" path="res://Scripts/ai_input_component.gd" id="3_p17fj"]
+[ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="4_6a1j5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
+radius = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_el34r"]
+bg_color = Color(0.9515795, 0.95157963, 0.9515795, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_el34r"]
+resource_local_to_scene = true
+shader = ExtResource("4_6a1j5")
+shader_parameter/max_health = 1000.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+
+[node name="EnemyChampion" groups=["champion", "unit"] instance=ExtResource("1_j1rd1")]
+unit_type = 0
+team = 1
+
+[node name="AIInputComponent" type="Node" parent="." index="0" groups=["champion"]]
+script = ExtResource("3_p17fj")
+
+[node name="Label" type="Label" parent="." index="1"]
+offset_left = -121.0
+offset_top = -137.0
+offset_right = -81.0
+offset_bottom = -104.0
+vertical_alignment = 1
+script = ExtResource("2_6a1j5")
+
+[node name="ChampSelect" parent="." index="2"]
+debug_color = Color(0.4471416, 0.59359264, 0.19211486, 0.41960785)
+
+[node name="InventoryComponent" parent="." index="4" groups=["player"]]
+
+[node name="AttackRange" type="Area2D" parent="." index="5"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource("CircleShape2D_2olbg")
+debug_color = Color(0.9999997, 0.0014152366, 0.09820508, 0.41960785)
+
+[node name="StatusContainer" type="Node" parent="." index="6"]
+
+[node name="Hurtbox" parent="." index="7"]
+collision_layer = 4
+
+[node name="HealthBarRoot" parent="." index="9"]
+offset_left = -78.0
+offset_top = -80.0
+offset_right = 79.0
+offset_bottom = -71.0
+
+[node name="ShieldBar" parent="HealthBarRoot" index="1"]
+theme_override_styles/fill = SubResource("StyleBoxFlat_el34r")
+
+[node name="ColorRect" parent="HealthBarRoot" index="3"]
+material = SubResource("ShaderMaterial_el34r")
+offset_left = -2.0
+
+[node name="Resourcebar" parent="HealthBarRoot" index="4"]
+offset_left = 2.0
+offset_top = 11.0
+offset_right = 146.0
+offset_bottom = 16.0
+
+[node name="LevelBox" parent="HealthBarRoot" index="5"]
+offset_left = -44.0
+offset_top = -25.0
+offset_right = -4.0
+offset_bottom = 15.0

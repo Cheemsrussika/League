@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://bj0jju3mvggyd"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_5o8lu"]
+[ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="2_7l8fa"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_8m6jk"]
+[ext_resource type="Texture2D" uid="uid://crw6apylr2bc6" path="res://Icons/Legend Items/40px-Blade_of_the_Ruined_King_item.png" id="2_g16yj"]
+[ext_resource type="Script" uid="uid://d2bj6cdhja8e8" path="res://Scripts/Effects/EffectSlowOnHit.gd" id="3_7wadu"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="4_01phl"]
+[ext_resource type="Resource" uid="uid://rnw0a64y1qq1" path="res://Item/Epic/VampiricScepter.tres" id="5_e2qau"]
+[ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="6_7l8fa"]
+
+[sub_resource type="Resource" id="Resource_7wadu"]
+script = ExtResource("2_7l8fa")
+damage_on_hit = 0.0
+damage_percent_melee = 0.09
+damage_percent_ranged = 0.06
+buff_amount = 0.0
+buff_duration = 0.0
+cdr_on_hit = 0.0
+cdr_on_crit = 0.0
+metadata/_custom_type_script = "uid://dnywn2qxskb27"
+
+[sub_resource type="Resource" id="Resource_mat0l"]
+script = ExtResource("3_7wadu")
+slow_ranged = 0.3
+duration = 1.25
+id = "BoRK"
+is_unique = true
+cooldown = 30.0
+metadata/_custom_type_script = "uid://d2bj6cdhja8e8"
+
+[resource]
+script = ExtResource("2_8m6jk")
+item_tier = 4
+item_name = "Blade of The Ruin King"
+icon = ExtResource("2_g16yj")
+cost = 3200
+recipe = Array[ExtResource("2_8m6jk")]([ExtResource("4_01phl"), ExtResource("5_e2qau"), ExtResource("6_7l8fa")])
+stats = {
+"attack_damage": 40.0,
+"attack_speed": 0.25,
+"life_steal": 10.0
+}
+effects = Array[ExtResource("1_5o8lu")]([SubResource("Resource_7wadu"), SubResource("Resource_mat0l")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

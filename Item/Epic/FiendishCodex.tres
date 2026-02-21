@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://83mrwjhg4cmh"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_afvkc"]
+[ext_resource type="Texture2D" uid="uid://48cjmafqppnv" path="res://Icons/Epic Items/40px-Fiendish_Codex_item.png" id="2_nbcjt"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_yb8ee"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="4_vdkae"]
+[ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="5_efsc4"]
+
+[resource]
+script = ExtResource("3_yb8ee")
+item_tier = 3
+item_name = "Fiendish Codex"
+icon = ExtResource("2_nbcjt")
+cost = 850
+recipe = Array[ExtResource("3_yb8ee")]([ExtResource("4_vdkae"), ExtResource("5_efsc4")])
+stats = {
+"ability_haste": 10.0,
+"ability_power": 25.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://duengeiu1h2l0"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_noo3c"]
+[ext_resource type="Script" uid="uid://ciiq14ajccfcd" path="res://Scripts/Effects/RockSolid.gd" id="2_hs7lg"]
+[ext_resource type="Texture2D" uid="uid://dm5py5h6a5vgi" path="res://Icons/Epic Items/40px-Warden's_Mail_item.png" id="3_kq4y2"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_ue5um"]
+[ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="5_gsupj"]
+
+[sub_resource type="Resource" id="Resource_k5ec5"]
+script = ExtResource("2_hs7lg")
+base_reduction = 15.0
+hp_scaling = 0.0
+max_reduction_percent = 0.2
+id = "RockSolid"
+is_unique = true
+metadata/_custom_type_script = "uid://ciiq14ajccfcd"
+
+[resource]
+script = ExtResource("4_ue5um")
+item_tier = 3
+item_name = "Warden's Mail"
+icon = ExtResource("3_kq4y2")
+cost = 1000
+recipe = Array[ExtResource("4_ue5um")]([ExtResource("5_gsupj"), ExtResource("5_gsupj")])
+stats = {
+"armor": 40.0
+}
+effects = Array[ExtResource("1_noo3c")]([SubResource("Resource_k5ec5")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

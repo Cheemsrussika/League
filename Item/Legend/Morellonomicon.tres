@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://jpv8vyn8b4td"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_chlbn"]
+[ext_resource type="Script" uid="uid://ba4aywk8g7s4o" path="res://Scripts/Effects/EffectGrievousWounds.gd" id="2_6bwj1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_aoa8n"]
+[ext_resource type="Texture2D" uid="uid://kovnnlf5pewa" path="res://Icons/Legend Items/40px-Morellonomicon_item.png" id="3_bpjqh"]
+[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="5_2gi4u"]
+[ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="6_ngsfg"]
+[ext_resource type="Resource" uid="uid://bokhv2ehnaa67" path="res://Item/Epic/OblivionOrb.tres" id="7_s2tv4"]
+
+[sub_resource type="Resource" id="Resource_wkdth"]
+script = ExtResource("2_6bwj1")
+trigger_type = 1
+id = "GrievousWound"
+is_unique = true
+metadata/_custom_type_script = "uid://ba4aywk8g7s4o"
+
+[resource]
+script = ExtResource("2_aoa8n")
+item_tier = 4
+item_name = "Morellonomicon"
+icon = ExtResource("3_bpjqh")
+cost = 2850
+recipe = Array[ExtResource("2_aoa8n")]([ExtResource("5_2gi4u"), ExtResource("6_ngsfg"), ExtResource("7_s2tv4")])
+stats = {
+"ability_haste": 15.0,
+"ability_power": 75.0,
+"health": 350.0
+}
+effects = Array[ExtResource("1_chlbn")]([SubResource("Resource_wkdth")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

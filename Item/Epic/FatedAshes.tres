@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://b6o0cqp4qm3ud"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_l5rs0"]
+[ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/EffectBurn.gd" id="2_ld34p"]
+[ext_resource type="Texture2D" uid="uid://de1ls2sb5ai3d" path="res://Icons/Epic Items/40px-Fated_Ashes_item.png" id="3_mkfh6"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_he3g1"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_wji2p"]
+
+[sub_resource type="Resource" id="Resource_v3io7"]
+resource_local_to_scene = true
+script = ExtResource("2_ld34p")
+trigger_on_attacks = true
+base_damage_per_tick = 2.5
+ap_ratio_per_tick = 0.0
+target_max_hp_ratio = 0.0
+id = "INFLAME"
+is_unique = true
+metadata/_custom_type_script = "uid://do21qcd0yt5ih"
+
+[resource]
+script = ExtResource("4_he3g1")
+item_tier = 3
+item_name = "Fated Ashes"
+icon = ExtResource("3_mkfh6")
+cost = 900
+recipe = Array[ExtResource("4_he3g1")]([ExtResource("5_wji2p")])
+stats = {
+"ability_power": 30.0
+}
+effects = Array[ExtResource("1_l5rs0")]([SubResource("Resource_v3io7")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

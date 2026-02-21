@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bvfkcjt620xyf"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_tqana"]
+[ext_resource type="Texture2D" uid="uid://c55j3rtlve2o3" path="res://Icons/Epic Items/40px-Quicksilver_Sash_item.png" id="2_cs67s"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_q5erh"]
+
+[resource]
+script = ExtResource("2_q5erh")
+item_tier = 3
+icon = ExtResource("2_cs67s")
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

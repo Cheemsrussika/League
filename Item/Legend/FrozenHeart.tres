@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://bjtnw7sxxojxm"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_kux8s"]
+[ext_resource type="Script" uid="uid://cm12ioael5m4s" path="res://Scripts/Effects/EffectAura.gd" id="2_e3wnu"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_m4u0w"]
+[ext_resource type="Texture2D" uid="uid://857qfblxlxca" path="res://Icons/Legend Items/40px-Frozen_Heart_item.png" id="3_j2gty"]
+[ext_resource type="Resource" uid="uid://duengeiu1h2l0" path="res://Item/Epic/WardensMail.tres" id="5_8vw38"]
+[ext_resource type="Resource" uid="uid://c3q8hki3rgnpr" path="res://Item/Epic/GlacialBuckler.tres" id="6_d1gls"]
+
+[sub_resource type="Resource" id="Resource_7vdhk"]
+script = ExtResource("2_e3wnu")
+status_id = "frozen_heart"
+aura_range = 500.0
+aura_power = 0.2
+metadata/_custom_type_script = "uid://cm12ioael5m4s"
+
+[resource]
+script = ExtResource("2_m4u0w")
+item_tier = 4
+item_name = "Frozen Heart"
+icon = ExtResource("3_j2gty")
+cost = 2500
+recipe = Array[ExtResource("2_m4u0w")]([ExtResource("5_8vw38"), ExtResource("6_d1gls")])
+stats = {
+"Mana": 400.0,
+"ability_haste": 20.0,
+"armor": 75.0
+}
+effects = Array[ExtResource("1_kux8s")]([SubResource("Resource_7vdhk")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

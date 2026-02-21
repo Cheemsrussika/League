@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://de2t6fmkkifc2"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ll8qd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_8ndq8"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_60ogb"]
+[ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/OnHitSpeed.gd" id="3_rxuv4"]
+[ext_resource type="Texture2D" uid="uid://cjuemoe0hs4db" path="res://Icons/Legend Items/40px-Cosmic_Drive_item.png" id="4_a0lqp"]
+[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="6_qtueg"]
+[ext_resource type="Resource" uid="uid://b8o17p74qsy16" path="res://Item/Epic/AetherWisp.tres" id="7_3q2oi"]
+[ext_resource type="Resource" uid="uid://83mrwjhg4cmh" path="res://Item/Epic/FiendishCodex.tres" id="8_yhhh7"]
+
+[sub_resource type="Resource" id="Resource_3fcqn"]
+script = ExtResource("2_60ogb")
+stat_type = 8
+scaling_factor = 0.04
+scaling_source = 8
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_apaeg"]
+script = ExtResource("3_rxuv4")
+trigger_type = 1
+speed_bonus_on_kill = 0.0
+duration = 4.0
+id = "SPELLDANCE"
+is_unique = true
+metadata/_custom_type_script = "uid://61k1qccw6je8"
+
+[resource]
+script = ExtResource("2_8ndq8")
+item_tier = 4
+item_name = "Cosmic Drive"
+icon = ExtResource("4_a0lqp")
+cost = 3000
+recipe = Array[ExtResource("2_8ndq8")]([ExtResource("6_qtueg"), ExtResource("7_3q2oi"), ExtResource("8_yhhh7")])
+stats = {
+"ability_haste": 25.0,
+"ability_power": 70.0,
+"health": 350.0
+}
+effects = Array[ExtResource("1_ll8qd")]([SubResource("Resource_3fcqn"), SubResource("Resource_apaeg")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

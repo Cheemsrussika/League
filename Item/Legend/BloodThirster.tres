@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://djqid12n2y33w"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_663ly"]
+[ext_resource type="Script" uid="uid://di5668y1hwnmv" path="res://Scripts/Effects/EffectBloodThirster.gd" id="2_2g5xh"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_wv7ws"]
+[ext_resource type="Texture2D" uid="uid://dtyu7gjubfg1f" path="res://Icons/Legend Items/40px-Bloodthirster_item.png" id="3_3qm7e"]
+[ext_resource type="Resource" uid="uid://bvkgk3b7dqhb" path="res://Item/Basic/B.F.Sword.tres" id="5_6xagc"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="6_3ygct"]
+[ext_resource type="Resource" uid="uid://rnw0a64y1qq1" path="res://Item/Epic/VampiricScepter.tres" id="7_tqfl3"]
+
+[sub_resource type="Resource" id="Resource_u6kmt"]
+script = ExtResource("2_2g5xh")
+max_shield_base = 400.0
+max_shield_lvl_scaling = 700.0
+shield_duration = 999.0
+id = "ICHORSHIELD"
+is_unique = true
+metadata/_custom_type_script = "uid://di5668y1hwnmv"
+
+[resource]
+script = ExtResource("2_wv7ws")
+item_tier = 4
+item_name = "Blood Thirster"
+icon = ExtResource("3_3qm7e")
+cost = 3400
+recipe = Array[ExtResource("2_wv7ws")]([ExtResource("5_6xagc"), ExtResource("6_3ygct"), ExtResource("7_tqfl3")])
+stats = {
+"attack_damage": 80.0,
+"life_steal": 15.0
+}
+effects = Array[ExtResource("1_663ly")]([SubResource("Resource_u6kmt")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

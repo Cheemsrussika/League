@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bhemcjx4ip1pb"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_o4dxp"]
+[ext_resource type="Texture2D" uid="uid://dpjb4jro57hqw" path="res://Icons/Basis items/40px-Needlessly_Large_Rod_item.png" id="2_42fr6"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_yrfjg"]
+
+[resource]
+script = ExtResource("2_yrfjg")
+item_tier = 2
+item_name = "Needlessly Large Rod"
+icon = ExtResource("2_42fr6")
+cost = 1200
+stats = {
+"ability_power": 65.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

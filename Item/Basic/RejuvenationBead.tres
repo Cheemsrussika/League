@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c0lsbtuebutnd"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_j54us"]
+[ext_resource type="Texture2D" uid="uid://bhp3rsylr2h5p" path="res://Icons/Basis items/40px-Rejuvenation_Bead_item.png" id="2_l0n48"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_sfdtj"]
+
+[resource]
+script = ExtResource("2_sfdtj")
+item_tier = 2
+item_name = "Rejuvenation Bead"
+icon = ExtResource("2_l0n48")
+cost = 300
+stats = {
+"health_regen": 100.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

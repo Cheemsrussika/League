@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://vu42dfuc6g14"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_lp4cc"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_3j61k"]
+[ext_resource type="Script" uid="uid://b21h3s7uof2c4" path="res://Scripts/Effects/SunFire.gd" id="2_sww08"]
+[ext_resource type="Texture2D" uid="uid://clbq6rlff77x2" path="res://Icons/Epic Items/40px-Bami's_Cinder_item.png" id="3_sp3hb"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_jm26r"]
+[ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="6_41afy"]
+
+[sub_resource type="Resource" id="Resource_82oac"]
+script = ExtResource("2_sww08")
+damage_per_second = 15.0
+range = 325.0
+id = "IMMOLATE"
+is_unique = true
+cooldown = 1.0
+metadata/_custom_type_script = "uid://b21h3s7uof2c4"
+
+[resource]
+script = ExtResource("2_3j61k")
+item_tier = 3
+item_name = "Bami's Cinder"
+icon = ExtResource("3_sp3hb")
+cost = 900
+recipe = Array[ExtResource("2_3j61k")]([ExtResource("5_jm26r"), ExtResource("6_41afy")])
+stats = {
+"ability_haste": 5.0,
+"health": 150.0
+}
+effects = Array[ExtResource("1_lp4cc")]([SubResource("Resource_82oac")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

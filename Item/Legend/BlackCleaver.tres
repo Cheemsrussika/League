@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://cnxlipbdml3m5"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_o8kmw"]
+[ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/OnHitSpeed.gd" id="2_a3ldi"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_yjpdh"]
+[ext_resource type="Script" uid="uid://b8tyobvx5m570" path="res://Scripts/Effects/BlackCleaves.gd" id="3_tq0jg"]
+[ext_resource type="Texture2D" uid="uid://c2uwi52vc4k8e" path="res://Icons/Legend Items/40px-Black_Cleaver_item.png" id="4_rgy38"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="6_eai5c"]
+[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="7_n4b3s"]
+[ext_resource type="Resource" uid="uid://t6kyb7sdshu" path="res://Item/Epic/Phage.tres" id="8_ifuba"]
+
+[sub_resource type="Resource" id="Resource_8wytc"]
+script = ExtResource("2_a3ldi")
+speed_bonus_on_kill = 0.0
+metadata/_custom_type_script = "uid://61k1qccw6je8"
+
+[sub_resource type="Resource" id="Resource_bpn10"]
+script = ExtResource("3_tq0jg")
+shred_per_stack = 0.06
+max_stacks = 5
+id = "CARVE"
+is_unique = true
+cooldown = 0.1
+metadata/_custom_type_script = "uid://b8tyobvx5m570"
+
+[resource]
+script = ExtResource("2_yjpdh")
+item_tier = 4
+item_name = "Black Cleaves"
+icon = ExtResource("4_rgy38")
+cost = 3000
+recipe = Array[ExtResource("2_yjpdh")]([ExtResource("6_eai5c"), ExtResource("7_n4b3s"), ExtResource("8_ifuba")])
+stats = {
+"ability_haste": 20.0,
+"attack_damage": 40.0,
+"health": 400.0
+}
+effects = Array[ExtResource("1_o8kmw")]([SubResource("Resource_8wytc"), SubResource("Resource_bpn10")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

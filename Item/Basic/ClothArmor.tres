@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bhofbu1d3ehs4"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_blxnx"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_vbgll"]
+[ext_resource type="Texture2D" uid="uid://brvkhvmnhxncx" path="res://Icons/Basis items/40px-Cloth_Armor_item.png" id="2_y2jc6"]
+
+[resource]
+script = ExtResource("2_vbgll")
+item_tier = 2
+item_name = "Cloth armor"
+icon = ExtResource("2_y2jc6")
+cost = 300
+stats = {
+"armor": 15.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

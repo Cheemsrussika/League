@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://dvlv75lxkf2mb"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_xkcra"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_6fibn"]
+[ext_resource type="Texture2D" uid="uid://bjidxlt4k3xpq" path="res://Icons/Legend Items/40px-Abyssal_Mask_item.png" id="2_dgr6l"]
+[ext_resource type="Script" uid="uid://cm12ioael5m4s" path="res://Scripts/Effects/EffectAura.gd" id="2_vurxu"]
+[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="4_vurxu"]
+[ext_resource type="Resource" uid="uid://cllonhjofmq3g" path="res://Item/Epic/NegatronCloak.tres" id="5_qf1jt"]
+
+[sub_resource type="Resource" id="Resource_qf1jt"]
+script = ExtResource("2_vurxu")
+aura_range = 500.0
+aura_power = 0.2
+metadata/_custom_type_script = "uid://cm12ioael5m4s"
+
+[resource]
+script = ExtResource("2_6fibn")
+item_tier = 4
+item_name = "Abyssal Mask"
+icon = ExtResource("2_dgr6l")
+cost = 2650
+recipe = Array[ExtResource("2_6fibn")]([ExtResource("4_vurxu"), ExtResource("5_qf1jt")])
+stats = {
+"ability_haste": 15.0,
+"health": 350.0,
+"magic_res": 45.0
+}
+effects = Array[ExtResource("1_xkcra")]([SubResource("Resource_qf1jt")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://5iktadxqw6n"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_asn77"]
+[ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="2_2h0r7"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_sfvo4"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/EffectStacking.gd" id="3_d1sdp"]
+[ext_resource type="Texture2D" uid="uid://xgk7lvy2p1xr" path="res://Icons/Legend Items/Guinsoo's_Rageblade_item.png" id="3_qobr8"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_d1sdp"]
+[ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="6_gffh5"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="7_a00n0"]
+
+[sub_resource type="Resource" id="Resource_3yj0m"]
+script = ExtResource("2_2h0r7")
+damage_type = 1
+damage_on_hit = 30.0
+metadata/_custom_type_script = "uid://dnywn2qxskb27"
+
+[sub_resource type="Resource" id="Resource_gffh5"]
+script = ExtResource("3_d1sdp")
+status_id = "rageblade"
+stack_duration = 3.0
+hits_to_trigger_phantom = 2
+stats_per_stack = {
+"attack_speed": 0.08
+}
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[resource]
+script = ExtResource("2_sfvo4")
+item_tier = 4
+item_name = "Guinsoo's Rageblade"
+icon = ExtResource("3_qobr8")
+cost = 3000
+recipe = Array[ExtResource("2_sfvo4")]([ExtResource("5_d1sdp"), ExtResource("6_gffh5"), ExtResource("7_a00n0")])
+stats = {
+"ability_power": 30.0,
+"attack_damage": 30.0,
+"attack_speed": 0.25
+}
+effects = Array[ExtResource("1_asn77")]([SubResource("Resource_3yj0m"), SubResource("Resource_gffh5")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

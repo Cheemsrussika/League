@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://dc1y3q3k7kfei"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_n0lyr"]
+[ext_resource type="Script" uid="uid://lgulkxdnrb2u" path="res://Scripts/Effects/EffectOnLevelUp.gd" id="2_x6ual"]
+[ext_resource type="Texture2D" uid="uid://ct4oek2ulla8i" path="res://Icons/Epic Items/40px-Lost_Chapter_item.png" id="3_qgk8f"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_swrxd"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_26xun"]
+[ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="6_qv0rp"]
+[ext_resource type="Resource" uid="uid://ddj1rhowauinx" path="res://Item/Basic/SapphireCrystal.tres" id="7_ac76b"]
+
+[sub_resource type="Resource" id="Resource_3h871"]
+script = ExtResource("2_x6ual")
+metadata/_custom_type_script = "uid://lgulkxdnrb2u"
+
+[resource]
+script = ExtResource("4_swrxd")
+item_tier = 3
+item_name = "Lost chapter"
+icon = ExtResource("3_qgk8f")
+cost = 1200
+recipe = Array[ExtResource("4_swrxd")]([ExtResource("5_26xun"), ExtResource("6_qv0rp"), ExtResource("7_ac76b")])
+stats = {
+"Mana": 300.0,
+"ability_haste": 10.0,
+"ability_power": 40.0
+}
+effects = Array[ExtResource("1_n0lyr")]([SubResource("Resource_3h871")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

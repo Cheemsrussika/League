@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://wqmny87fih1x"
+path="res://.godot/imported/StoryBGM_Through the Veil of Time_Hitctrl.ogg-39bb022b118f0605f54709e47e8adbab.oggvorbisstr"
+
+[deps]
+
+source_file="res://Rescources/AudioClip/StoryBGM_Through the Veil of Time_Hitctrl.ogg"
+dest_files=["res://.godot/imported/StoryBGM_Through the Veil of Time_Hitctrl.ogg-39bb022b118f0605f54709e47e8adbab.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://jels4131atyy"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_vycu8"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_kjwuo"]
+[ext_resource type="Texture2D" uid="uid://dck3vlkl3u21d" path="res://Icons/Epic Items/40px-Winged_Moonplate_item.png" id="3_2g05m"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_4a3q8"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_q5fc3"]
+
+[sub_resource type="Resource" id="Resource_sssk1"]
+script = ExtResource("2_kjwuo")
+stat_type = 8
+scaling_factor = 0.04
+scaling_source = 8
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("4_4a3q8")
+item_tier = 3
+item_name = "Winged Moonplate"
+icon = ExtResource("3_2g05m")
+cost = 800
+recipe = Array[ExtResource("4_4a3q8")]([ExtResource("5_q5fc3")])
+stats = {
+"health": 200.0
+}
+effects = Array[ExtResource("1_vycu8")]([SubResource("Resource_sssk1")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ddj1rhowauinx"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_780fg"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_leo8k"]
+[ext_resource type="Texture2D" uid="uid://dtw0dfdytc1n8" path="res://Icons/Basis items/40px-Sapphire_Crystal_item.png" id="2_plt7e"]
+
+[resource]
+script = ExtResource("2_leo8k")
+item_tier = 2
+item_name = "Sapphire Crystal"
+icon = ExtResource("2_plt7e")
+cost = 300
+stats = {
+"Mana": 300.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

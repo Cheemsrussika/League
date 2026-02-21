@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://7frorhb4bnmg"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_k2irk"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_7fnv1"]
+[ext_resource type="Script" uid="uid://bau220e58fhc1" path="res://Scripts/Effects/EffectEnternity.gd" id="2_8o62g"]
+[ext_resource type="Texture2D" uid="uid://hiixa0n6rxug" path="res://Icons/Epic Items/40px-Catalyst_of_Aeons_item.png" id="2_evyfx"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_8xuf0"]
+[ext_resource type="Resource" uid="uid://ddj1rhowauinx" path="res://Item/Basic/SapphireCrystal.tres" id="6_ym7el"]
+
+[sub_resource type="Resource" id="Resource_8xuf0"]
+script = ExtResource("2_8o62g")
+id = "Enternity"
+is_unique = true
+metadata/_custom_type_script = "uid://bau220e58fhc1"
+
+[resource]
+script = ExtResource("2_7fnv1")
+item_tier = 3
+item_name = "Calayst of Aeon"
+icon = ExtResource("2_evyfx")
+cost = 1300
+recipe = Array[ExtResource("2_7fnv1")]([ExtResource("5_8xuf0"), ExtResource("5_8xuf0"), ExtResource("6_ym7el")])
+stats = {
+"Mana": 375.0,
+"health": 300.0
+}
+effects = Array[ExtResource("1_k2irk")]([SubResource("Resource_8xuf0")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://dfw5fq3o5i0j4"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_fkset"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_bqlgc"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="3_bqlgc"]
+[ext_resource type="Texture2D" uid="uid://dr8xxy2x63qwd" path="res://Icons/Boots/40px-Ionian_Boots_of_Lucidity_item.png" id="3_fkset"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_1fn8b"]
+[ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="6_haqgo"]
+
+[sub_resource type="Resource" id="Resource_vda3o"]
+script = ExtResource("2_bqlgc")
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[sub_resource type="Resource" id="Resource_bqlgc"]
+script = ExtResource("3_bqlgc")
+stat_type = 24
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("4_1fn8b")
+item_tier = 5
+item_name = "Boots of Haste"
+icon = ExtResource("3_fkset")
+cost = 900
+recipe = Array[ExtResource("4_1fn8b")]([ExtResource("6_haqgo")])
+stats = {
+"ability_haste": 10.0,
+"move_speed": 45.0
+}
+effects = Array[ExtResource("1_fkset")]([SubResource("Resource_vda3o"), SubResource("Resource_bqlgc")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

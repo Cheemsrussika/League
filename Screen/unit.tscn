@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://ptaf7yvgd4q7"]
+
+[ext_resource type="Script" uid="uid://bclt8updei63r" path="res://Screen/Minion.gd" id="1_ktxfn"]
+[ext_resource type="Texture2D" uid="uid://c0617ugrmsrr8" path="res://Icons/RedSword_Images/Texture2D/Soft.png" id="2_ps5dh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cie5s"]
+radius = 57.271286
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ktxfn"]
+radius = 54.74486
+
+[node name="Unit" type="CharacterBody2D" groups=["unit"]]
+script = ExtResource("1_ktxfn")
+base_armor = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cie5s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ps5dh")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 4.0
+offset_bottom = 18.0
+
+[node name="StatusContainer" type="Node" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_ktxfn")

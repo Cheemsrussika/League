@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://l8v8o36i0asj"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_1b6yi"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_6wo5k"]
+[ext_resource type="Texture2D" uid="uid://b67ple1sxbn3x" path="res://Icons/Boots/40px-Boots_item.png" id="2_s1yix"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_vjpxp"]
+
+[sub_resource type="Resource" id="Resource_vda3o"]
+script = ExtResource("2_6wo5k")
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[resource]
+script = ExtResource("2_vjpxp")
+item_tier = 5
+item_name = "Leather Boot"
+icon = ExtResource("2_s1yix")
+cost = 300
+stats = {
+"move_speed": 25.0
+}
+effects = Array[ExtResource("1_1b6yi")]([SubResource("Resource_vda3o")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

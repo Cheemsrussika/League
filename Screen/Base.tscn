@@ -1,0 +1,375 @@
+[gd_scene load_steps=99 format=3 uid="uid://b0a1owia3oyvo"]
+
+[ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
+[ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="2_ky6x0"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="3_bfvbo"]
+[ext_resource type="Script" uid="uid://dtgrxjbcvbpgb" path="res://Scripts/UI/StatDisplayUI.gd" id="5_c08ud"]
+[ext_resource type="Script" uid="uid://cwjqrmdplxmtp" path="res://Scripts/UI/GoldDisplay.gd" id="8_x8w0l"]
+[ext_resource type="Script" uid="uid://c2uhtaydlbtft" path="res://Scripts/UI/InventoryUI.gd" id="9_f5qwj"]
+[ext_resource type="Resource" uid="uid://t6kyb7sdshu" path="res://Item/Epic/Phage.tres" id="9_opapx"]
+[ext_resource type="PackedScene" uid="uid://dh1kg7jb5q3p1" path="res://Screen/ItemSlot.tscn" id="10_ky6x0"]
+[ext_resource type="Script" uid="uid://ckx25w4bojv7t" path="res://Scripts/Shop/shop_panel.gd" id="11_bfvbo"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="12_pqdyi"]
+[ext_resource type="PackedScene" uid="uid://dbmc5700nwao0" path="res://Screen/ItemButton.tscn" id="13_fwvyv"]
+[ext_resource type="FontFile" uid="uid://byogv8vles4k1" path="res://League.otf" id="13_pqdyi"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="14_oo1lh"]
+[ext_resource type="Resource" uid="uid://bvkgk3b7dqhb" path="res://Item/Basic/B.F.Sword.tres" id="15_lh7kg"]
+[ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="16_4yv0o"]
+[ext_resource type="PackedScene" uid="uid://b8t4l5fufhnkd" path="res://Screen/Shop.tscn" id="16_fwvyv"]
+[ext_resource type="Resource" uid="uid://dtu1xvq34a4pa" path="res://Item/Basic/CloakOfAgility.tres" id="17_c2424"]
+[ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="18_lh7kg"]
+[ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="19_4yv0o"]
+[ext_resource type="Resource" uid="uid://tvoqqved45nb" path="res://Item/Basic/FaerieCharm.tres" id="20_c2424"]
+[ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="21_tepqr"]
+[ext_resource type="Resource" uid="uid://bhemcjx4ip1pb" path="res://Item/Basic/NeedlesslyLargeRod.tres" id="22_n1fyg"]
+[ext_resource type="Resource" uid="uid://cpd6ls73e25ay" path="res://Item/Basic/NullMagicMantle.tres" id="23_cqxy2"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="24_w13fg"]
+[ext_resource type="Resource" uid="uid://c0lsbtuebutnd" path="res://Item/Basic/RejuvenationBead.tres" id="25_w13fg"]
+[ext_resource type="Resource" uid="uid://ddj1rhowauinx" path="res://Item/Basic/SapphireCrystal.tres" id="26_l15fi"]
+[ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="27_qwdbk"]
+[ext_resource type="Resource" uid="uid://12wnypp1l3bv" path="res://Item/Boots/BerserkerGreaves.tres" id="28_k2oju"]
+[ext_resource type="Resource" uid="uid://ilej0hp42lwb" path="res://Item/Boots/SwiftnessBoot.tres" id="29_3aoee"]
+[ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="30_jkpe8"]
+[ext_resource type="Resource" uid="uid://dfw5fq3o5i0j4" path="res://Item/Boots/IoniaBootOfLucidity.tres" id="30_q7nm4"]
+[ext_resource type="Resource" uid="uid://cfe7ks0fdixch" path="res://Item/Boots/MecurysTread.tres" id="31_11frw"]
+[ext_resource type="Resource" uid="uid://rnw0a64y1qq1" path="res://Item/Epic/VampiricScepter.tres" id="31_kopp8"]
+[ext_resource type="Resource" uid="uid://bj0jju3mvggyd" path="res://Item/Legend/BoRK.tres" id="32_cfqj6"]
+[ext_resource type="Resource" uid="uid://bsd2midqtbnvg" path="res://Item/Boots/PlatedSteelCaps.tres" id="32_jkpe8"]
+[ext_resource type="Resource" uid="uid://4mnyc0u8hcjs" path="res://Item/Epic/GiantsBelt.tres" id="33_ghclr"]
+[ext_resource type="Resource" uid="uid://cun1bhbdw7vrv" path="res://Item/Boots/SorcerersShoes.tres" id="33_kopp8"]
+[ext_resource type="Resource" uid="uid://bwvat6atcwi88" path="res://Item/Legend/Warmogs.tres" id="34_8i3vq"]
+[ext_resource type="Resource" uid="uid://vu42dfuc6g14" path="res://Item/Epic/BamisCinder.tres" id="35_0cdmu"]
+[ext_resource type="Resource" uid="uid://b0t8vgxtmvl4f" path="res://Item/Epic/BrambleVest.tres" id="36_sr40m"]
+[ext_resource type="Resource" uid="uid://cbqxtl71vdy16" path="res://Item/Legend/SunfireAegis.tres" id="37_4da42"]
+[ext_resource type="Resource" uid="uid://cnxlipbdml3m5" path="res://Item/Legend/BlackCleaver.tres" id="38_l1xab"]
+[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="39_hc7ry"]
+[ext_resource type="Script" uid="uid://cdqw43cfvb8kb" path="res://Scripts/item_tooltip.gd" id="40_2ix4f"]
+[ext_resource type="Resource" uid="uid://ciseabtuq4b50" path="res://Item/Epic/Zeal.tres" id="40_hc7ry"]
+[ext_resource type="Resource" uid="uid://jels4131atyy" path="res://Item/Epic/WingedMoonplate.tres" id="41_hy0ny"]
+[ext_resource type="Resource" uid="uid://duengeiu1h2l0" path="res://Item/Epic/WardensMail.tres" id="42_2h5ek"]
+[ext_resource type="Resource" uid="uid://cvjp2l6isdf1k" path="res://Item/Legend/Nashor'sTooth.tres" id="43_2scoa"]
+[ext_resource type="Resource" uid="uid://b2c8p5wki6fdf" path="res://Item/Epic/Tunneler.tres" id="44_1nw2w"]
+[ext_resource type="Resource" uid="uid://b8o17p74qsy16" path="res://Item/Epic/AetherWisp.tres" id="45_u407m"]
+[ext_resource type="Resource" uid="uid://c76wymbcjw2dd" path="res://Item/Epic/BandleGlassMirror.tres" id="46_vho3s"]
+[ext_resource type="PackedScene" uid="uid://ptaf7yvgd4q7" path="res://Screen/unit.tscn" id="47_l1xab"]
+[ext_resource type="Resource" uid="uid://j5c88js16ijc" path="res://Item/Epic/BlightingJewel.tres" id="47_vskhq"]
+[ext_resource type="Resource" uid="uid://caa8em6kaon6n" path="res://Item/Epic/ForbiddenIdol.tres" id="48_mvecn"]
+[ext_resource type="Resource" uid="uid://7frorhb4bnmg" path="res://Item/Epic/CatalystOfAeon.tres" id="49_phy30"]
+[ext_resource type="Resource" uid="uid://d4khfbq8depp3" path="res://Item/Legend/RodOfAge.tres" id="50_dpq2r"]
+[ext_resource type="Resource" uid="uid://dhotscub3g83g" path="res://Item/Epic/theBrutalizer.tres" id="51_v3bt6"]
+[ext_resource type="Resource" uid="uid://bb3qkihocwasx" path="res://Item/Epic/CaulfieldsWarhammer.tres" id="52_v74rd"]
+[ext_resource type="Resource" uid="uid://tesngflvqw88" path="res://Item/Epic/ExecutionersCalling.tres" id="53_1gd0u"]
+[ext_resource type="Resource" uid="uid://sqyxsria5ulb" path="res://Item/Epic/SteelSigil.tres" id="54_2vv1j"]
+[ext_resource type="Resource" uid="uid://83mrwjhg4cmh" path="res://Item/Epic/FiendishCodex.tres" id="55_73usx"]
+[ext_resource type="Resource" uid="uid://c3q8hki3rgnpr" path="res://Item/Epic/GlacialBuckler.tres" id="56_1m38t"]
+[ext_resource type="Resource" uid="uid://bmbihwpvfepda" path="res://Item/Epic/HeartboundAxe.tres" id="57_6xwof"]
+[ext_resource type="Resource" uid="uid://bndfuylav5ivl" path="res://Item/Epic/HexDrinker.tres" id="58_6xwof"]
+[ext_resource type="Resource" uid="uid://betbe4m7utd5l" path="res://Item/Legend/SteraksGage.tres" id="59_fnd0l"]
+[ext_resource type="Resource" uid="uid://dh0hwda8anp1x" path="res://Item/Epic/SpectresCowl.tres" id="60_xxp4e"]
+[ext_resource type="Resource" uid="uid://1vd2lkrpdy6n" path="res://Item/Epic/HextechAlternator.tres" id="61_8cyjb"]
+[ext_resource type="Resource" uid="uid://cksugq2a4v8o1" path="res://Item/Epic/HauntingGuise.tres" id="62_gyato"]
+[ext_resource type="Resource" uid="uid://b6o0cqp4qm3ud" path="res://Item/Epic/FatedAshes.tres" id="63_kfw8r"]
+[ext_resource type="Resource" uid="uid://tkxp1snombks" path="res://Item/Epic/SerratedDirk.tres" id="64_87cmq"]
+[ext_resource type="Resource" uid="uid://d4kuvr38mim0l" path="res://Item/Epic/LastWhisper.tres" id="65_rld22"]
+[ext_resource type="PackedScene" uid="uid://b15dqfi6udv6p" path="res://Screen/enemy_champion.tscn" id="66_6xwof"]
+[ext_resource type="Resource" uid="uid://dc1y3q3k7kfei" path="res://Item/Epic/LostChapter.tres" id="66_rld22"]
+[ext_resource type="Resource" uid="uid://cllonhjofmq3g" path="res://Item/Epic/NegatronCloak.tres" id="67_1sylu"]
+[ext_resource type="Resource" uid="uid://bvn4rojfkhj1s" path="res://Item/Epic/NoonQuiver.tres" id="68_ns61s"]
+[ext_resource type="Resource" uid="uid://dqiqf0h3qihyj" path="res://Item/Epic/Rectrix.tres" id="69_j2xt6"]
+[ext_resource type="Resource" uid="uid://batsdjv2308jp" path="res://Item/Epic/ScoutsSlingshot.tres" id="70_ns61s"]
+[ext_resource type="Resource" uid="uid://dpiuc4su5pfuq" path="res://Item/Legend/YuntalWildArrow.tres" id="71_j2xt6"]
+[ext_resource type="Resource" uid="uid://b5iys7c072tbi" path="res://Item/Epic/Sheen.tres" id="72_yh16q"]
+[ext_resource type="Resource" uid="uid://bokhv2ehnaa67" path="res://Item/Epic/OblivionOrb.tres" id="73_rfvkr"]
+[ext_resource type="Resource" uid="uid://dvlv75lxkf2mb" path="res://Item/Legend/AbyssalMask.tres" id="74_rba1e"]
+[ext_resource type="Resource" uid="uid://5iktadxqw6n" path="res://Item/Legend/Guinsoo'sRageBlade.tres" id="75_y6i5l"]
+[ext_resource type="Resource" uid="uid://dwmol31xw4c4u" path="res://Item/Legend/KrakenSlayer.tres" id="76_gls4v"]
+[ext_resource type="Resource" uid="uid://bjtnw7sxxojxm" path="res://Item/Legend/FrozenHeart.tres" id="77_7qi4f"]
+[ext_resource type="Resource" uid="uid://b1jgquod6absv" path="res://Item/Legend/LiandrysTorment.tres" id="78_fgd83"]
+[ext_resource type="Resource" uid="uid://de2t6fmkkifc2" path="res://Item/Legend/CosmicDrive.tres" id="79_2tlit"]
+[ext_resource type="Resource" uid="uid://6wthl07t5jds" path="res://Item/Legend/LichBane.tres" id="80_1ls0y"]
+[ext_resource type="Resource" uid="uid://botd0k4rxiupq" path="res://Item/Legend/VoidStaff.tres" id="81_mvcfj"]
+[ext_resource type="Resource" uid="uid://jpv8vyn8b4td" path="res://Item/Legend/Morellonomicon.tres" id="82_0lxbk"]
+[ext_resource type="Resource" uid="uid://ce2spmok436t6" path="res://Item/Legend/Mortal Reminder.tres" id="83_0u3gt"]
+[ext_resource type="Resource" uid="uid://djqid12n2y33w" path="res://Item/Legend/BloodThirster.tres" id="84_0u3gt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfvv7"]
+bg_color = Color(0.33675686, 0.66117305, 0.67245364, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkpe8"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+bg_color = Color(1, 1, 1, 0.20784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwvyv"]
+bg_color = Color(0, 0, 0, 0.50980395)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqdyi"]
+content_margin_left = 6.0
+bg_color = Color(0.6, 0.6, 0.6, 0.21960784)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6862745, 0.57254905, 0.15686275, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr40m"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6745098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11frw"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.74415547, 0.57367885, 1.92523e-07, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 15.0
+expand_margin_right = 15.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_cfqj6")
+warrior_scene = ExtResource("2_i61t5")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -46.0
+offset_top = -39.0
+offset_right = 49.0
+offset_bottom = 38.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bfvv7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 42.0
+offset_top = 50.0
+offset_right = 430.0
+offset_bottom = 593.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jkpe8")
+script = ExtResource("5_c08ud")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 236.0
+offset_top = 648.0
+offset_right = 276.0
+offset_bottom = 671.0
+script = ExtResource("8_x8w0l")
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 446.0
+offset_top = 50.0
+offset_right = 486.0
+offset_bottom = 90.0
+mouse_filter = 2
+
+[node name="ShopPanel" type="Panel" parent="CanvasLayer/Control" groups=["shop_ui"]]
+layout_mode = 0
+offset_right = 1414.0
+offset_bottom = 641.0
+script = ExtResource("11_bfvbo")
+all_items = Array[ExtResource("12_pqdyi")]([ExtResource("3_bfvbo"), ExtResource("2_ky6x0"), ExtResource("9_opapx"), ExtResource("14_oo1lh"), ExtResource("15_lh7kg"), ExtResource("16_4yv0o"), ExtResource("17_c2424"), ExtResource("18_lh7kg"), ExtResource("19_4yv0o"), ExtResource("20_c2424"), ExtResource("21_tepqr"), ExtResource("22_n1fyg"), ExtResource("23_cqxy2"), ExtResource("24_w13fg"), ExtResource("25_w13fg"), ExtResource("26_l15fi"), ExtResource("27_qwdbk"), ExtResource("28_k2oju"), ExtResource("29_3aoee"), ExtResource("30_q7nm4"), ExtResource("31_11frw"), ExtResource("32_jkpe8"), ExtResource("33_kopp8"), ExtResource("30_jkpe8"), ExtResource("31_kopp8"), ExtResource("32_cfqj6"), ExtResource("33_ghclr"), ExtResource("34_8i3vq"), ExtResource("35_0cdmu"), ExtResource("36_sr40m"), ExtResource("37_4da42"), ExtResource("38_l1xab"), ExtResource("39_hc7ry"), ExtResource("40_hc7ry"), ExtResource("41_hy0ny"), ExtResource("42_2h5ek"), ExtResource("43_2scoa"), ExtResource("44_1nw2w"), ExtResource("45_u407m"), ExtResource("46_vho3s"), ExtResource("47_vskhq"), ExtResource("48_mvecn"), ExtResource("49_phy30"), ExtResource("50_dpq2r"), ExtResource("51_v3bt6"), ExtResource("52_v74rd"), ExtResource("53_1gd0u"), ExtResource("54_2vv1j"), ExtResource("55_73usx"), ExtResource("56_1m38t"), ExtResource("57_6xwof"), ExtResource("58_6xwof"), ExtResource("59_fnd0l"), ExtResource("60_xxp4e"), ExtResource("61_8cyjb"), ExtResource("62_gyato"), ExtResource("63_kfw8r"), ExtResource("64_87cmq"), ExtResource("65_rld22"), ExtResource("66_rld22"), ExtResource("67_1sylu"), ExtResource("68_ns61s"), ExtResource("69_j2xt6"), ExtResource("70_ns61s"), ExtResource("71_j2xt6"), ExtResource("72_yh16q"), ExtResource("73_rfvkr"), ExtResource("74_rba1e"), ExtResource("75_y6i5l"), ExtResource("76_gls4v"), ExtResource("77_7qi4f"), ExtResource("78_fgd83"), ExtResource("79_2tlit"), ExtResource("80_1ls0y"), ExtResource("81_mvcfj"), ExtResource("82_0lxbk"), ExtResource("83_0u3gt"), ExtResource("84_0u3gt")])
+shop_slot_scene = ExtResource("13_fwvyv")
+
+[node name="TooltipLabel" type="Label" parent="CanvasLayer/Control/ShopPanel" groups=["shop_tooltip"]]
+unique_name_in_owner = true
+z_index = 5
+layout_mode = 0
+offset_left = -1984.0
+offset_top = 1336.0
+offset_right = -1792.0
+offset_bottom = 1359.0
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_fwvyv")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/ShopPanel"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 927.0
+offset_bottom = 568.0
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqdyi")
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Boots" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "BOOTS"
+
+[node name="Boots2" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+custom_minimum_size = Vector2(870, 0)
+layout_mode = 2
+
+[node name="Potions" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("13_pqdyi")
+theme_override_font_sizes/font_size = 13
+text = "Consumable"
+
+[node name="Consumable" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Starter" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 13
+text = "Starter Item"
+
+[node name="StaterRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+clip_contents = true
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+
+[node name="Basic" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Basic Item"
+
+[node name="BasicRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+
+[node name="Epic" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Epic Item"
+
+[node name="EpicRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Legend" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Legendary"
+
+[node name="LegendaryRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+
+[node name="ItemTooltip" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 50.0
+offset_top = 778.0
+offset_right = 287.0
+offset_bottom = 954.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_sr40m")
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("40_2ix4f")
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 60.0
+offset_top = 955.0
+offset_right = 130.0
+offset_bottom = 1025.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_11frw")
+
+[node name="InventoryIcons" type="HBoxContainer" parent="CanvasLayer/PanelContainer" node_paths=PackedStringArray("info_panel") groups=["player"]]
+z_index = 5
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+script = ExtResource("9_f5qwj")
+slot_scene = ExtResource("10_ky6x0")
+info_panel = NodePath("../../ItemTooltip")
+max_slots = 10
+
+[node name="Area2D" parent="." instance=ExtResource("16_fwvyv")]
+position = Vector2(67, 204)
+
+[node name="Unit" parent="." instance=ExtResource("47_l1xab")]
+position = Vector2(975, 1004)
+unit_type = 3
+
+[node name="Unit2" parent="." instance=ExtResource("47_l1xab")]
+position = Vector2(885, 1273)
+base_max_hp = 100.0
+unit_type = 0
+
+[node name="Unit3" parent="." instance=ExtResource("47_l1xab")]
+position = Vector2(671, 1142)
+base_max_hp = 100.0
+unit_type = 2
+base_stats = {
+"Energy": 0.0,
+"Mana": 100.0,
+"Mana_Regen": 2.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 30.0,
+"armor_pen": 0.0,
+"attack_damage": 60.0,
+"attack_range": 175.0,
+"attack_speed": 0.625,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"gold_gen": 5.0,
+"health": 2000.0,
+"health_regen": 5.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 30.0,
+"move_speed": 330.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0
+}
+
+[node name="EnemyChampion" parent="." instance=ExtResource("66_6xwof")]
+position = Vector2(66, 1171)
+team = 0
+base_stats = {
+"Energy": 0.0,
+"Mana": 100.0,
+"Mana_Regen": 2.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 0.0,
+"armor_pen": 0.0,
+"attack_damage": 60.0,
+"attack_range": 175.0,
+"attack_speed": 0.625,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"gold_gen": 5.0,
+"health": 500.0,
+"health_regen": 5.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 30.0,
+"move_speed": 330.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0
+}
+
+[node name="Area2D2" parent="." instance=ExtResource("16_fwvyv")]
+position = Vector2(-704, -324)

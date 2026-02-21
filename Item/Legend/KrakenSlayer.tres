@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://dwmol31xw4c4u"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_x3t4r"]
+[ext_resource type="Texture2D" uid="uid://dvflea41joh3i" path="res://Icons/Legend Items/40px-Kraken_Slayer_item.png" id="2_6sf3d"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_nsx53"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_pudel"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/EffectStacking.gd" id="3_462lq"]
+[ext_resource type="Resource" uid="uid://dqiqf0h3qihyj" path="res://Item/Epic/Rectrix.tres" id="4_g856e"]
+[ext_resource type="Resource" uid="uid://bmbihwpvfepda" path="res://Item/Epic/HeartboundAxe.tres" id="5_pudel"]
+[ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="6_462lq"]
+
+[sub_resource type="Resource" id="Resource_l75du"]
+script = ExtResource("2_pudel")
+stat_type = 8
+scaling_factor = 0.04
+scaling_source = 8
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_lvgqp"]
+script = ExtResource("3_462lq")
+status_id = "Kraken"
+max_stacks = 3
+trigger_phantom_on_max = false
+deal_damage_on_max = true
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[resource]
+script = ExtResource("2_nsx53")
+item_tier = 4
+item_name = "Kraken Slayer"
+icon = ExtResource("2_6sf3d")
+cost = 3000
+recipe = Array[ExtResource("2_nsx53")]([ExtResource("4_g856e"), ExtResource("5_pudel"), ExtResource("6_462lq")])
+stats = {
+"attack_damage": 45.0,
+"attack_speed": 0.4
+}
+effects = Array[ExtResource("1_x3t4r")]([SubResource("Resource_l75du"), SubResource("Resource_lvgqp")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

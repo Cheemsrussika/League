@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://ciseabtuq4b50"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_w0wsn"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_qnxdr"]
+[ext_resource type="Texture2D" uid="uid://bfa8ri1lwa86d" path="res://Icons/Epic Items/40px-Zeal_item.png" id="3_v2uvb"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_cnubf"]
+[ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="5_530c2"]
+[ext_resource type="Resource" uid="uid://dtu1xvq34a4pa" path="res://Item/Basic/CloakOfAgility.tres" id="6_33je8"]
+
+[sub_resource type="Resource" id="Resource_8atk4"]
+script = ExtResource("2_qnxdr")
+stat_type = 8
+scaling_factor = 0.04
+scaling_source = 8
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("4_cnubf")
+item_tier = 3
+item_name = "Zeal"
+icon = ExtResource("3_v2uvb")
+cost = 1200
+recipe = Array[ExtResource("4_cnubf")]([ExtResource("5_530c2"), ExtResource("6_33je8")])
+stats = {
+"attack_speed": 0.15,
+"crit_chance": 15.0
+}
+effects = Array[ExtResource("1_w0wsn")]([SubResource("Resource_8atk4")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

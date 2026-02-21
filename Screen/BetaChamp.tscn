@@ -1,0 +1,153 @@
+[gd_scene load_steps=17 format=3 uid="uid://c06la7wb3y2ws"]
+
+[ext_resource type="Texture2D" uid="uid://begfyuuoi5e1i" path="res://Rescources/Champs/ic_launcher_foreground.png" id="1_t8ta8"]
+[ext_resource type="Script" uid="uid://c5sltpmetslbx" path="res://Scripts/Champion.gd" id="1_x8lij"]
+[ext_resource type="Script" uid="uid://b02ds6kwg5inp" path="res://Scripts/UI/InventoryComponent.gd" id="3_v5kux"]
+[ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="4_7thvn"]
+[ext_resource type="Script" uid="uid://4wgvkprjp1s7" path="res://Scripts/UI/HealthBar.gd.gd" id="4_lhodd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x8lij"]
+radius = 34.0147
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v5kux"]
+radius = 42.047592
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7thvn"]
+radius = 3.1622777
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7thvn"]
+bg_color = Color(0.20871013, 0.20871016, 0.20871004, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhodd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rgg0g"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3bsgw"]
+bg_color = Color(0.3019608, 0.7019608, 0.28627452, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0epe"]
+bg_color = Color(0.32156864, 0.8117647, 0.11372549, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhodd"]
+resource_local_to_scene = true
+shader = ExtResource("4_7thvn")
+shader_parameter/max_health = 1000.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sbl6n"]
+bg_color = Color(0.56078434, 0.56078434, 0.56078434, 0.30980393)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mrgnu"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_x8lij")
+metadata/_custom_type_script = "uid://c5sltpmetslbx"
+
+[node name="ChampSelect" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x8lij")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t8ta8")
+
+[node name="InventoryComponent" type="Node2D" parent="."]
+script = ExtResource("3_v5kux")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_v5kux")
+
+[node name="AuraArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AuraArea"]
+shape = SubResource("CircleShape2D_7thvn")
+
+[node name="HealthBarRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -101.0
+offset_top = -98.0
+offset_right = 102.0
+offset_bottom = -82.0
+script = ExtResource("4_lhodd")
+
+[node name="HealthBar" type="ProgressBar" parent="HealthBarRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7thvn")
+show_percentage = false
+
+[node name="ShieldBar" type="ProgressBar" parent="HealthBarRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_lhodd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_rgg0g")
+show_percentage = false
+
+[node name="HealthFill" type="ProgressBar" parent="HealthBarRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_3bsgw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c0epe")
+show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="HealthBarRoot"]
+material = SubResource("ShaderMaterial_lhodd")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resourcebar" type="ProgressBar" parent="HealthBarRoot"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 20.0
+offset_right = 198.0
+offset_bottom = 25.0
+theme_override_styles/background = SubResource("StyleBoxFlat_sbl6n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mrgnu")
+show_percentage = false
+
+[node name="LevelBox" type="ColorRect" parent="HealthBarRoot"]
+layout_mode = 0
+offset_left = -43.0
+offset_top = -17.0
+offset_right = -3.0
+offset_bottom = 23.0
+color = Color(0.5019608, 0.5019608, 0.5019608, 0.627451)
+
+[node name="LevelLabel" type="Label" parent="HealthBarRoot/LevelBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -12.5
+offset_top = -12.5
+offset_right = 12.5
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

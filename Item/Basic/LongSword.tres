@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bm1t10eki6njp"]
+
+[ext_resource type="Texture2D" uid="uid://8kwyi0lgjfts" path="res://Icons/Basis items/40px-Long_Sword_item.png" id="1_dew2u"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="1_re38q"]
+
+[resource]
+script = ExtResource("1_re38q")
+item_tier = 2
+item_name = "Long Sword"
+icon = ExtResource("1_dew2u")
+cost = 350
+recipe = null
+stats = {
+"attack_damage": 10.0
+}
+description = null
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

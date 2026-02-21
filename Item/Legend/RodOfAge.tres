@@ -1,0 +1,44 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://d4khfbq8depp3"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ek5k3"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_cvelt"]
+[ext_resource type="Texture2D" uid="uid://cjfvnwuprecvg" path="res://Icons/Legend Items/40px-Rod_of_Ages_item.png" id="2_lsxqn"]
+[ext_resource type="Script" uid="uid://c1f8wxk4a5a3u" path="res://Scripts/Effects/EffectTimeScaling.gd" id="2_wdxuu"]
+[ext_resource type="Script" uid="uid://bau220e58fhc1" path="res://Scripts/Effects/EffectEnternity.gd" id="3_48a5t"]
+[ext_resource type="Resource" uid="uid://7frorhb4bnmg" path="res://Item/Epic/CatalystOfAeon.tres" id="6_3pjm8"]
+[ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="7_oix7v"]
+
+[sub_resource type="Resource" id="Resource_tdywb"]
+resource_local_to_scene = true
+script = ExtResource("2_wdxuu")
+health_per_stack = 10.0
+mana_per_stack = 30.0
+ap_per_stack = 3.0
+id = "Enternity"
+is_unique = true
+metadata/_custom_type_script = "uid://c1f8wxk4a5a3u"
+
+[sub_resource type="Resource" id="Resource_hflfo"]
+script = ExtResource("3_48a5t")
+mana_restore_percent_damage = 0.1
+health_restore_percent_cost = 0.25
+health_restore_cap_per_cast = 20.0
+id = "Enternity"
+is_unique = true
+cooldown = 1.0
+metadata/_custom_type_script = "uid://bau220e58fhc1"
+
+[resource]
+script = ExtResource("2_cvelt")
+item_tier = 4
+item_name = "Rod of Age"
+icon = ExtResource("2_lsxqn")
+cost = 2600
+recipe = Array[ExtResource("2_cvelt")]([ExtResource("6_3pjm8"), ExtResource("7_oix7v")])
+stats = {
+"Mana": 500.0,
+"ability_power": 45.0,
+"health": 350.0
+}
+effects = Array[ExtResource("1_ek5k3")]([SubResource("Resource_tdywb"), SubResource("Resource_hflfo")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

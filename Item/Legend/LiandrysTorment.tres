@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://b1jgquod6absv"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_c56x1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_f7n0m"]
+[ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/EffectBurn.gd" id="2_h42gg"]
+[ext_resource type="Texture2D" uid="uid://dk7out8sa1nge" path="res://Icons/Legend Items/40px-Liandry's_Torment_item.png" id="2_smqje"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/EffectStacking.gd" id="3_c3yb2"]
+[ext_resource type="Resource" uid="uid://cksugq2a4v8o1" path="res://Item/Epic/HauntingGuise.tres" id="6_wmc6f"]
+[ext_resource type="Resource" uid="uid://b6o0cqp4qm3ud" path="res://Item/Epic/FatedAshes.tres" id="7_3ae0m"]
+
+[sub_resource type="Resource" id="Resource_pgoxq"]
+script = ExtResource("2_h42gg")
+trigger_on_attacks = true
+burn_id = "Lindrys"
+base_damage_per_tick = 0.0
+ap_ratio_per_tick = 0.0
+metadata/_custom_type_script = "uid://do21qcd0yt5ih"
+
+[sub_resource type="Resource" id="Resource_3j8xh"]
+script = ExtResource("3_c3yb2")
+status_id = "SUFFERING"
+max_stacks = 3
+trigger_phantom_on_max = false
+stats_per_stack = {
+"dmg_dealt_modifier": 0.02
+}
+id = "TORMENT"
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[resource]
+script = ExtResource("2_f7n0m")
+item_tier = 4
+item_name = "Liandry's Torment"
+icon = ExtResource("2_smqje")
+cost = 3000
+recipe = Array[ExtResource("2_f7n0m")]([ExtResource("6_wmc6f"), ExtResource("7_3ae0m")])
+stats = {
+"ability_power": 60.0,
+"health": 300.0
+}
+effects = Array[ExtResource("1_c56x1")]([SubResource("Resource_pgoxq"), SubResource("Resource_3j8xh")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

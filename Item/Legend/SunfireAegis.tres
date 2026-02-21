@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://cbqxtl71vdy16"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_o6f1d"]
+[ext_resource type="Script" uid="uid://b21h3s7uof2c4" path="res://Scripts/Effects/SunFire.gd" id="2_a2ipd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_nyap8"]
+[ext_resource type="Texture2D" uid="uid://bfq7ju7lrw8t0" path="res://Icons/Legend Items/40px-Sunfire_Aegis_item.png" id="3_pffiq"]
+[ext_resource type="Resource" uid="uid://vu42dfuc6g14" path="res://Item/Epic/BamisCinder.tres" id="5_w3a1b"]
+[ext_resource type="Resource" uid="uid://c6cmdw4s7bsdc" path="res://Item/Epic/ChainVest.tres" id="6_elu0g"]
+
+[sub_resource type="Resource" id="Resource_npi2t"]
+script = ExtResource("2_a2ipd")
+damage_per_second = 20.0
+id = "IMMOLATE"
+is_unique = true
+cooldown = 1.0
+metadata/_custom_type_script = "uid://b21h3s7uof2c4"
+
+[resource]
+script = ExtResource("2_nyap8")
+item_tier = 4
+item_name = "Sunfire Aegis"
+icon = ExtResource("3_pffiq")
+cost = 2700
+recipe = Array[ExtResource("2_nyap8")]([ExtResource("5_w3a1b"), ExtResource("6_elu0g")])
+stats = {
+"ability_haste": 10.0,
+"armor": 50.0,
+"health": 350.0
+}
+effects = Array[ExtResource("1_o6f1d")]([SubResource("Resource_npi2t")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

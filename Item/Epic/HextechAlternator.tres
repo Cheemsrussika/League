@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://1vd2lkrpdy6n"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_qxu5p"]
+[ext_resource type="Script" uid="uid://du61tu737icc1" path="res://Scripts/Effects/EffectProcing.gd" id="2_bl10t"]
+[ext_resource type="Texture2D" uid="uid://ceqrr8xkitt52" path="res://Icons/Epic Items/40px-Hextech_Alternator_item.png" id="3_fpxqe"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_vjwum"]
+[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_mf7sk"]
+
+[sub_resource type="Resource" id="Resource_gmax8"]
+resource_local_to_scene = true
+script = ExtResource("2_bl10t")
+bonus_damage = 100.0
+target_must_be_champion = false
+cooldown = 40.0
+metadata/_custom_type_script = "uid://du61tu737icc1"
+
+[resource]
+script = ExtResource("4_vjwum")
+item_tier = 3
+item_name = "Hextech Alternator"
+icon = ExtResource("3_fpxqe")
+cost = 1100
+recipe = Array[ExtResource("4_vjwum")]([ExtResource("5_mf7sk"), ExtResource("5_mf7sk")])
+stats = {
+"ability_power": 45.0
+}
+effects = Array[ExtResource("1_qxu5p")]([SubResource("Resource_gmax8")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

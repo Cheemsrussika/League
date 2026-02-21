@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://dpiuc4su5pfuq"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_6hrjs"]
+[ext_resource type="Texture2D" uid="uid://ivgoiclr57nn" path="res://Icons/Legend Items/40px-Yun_Tal_Wildarrows_item.png" id="2_1cqq1"]
+[ext_resource type="Script" uid="uid://bu6w05ofj1if2" path="res://Scripts/Effects/YunTalWildArrow.gd" id="2_qq1l0"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_s51x7"]
+[ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="3_l6ul2"]
+[ext_resource type="Resource" uid="uid://batsdjv2308jp" path="res://Item/Epic/ScoutsSlingshot.tres" id="5_l6ul2"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="5_qq1l0"]
+[ext_resource type="Resource" uid="uid://bvn4rojfkhj1s" path="res://Item/Epic/NoonQuiver.tres" id="6_l6ul2"]
+
+[sub_resource type="Resource" id="Resource_l6ul2"]
+script = ExtResource("2_qq1l0")
+total_ad_ratio = 0.09
+id = "Yuntal"
+is_unique = true
+metadata/_custom_type_script = "uid://bu6w05ofj1if2"
+
+[sub_resource type="Resource" id="Resource_e87ol"]
+script = ExtResource("3_l6ul2")
+damage_on_hit = 0.0
+allow_buff = true
+buff_cooldown = 30.0
+metadata/_custom_type_script = "uid://dnywn2qxskb27"
+
+[resource]
+script = ExtResource("2_s51x7")
+item_tier = 4
+item_name = "Yun Tal WildArrow"
+icon = ExtResource("2_1cqq1")
+cost = 3500
+recipe = Array[ExtResource("2_s51x7")]([ExtResource("5_qq1l0"), ExtResource("6_l6ul2"), ExtResource("5_l6ul2")])
+stats = {
+"attack_damage": 65.0,
+"attack_speed": 0.4,
+"crit_chance": 25.0
+}
+effects = Array[ExtResource("1_6hrjs")]([SubResource("Resource_l6ul2"), SubResource("Resource_e87ol")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

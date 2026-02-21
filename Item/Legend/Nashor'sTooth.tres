@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://cvjp2l6isdf1k"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_kq7ik"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_p1gmi"]
+[ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="2_tnyft"]
+[ext_resource type="Texture2D" uid="uid://h8t3o3bn754x" path="res://Icons/Legend Items/40px-Nashor's_Tooth_item.png" id="3_481hq"]
+[ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="5_5vo5y"]
+[ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="6_ad74o"]
+[ext_resource type="Resource" uid="uid://83mrwjhg4cmh" path="res://Item/Epic/FiendishCodex.tres" id="7_bt1ur"]
+
+[sub_resource type="Resource" id="Resource_inkoa"]
+script = ExtResource("2_tnyft")
+damage_type = 1
+scaling_factor = 0.15
+affects_structures = true
+cap_vs_monsters = 0.0
+id = "IcathianBite"
+is_unique = true
+metadata/_custom_type_script = "uid://dnywn2qxskb27"
+
+[resource]
+script = ExtResource("2_p1gmi")
+item_tier = 4
+item_name = "Nashor's Tooth"
+icon = ExtResource("3_481hq")
+cost = 2900
+recipe = Array[ExtResource("2_p1gmi")]([ExtResource("5_5vo5y"), ExtResource("6_ad74o"), ExtResource("7_bt1ur")])
+stats = {
+"ability_haste": 15.0,
+"ability_power": 80.0,
+"attack_speed": 0.5
+}
+effects = Array[ExtResource("1_kq7ik")]([SubResource("Resource_inkoa")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

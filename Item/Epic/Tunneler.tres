@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://b2c8p5wki6fdf"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ijbec"]
+[ext_resource type="Texture2D" uid="uid://cixfxan1e2p1k" path="res://Icons/Epic Items/40px-Tunneler_item.png" id="2_xbhxh"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_ifxlw"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="4_0n6j0"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_xxjv1"]
+
+[resource]
+script = ExtResource("3_ifxlw")
+item_tier = 3
+item_name = "Tunneler"
+icon = ExtResource("2_xbhxh")
+cost = 1150
+recipe = Array[ExtResource("3_ifxlw")]([ExtResource("4_0n6j0"), ExtResource("5_xxjv1")])
+stats = {
+"attack_damage": 15.0,
+"health": 250.0
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

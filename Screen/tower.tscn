@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://n7uw18mnnif0"]
+
+[ext_resource type="Texture2D" uid="uid://8381uk4imaal" path="res://Icons/Texture2D/005.png" id="1_g51dk"]
+[ext_resource type="Script" uid="uid://c5xqiykmyuqa6" path="res://Screen/tower.gd" id="1_kj2vm"]
+[ext_resource type="PackedScene" uid="uid://dyke7lymdtuf" path="res://Screen/tower_projectile.tscn" id="2_wuxap"]
+[ext_resource type="Shader" uid="uid://li5g2rq1tb8" path="res://Screen/tower.gdshader" id="3_sarqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hwwcj"]
+radius = 88.68484
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g51dk"]
+radius = 94.83143
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kj2vm"]
+radius = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wuxap"]
+shader = ExtResource("3_sarqp")
+shader_parameter/health = 1.0
+shader_parameter/plate_count = 5
+shader_parameter/plates_broken = 0
+shader_parameter/health_color = Color(0.2, 0.8, 0.2, 1)
+shader_parameter/plate_color = Color(0.8, 0.6, 0, 1)
+shader_parameter/broken_color = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/divider_color = Color(0, 0, 0, 1)
+
+[node name="Tower" type="CharacterBody2D"]
+script = ExtResource("1_kj2vm")
+projectile_scene = ExtResource("2_wuxap")
+armor_per_plate = 100.0
+mr_per_plate = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hwwcj")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("CircleShape2D_g51dk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -27)
+scale = Vector2(3, 3)
+texture = ExtResource("1_g51dk")
+
+[node name="StatusContainer" type="Node" parent="."]
+
+[node name="RangeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RangeArea"]
+shape = SubResource("CircleShape2D_kj2vm")
+
+[node name="HealthRootControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -152.0
+offset_top = -149.0
+offset_right = 155.0
+offset_bottom = -109.0
+
+[node name="ColorRect" type="ColorRect" parent="HealthRootControl"]
+material = SubResource("ShaderMaterial_wuxap")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="ProgressBar" parent="HealthRootControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

@@ -23,7 +23,7 @@ func on_equip(user: Champion) -> void:
 	_is_fully_stacked = false
 
 # Count time every frame
-func on_update(user: Champion, delta: float) -> void:
+func on_update(user: Unit, delta: float) -> void:
 	if current_stacks >= max_stacks:
 		return
 
@@ -34,7 +34,7 @@ func on_update(user: Champion, delta: float) -> void:
 		time_accumulator -= interval_seconds
 		_add_stack(user)
 
-func _add_stack(user: Champion) -> void:
+func _add_stack(user: Unit) -> void:
 	current_stacks += 1
 	user.recalculate_stats()
 	if current_stacks >= max_stacks and not _is_fully_stacked:
@@ -42,7 +42,7 @@ func _add_stack(user: Champion) -> void:
 		if evolve_at_max:
 			pass#TODO:add one level at max stack
 
-func on_stat_calculation(user: Champion) -> void:
+func on_stat_calculation(user: Unit) -> void:
 	if current_stacks <= 0: return
 
 	# Calculate totals

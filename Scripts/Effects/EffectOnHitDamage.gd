@@ -47,7 +47,7 @@ const BUFF_ID = "stat_buff"
 
 
 # --- 2. MAIN ATTACK LOGIC ---
-func on_attack(user: Champion, context: Dictionary) -> void:
+func on_attack(user: Unit, context: Dictionary) -> void:
 	var target = context.get("target")
 	if not target or not is_instance_valid(target): return
 	if not _try_start_cooldown(): return 

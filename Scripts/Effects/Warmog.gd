@@ -8,7 +8,7 @@ class_name EffectWarmogs
 var time_accumulator: float = 0.0
 var healed:float=0
 
-func on_update(user: Champion, delta: float) -> void:
+func on_update(user: Unit, delta: float) -> void:
 	var max_hp = user.get_total(user.Stat.HP)
 	if user.current_health >= max_hp:
 		time_accumulator = 0.0 

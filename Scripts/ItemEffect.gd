@@ -38,17 +38,17 @@ func on_equip(user: Champion) -> void:
 func on_unequip(user: Champion) -> void:
 	pass
 
-func on_attack(user: Champion, context: Dictionary) -> void:
+func on_attack(user: Unit, context: Dictionary) -> void:
 	pass
 
-func on_hit_received(user: Champion, context: Dictionary) -> void:
+func on_hit_received(user: Unit, context: Dictionary) -> void:
 	pass
 
-func on_kill(user: Champion, context: Dictionary) -> void:
+func on_kill(user: Unit, context: Dictionary) -> void:
 	pass
-func on_update(user: Champion, delta: float) -> void:
+func on_update(user: Unit, delta: float) -> void:
 	pass
-func on_active(user: Champion, context: Dictionary) -> void:
+func on_active(user: Unit, context: Dictionary) -> void:
 	pass
 func on_ability_cast(user: Champion, context: Dictionary) -> void:
 	pass
@@ -58,3 +58,17 @@ func on_stat_calculation(unit):
 	pass
 func on_calculate_hit_damage(unit, context):
 	pass
+func on_hit(user: Unit, context: Dictionary) -> void:
+	pass
+func on_damage_dealt(user: Unit, context: Dictionary):
+	pass
+func on_event(hook: String, owner: Unit, data: Dictionary):
+	match hook:
+		"on_attack":
+			on_attack(owner, data) 
+		"on_hit":
+			on_hit(owner, data)
+		"on_hit_received":
+			on_hit_received(owner, data)
+		"on_damage_dealt":
+			on_damage_dealt(owner, data)

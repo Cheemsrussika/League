@@ -132,7 +132,7 @@ func on_skill_cast(ability_identifier: String, mana_cost: float = 0.0, is_toggle
 		"ability_id": ability_identifier, "mana_cost": mana_cost,
 		"is_toggle": is_toggle, "cast_time": Time.get_ticks_msec()
 	}
-	_trigger_item_effects("on_ability_activated", context)
+	_trigger_passive_effects("on_ability_activated", context)
 
 func apply_physical_spell_hit(target: Node2D, base_damage: float, scaling_ratio: float = 1.0, can_crit: bool = false, crit_mod: float = 1.0):
 	if not is_instance_valid(target) or target.is_queued_for_deletion(): return
@@ -152,7 +152,7 @@ func apply_physical_spell_hit(target: Node2D, base_damage: float, scaling_ratio:
 		"is_crit": is_crit, "is_spell": true, "damage_type": "physical"
 	}
 	
-	_trigger_item_effects("on_attack", context)
+	_trigger_passive_effects("on_attack", context)
 	raw_damage = context["damage"]
 	var dealt = deal_damage(target, raw_damage, "physical", "spell", is_crit)
 
@@ -169,7 +169,7 @@ func apply_spell_damage(target: Node2D, base_damage: float, type: String, scalin
 		total_damage += get_total(scaling_stat) * scaling_ratio
 		
 	var context = { "target": target, "damage": total_damage, "type": type, "is_aoe": false }
-	_trigger_item_effects("on_spell_hit", context)
+	_trigger_passive_effects("on_spell_hit", context)
 	total_damage = context["damage"]
 	
 	var dealt = deal_damage(target, total_damage, type, "spell", false)
@@ -195,7 +195,7 @@ func perform_auto_attack_hit(target: Node2D):
 		if damage_buckets["magic"] > 0: damage_buckets["magic"] *= crit_mult
 		
 	var context = { "target": target, "is_crit": is_crit, "buckets": damage_buckets }
-	_trigger_item_effects("on_attack", context)
+	_trigger_passive_effects("on_attack", context)
 	
 	var total_damage_dealt = 0.0
 	var physical_damage_dealt = 0.0
@@ -224,7 +224,7 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 	if amount > 0.0: ratio = mitigated_amt / amount
 		
 	var report = { "type": type, "ratio": ratio, "target": target }
-	_trigger_item_effects("on_bucket_damage_landed", report)
+	_trigger_passive_effects("on_bucket_damage_landed", report)
 	damage_done += mitigated_amt 
 	
 	if mitigated_amt > 0 and inventory:
@@ -232,16 +232,16 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 			"target": target, "amount": mitigated_amt, "health_lost": actual_lost,
 			"damage_type": type, "category": category, "is_crit": is_crit, "receipt": receipt      
 		}
-		_trigger_item_effects("on_damage_dealt", context)
-		if category == "spell": _trigger_item_effects("on_spell_landed", context)
-		elif category == "attack": _trigger_item_effects("on_attack_landed", context)
+		_trigger_passive_effects("on_damage_dealt", context)
+		if category == "spell": _trigger_passive_effects("on_spell_landed", context)
+		elif category == "attack": _trigger_passive_effects("on_attack_landed", context)
 				
 	return actual_lost 
 
 func take_damage(amount: float, type: String, source: Node, is_crit: bool = false, category: String = "spell") -> Dictionary:
 	last_combat_time = Time.get_ticks_msec()
 	var damage_context = { "amount": amount, "type": type, "category": category, "source": source, "is_crit": is_crit }
-	_trigger_item_effects("on_incoming_damage", damage_context)
+	_trigger_passive_effects("on_incoming_damage", damage_context)
 
 	var final_amount = damage_context["amount"]
 	var receipt: Dictionary = super.take_damage(final_amount, type, source, is_crit, category)
@@ -256,14 +256,14 @@ func take_damage(amount: float, type: String, source: Node, is_crit: bool = fals
 		"shield_soaked": receipt["shield_soaked"], "attacker": source, 
 		"type": type, "category": category
 	}
-	_trigger_item_effects("on_take_damage", post_context)
-	_trigger_item_effects("on_hit_received_pre_mitigation", damage_context) 
-	_trigger_item_effects("on_hit_received", post_context)
+	_trigger_passive_effects("on_take_damage", post_context)
+	_trigger_passive_effects("on_hit_received_pre_mitigation", damage_context) 
+	_trigger_passive_effects("on_hit_received", post_context)
 	return receipt
 
 func _on_status_dealt_damage(status_id: String, receipt: Dictionary):
 	var context = {"status_id": status_id, "receipt": receipt}
-	_trigger_item_effects("on_status_tick_damage", context)
+	_trigger_passive_effects("on_status_tick_damage", context)
 
 # --- REGENERATION ---
 func handle_regeneration(delta):
@@ -299,7 +299,7 @@ func heal(amount: float, source: Node2D = null):
 	amount = max(0, amount)
 	if has_status("grevious_wounds"): amount *= 0.6 
 	var context = {"amount": amount, "source": source}
-	_trigger_item_effects("on_heal", context)
+	_trigger_passive_effects("on_heal", context)
 	
 	var final_heal_amount = context["amount"]
 	current_health += final_heal_amount
@@ -391,7 +391,7 @@ func level_up():
 	current_health += hp_growth
 	current_resource += mana_growth
 	
-	_trigger_item_effects("on_level_up", { "new_level": level })
+	_trigger_passive_effects("on_level_up", { "new_level": level })
 	_on_inventory_updated() 
 	level_updated.emit(level)
 	print(name, " leveled up to ", level, "!")
@@ -409,8 +409,7 @@ func _roll_for_crit(base_chance: float) -> bool:
 		crit_pity_bonus += PITY_INCREMENT
 		return false
 
-func _trigger_item_effects(trigger_name: String, context: Dictionary):
-	if inventory: inventory.trigger_global_event(trigger_name, context)
+
 
 func update_passives(delta: float):
 	if attack_cooldown_timer > 0: attack_cooldown_timer -= delta

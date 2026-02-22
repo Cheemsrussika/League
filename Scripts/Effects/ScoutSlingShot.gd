@@ -12,7 +12,7 @@ enum DamageType { PHYSICAL, MAGIC, TRUE }
 
 var next_ready_time: int = 0
 
-func on_damage_dealt(user: Champion, context: Dictionary) -> void:
+func on_damage_dealt(user: Unit, context: Dictionary) -> void:
 	if context["amount"] <= 0 or not is_instance_valid(context["target"]):
 		return
 	if context.get("category") == "proc":

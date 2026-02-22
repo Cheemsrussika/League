@@ -1,4 +1,3 @@
-# EffectSlowDynamic.gd
 extends ItemEffect
 class_name EffectSlowOnHit
 
@@ -8,7 +7,7 @@ class_name EffectSlowOnHit
 
 var slows_applied: int = 0
 
-func on_attack(user: Champion, context: Dictionary) -> void:
+func on_hit(user: Unit, context: Dictionary) -> void:
 	var current_time = Time.get_ticks_msec()
 	if current_time - last_trigger_time < (cooldown * 1000):
 		return 
@@ -17,7 +16,12 @@ func on_attack(user: Champion, context: Dictionary) -> void:
 			return
 	if not target or not is_instance_valid(target): return
 	if not target.has_method("apply_slow"): return
-	var slow_amount = slow_ranged if user.is_ranged() else slow_melee
+	var is_unit_ranged = true # Default to ranged
+	if user.has_method("is_ranged"):
+		is_unit_ranged = user.is_ranged()
+	elif user.unit_type == Unit.UnitType.CHAMPION:
+		is_unit_ranged = false 
+	var slow_amount = slow_ranged if is_unit_ranged else slow_melee
 	target.apply_slow(slow_amount, duration)
 	slows_applied += 1
 	_update_item_ui(user)

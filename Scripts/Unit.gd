@@ -84,7 +84,7 @@ var nav_target = null
 # --- STATUS EFFECT SYSTEM ---
 var move_speed_modifier: float = 1.0
 var is_slowed: bool = false
-@export var passive_effects: Array[Resource] 
+@export var passive_effects: Array[ItemEffect] 
 @onready var status_container: Node = $StatusContainer # Ensure this child node exists in Scene!
 
 # --- LIFECYCLE ---
@@ -221,7 +221,8 @@ func take_damage(raw_amount: float, dmg_type: String, source: Node, is_crit:bool
 		"health_lost": actual_health_lost,
 		"shield_soaked": shield_soaked
 	}
-	
+	if GameEvents:
+		GameEvents.unit_damaged.emit(self, source, raw_amount)
 	damage_taken.emit(source, mitigated_damage, dmg_type) 
 	if current_health <= 0:
 		die(source)
@@ -315,6 +316,16 @@ func handle_regeneration(delta):
 	if not is_dead and current_health < max_hp:
 		current_health += (hp5 / 5.0) * delta
 		if current_health > max_hp: current_health = max_hp
+
+func _trigger_passive_effects(event_name: String, context: Dictionary) -> void:
+	# 1. Trigger Inventory items (if the unit has an inventory)
+	if inventory:
+		inventory.trigger_global_event(event_name, context)
+		
+	# 2. Trigger built-in Passives (if the unit has any slotted in)
+	for effect in passive_effects:
+		if effect != null and effect.has_method(event_name):
+			effect.call(event_name, self, context)
 
 # --- NEW STATUS EFFECT SYSTEM ---
 

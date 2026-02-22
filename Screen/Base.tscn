@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://b0a1owia3oyvo"]
+[gd_scene load_steps=108 format=3 uid="uid://b0a1owia3oyvo"]
 
 [ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
 [ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
@@ -93,8 +93,12 @@
 [ext_resource type="Resource" uid="uid://ce2spmok436t6" path="res://Item/Legend/Mortal Reminder.tres" id="83_0u3gt"]
 [ext_resource type="Resource" uid="uid://djqid12n2y33w" path="res://Item/Legend/BloodThirster.tres" id="84_0u3gt"]
 [ext_resource type="Resource" uid="uid://4o6e1thgumx1" path="res://Item/Legend/ImmortalShieldBow.tres" id="85_x0tvv"]
+[ext_resource type="PackedScene" uid="uid://n7uw18mnnif0" path="res://Screen/tower.tscn" id="88_eco1f"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="93_7e3vi"]
 [ext_resource type="PackedScene" uid="uid://y31re3jctavs" path="res://Screen/monster_camp.tscn" id="93_yuddn"]
+[ext_resource type="Script" uid="uid://d2bj6cdhja8e8" path="res://Scripts/Effects/EffectSlowOnHit.gd" id="94_cqp54"]
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="94_x0tvv"]
+[ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/EffectBurn.gd" id="95_cqp54"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfvv7"]
 bg_color = Color(0.33675686, 0.66117305, 0.67245364, 1)
@@ -143,6 +147,18 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 expand_margin_left = 15.0
 expand_margin_right = 15.0
+
+[sub_resource type="Resource" id="Resource_fstwv"]
+script = ExtResource("94_cqp54")
+slow_ranged = 0.3
+cooldown = 1.0
+metadata/_custom_type_script = "uid://d2bj6cdhja8e8"
+
+[sub_resource type="Resource" id="Resource_6jd7u"]
+script = ExtResource("95_cqp54")
+trigger_type = 3
+trigger_on_attacks = true
+metadata/_custom_type_script = "uid://do21qcd0yt5ih"
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_cfqj6")
@@ -306,45 +322,28 @@ max_slots = 10
 [node name="Area2D" parent="." instance=ExtResource("16_fwvyv")]
 position = Vector2(67, 204)
 
+[node name="Tower" parent="." instance=ExtResource("88_eco1f")]
+position = Vector2(-261, 1030)
+armor_per_plate = 35.0
+mr_per_plate = 35.0
+unit_type = 3
+team = 0
+passive_effects = Array[ExtResource("93_7e3vi")]([SubResource("Resource_fstwv"), SubResource("Resource_6jd7u")])
+
 [node name="Unit" parent="." instance=ExtResource("47_l1xab")]
 position = Vector2(975, 1004)
-base_max_hp = null
-base_attack_damage = null
-base_magic_resist = null
-base_move_speed = null
-base_attack_speed = null
-gold_reward = null
-exp_reward = null
 unit_type = 3
-team = null
-base_stats = null
-passive_effects = null
 
 [node name="Unit2" parent="." instance=ExtResource("47_l1xab")]
-position = Vector2(885, 1273)
+position = Vector2(735, 1052)
 base_max_hp = 100.0
-base_attack_damage = null
-base_magic_resist = null
-base_move_speed = null
-base_attack_speed = null
-gold_reward = null
-exp_reward = null
 unit_type = 0
-team = null
-base_stats = null
-passive_effects = null
+team = 3
 
 [node name="Unit3" parent="." instance=ExtResource("47_l1xab")]
-position = Vector2(671, 1142)
+position = Vector2(871, 1262)
 base_max_hp = 100.0
-base_attack_damage = null
-base_magic_resist = null
-base_move_speed = null
-base_attack_speed = null
-gold_reward = null
-exp_reward = null
-unit_type = 2
-team = null
+team = 1
 base_stats = {
 "Energy": 0.0,
 "Mana": 100.0,
@@ -370,10 +369,9 @@ base_stats = {
 "omnivamp": 0.0,
 "phys_dmg_take_modi": 1.0
 }
-passive_effects = null
 
 [node name="EnemyChampion" parent="." instance=ExtResource("66_6xwof")]
-position = Vector2(66, 1171)
+position = Vector2(-304, 1350)
 collision_layer = 1
 collision_mask = 1
 team = 0

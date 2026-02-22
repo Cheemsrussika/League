@@ -11,7 +11,7 @@ class_name EffectAuraItem
 @export var burn_base_dmg: float = 25.0
 @export var burn_hp_ratio: float = 0.01
 
-func on_update(user: Champion, delta: float):
+func on_update(user: Unit, delta: float):
 	var targets = user.get_nearby_enemies(aura_range)
 	
 	for target in targets:
@@ -20,7 +20,7 @@ func on_update(user: Champion, delta: float):
 		if is_burn_aura:
 			_handle_burn(user, target, delta)
 
-func _handle_burn(user: Champion, target: Unit, delta: float):
+func _handle_burn(user: Unit, target: Unit, delta: float):
 	var hp_scaling = user.get_total(user.Stat.HP) * burn_hp_ratio
 	var damage = (burn_base_dmg + hp_scaling) * delta
 	

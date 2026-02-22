@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://Scripts/GameManager.gd"
 StatusLIB="*res://StatusEffects/StatusLibrary.gd"
+GameEvents="*res://Scripts/GameEvents.gd"
 
 [display]
 

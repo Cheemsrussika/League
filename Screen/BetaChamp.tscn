@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://4wgvkprjp1s7" path="res://Scripts/UI/HealthBar.gd.gd" id="4_lhodd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x8lij"]
-radius = 34.0147
+radius = 24.436438
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v5kux"]
 radius = 42.047592

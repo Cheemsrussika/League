@@ -67,7 +67,7 @@ func _ready():
 func die(killer):
 	if is_dead: return 
 	is_dead = false 
-	$CollisionShape2D.set_deferred("disabled", true)
+	$CollisionShape2D.set_deferred("disabled", false)
 	if killer and killer.has_method("add_gold") and killer.unit_type == Unit.UnitType.CHAMPION and killer.has_method("gain_experience"):
 		killer.add_gold(gold_reward)
 		killer.gain_experience(exp_reward)

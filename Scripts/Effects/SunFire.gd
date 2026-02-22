@@ -11,7 +11,7 @@ var total_damage_dealt: float = 0.0
 
 var time_accumulator: float = 0.0
 
-func on_update(user: Champion, delta: float) -> void:
+func on_update(user: Unit, delta: float) -> void:
 	if user.is_dead: return
 	time_accumulator += delta
 	
@@ -19,7 +19,7 @@ func on_update(user: Champion, delta: float) -> void:
 		time_accumulator -= tick_rate
 		_burn_enemies(user)
 
-func _burn_enemies(user: Champion):
+func _burn_enemies(user: Unit):
 	var all_units = user.get_tree().get_nodes_in_group("unit")
 	var user_max_hp = user.get_total(Unit.Stat.HP)
 	var base_burn = (damage_per_second + (user_max_hp * max_hp_rate)) * tick_rate

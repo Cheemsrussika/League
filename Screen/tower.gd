@@ -26,7 +26,8 @@ var targets_in_range: Array[Unit] = []
 # --- STATE ---
 var next_priority_target: Unit = null 
 var plates_lost: int = 0
-
+var champion_damage_ledger: Dictionary = {} 
+var assist_timeout: float = 10.0 
 func _ready():
 	super._ready()
 	unit_type = UnitType.TOWER
@@ -66,6 +67,11 @@ func _update_shader():
 		health_bar.material.set_shader_parameter("plates_broken", plates_lost)
 func _process(delta: float):
 	if is_dead: return
+	var champs_in_ledger = champion_damage_ledger.keys()
+	for champ in champs_in_ledger:
+		champion_damage_ledger[champ] -= delta
+		if champion_damage_ledger[champ] <= 0 or not is_instance_valid(champ) or champ.is_dead:
+			champion_damage_ledger.erase(champ)
 	if attack_cooldown_timer > 0:
 		attack_cooldown_timer -= delta
 	
@@ -76,7 +82,8 @@ func _process(delta: float):
 
 # --- PLATING LOGIC ---
 
-func _check_plating_break():
+func _check_plating_break(context:Dictionary):
+	var killer = context.get("source")
 	var max_hp = get_total(Stat.HP)
 	var health_per_plate = max_hp / plating_count
 	var expected_plates_lost = floor((max_hp - current_health) / health_per_plate)
@@ -84,12 +91,24 @@ func _check_plating_break():
 	if expected_plates_lost > plates_lost:
 		var plates_to_break = expected_plates_lost - plates_lost
 		plates_lost = expected_plates_lost
+		plate_broke(killer)
 		bonus_stats["armor"] += armor_per_plate * plates_to_break
 		bonus_stats["magic_res"] += mr_per_plate * plates_to_break
 		print("Plate broken! Tower gained resistance. Current Armor: ", get_total(Stat.AR))
 		recalculate_stats()
 
 # --- COMBAT ---
+func plate_broke(killer: Unit = null):
+	var eligible_champions = champion_damage_ledger.keys()
+	if eligible_champions.size() > 0:
+		var split_gold = float(gold_per_plate) / eligible_champions.size()
+		
+		for champ in eligible_champions:
+			if champ.has_method("add_gold"):
+				champ.add_gold(split_gold)
+				print(champ.name, " received ", split_gold, " plate gold!")
+	else:
+		print("Plate broke, but no champions were around to claim the gold.")
 
 func _attack():
 	if not projectile_scene or not is_instance_valid(current_target): return
@@ -124,10 +143,20 @@ func _attack():
 	attack_cooldown_timer = 1.0 / aps
 
 func take_damage(amount: float, type: String, source: Node, is_crit: bool = false, category: String = "attack") -> Dictionary:
-	# Trigger "Incoming Damage" Passives
 	var context = {"amount": amount, "type": type, "source": source}
 	_trigger_passive_effects("on_incoming_damage", context)
 	
+	# --- 1. BACKDOOR PROTECTION CHECK ---
+	var has_enemy_minions = false
+	for unit in targets_in_range:
+		if is_instance_valid(unit) and not unit.is_dead and unit.unit_type == UnitType.MINION:
+			has_enemy_minions = true
+			break
+			
+	if not has_enemy_minions:
+		context["amount"] /= 3.0 
+	if source and source.unit_type == UnitType.CHAMPION:
+		champion_damage_ledger[source] = assist_timeout
 	var receipt = super.take_damage(context["amount"], type, source, is_crit, category)
 	if FLOATING_TEXT_SCENE and receipt["health_lost"] > 0:
 		var text_instance = FLOATING_TEXT_SCENE.instantiate()
@@ -135,9 +164,11 @@ func take_damage(amount: float, type: String, source: Node, is_crit: bool = fals
 		# Position it slightly above the tower's head
 		var text_pos = global_position + Vector2(0, -100)
 		text_instance.start(receipt["health_lost"], text_pos, type, is_crit)
-	_check_plating_break()
-	
-	if health_bar: health_bar.value = current_health
+		
+	_check_plating_break(context)
+	if health_bar: 
+		health_bar.value = current_health
+		
 	return receipt
 
 
@@ -161,16 +192,29 @@ func _update_target_logic():
 		current_target = null
 	if current_target == null and targets_in_range.size() > 0:
 		current_target = _get_first_in_line()
+	if current_target == null or current_target != old_target:
+		current_heat_stacks = 0
+		last_attacked_unit = null
 
 func _get_first_in_line() -> Unit:
+	var valid_minions = []
+	
+	# Gather all minions in range
 	for unit in targets_in_range:
 		if unit.unit_type == UnitType.MINION:
-			return unit
+			valid_minions.append(unit)
+			
+
+	if valid_minions.size() > 0:
+		valid_minions.sort_custom(func(a, b):
+			return a.minion_role > b.minion_role
+		)
+		return valid_minions[0]
 	for unit in targets_in_range:
 		if unit.unit_type == UnitType.CHAMPION:
 			return unit
-			
-	return targets_in_range[0] 
+	return targets_in_range[0]
+
 func _find_best_target() -> Unit:
 	if not range_area: return null
 

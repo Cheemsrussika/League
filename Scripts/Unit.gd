@@ -304,7 +304,6 @@ func _absorb_damage_with_shields(damage: float, dmg_type: String) -> float:
 	return damage_remaining
 
 func die(killer):
-	# Override in Champion/Minion
 	pass
 
 func handle_regeneration(delta):

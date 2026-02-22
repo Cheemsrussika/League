@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://b0a1owia3oyvo"]
+[gd_scene load_steps=111 format=3 uid="uid://b0a1owia3oyvo"]
 
 [ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
 [ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
@@ -52,7 +52,7 @@
 [ext_resource type="Resource" uid="uid://b2c8p5wki6fdf" path="res://Item/Epic/Tunneler.tres" id="44_1nw2w"]
 [ext_resource type="Resource" uid="uid://b8o17p74qsy16" path="res://Item/Epic/AetherWisp.tres" id="45_u407m"]
 [ext_resource type="Resource" uid="uid://c76wymbcjw2dd" path="res://Item/Epic/BandleGlassMirror.tres" id="46_vho3s"]
-[ext_resource type="PackedScene" uid="uid://ptaf7yvgd4q7" path="res://Screen/unit.tscn" id="47_l1xab"]
+[ext_resource type="PackedScene" uid="uid://ptaf7yvgd4q7" path="res://Screen/Minion.tscn" id="47_l1xab"]
 [ext_resource type="Resource" uid="uid://j5c88js16ijc" path="res://Item/Epic/BlightingJewel.tres" id="47_vskhq"]
 [ext_resource type="Resource" uid="uid://caa8em6kaon6n" path="res://Item/Epic/ForbiddenIdol.tres" id="48_mvecn"]
 [ext_resource type="Resource" uid="uid://7frorhb4bnmg" path="res://Item/Epic/CatalystOfAeon.tres" id="49_phy30"]
@@ -99,6 +99,7 @@
 [ext_resource type="Script" uid="uid://d2bj6cdhja8e8" path="res://Scripts/Effects/EffectSlowOnHit.gd" id="94_cqp54"]
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="94_x0tvv"]
 [ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/EffectBurn.gd" id="95_cqp54"]
+[ext_resource type="PackedScene" uid="uid://bc5xg6ua1upbt" path="res://Screen/minion_spawner.tscn" id="100_fstwv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfvv7"]
 bg_color = Color(0.33675686, 0.66117305, 0.67245364, 1)
@@ -160,7 +161,19 @@ trigger_type = 3
 trigger_on_attacks = true
 metadata/_custom_type_script = "uid://do21qcd0yt5ih"
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_cqp54"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 242, -107, 0, 0, 0, 0, -214, 21, 0, 0, 0, 0, -1237, -107)
+}
+point_count = 3
+
+[sub_resource type="Curve2D" id="Curve2D_fstwv"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 4, 101, 0, 0, 0, 0, -742, 595, 0, 0, 0, 0, -1747, 313, 0, 0, 0, 0, -1643, -227)
+}
+point_count = 4
+
+[node name="Base" type="Node2D"]
 script = ExtResource("1_cfqj6")
 warrior_scene = ExtResource("2_i61t5")
 
@@ -326,24 +339,10 @@ position = Vector2(67, 204)
 position = Vector2(-261, 1030)
 armor_per_plate = 35.0
 mr_per_plate = 35.0
+heat_damage_increase = 0.5
+max_heat_stacks = 4
 unit_type = 3
 team = 0
-passive_effects = Array[ExtResource("93_7e3vi")]([SubResource("Resource_fstwv"), SubResource("Resource_6jd7u")])
-
-[node name="Unit" parent="." instance=ExtResource("47_l1xab")]
-position = Vector2(975, 1004)
-unit_type = 3
-
-[node name="Unit2" parent="." instance=ExtResource("47_l1xab")]
-position = Vector2(735, 1052)
-base_max_hp = 100.0
-unit_type = 0
-team = 3
-
-[node name="Unit3" parent="." instance=ExtResource("47_l1xab")]
-position = Vector2(871, 1262)
-base_max_hp = 100.0
-team = 1
 base_stats = {
 "Energy": 0.0,
 "Mana": 100.0,
@@ -358,8 +357,9 @@ base_stats = {
 "attack_speed": 0.625,
 "crit_chance": 0.0,
 "crit_damage": 1.75,
+"dmg_dealt_modifier": 0.0,
 "gold_gen": 5.0,
-"health": 2000.0,
+"health": 1000.0,
 "health_regen": 5.0,
 "life_steal": 0.0,
 "magic_dmg_take__modi": 1.0,
@@ -369,9 +369,15 @@ base_stats = {
 "omnivamp": 0.0,
 "phys_dmg_take_modi": 1.0
 }
+passive_effects = Array[ExtResource("93_7e3vi")]([SubResource("Resource_fstwv"), SubResource("Resource_6jd7u")])
+
+[node name="Unit2" parent="." instance=ExtResource("47_l1xab")]
+position = Vector2(1566, 352)
+unit_type = 0
+team = 1
 
 [node name="EnemyChampion" parent="." instance=ExtResource("66_6xwof")]
-position = Vector2(-304, 1350)
+position = Vector2(-748, 1028)
 collision_layer = 1
 collision_mask = 1
 team = 0
@@ -419,3 +425,41 @@ position = Vector2(196, -181)
 
 [node name="Pos4" type="Marker2D" parent="MonsterCamp"]
 position = Vector2(206, 101)
+
+[node name="MinionSpawner" parent="." node_paths=PackedStringArray("spawn_point", "assigned_path") instance=ExtResource("100_fstwv")]
+position = Vector2(1426, 995)
+melee_scene = ExtResource("47_l1xab")
+melee_count = 2
+ranged_count = 0
+spawn_team = 3
+spawn_point = NodePath("Marker2D")
+assigned_path = NodePath("Top")
+
+[node name="Top" type="Path2D" parent="MinionSpawner"]
+position = Vector2(-227, 201)
+curve = SubResource("Curve2D_cqp54")
+
+[node name="Marker2D" type="Marker2D" parent="MinionSpawner"]
+position = Vector2(-3, 111)
+
+[node name="WaveTimer" type="Timer" parent="MinionSpawner"]
+one_shot = true
+autostart = true
+
+[node name="MinionSpawner2" parent="." node_paths=PackedStringArray("spawn_point", "assigned_path") instance=ExtResource("100_fstwv")]
+position = Vector2(1325, 1460)
+melee_scene = ExtResource("47_l1xab")
+ranged_count = 0
+spawn_team = 3
+spawn_point = NodePath("Marker2D")
+assigned_path = NodePath("Mid")
+
+[node name="WaveTimer" type="Timer" parent="MinionSpawner2"]
+one_shot = true
+autostart = true
+
+[node name="Marker2D" type="Marker2D" parent="MinionSpawner2"]
+position = Vector2(-112, 60)
+
+[node name="Mid" type="Path2D" parent="MinionSpawner2"]
+curve = SubResource("Curve2D_fstwv")

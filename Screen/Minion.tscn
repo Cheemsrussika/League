@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ptaf7yvgd4q7"]
+[gd_scene load_steps=6 format=3 uid="uid://ptaf7yvgd4q7"]
 
 [ext_resource type="Script" uid="uid://bclt8updei63r" path="res://Screen/Minion.gd" id="1_ktxfn"]
 [ext_resource type="Texture2D" uid="uid://c0617ugrmsrr8" path="res://Icons/RedSword_Images/Texture2D/Soft.png" id="2_ps5dh"]
+[ext_resource type="Script" uid="uid://dsh5wwt03h1ua" path="res://Screen/minions_ai.gd" id="3_53gvd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cie5s"]
 radius = 57.271286
@@ -9,11 +10,10 @@ radius = 57.271286
 [sub_resource type="CircleShape2D" id="CircleShape2D_ktxfn"]
 radius = 54.74486
 
-[node name="Unit" type="CharacterBody2D" groups=["unit"]]
-collision_layer = 14
-collision_mask = 0
+[node name="Minion" type="CharacterBody2D" groups=["unit"]]
+collision_layer = 8
+collision_mask = 11
 script = ExtResource("1_ktxfn")
-base_armor = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_cie5s")
@@ -32,3 +32,6 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_ktxfn")
+
+[node name="MinionsAi" type="Node" parent="."]
+script = ExtResource("3_53gvd")

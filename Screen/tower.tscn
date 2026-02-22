@@ -9,7 +9,7 @@
 radius = 88.68484
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g51dk"]
-radius = 94.83143
+radius = 82.006096
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kj2vm"]
 radius = 1.0
@@ -24,7 +24,7 @@ shader_parameter/plate_color = Color(0.8, 0.6, 0, 1)
 shader_parameter/broken_color = Color(0.1, 0.1, 0.1, 1)
 shader_parameter/divider_color = Color(0, 0, 0, 1)
 
-[node name="Tower" type="CharacterBody2D"]
+[node name="Tower" type="CharacterBody2D" groups=["unit"]]
 script = ExtResource("1_kj2vm")
 projectile_scene = ExtResource("2_wuxap")
 armor_per_plate = 100.0

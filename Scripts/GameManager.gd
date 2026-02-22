@@ -10,7 +10,7 @@ func start_game(champion_scene: PackedScene, spawn_parent: Node2D, start_positio
 	
 	var cam = Camera2D.new()
 	cam.enabled = true
-	cam.set_zoom(Vector2(1,1))
+	cam.set_zoom(Vector2(0.5,0.5))
 	new_hero.add_child(cam)
 	spawn_parent.add_child(new_hero)
 

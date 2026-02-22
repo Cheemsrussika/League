@@ -12,16 +12,19 @@
 [sub_resource type="Resource" id="Resource_7ppa3"]
 script = ExtResource("2_suxct")
 stat_type = 5
+flat_amount = null
 scaling_factor = 0.5
 scaling_source = 5
 scaling_mode = 1
+id = null
+is_unique = null
+cooldown = null
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 
 [sub_resource type="Resource" id="Resource_xofiu"]
 script = ExtResource("3_2f1do")
-shield_decay_mode = 0
-base_shield = 0.0
-shield_duration = 4.5
+use_level_scaling = false
+use_range_difference = false
 scale_percent_max_hp = 0.6
 id = "LifeLine"
 is_unique = true

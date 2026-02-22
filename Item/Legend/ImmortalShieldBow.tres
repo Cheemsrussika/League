@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://4o6e1thgumx1"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_qavhx"]
+[ext_resource type="Script" uid="uid://11l2btwwi6vp" path="res://Scripts/Effects/EffectShield.gd" id="2_gvhwy"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_qibt6"]
+[ext_resource type="Texture2D" uid="uid://cq517fxxd5ara" path="res://Icons/Legend Items/40px-Immortal_Shieldbow_item.png" id="3_warsn"]
+[ext_resource type="Resource" uid="uid://bvn4rojfkhj1s" path="res://Item/Epic/NoonQuiver.tres" id="5_isr76"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="6_atslc"]
+
+[sub_resource type="Resource" id="Resource_i31u0"]
+script = ExtResource("2_gvhwy")
+melee_lvl_1 = 400.0
+melee_lvl_18 = 700.0
+ranged_lvl_1 = 320.0
+ranged_lvl_18 = 560.0
+id = "LifeLine"
+is_unique = true
+cooldown = 90.0
+metadata/_custom_type_script = "uid://11l2btwwi6vp"
+
+[resource]
+script = ExtResource("2_qibt6")
+item_tier = 4
+item_name = "Immortal ShieldBow"
+icon = ExtResource("3_warsn")
+cost = 3000
+recipe = Array[ExtResource("2_qibt6")]([ExtResource("5_isr76"), ExtResource("6_atslc")])
+stats = {
+"attack_damage": 55.0,
+"crit_chance": 25.0
+}
+effects = Array[ExtResource("1_qavhx")]([SubResource("Resource_i31u0")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

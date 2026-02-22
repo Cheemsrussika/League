@@ -101,15 +101,24 @@ func on_attack(user: Champion, context: Dictionary) -> void:
 
 	if can_this_item_crit and is_crit:
 		calculated_damage *= user.get_total(Unit.Stat.CRIT_DMG)
+	# --- B. HANDLE DAMAGE CALCULATION ---
 	if calculated_damage > 0:
 		if damage_type == DamageType.PHYSICAL:
-			context.buckets["physical"] += calculated_damage
-			last_added_raw = calculated_damage 
+			# If your Unit.gd doesn't provide buckets, we deal damage directly
+			if not context.has("buckets"):
+				var dealt = user.deal_damage(target, calculated_damage, "physical", "proc", is_crit)
+				total_damage_added += dealt
+				last_added_raw = 0.0 # Clear this since we didn't use the bucket system
+			else:
+				# If buckets exist, we add to it as originally intended
+				context["buckets"]["physical"] += calculated_damage
+				last_added_raw = calculated_damage 
 		else:
+			# Magic and True damage already use the safe "deal_damage" method
 			var type_str = "magic" if damage_type == DamageType.MAGIC else "true"
 			var dealt = user.deal_damage(target, calculated_damage, type_str, "proc", is_crit)
 			total_damage_added += dealt
-			last_added_raw = 0.0 
+			last_added_raw = 0.0
 		
 	_update_item_ui(user)
 

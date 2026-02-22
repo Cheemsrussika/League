@@ -75,6 +75,7 @@ offset_left = -101.0
 offset_top = -98.0
 offset_right = 102.0
 offset_bottom = -82.0
+mouse_filter = 2
 script = ExtResource("4_lhodd")
 
 [node name="HealthBar" type="ProgressBar" parent="HealthBarRoot"]

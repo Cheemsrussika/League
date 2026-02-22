@@ -10,6 +10,10 @@
 [sub_resource type="Resource" id="Resource_ni2ft"]
 script = ExtResource("2_qcgpe")
 shield_damage_type = 2
+melee_lvl_1 = 110.0
+melee_lvl_18 = 280.0
+ranged_lvl_1 = 82.5
+ranged_lvl_18 = 210.0
 id = "LifeLine"
 is_unique = true
 cooldown = 60.0

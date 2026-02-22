@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://dwmol31xw4c4u"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_x3t4r"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_x3t4r"]
 [ext_resource type="Texture2D" uid="uid://dvflea41joh3i" path="res://Icons/Legend Items/40px-Kraken_Slayer_item.png" id="2_6sf3d"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_nsx53"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_nsx53"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_pudel"]
 [ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/EffectStacking.gd" id="3_462lq"]
 [ext_resource type="Resource" uid="uid://dqiqf0h3qihyj" path="res://Item/Epic/Rectrix.tres" id="4_g856e"]

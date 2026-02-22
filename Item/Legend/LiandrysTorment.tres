@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://b1jgquod6absv"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_c56x1"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_f7n0m"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_c56x1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_f7n0m"]
 [ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/EffectBurn.gd" id="2_h42gg"]
 [ext_resource type="Texture2D" uid="uid://dk7out8sa1nge" path="res://Icons/Legend Items/40px-Liandry's_Torment_item.png" id="2_smqje"]
 [ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/EffectStacking.gd" id="3_c3yb2"]

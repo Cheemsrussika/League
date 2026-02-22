@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://12wnypp1l3bv"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_bl7u8"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_bl7u8"]
 [ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_excat"]
 [ext_resource type="Texture2D" uid="uid://bcic0r35iduip" path="res://Icons/Boots/40px-Berserker's_Greaves_item.png" id="2_xce18"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_su2h1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_su2h1"]
 [ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="4_excat"]
 [ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="5_be6xb"]
 

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://tvoqqved45nb"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_jwqk3"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_bhenq"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_jwqk3"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_bhenq"]
 [ext_resource type="Texture2D" uid="uid://d16fgxw2e5bkb" path="res://Icons/Basis items/40px-Faerie_Charm_item.png" id="2_koigw"]
 
 [resource]

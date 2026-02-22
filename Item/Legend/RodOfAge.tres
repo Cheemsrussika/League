@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://d4khfbq8depp3"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ek5k3"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_cvelt"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ek5k3"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_cvelt"]
 [ext_resource type="Texture2D" uid="uid://cjfvnwuprecvg" path="res://Icons/Legend Items/40px-Rod_of_Ages_item.png" id="2_lsxqn"]
 [ext_resource type="Script" uid="uid://c1f8wxk4a5a3u" path="res://Scripts/Effects/EffectTimeScaling.gd" id="2_wdxuu"]
 [ext_resource type="Script" uid="uid://bau220e58fhc1" path="res://Scripts/Effects/EffectEnternity.gd" id="3_48a5t"]

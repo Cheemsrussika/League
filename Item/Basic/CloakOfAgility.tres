@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://dtu1xvq34a4pa"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_3i7sn"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_3i7sn"]
 [ext_resource type="Texture2D" uid="uid://dthbxgkvqk8gs" path="res://Icons/Basis items/40px-Cloak_of_Agility_item.png" id="2_5tch1"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_rcefm"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_rcefm"]
 
 [resource]
 script = ExtResource("2_rcefm")

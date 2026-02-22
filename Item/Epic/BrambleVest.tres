@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://b0t8vgxtmvl4f"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_6rimt"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_6rimt"]
 [ext_resource type="Script" uid="uid://cyt60iiype847" path="res://Scripts/Effects/EffectDamageReflect.gd" id="2_6ewdh"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_52g0a"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_52g0a"]
 [ext_resource type="Texture2D" uid="uid://bpi83yqx1ot10" path="res://Icons/Epic Items/40px-Bramble_Vest_item.png" id="3_4twsj"]
 [ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="5_8xmaq"]
 

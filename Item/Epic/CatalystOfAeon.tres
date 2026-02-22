@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://7frorhb4bnmg"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_k2irk"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_7fnv1"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_k2irk"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_7fnv1"]
 [ext_resource type="Script" uid="uid://bau220e58fhc1" path="res://Scripts/Effects/EffectEnternity.gd" id="2_8o62g"]
 [ext_resource type="Texture2D" uid="uid://hiixa0n6rxug" path="res://Icons/Epic Items/40px-Catalyst_of_Aeons_item.png" id="2_evyfx"]
 [ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_8xuf0"]

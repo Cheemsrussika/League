@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://ce2spmok436t6"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_cprgu"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_cprgu"]
 [ext_resource type="Script" uid="uid://ba4aywk8g7s4o" path="res://Scripts/Effects/EffectGrievousWounds.gd" id="2_24gr0"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_eludu"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_eludu"]
 [ext_resource type="Texture2D" uid="uid://0rkjefbd0nyu" path="res://Icons/Legend Items/40px-Mortal_Reminder_item.png" id="3_melbm"]
 [ext_resource type="Resource" uid="uid://tesngflvqw88" path="res://Item/Epic/ExecutionersCalling.tres" id="5_ms82q"]
 [ext_resource type="Resource" uid="uid://d4kuvr38mim0l" path="res://Item/Epic/LastWhisper.tres" id="6_kspyh"]

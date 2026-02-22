@@ -7,7 +7,6 @@ var damage_ramp_per_stack: float = 0.0
 var damage_ramp_cap: float = 0.0
 
 func on_stat_calculation(unit):
-	# 1. Apply Per-Stack Bonuses
 	for stat_name in stats_to_buff:
 		var amount = stats_to_buff[stat_name] * stacks
 		unit.modify_stat(stat_name, amount)

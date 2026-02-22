@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://dh0hwda8anp1x"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ig56y"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ig56y"]
 [ext_resource type="Texture2D" uid="uid://craw2ghq6rvq4" path="res://Icons/Epic Items/40px-Spectre's_Cowl_item.png" id="2_bsshw"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_38lb7"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_38lb7"]
 [ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="4_16cck"]
 [ext_resource type="Resource" uid="uid://cpd6ls73e25ay" path="res://Item/Basic/NullMagicMantle.tres" id="5_bof1q"]
 [ext_resource type="Resource" uid="uid://c0lsbtuebutnd" path="res://Item/Basic/RejuvenationBead.tres" id="6_tcixq"]

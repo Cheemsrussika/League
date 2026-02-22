@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dw53eopscb1l0"]
 
-[ext_resource type="Script" uid="uid://cshsmtpt6rxcs" path="res://Screen/monster.gd" id="1_bgb31"]
+[ext_resource type="Script" uid="uid://cshsmtpt6rxcs" path="res://Scripts/GameMob/monster.gd" id="1_bgb31"]
 [ext_resource type="Texture2D" uid="uid://bl2n7d0lwxh1c" path="res://Icons/Texture2D/2.png" id="2_0r8oe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yh3sy"]
@@ -21,20 +21,6 @@ radius = 46.0
 collision_layer = 260
 collision_mask = 2
 script = ExtResource("1_bgb31")
-is_stationary = null
-protect_home_only = null
-aggro_radius = null
-leash_radius = null
-patience_time = null
-return_delay = null
-attack_range = null
-attack_damage_delay = null
-gold_reward = null
-exp_reward = null
-unit_type = null
-team = null
-base_stats = null
-passive_effects = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yh3sy")

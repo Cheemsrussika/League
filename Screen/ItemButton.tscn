@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dbmc5700nwao0"]
 
-[ext_resource type="Script" uid="uid://byvd5ri612ksj" path="res://Scripts/ItemButton.gd" id="1_f514l"]
+[ext_resource type="Script" uid="uid://byvd5ri612ksj" path="res://Scripts/UI/ItemSlots/ItemButton.gd" id="1_f514l"]
 
 [node name="Button" type="Button" groups=["shop_buttons"]]
 custom_minimum_size = Vector2(50, 65)

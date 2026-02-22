@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://bndfuylav5ivl"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_mojd1"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_7aq6p"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_mojd1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_7aq6p"]
 [ext_resource type="Script" uid="uid://11l2btwwi6vp" path="res://Scripts/Effects/EffectShield.gd" id="2_qcgpe"]
 [ext_resource type="Texture2D" uid="uid://copvdjmjvqdit" path="res://Icons/Epic Items/40px-Hexdrinker_item.png" id="3_apk5l"]
 [ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="5_gvjtm"]

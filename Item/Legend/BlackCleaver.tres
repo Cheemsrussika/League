@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://cnxlipbdml3m5"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_o8kmw"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_o8kmw"]
 [ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/OnHitSpeed.gd" id="2_a3ldi"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_yjpdh"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_yjpdh"]
 [ext_resource type="Script" uid="uid://b8tyobvx5m570" path="res://Scripts/Effects/BlackCleaves.gd" id="3_tq0jg"]
 [ext_resource type="Texture2D" uid="uid://c2uwi52vc4k8e" path="res://Icons/Legend Items/40px-Black_Cleaver_item.png" id="4_rgy38"]
 [ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="6_eai5c"]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=17 format=3 uid="uid://c06la7wb3y2ws"]
 
 [ext_resource type="Texture2D" uid="uid://begfyuuoi5e1i" path="res://Rescources/Champs/ic_launcher_foreground.png" id="1_t8ta8"]
-[ext_resource type="Script" uid="uid://c5sltpmetslbx" path="res://Scripts/Champion.gd" id="1_x8lij"]
-[ext_resource type="Script" uid="uid://b02ds6kwg5inp" path="res://Scripts/UI/InventoryComponent.gd" id="3_v5kux"]
+[ext_resource type="Script" uid="uid://c5sltpmetslbx" path="res://Scripts/Libs/Champion.gd" id="1_x8lij"]
+[ext_resource type="Script" uid="uid://b02ds6kwg5inp" path="res://Scripts/UI/ItemSlots/InventoryComponent.gd" id="3_v5kux"]
 [ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="4_7thvn"]
 [ext_resource type="Script" uid="uid://4wgvkprjp1s7" path="res://Scripts/UI/HealthBar.gd.gd" id="4_lhodd"]
 

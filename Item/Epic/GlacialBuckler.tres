@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://c3q8hki3rgnpr"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_hbu1i"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_hbu1i"]
 [ext_resource type="Texture2D" uid="uid://i1lm4qsqofnp" path="res://Icons/Epic Items/40px-Glacial_Buckler_item.png" id="2_hekvr"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_wq6lc"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_wq6lc"]
 [ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="4_3x4so"]
 [ext_resource type="Resource" uid="uid://ddj1rhowauinx" path="res://Item/Basic/SapphireCrystal.tres" id="5_bc3ts"]
 [ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="6_180mp"]

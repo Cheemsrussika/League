@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://b8o17p74qsy16"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_7184s"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_7184s"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_fa8dd"]
 [ext_resource type="Texture2D" uid="uid://7a65rabjkwct" path="res://Icons/Epic Items/40px-Aether_Wisp_item.png" id="3_e1ab4"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_js6xc"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="4_js6xc"]
 [ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_mwgp7"]
 
 [sub_resource type="Resource" id="Resource_olaty"]

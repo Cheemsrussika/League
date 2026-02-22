@@ -102,7 +102,6 @@ func plate_broke(killer: Unit = null):
 	var eligible_champions = champion_damage_ledger.keys()
 	if eligible_champions.size() > 0:
 		var split_gold = float(gold_per_plate) / eligible_champions.size()
-		
 		for champ in eligible_champions:
 			if champ.has_method("add_gold"):
 				champ.add_gold(split_gold)

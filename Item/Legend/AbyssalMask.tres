@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://dvlv75lxkf2mb"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_xkcra"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_6fibn"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_xkcra"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_6fibn"]
 [ext_resource type="Texture2D" uid="uid://bjidxlt4k3xpq" path="res://Icons/Legend Items/40px-Abyssal_Mask_item.png" id="2_dgr6l"]
 [ext_resource type="Script" uid="uid://cm12ioael5m4s" path="res://Scripts/Effects/EffectAura.gd" id="2_vurxu"]
 [ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="4_vurxu"]

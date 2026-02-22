@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://betbe4m7utd5l"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_f0hxd"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_m8we3"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_f0hxd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_m8we3"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_suxct"]
 [ext_resource type="Script" uid="uid://11l2btwwi6vp" path="res://Scripts/Effects/EffectShield.gd" id="3_2f1do"]
 [ext_resource type="Texture2D" uid="uid://blxy6b67ytt4o" path="res://Icons/Legend Items/40px-Sterak's_Gage_item.png" id="3_rb4qa"]
@@ -12,13 +12,9 @@
 [sub_resource type="Resource" id="Resource_7ppa3"]
 script = ExtResource("2_suxct")
 stat_type = 5
-flat_amount = null
 scaling_factor = 0.5
 scaling_source = 5
 scaling_mode = 1
-id = null
-is_unique = null
-cooldown = null
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 
 [sub_resource type="Resource" id="Resource_xofiu"]

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://t6kyb7sdshu"]
 
 [ext_resource type="Texture2D" uid="uid://b7hkf85bwavi0" path="res://Icons/Epic Items/40px-Phage_item.png" id="1_1lc6n"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="1_fdk1e"]
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ola6l"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="1_fdk1e"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ola6l"]
 [ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="2_0jrvi"]
 [ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/OnHitSpeed.gd" id="2_tnw8l"]
 [ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="3_1lc6n"]
@@ -25,5 +25,4 @@ stats = {
 "health": 200.0
 }
 effects = Array[ExtResource("1_ola6l")]([SubResource("Resource_k521a")])
-description = null
 metadata/_custom_type_script = "uid://76cpvgsppjvf"

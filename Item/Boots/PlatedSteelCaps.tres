@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://bsd2midqtbnvg"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_dnl6y"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_dnl6y"]
 [ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_2f5g5"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="3_2f5g5"]
 [ext_resource type="Texture2D" uid="uid://dqc7luvesqdoo" path="res://Icons/Boots/40px-Plated_Steelcaps_item.png" id="3_dnl6y"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_ke48m"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="4_ke48m"]
 [ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="5_ey2f1"]
 [ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="6_2f5g5"]
 

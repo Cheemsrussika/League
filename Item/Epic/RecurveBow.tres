@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://blvndo0ism4fp"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_qm4t6"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_qm4t6"]
 [ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="2_6xqbi"]
 [ext_resource type="Texture2D" uid="uid://crky16k8jowqs" path="res://Icons/Epic Items/40px-Recurve_Bow_item.png" id="2_8hqci"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_50pqw"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_50pqw"]
 [ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="5_aasmw"]
 
 [sub_resource type="Resource" id="Resource_6xqbi"]

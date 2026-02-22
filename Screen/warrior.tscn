@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://6cscgq2y2g21"]
+[gd_scene load_steps=8 format=3 uid="uid://6cscgq2y2g21"]
 
 [ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_2olbg"]
-[ext_resource type="Script" uid="uid://if6imaeuhse2" path="res://Scripts/PlayerInputComponent.gd" id="3_1obmu"]
+[ext_resource type="Script" uid="uid://if6imaeuhse2" path="res://Scripts/GameMob/PlayerInputComponent.gd" id="3_1obmu"]
 [ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="3_mrby3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
@@ -16,11 +16,15 @@ shader = ExtResource("3_mrby3")
 shader_parameter/max_health = 1000.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1obmu"]
+bg_color = Color(0.6, 0.6, 0.6, 0.50980395)
+
 [node name="Warrior" groups=["champion", "unit"] instance=ExtResource("1_2olbg")]
+resource_type = 1
 unit_type = 0
 team = 3
 base_stats = {
-"Energy": 0.0,
+"Energy": 10.0,
 "Mana": 100.0,
 "Mana_Regen": 2.0,
 "Slow_res": 0.0,
@@ -88,6 +92,7 @@ offset_left = 3.0
 offset_top = 11.0
 offset_right = 148.0
 offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1obmu")
 
 [node name="LevelBox" parent="HealthBarRoot" index="5"]
 offset_left = -45.0

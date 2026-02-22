@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyke7lymdtuf"]
 
-[ext_resource type="Script" uid="uid://c222sng7cfkq" path="res://tower_projectile.gd" id="1_1gj62"]
+[ext_resource type="Script" uid="uid://c222sng7cfkq" path="res://Scripts/GameMob/tower_projectile.gd" id="1_1gj62"]
 [ext_resource type="Texture2D" uid="uid://b7evteln0laga" path="res://Icons/Texture2D/Log.png" id="2_uxc7m"]
 
 [node name="TowerProjectile" type="Node2D"]

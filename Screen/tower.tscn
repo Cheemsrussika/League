@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://n7uw18mnnif0"]
 
 [ext_resource type="Texture2D" uid="uid://8381uk4imaal" path="res://Icons/Texture2D/005.png" id="1_g51dk"]
-[ext_resource type="Script" uid="uid://c5xqiykmyuqa6" path="res://Screen/tower.gd" id="1_kj2vm"]
+[ext_resource type="Script" uid="uid://c5xqiykmyuqa6" path="res://Scripts/GameMob/tower.gd" id="1_kj2vm"]
 [ext_resource type="PackedScene" uid="uid://dyke7lymdtuf" path="res://Screen/tower_projectile.tscn" id="2_wuxap"]
-[ext_resource type="Shader" uid="uid://li5g2rq1tb8" path="res://Screen/tower.gdshader" id="3_sarqp"]
+[ext_resource type="Shader" uid="uid://li5g2rq1tb8" path="res://Shader/tower.gdshader" id="3_sarqp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hwwcj"]
 radius = 88.68484

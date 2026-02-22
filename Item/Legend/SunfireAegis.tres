@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://cbqxtl71vdy16"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_o6f1d"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_o6f1d"]
 [ext_resource type="Script" uid="uid://b21h3s7uof2c4" path="res://Scripts/Effects/SunFire.gd" id="2_a2ipd"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_nyap8"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_nyap8"]
 [ext_resource type="Texture2D" uid="uid://bfq7ju7lrw8t0" path="res://Icons/Legend Items/40px-Sunfire_Aegis_item.png" id="3_pffiq"]
 [ext_resource type="Resource" uid="uid://vu42dfuc6g14" path="res://Item/Epic/BamisCinder.tres" id="5_w3a1b"]
 [ext_resource type="Resource" uid="uid://c6cmdw4s7bsdc" path="res://Item/Epic/ChainVest.tres" id="6_elu0g"]

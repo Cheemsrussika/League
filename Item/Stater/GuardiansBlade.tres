@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://d24tbxhlqoosq"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_sher1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_7a3ry"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_oc2rp"]
+[ext_resource type="Texture2D" uid="uid://clc5y21nibyag" path="res://Icons/StarterItem/40px-Guardian's_Blade_item.png" id="3_x8y5h"]
+
+[sub_resource type="Resource" id="Resource_r27sk"]
+script = ExtResource("2_oc2rp")
+id = "Guardian"
+is_unique = true
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[resource]
+script = ExtResource("2_7a3ry")
+item_name = "Guardian's Blade"
+icon = ExtResource("3_x8y5h")
+cost = 950
+stats = {
+"ability_haste": 15.0,
+"attack_damage": 30.0,
+"health": 150.0
+}
+effects = Array[ExtResource("1_sher1")]([SubResource("Resource_r27sk")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

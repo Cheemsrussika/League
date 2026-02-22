@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://cvjp2l6isdf1k"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_kq7ik"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_p1gmi"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_kq7ik"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_p1gmi"]
 [ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="2_tnyft"]
 [ext_resource type="Texture2D" uid="uid://h8t3o3bn754x" path="res://Icons/Legend Items/40px-Nashor's_Tooth_item.png" id="3_481hq"]
 [ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="5_5vo5y"]

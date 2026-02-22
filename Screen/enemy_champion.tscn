@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_j1rd1"]
 [ext_resource type="Script" uid="uid://der6a5ihs533o" path="res://Scripts/EnemyGold.gd" id="2_6a1j5"]
-[ext_resource type="Script" uid="uid://cr5n2skcy1k6u" path="res://Scripts/ai_input_component.gd" id="3_p17fj"]
+[ext_resource type="Script" uid="uid://cr5n2skcy1k6u" path="res://Scripts/Libs/ai_input_component.gd" id="3_p17fj"]
 [ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="4_6a1j5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]

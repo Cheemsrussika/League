@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://dhukl1qu272av"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_wd7ex"]
+[ext_resource type="Texture2D" uid="uid://drx411gdpjlq3" path="res://Icons/StarterItem/40px-Guardian's_Orb_item.png" id="2_0q5qf"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_1jx08"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_olflf"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="3_1jx08"]
+
+[sub_resource type="Resource" id="Resource_5o2r4"]
+script = ExtResource("2_1jx08")
+stat_type = 10
+flat_amount = 10.0
+requires_mana = true
+alternate_stat_type = 1
+alternate_flat_amount = 15.0
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_ywhkc"]
+script = ExtResource("3_1jx08")
+id = "Guardian"
+is_unique = true
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[resource]
+script = ExtResource("2_olflf")
+item_name = "Guardian's Orb"
+icon = ExtResource("2_0q5qf")
+cost = 950
+stats = {
+"ability_power": 50.0,
+"health": 150.0
+}
+effects = Array[ExtResource("1_wd7ex")]([SubResource("Resource_5o2r4"), SubResource("Resource_ywhkc")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

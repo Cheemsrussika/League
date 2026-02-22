@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://bwvat6atcwi88"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_r8q2e"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_r8q2e"]
 [ext_resource type="Texture2D" uid="uid://der8dy4phw2qp" path="res://Icons/Legend Items/40px-Warmog's_Armor_item.png" id="2_iqbaw"]
 [ext_resource type="Script" uid="uid://bntgsrmk76e73" path="res://Scripts/Effects/Warmog.gd" id="2_n46da"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_wcbel"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_wcbel"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="3_d16mo"]
 [ext_resource type="Resource" uid="uid://4mnyc0u8hcjs" path="res://Item/Epic/GiantsBelt.tres" id="5_d16mo"]
 [ext_resource type="Resource" uid="uid://bdla7flc3koe0" path="res://Item/Epic/CrystallineBracer.tres" id="6_5ilap"]

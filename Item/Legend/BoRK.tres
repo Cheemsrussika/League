@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://bj0jju3mvggyd"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_5o8lu"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_5o8lu"]
 [ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/EffectOnHitDamage.gd" id="2_7l8fa"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_8m6jk"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_8m6jk"]
 [ext_resource type="Texture2D" uid="uid://crw6apylr2bc6" path="res://Icons/Legend Items/40px-Blade_of_the_Ruined_King_item.png" id="2_g16yj"]
 [ext_resource type="Script" uid="uid://d2bj6cdhja8e8" path="res://Scripts/Effects/EffectSlowOnHit.gd" id="3_7wadu"]
 [ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="4_01phl"]

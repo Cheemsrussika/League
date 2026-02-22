@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://1hoggkg1prbt"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_q5udc"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_q5udc"]
 [ext_resource type="Texture2D" uid="uid://bs4tdrnbxpsy6" path="res://Icons/Epic Items/40px-Kindlegem_item.png" id="2_kdhit"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_1oghc"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_1oghc"]
 [ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="4_87fiy"]
 [ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="5_a3hf7"]
 

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://j4bwmiv0beuq"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_l2k5u"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_l2k5u"]
 [ext_resource type="Texture2D" uid="uid://btp7tsapg16y6" path="res://Icons/Basis items/40px-Dagger_item.png" id="2_312jh"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_nf4ei"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_nf4ei"]
 
 [resource]
 script = ExtResource("2_nf4ei")

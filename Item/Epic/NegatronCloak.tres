@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=5 format=3 uid="uid://cllonhjofmq3g"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_qmtmp"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_qmtmp"]
 [ext_resource type="Texture2D" uid="uid://cablv80gro574" path="res://Icons/Epic Items/40px-Negatron_Cloak_item.png" id="2_lrnab"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_6funr"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_6funr"]
 [ext_resource type="Resource" uid="uid://cpd6ls73e25ay" path="res://Item/Basic/NullMagicMantle.tres" id="4_kpgdg"]
 
 [resource]

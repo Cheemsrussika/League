@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://bknckavkhsejm"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_j63nd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_42fxf"]
+[ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_cajo6"]
+[ext_resource type="Texture2D" uid="uid://b0sshud25245c" path="res://Icons/StarterItem/40px-Guardian's_Hammer_item.png" id="3_vdrqu"]
+
+[sub_resource type="Resource" id="Resource_5axjl"]
+script = ExtResource("2_cajo6")
+id = "Guardian"
+is_unique = true
+metadata/_custom_type_script = "uid://d2d0s34kreliv"
+
+[resource]
+script = ExtResource("2_42fxf")
+item_name = "Guardian's hammer"
+icon = ExtResource("3_vdrqu")
+cost = 950
+stats = {
+"attack_damage": 25.0,
+"health": 150.0,
+"life_steal": 5.0
+}
+effects = Array[ExtResource("1_j63nd")]([SubResource("Resource_5axjl")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

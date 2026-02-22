@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://6wthl07t5jds"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ljg3j"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ljg3j"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_nmn5k"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_thq7o"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_thq7o"]
 [ext_resource type="Script" uid="uid://dcox482gwq85a" path="res://Scripts/Effects/EffectSpellblade.gd" id="3_edh88"]
 [ext_resource type="Texture2D" uid="uid://dl45myt15m7ue" path="res://Icons/Legend Items/40px-Lich_Bane_item.png" id="4_etgml"]
 [ext_resource type="Resource" uid="uid://b5iys7c072tbi" path="res://Item/Epic/Sheen.tres" id="6_isokk"]

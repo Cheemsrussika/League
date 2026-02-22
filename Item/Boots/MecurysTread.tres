@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://cfe7ks0fdixch"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_f1ulf"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_f1ulf"]
 [ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_lh2u0"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="3_lh2u0"]
 [ext_resource type="Texture2D" uid="uid://dg88f13brjb6h" path="res://Icons/Boots/40px-Mercury's_Treads_item.png" id="4_lh2u0"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="5_ahuch"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="5_ahuch"]
 [ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="6_ei6uf"]
 [ext_resource type="Resource" uid="uid://cpd6ls73e25ay" path="res://Item/Basic/NullMagicMantle.tres" id="7_sx0v1"]
 

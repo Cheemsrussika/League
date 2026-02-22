@@ -1,7 +1,13 @@
 extends Unit
 class_name Champion
 
+# --- ENUMS ---
+enum ResourceType { MANA, ENERGY, FURY, NONE }
+
 # --- CONFIGURATION ---
+@export_group("Champion Identity")
+@export var resource_type: ResourceType = ResourceType.MANA
+
 @export_group("Leveling Stats (Growth)")
 @export var hp_growth: float = 80.0
 @export var mana_growth: float = 40.0
@@ -16,18 +22,18 @@ var experience: float = 0.0
 var experience_to_next_level: float = 280.0
 var accumulated_as_growth: float = 0.0 
 
-
 # --- SIGNALS ---
 signal gold_updated(amount: float)
 signal level_updated(new_level: int)
 signal status_damage_dealt(status_id: String, receipt: Dictionary)
 signal stats_recalculated(unit: Unit)
+
 # --- COMPONENTS ---
 @onready var attack_range_area: Area2D = $AttackRange
 
 func _process(delta: float) -> void:
 	_handle_shields(delta)
-	handle_regeneration(delta) # Handles HP and Mana/Energy
+	handle_regeneration(delta) # Handles HP and Resource
 	
 	# 2. Run Champion Logic
 	if attack_cooldown_timer > 0: 
@@ -35,15 +41,12 @@ func _process(delta: float) -> void:
 		
 	handle_gold_generation(delta)
 
-
 # --- CHAMPION VARS ---
 var current_resource: float = 0.0
 var gold: float = 10000.0:
 	set(value):
 		gold = value
 		gold_updated.emit(gold)
-
-var use_energy: bool = false
 
 # --- COMBAT CONTROL ---
 var is_winding_up: bool = false
@@ -54,19 +57,26 @@ const WINDUP_PERCENT: float = 0.3
 var crit_pity_bonus: float = 0.0
 const PITY_INCREMENT: float = 0.05
 
+# --- RESOURCE HELPER ---
+func _get_max_resource() -> float:
+	match resource_type:
+		ResourceType.MANA: return get_total(Stat.MANA)
+		ResourceType.ENERGY: return get_total(Stat.ENERGY)
+		ResourceType.FURY: return 100.0 # Example cap for Fury
+		_: return 0.0 # NONE
+
 # --- LIFECYCLE ---
 func _ready():
 	super._ready()
 	unit_type = UnitType.CHAMPION 
 	inventory = $InventoryComponent
-	var base_mana = base_stats.get("Mana", 0.0)
-	var base_energy = base_stats.get("Energy", 0.0)
 	
-	if base_energy > base_mana:
-		current_resource = base_energy
-		use_energy = true
-	else:
-		current_resource = base_mana
+	# Initialize Resource Based on Enum
+	match resource_type:
+		ResourceType.MANA: current_resource = base_stats.get("Mana", 0.0)
+		ResourceType.ENERGY: current_resource = base_stats.get("Energy", 0.0)
+		ResourceType.FURY: current_resource = 0.0 # Fury usually starts empty
+		ResourceType.NONE: current_resource = 0.0
 		
 	if inventory:
 		inventory.inventory_changed.connect(_on_inventory_updated)
@@ -268,32 +278,45 @@ func _on_status_dealt_damage(status_id: String, receipt: Dictionary):
 # --- REGENERATION ---
 func handle_regeneration(delta):
 	if is_dead: return
+	
+	# 1. Health Regeneration
 	var max_hp = get_total(Stat.HP)
-	var max_mana = get_total(Stat.MANA)
 	var hp5 = get_total(Stat.HP5)
-	var manarg = get_total(Stat.MANARG)
 	
 	if current_health < max_hp and current_health > 0:
 		current_health += (hp5 / 5.0) * delta
 		current_health = min(current_health, max_hp)
 	elif current_health < 10:
-		current_health=0
-	else: current_health=max_hp
-	if current_resource < max_mana:
-		current_resource += (manarg / 5.0) * delta 
-		current_resource = min(current_resource, max_mana)
+		current_health = 0
+	else: 
+		current_health = max_hp
+		
+	# 2. Resource Regeneration
+	if resource_type == ResourceType.NONE: return # No resource to regen
+	
+	var max_res = _get_max_resource()
+	var res_regen = get_total(Stat.MANARG) # Assuming MANARG stat handles general resource regen
+	
+	if current_resource < max_res:
+		current_resource += (res_regen / 5.0) * delta 
+		current_resource = min(current_resource, max_res)
 	else:
-		current_resource=max_mana
+		current_resource = max_res
+
 func restore(resource_amt: float, health_amt: float):
 	if is_dead: return
 	resource_amt = max(0, resource_amt)
 	health_amt = max(0, health_amt)
-	current_resource += resource_amt
+	
 	current_health += health_amt
 	var max_hp = get_total(Stat.HP)
-	var max_res = get_total(Stat.MANA) if !use_energy else get_total(Stat.ENERGY)
 	if current_health > max_hp: current_health = max_hp
-	if current_resource > max_res: current_resource = max_res
+	
+	if resource_type != ResourceType.NONE:
+		current_resource += resource_amt
+		var max_res = _get_max_resource()
+		if current_resource > max_res: current_resource = max_res
+
 func heal(amount: float, source: Node2D = null):
 	if is_dead: return
 	amount = max(0, amount)
@@ -305,16 +328,14 @@ func heal(amount: float, source: Node2D = null):
 	current_health += final_heal_amount
 	var max_hp = get_total(Stat.HP)
 	if current_health > max_hp: current_health = max_hp
-	if amount > 5.0 and FLOATING_TEXT_SCENE and current_resource<max_hp: 
+	
+	if amount > 5.0 and FLOATING_TEXT_SCENE and current_health < max_hp: 
 		var text_instance = FLOATING_TEXT_SCENE.instantiate()
 		get_tree().current_scene.add_child(text_instance)
 		text_instance.start(amount, global_position, "heal", false)
 
-
 func get_nearby_enemies(radius: float) -> Array:
 	var enemies = []
-	# Use your existing AuraArea if you have one, 
-	# or a quick physics query:
 	var space = get_world_2d().direct_space_state
 	var query = PhysicsShapeQueryParameters2D.new()
 	
@@ -337,11 +358,11 @@ func get_nearby_enemies(radius: float) -> Array:
 
 # --- INVENTORY & UI UPDATES ---
 func _on_inventory_updated():
-# 1. Store old max values before recalculating
+	# 1. Store old max values before recalculating
 	var old_max_hp = get_total(Stat.HP)
-	var old_max_res = get_total(Stat.MANA) if !use_energy else get_total(Stat.ENERGY)
+	var old_max_res = _get_max_resource()
 
-	# 2. Reset and sum up stats from items (Your existing logic)
+	# 2. Reset and sum up stats from items
 	for key in bonus_stats.keys():
 		bonus_stats[key] = 0.0
 
@@ -353,39 +374,38 @@ func _on_inventory_updated():
 				for stat_key in item.stats:
 					if bonus_stats.has(stat_key):
 						bonus_stats[stat_key] += item.stats[stat_key]
+						
+	# 3. Apply Health Difference
 	var new_max_hp = get_total(Stat.HP)
 	var hp_diff = new_max_hp - old_max_hp
 	if hp_diff > 0:
 		current_health += hp_diff
-	var new_max_res = get_total(Stat.MANA) if !use_energy else get_total(Stat.ENERGY)
-	var res_diff = new_max_res - old_max_res
-	if res_diff > 0:
-		current_resource += res_diff
+		
+	# 4. Apply Resource Difference safely
+	if resource_type != ResourceType.NONE:
+		var new_max_res = _get_max_resource()
+		var res_diff = new_max_res - old_max_res
+		if res_diff > 0:
+			current_resource += res_diff
+			
 	recalculate_stats()
 
 func recalculate_stats():
 	super.recalculate_stats()
-	if inventory:
-		for item in inventory.items:
-			if item and item.effects:
-				for effect in item.effects:
-					if effect.has_method("on_stat_calculation"):
-						effect.on_stat_calculation(self)
 	_refresh_ui_display()
 	stats_recalculated.emit(self)
+
 func level_up():
 	level += 1
 	experience -= experience_to_next_level
 	experience_to_next_level *= 1.15 
 	
-
 	base_stats["health"] = base_stats.get("health", 0.0) + hp_growth
 	base_stats["Mana"] = base_stats.get("Mana", 0.0) + mana_growth
 	base_stats["attack_damage"] = base_stats.get("attack_damage", 0.0) + ad_growth
 	base_stats["armor"] = base_stats.get("armor", 0.0) + armor_growth
 	base_stats["magic_res"] = base_stats.get("magic_res", 0.0) + mr_growth
 	
-	# FIX: Save AS Growth to separate variable
 	accumulated_as_growth += (as_growth_percent / 100.0)
 	
 	current_health += hp_growth
@@ -408,8 +428,6 @@ func _roll_for_crit(base_chance: float) -> bool:
 	else:
 		crit_pity_bonus += PITY_INCREMENT
 		return false
-
-
 
 func update_passives(delta: float):
 	if attack_cooldown_timer > 0: attack_cooldown_timer -= delta
@@ -464,7 +482,6 @@ func _update_attack_range_circle():
 	
 func record_status_damage(status_id: String, receipt: Dictionary):
 	status_damage_dealt.emit(status_id, receipt)
-	
 	
 func gain_experience(amount: float):
 	experience += amount

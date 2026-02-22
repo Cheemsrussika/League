@@ -175,7 +175,7 @@ func recalculate_stats():
 					if effect.has_method("on_stat_calculation"):
 						effect.on_stat_calculation(self)
 
-	# 2. Ask Status Effects for stats (ONLY ONE LOOP)
+
 	if status_container:
 		for status in status_container.get_children():
 			# Skip nodes that are currently being deleted

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://cun1bhbdw7vrv"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_fyax5"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_fyax5"]
 [ext_resource type="Texture2D" uid="uid://4rdqbiig13li" path="res://Icons/Boots/40px-Sorcerer's_Shoes_item.png" id="2_gr0da"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_hsi6y"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_hsi6y"]
 [ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/UniqueTag.gd" id="2_xpa57"]
 [ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="4_xpa57"]
 

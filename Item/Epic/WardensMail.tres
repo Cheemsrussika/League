@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://duengeiu1h2l0"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_noo3c"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_noo3c"]
 [ext_resource type="Script" uid="uid://ciiq14ajccfcd" path="res://Scripts/Effects/RockSolid.gd" id="2_hs7lg"]
 [ext_resource type="Texture2D" uid="uid://dm5py5h6a5vgi" path="res://Icons/Epic Items/40px-Warden's_Mail_item.png" id="3_kq4y2"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_ue5um"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="4_ue5um"]
 [ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="5_gsupj"]
 
 [sub_resource type="Resource" id="Resource_k5ec5"]

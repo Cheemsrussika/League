@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://bjtnw7sxxojxm"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_kux8s"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_kux8s"]
 [ext_resource type="Script" uid="uid://cm12ioael5m4s" path="res://Scripts/Effects/EffectAura.gd" id="2_e3wnu"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_m4u0w"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_m4u0w"]
 [ext_resource type="Texture2D" uid="uid://857qfblxlxca" path="res://Icons/Legend Items/40px-Frozen_Heart_item.png" id="3_j2gty"]
 [ext_resource type="Resource" uid="uid://duengeiu1h2l0" path="res://Item/Epic/WardensMail.tres" id="5_8vw38"]
 [ext_resource type="Resource" uid="uid://c3q8hki3rgnpr" path="res://Item/Epic/GlacialBuckler.tres" id="6_d1gls"]

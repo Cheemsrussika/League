@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://cksugq2a4v8o1"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_mmdw4"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_mmdw4"]
 [ext_resource type="Texture2D" uid="uid://dn03vp341nv5b" path="res://Icons/Epic Items/40px-Haunting_Guise_item.png" id="2_2dwjt"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_6nr61"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_6nr61"]
 [ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/EffectStacking.gd" id="2_j81re"]
 [ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_bp8bo"]
 [ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="6_a5r33"]

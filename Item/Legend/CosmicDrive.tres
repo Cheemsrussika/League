@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://de2t6fmkkifc2"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ll8qd"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_8ndq8"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ll8qd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_8ndq8"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_60ogb"]
 [ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/OnHitSpeed.gd" id="3_rxuv4"]
 [ext_resource type="Texture2D" uid="uid://cjuemoe0hs4db" path="res://Icons/Legend Items/40px-Cosmic_Drive_item.png" id="4_a0lqp"]

@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://c76wymbcjw2dd"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_ydrub"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ydrub"]
 [ext_resource type="Texture2D" uid="uid://c1jox8f7gew41" path="res://Icons/Epic Items/40px-Bandleglass_Mirror_item.png" id="2_gaw2t"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="3_bo5en"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_bo5en"]
 [ext_resource type="Resource" uid="uid://tvoqqved45nb" path="res://Item/Basic/FaerieCharm.tres" id="4_t8pl8"]
 [ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="5_4cikm"]
 [ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="6_pub2v"]

@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://ciseabtuq4b50"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_w0wsn"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_w0wsn"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/EffectStats.gd" id="2_qnxdr"]
 [ext_resource type="Texture2D" uid="uid://bfa8ri1lwa86d" path="res://Icons/Epic Items/40px-Zeal_item.png" id="3_v2uvb"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="4_cnubf"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="4_cnubf"]
 [ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="5_530c2"]
 [ext_resource type="Resource" uid="uid://dtu1xvq34a4pa" path="res://Item/Basic/CloakOfAgility.tres" id="6_33je8"]
 

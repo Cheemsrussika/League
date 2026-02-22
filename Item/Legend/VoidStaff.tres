@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://botd0k4rxiupq"]
 
-[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/ItemEffect.gd" id="1_phafd"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/ItemData.gd" id="2_257kl"]
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_phafd"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_257kl"]
 [ext_resource type="Texture2D" uid="uid://ds3ts3ywul3d7" path="res://Icons/Legend Items/40px-Void_Staff_item.png" id="2_x4ydw"]
 [ext_resource type="Resource" uid="uid://j5c88js16ijc" path="res://Item/Epic/BlightingJewel.tres" id="4_y156s"]
 [ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="5_jbh44"]

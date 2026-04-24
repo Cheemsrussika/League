@@ -24,8 +24,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0.50980395)
 
 [node name="Warrior" groups=["champion", "unit"] instance=ExtResource("1_2olbg")]
 current_champion_data = ExtResource("2_mrby3")
-gold_reward = null
-exp_reward = null
 unit_type = 0
 team = 3
 base_stats = {
@@ -54,7 +52,6 @@ base_stats = {
 "omnivamp": 0.0,
 "phys_dmg_take_modi": 1.0
 }
-passive_effects = null
 
 [node name="ChampSelect" parent="." index="0"]
 scale = Vector2(1.8131905, 1.7385885)

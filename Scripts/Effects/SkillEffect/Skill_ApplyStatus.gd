@@ -1,7 +1,8 @@
 # res://Skills/Effects/Effect_ApplyStatus.gd
 extends SkillEffect
 class_name Effect_ApplyStatus
-
+@export_group("Stat Mapping")
+@export var target_stat: Unit.Stat = Unit.Stat.MS # You might need to add NONE to your Enum
 @export var status_id: String = ""
 @export var duration: float = 3.0
 @export var power_per_level: Array[float] = [10.0, 20.0, 30.0]
@@ -27,16 +28,26 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 		
 		# 2. Get the node and inject the LEGOs
 		var status_node = target.get_node_or_null("StatusContainer/" + status_id)
+# Inside Effect_ApplyStatus.gd -> on_execute()
+
 		if status_node:
-			# Pass the base damage
-			if "bonus_damage_base" in status_node:
-				status_node.bonus_damage_base = base_power
+			# 1. Standard power injection
+			if "power" in status_node:
+				status_node.power = base_power
 			
-			# Pass the SCALING RESOURCES themselves (for real-time math)
-			if "scaling_factors" in status_node:
-				status_node.scaling_factors = scaling_factors
-				
-			# Pass anything else from the extra_data dictionary
+			# 2. Convert Enum to String using your existing STAT_MAP
+			if "stats_to_buff" in status_node:
+				# We look up the string name using the Enum key you selected in the Inspector
+				if Unit.STAT_MAP.has(target_stat):
+					var stat_string = Unit.STAT_MAP[target_stat]
+					status_node.stats_to_buff = { stat_string: base_power }
+				else:
+					print("Warning: Stat ", target_stat, " not found in Unit.STAT_MAP")
+
+			# 3. Extra Data Injection
 			for key in extra_data:
 				if key in status_node:
 					status_node.set(key, extra_data[key])
+			
+			if target.has_method("recalculate_stats"):
+				target.recalculate_stats()

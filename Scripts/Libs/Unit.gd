@@ -108,7 +108,6 @@ func _process(delta: float):
 # --- SHIELD LOGIC ---
 func add_shield(amount: float, duration: float, type: int = ShieldType.ALL, decay_mode: int = ShieldDecay.TIMEOUT, shield_id: String = ""):
 	# 1. Check if a shield with this ID already exists
-	print("Shield W1\n")
 	if shield_id != "":
 		for s in active_shields:
 			print("Shield W\n")

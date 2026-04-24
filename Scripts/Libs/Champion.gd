@@ -94,6 +94,7 @@ func initialize_from_data(data: ChampionData) -> void:
 	
 	# 2. Map Base Stats (The "Item Way")
 	base_stats[STAT_MAP[Stat.HP]] = data.base_hp
+	current_health=data.base_hp
 	base_stats[STAT_MAP[Stat.AD]] = data.base_ad
 	base_stats[STAT_MAP[Stat.AR]] = data.base_armor
 	base_stats[STAT_MAP[Stat.MR]] = data.base_mr
@@ -108,6 +109,7 @@ func initialize_from_data(data: ChampionData) -> void:
 	armor_growth = data.armor_growth
 	mr_growth = data.mr_growth
 	as_growth_percent = data.as_growth_percent
+	
 	
 	# 4. Inject Skill Resources into Slots
 	if skill_q: skill_q.skill_data = data.q_skill

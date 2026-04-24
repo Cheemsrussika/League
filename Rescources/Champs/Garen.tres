@@ -8,4 +8,5 @@
 script = ExtResource("1_p5ghc")
 q_skill = ExtResource("1_ry6u7")
 w_skill = ExtResource("3_stsuv")
+resource_type = 3
 metadata/_custom_type_script = "uid://b07kiciv5m5pd"

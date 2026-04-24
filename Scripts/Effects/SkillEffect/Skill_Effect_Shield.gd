@@ -19,10 +19,7 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 	var target = target_data.get("target_unit")
 	if target == null:
 		target = caster
-	print("Shield W11\n")
 	if target and target.has_method("add_shield"):
-	
-		print("Shield W61\n")
 		var lvl_idx = clamp(skill_level - 1, 0, base_shield.size() - 1)
 		var total_shield = base_shield[lvl_idx]
 		
@@ -31,7 +28,6 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 			for factor in scaling_factors:
 				if factor:
 					total_shield += caster.get_total(factor.stat) * factor.scale_amount
-		print("Shield W4\n")
 		target.add_shield(total_shield, duration, shield_type, decay_mode, shield_id)
 		print("Skill Shield Applied: ", total_shield)
 	else:

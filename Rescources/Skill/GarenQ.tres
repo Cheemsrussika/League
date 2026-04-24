@@ -4,23 +4,20 @@
 [ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStatus.gd" id="2_f1kdw"]
 [ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_m5ium"]
 [ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_pkhpf"]
+[ext_resource type="Script" uid="uid://dthw5x2c5soji" path="res://Scripts/Effects/SkillEffect/Effect_ApplyOnHit.gd" id="4_pkhpf"]
 
 [sub_resource type="Resource" id="Resource_pkhpf"]
 script = ExtResource("2_f1kdw")
 status_id = "skill_speed"
+power_per_level = Array[float]([100.0, 200.0, 200.0])
 metadata/_custom_type_script = "uid://bko8vn7ypvpxm"
 
 [sub_resource type="Resource" id="Resource_whwa4"]
-script = ExtResource("3_pkhpf")
-metadata/_custom_type_script = "uid://kxhidfcg30kg"
-
-[sub_resource type="Resource" id="Resource_f1kdw"]
-script = ExtResource("2_f1kdw")
-status_id = "empowered_hit"
-scaling_factors = Array[ExtResource("3_pkhpf")]([SubResource("Resource_whwa4")])
-metadata/_custom_type_script = "uid://bko8vn7ypvpxm"
+script = ExtResource("4_pkhpf")
+metadata/_custom_type_script = "uid://dthw5x2c5soji"
 
 [resource]
 script = ExtResource("2_m5ium")
-effects = Array[ExtResource("1_41dmi")]([SubResource("Resource_pkhpf"), SubResource("Resource_f1kdw")])
+targeting = 3
+effects = Array[ExtResource("1_41dmi")]([SubResource("Resource_pkhpf"), SubResource("Resource_whwa4")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

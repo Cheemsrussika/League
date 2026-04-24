@@ -126,14 +126,39 @@ func initialize_from_data(data: ChampionData) -> void:
 	
 
 # --- COMBAT & MOVEMENT LOGIC ---
+var pending_skill_slot: SkillSlot = null
+
+func set_chase_and_cast(target, slot):
+	current_target = target
+	pending_skill_slot = slot
 func execute_combat_logic(delta: float):
+	# 1. Windup check stays at the top (Stunned/Casting state)
 	if is_winding_up:
 		velocity = Vector2.ZERO
 		windup_timer -= delta
 		if windup_timer <= 0:
 			_complete_attack()
 		return 
+
+	# 2. PRIORITY: Skill Chasing
+	if pending_skill_slot and is_instance_valid(current_target):
+		var dist = global_position.distance_to(current_target.global_position)
 		
+		if dist <= pending_skill_slot.skill_data.cast_range:
+			velocity = Vector2.ZERO # Stop to cast
+			var target_data = {"target_unit": current_target, "target_position": current_target.global_position}
+			pending_skill_slot.activate(self, target_data)
+			pending_skill_slot = null 
+			current_target = null # Optional: clear target after ult
+		else:
+			# Move toward skill target
+			var move_spd = get_current_move_speed()
+			velocity = global_position.direction_to(current_target.global_position) * move_spd
+		
+		move_and_slide()
+		return # EXIT HERE so we don't run auto-attack logic!
+
+	# 3. AUTO-ATTACK LOGIC
 	if is_instance_valid(current_target):
 		var dist = global_position.distance_to(current_target.global_position)
 		var range_stat = get_total(Stat.RANGE) + 35.0
@@ -146,6 +171,7 @@ func execute_combat_logic(delta: float):
 			var move_spd = get_current_move_speed()
 			velocity = global_position.direction_to(current_target.global_position) * move_spd
 			
+	# 4. NAVIGATION LOGIC
 	elif nav_target != null:
 		var dist = global_position.distance_to(nav_target)
 		if dist < 5.0:
@@ -156,7 +182,7 @@ func execute_combat_logic(delta: float):
 			velocity = global_position.direction_to(nav_target) * move_spd
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, 2000 * delta)
-	
+
 	move_and_slide()
 
 # --- ATTACK SEQUENCE ---
@@ -208,9 +234,6 @@ func apply_physical_spell_hit(target: Node2D, base_damage: float, scaling_ratio:
 	_trigger_passive_effects("on_attack", context)
 	raw_damage = context["damage"]
 	var dealt = deal_damage(target, raw_damage, "physical", "spell", is_crit)
-
-	var lifesteal = get_total(Stat.LIFE_STEAL)
-	if lifesteal > 0 and dealt > 0: heal(dealt * (lifesteal / 100.0))
 	return dealt
 
 func apply_spell_damage(target: Node2D, base_damage: float, type: String, scaling_stat: Stat = Stat.AD, scaling_ratio: float = 0.0):
@@ -226,9 +249,7 @@ func apply_spell_damage(target: Node2D, base_damage: float, type: String, scalin
 	total_damage = context["damage"]
 	
 	var dealt = deal_damage(target, total_damage, type, "spell", false)
-	
-	var omnivamp = get_total(Stat.OMNIVAMP)
-	if omnivamp > 0 and dealt > 0: heal(dealt * (omnivamp / 100.0))
+
 	return dealt
 
 func perform_auto_attack_hit(target: Node2D):
@@ -257,43 +278,52 @@ func perform_auto_attack_hit(target: Node2D):
 	for type in damage_buckets.keys():
 		var raw_amount = damage_buckets[type]
 		if raw_amount > 0:
-			var health_lost = deal_damage(target, raw_amount, type, "attack", is_crit)
+			var health_lost = deal_damage(target, raw_amount, type, "attack", is_crit, {"allow_lifesteal": true})
 			total_damage_dealt += health_lost 
 			if type == "physical": physical_damage_dealt += health_lost
 				
-	var total_heal = 0.0
-	var lifesteal = get_total(Stat.LIFE_STEAL)
-	if lifesteal > 0: total_heal += physical_damage_dealt * (lifesteal / 100.0)
-	var omnivamp = get_total(Stat.OMNIVAMP) 
-	if omnivamp > 0: total_heal += total_damage_dealt * (omnivamp / 100.0)
-	if total_heal > 0 : heal(total_heal)
+	
+# res://Scripts/Units/Champion.gd
 
-func deal_damage(target: Node2D, amount: float, type: String, category: String, is_crit: bool = false) -> float:
+func deal_damage(target: Node2D, amount: float, type: String, category: String, is_crit: bool = false, skill_context: Dictionary = {}) -> float:
 	var receipt = target.take_damage(amount, type, self, is_crit, category)
-	var mitigated_amt = receipt["mitigated"] 
 	var actual_lost = receipt["health_lost"]
 	
-	var ratio = 0.0
-	if amount > 0.0: ratio = mitigated_amt / amount
-		
-	var report = { "type": type, "ratio": ratio, "target": target }
-	_trigger_passive_effects("on_bucket_damage_landed", report)
-	damage_done += mitigated_amt 
-	
-	if mitigated_amt > 0 and inventory:
+	if actual_lost > 0:
+		# 1. Create and Merge Context
 		var context = {
-			"target": target, "amount": mitigated_amt, "health_lost": actual_lost,
-			"damage_type": type, "category": category, "is_crit": is_crit, "receipt": receipt      
+			"target": target, 
+			"amount": amount, 
+			"health_lost": actual_lost,
+			"damage_type": type, 
+			"category": category, 
+			"is_crit": is_crit
 		}
+		context.merge(skill_context)
+
+		# 2. Trigger Global Passives
 		_trigger_passive_effects("on_damage_dealt", context)
+		
+		# 3. CONSOLIDATED HEALING (The Fix)
+		var total_heal = 0.0
+		
+		# Life Steal (Physical only + must be allowed by Skill/Attack)
+		if type == "physical" and context.get("allow_lifesteal", false):
+			total_heal += actual_lost * (get_total(Stat.LIFE_STEAL) / 100.0)
+		
+		# Omnivamp (All types)
+		total_heal += actual_lost * (get_total(Stat.OMNIVAMP) / 100.0)
+			
+		if total_heal > 0:
+			heal(total_heal)
+
+		# 4. Trigger Category Hooks
 		if category == "spell":
-		# USE THIS FOR: Liandry's Burn, Spell-vamp, Rylai's Slow
 			_trigger_passive_effects("on_spell_hit", context) 
 		elif category == "attack":
-		# USE THIS FOR: Life Steal, Blade of the Ruined King current % HP damage
 			_trigger_passive_effects("on_attack_hit_post_mitigation", context)
 				
-	return actual_lost 
+	return actual_lost
 
 func take_damage(amount: float, type: String, source: Node, is_crit: bool = false, category: String = "spell") -> Dictionary:
 	last_combat_time = Time.get_ticks_msec()

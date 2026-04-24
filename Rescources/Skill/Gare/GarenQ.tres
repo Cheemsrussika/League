@@ -18,6 +18,6 @@ metadata/_custom_type_script = "uid://dthw5x2c5soji"
 
 [resource]
 script = ExtResource("2_m5ium")
-targeting = 3
+cast_range = 0.0
 effects = Array[ExtResource("1_41dmi")]([SubResource("Resource_pkhpf"), SubResource("Resource_whwa4")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

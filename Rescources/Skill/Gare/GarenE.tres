@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://c73u1u6i2q23e"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_vepns"]
+[ext_resource type="Script" uid="uid://27p3t38xowvx" path="res://Scripts/Effects/SkillEffect/EffectSpawnHitBox.gd" id="2_4arlh"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_a5ybg"]
+[ext_resource type="PackedScene" uid="uid://dgjmcesq1poa3" path="res://Screen/skill_hit_box.tscn" id="2_p5fim"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="3_p5fim"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="3_yr8mk"]
+
+[sub_resource type="Resource" id="Resource_qu4te"]
+script = ExtResource("3_yr8mk")
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
+[sub_resource type="Resource" id="Resource_a5ybg"]
+script = ExtResource("2_4arlh")
+hitbox_scene = ExtResource("2_p5fim")
+hitbox_scale = 200.0
+is_persistent = true
+tick_rate = 0.25
+effect_to_apply = SubResource("Resource_qu4te")
+metadata/_custom_type_script = "uid://27p3t38xowvx"
+
+[resource]
+script = ExtResource("3_p5fim")
+cast_range = 0.0
+effects = Array[ExtResource("1_vepns")]([SubResource("Resource_a5ybg")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

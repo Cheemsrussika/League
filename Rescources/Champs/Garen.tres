@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="ChampionData" load_steps=4 format=3 uid="uid://cbowweq8oh6ie"]
+[gd_resource type="Resource" script_class="ChampionData" load_steps=6 format=3 uid="uid://cbowweq8oh6ie"]
 
 [ext_resource type="Script" uid="uid://b07kiciv5m5pd" path="res://Scripts/Champions/ChampionData.gd" id="1_p5ghc"]
-[ext_resource type="Resource" uid="uid://c0ilxah02qad" path="res://Rescources/Skill/GarenQ.tres" id="1_ry6u7"]
-[ext_resource type="Resource" uid="uid://bppaee5mc6s3a" path="res://Rescources/Skill/GarenW.tres" id="3_stsuv"]
+[ext_resource type="Resource" uid="uid://c73u1u6i2q23e" path="res://Rescources/Skill/Gare/GarenE.tres" id="1_v2k2y"]
+[ext_resource type="Resource" uid="uid://to0ydawglaba" path="res://Rescources/Skill/EzrealQ.tres" id="2_urhgj"]
+[ext_resource type="Resource" uid="uid://bwrn0rcoaw2ce" path="res://Rescources/Skill/Gare/GarenR.tres" id="3_urhgj"]
+[ext_resource type="Resource" uid="uid://bppaee5mc6s3a" path="res://Rescources/Skill/Gare/GarenW.tres" id="4_adfde"]
 
 [resource]
 script = ExtResource("1_p5ghc")
-q_skill = ExtResource("1_ry6u7")
-w_skill = ExtResource("3_stsuv")
+q_skill = ExtResource("2_urhgj")
+w_skill = ExtResource("4_adfde")
+e_skill = ExtResource("1_v2k2y")
+r_skill = ExtResource("3_urhgj")
 resource_type = 3
 metadata/_custom_type_script = "uid://b07kiciv5m5pd"

@@ -62,12 +62,17 @@ func on_hit(user: Unit, context: Dictionary) -> void:
 	pass
 func on_damage_dealt(user: Unit, context: Dictionary):
 	pass
+func on_attack_hit_post_mitigation(user:Unit,context:Dictionary):
+	pass
+	
 func on_event(hook: String, owner: Unit, data: Dictionary):
 	match hook:
 		"on_attack":
 			on_attack(owner, data) 
 		"on_hit":
 			on_hit(owner, data)
+		"on_attack_hit_post_mitigation": 
+			on_attack_hit_post_mitigation(owner, data)
 		"on_hit_received":
 			on_hit_received(owner, data)
 		"on_damage_dealt":

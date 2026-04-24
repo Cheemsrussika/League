@@ -7,6 +7,11 @@ enum TargetType { ENEMY, ALLY, ANY, SELF_ONLY }
 @export var icon: Texture2D
 @export_group("Target")
 @export var targeting: TargetType = TargetType.ENEMY
+@export var cast_range: float = 400.0
+@export_group("On-Hit Settings ")
+@export var is_on_hit: bool = false
+@export var allow_lifesteal: bool = false
+@export var on_hit_multiplier: float = 1.0
 @export_group("Scaling & Costs")
 @export var base_cooldown: Array[float] = [10.0, 9.0, 8.0, 7.0, 6.0]
 @export var resource_cost: Array[float] = [0.0, 0.0, 0.0, 0.0, 0.0]

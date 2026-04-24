@@ -1,3 +1,4 @@
+# res://Skills/Effects/EffectSlowOnHit.gd
 extends ItemEffect
 class_name EffectSlowOnHit
 
@@ -7,26 +8,33 @@ class_name EffectSlowOnHit
 
 var slows_applied: int = 0
 
+# Listen to the Post-Mitigation hook for Skills and Auto-Attacks
+func on_attack_hit_post_mitigation(user: Unit, context: Dictionary) -> void:
+	_apply_slow_logic(user, context)
+
+# Listen to the "on_hit" hook (used by your TowerProjectile)
 func on_hit(user: Unit, context: Dictionary) -> void:
-	var current_time = Time.get_ticks_msec()
-	if current_time - last_trigger_time < (cooldown * 1000):
-		return 
+	_apply_slow_logic(user, context)
+
+func _apply_slow_logic(user: Unit, context: Dictionary) -> void:
+	# Use parent logic to check/start cooldown
+	if not _try_start_cooldown(): return 
+
 	var target = context.get("target")
-	if target.unit_type == Unit.UnitType.TOWER:
-			return
 	if not target or not is_instance_valid(target): return
+	
+	# Respect the skill "Passport"
+	if not context.get("allow_on_hits", true): return
+
+	if target.get("unit_type") == Unit.UnitType.TOWER: return
 	if not target.has_method("apply_slow"): return
-	var is_unit_ranged = true # Default to ranged
-	if user.has_method("is_ranged"):
-		is_unit_ranged = user.is_ranged()
-	elif user.unit_type == Unit.UnitType.CHAMPION:
-		is_unit_ranged = false 
+
+	var is_unit_ranged = user.is_ranged() if user.has_method("is_ranged") else false
 	var slow_amount = slow_ranged if is_unit_ranged else slow_melee
+	
 	target.apply_slow(slow_amount, duration)
 	slows_applied += 1
 	_update_item_ui(user)
-	# 5. Reset Cooldown
-	last_trigger_time = current_time
 
 func _update_item_ui(user):
 	if user.inventory and user.inventory.has_method("request_ui_refresh"):

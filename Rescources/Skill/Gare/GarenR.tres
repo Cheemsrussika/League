@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=6 format=3 uid="uid://bwrn0rcoaw2ce"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_g28c0"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_gxv2b"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_weh8a"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="3_fqlha"]
+
+[sub_resource type="Resource" id="Resource_c55qt"]
+script = ExtResource("3_fqlha")
+damage_type = "true"
+missing_hp_scaling = 0.3
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
+[resource]
+script = ExtResource("2_weh8a")
+effects = Array[ExtResource("1_g28c0")]([SubResource("Resource_c55qt")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

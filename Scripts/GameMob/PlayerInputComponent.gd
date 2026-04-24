@@ -77,13 +77,22 @@ func _handle_skill_cast(slot: SkillSlot):
 	var found_unit = null
 	if filter != "NONE":
 		found_unit = _get_target_under_mouse(filter)
-	
-	# 3. Package and Activate
+	if found_unit:
+		var distance = champion.global_position.distance_to(found_unit.global_position)
+		
+		# Check if the skill has a range limit
+		if slot.skill_data.cast_range > 0:
+			if distance > slot.skill_data.cast_range:
+				print("Out of Range! Moving to target.")
+				# Tell the champion to chase the target and cast when close
+				champion.set_chase_and_cast(found_unit, slot)
+				return # Don't activate yet!
+
+	# If we are in range or it's a self-cast
 	var target_data = {
 		"target_position": champion.get_global_mouse_position(),
 		"target_unit": found_unit
 	}
-	
 	slot.activate(champion, target_data)
 func _get_target_under_mouse(filter_type: String = "ANY") -> Node2D:
 	var space = champion.get_world_2d().direct_space_state

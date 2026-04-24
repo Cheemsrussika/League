@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgjmcesq1poa3"]
+
+[ext_resource type="Script" uid="uid://c1nt2mkrd8j4i" path="res://Scripts/HitBoxSkills/SkillHitbox.gd" id="1_tcxv4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hu31y"]
+radius = 1.0
+
+[node name="SkillHitBox" type="Area2D"]
+collision_mask = 9
+script = ExtResource("1_tcxv4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hu31y")
+debug_color = Color(0.6637788, 0.51308244, 5.7756904e-07, 0.41960785)

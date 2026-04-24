@@ -36,10 +36,13 @@ func _on_impact():
 		target.take_damage(damage, "magic", attacker, false, "attack")
 		if is_instance_valid(attacker) and attacker.has_method("_trigger_passive_effects"):
 			attacker._trigger_passive_effects("on_hit", {"target": target})
+			# Inside TowerProjectile.gd _on_impact()
 			var damage_context = {
 				"target": target,
-				"category": "spell", 
-				"type": "magic"      
+				"category": "spell", # Or "attack" if you want towers to proc lifesteal?
+				"type": "magic",
+				"allow_on_hits": true, # Explicitly allow the slow to work
+				"on_hit_mult": 1.0
 			}
 			attacker._trigger_passive_effects("on_damage_dealt", damage_context)
 	queue_free()

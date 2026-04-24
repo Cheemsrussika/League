@@ -45,7 +45,6 @@ func on_stat_calculation(user: Node2D) -> void:
 				ScalingMode.BONUS:
 					source_value = user.bonus_stats.get(source_key, 0.0)
 			final_amount += source_value * scaling_factor
-	print(final_amount)
-	print(flat_amount)
+
 	if not is_zero_approx(final_amount):
 		user.modify_stat(target_stat_string, final_amount)

@@ -43,24 +43,32 @@ var last_added_raw: float = 0.0
 var total_damage_added: float = 0.0
 const BUFF_ID = "stat_buff"
 
-# --- 1. STAT MODIFICATION ---
 
+func on_attack(user: Unit, context: Dictionary) -> void:
+	_execute_on_hit_logic(user, context)
+
+# This handles on-hit skills (from deal_damage with category "attack")
+func on_attack_hit_post_mitigation(user: Unit, context: Dictionary) -> void:
+	_execute_on_hit_logic(user, context)
 
 # --- 2. MAIN ATTACK LOGIC ---
-func on_attack(user: Unit, context: Dictionary) -> void:
+func _execute_on_hit_logic(user: Unit, context: Dictionary) -> void:
 	var target = context.get("target")
 	if not target or not is_instance_valid(target): return
+	
+	if context.has("allow_on_hits") and not context["allow_on_hits"]:
+		return
+		
 	if not _try_start_cooldown(): return 
 	if champions_only and target.unit_type != Unit.UnitType.CHAMPION: return
 	
+	var effectiveness = context.get("on_hit_mult", 1.0)
 	var is_crit = context.get("is_crit", false)
 	var current_time = Time.get_ticks_msec()
 
-	# --- A. HANDLE BUFF & COOLDOWN ---
-	if allow_buff:
-		var has_buff = user.has_status(BUFF_ID)
-		
-		if not has_buff:
+	# --- Buff ---
+	if allow_buff and effectiveness > 0:
+		if not user.has_status(BUFF_ID):
 			if current_time >= cooldown_ready_time:
 				_activate_buff(user)
 			else:
@@ -68,10 +76,10 @@ func on_attack(user: Unit, context: Dictionary) -> void:
 				cooldown_ready_time -= int(reduction * 1000)
 				_update_item_ui(user)
 
-	# --- B. HANDLE DAMAGE CALCULATION ---
+	# --- Damage ---
 	var calculated_damage = damage_on_hit
-	var is_structure = (target.get("unit_type") == Unit.UnitType.TOWER)
 	
+	var is_structure = (target.unit_type == Unit.UnitType.TOWER)
 	if is_structure and not affects_structures:
 		return
 
@@ -86,40 +94,37 @@ func on_attack(user: Unit, context: Dictionary) -> void:
 				ScalingMode.BONUS: source_value = user.bonus_stats.get(stat_key, 0.0)
 		calculated_damage += source_value * scaling_factor
 
-	# Percent HP
-	var percent_to_use = 0.0
-	if damage_percent_melee > 0 or damage_percent_ranged > 0:
-		percent_to_use = damage_percent_ranged if user.is_ranged() else damage_percent_melee
-	
+	# % HP
+	var percent_to_use = damage_percent_ranged if user.is_ranged() else damage_percent_melee
 	if percent_to_use > 0:
 		var percent_dmg = target.current_health * percent_to_use
-		if cap_vs_monsters > 0 and (target.unit_type == Unit.UnitType.MINION or target.unit_type == Unit.UnitType.MONSTER):
+		
+		if cap_vs_monsters > 0 and target.unit_type in [Unit.UnitType.MINION, Unit.UnitType.MONSTER]:
 			percent_dmg = min(percent_dmg, cap_vs_monsters)
-		elif target.unit_type == Unit.UnitType.TOWER:
+		elif is_structure:
 			percent_dmg = 0.0
+			
 		calculated_damage += percent_dmg
 
+	# Multiplier
+	calculated_damage *= effectiveness
+
+	# Crit
 	if can_this_item_crit and is_crit:
 		calculated_damage *= user.get_total(Unit.Stat.CRIT_DMG)
-	# --- B. HANDLE DAMAGE CALCULATION ---
+
+	# Final apply
 	if calculated_damage > 0:
 		if damage_type == DamageType.PHYSICAL:
-			# If your Unit.gd doesn't provide buckets, we deal damage directly
 			if not context.has("buckets"):
-				var dealt = user.deal_damage(target, calculated_damage, "physical", "proc", is_crit)
-				total_damage_added += dealt
-				last_added_raw = 0.0 # Clear this since we didn't use the bucket system
+				total_damage_added += user.deal_damage(target, calculated_damage, "physical", "proc", is_crit)
 			else:
-				# If buckets exist, we add to it as originally intended
 				context["buckets"]["physical"] += calculated_damage
-				last_added_raw = calculated_damage 
+				last_added_raw = calculated_damage
 		else:
-			# Magic and True damage already use the safe "deal_damage" method
 			var type_str = "magic" if damage_type == DamageType.MAGIC else "true"
-			var dealt = user.deal_damage(target, calculated_damage, type_str, "proc", is_crit)
-			total_damage_added += dealt
-			last_added_raw = 0.0
-		
+			total_damage_added += user.deal_damage(target, calculated_damage, type_str, "proc", is_crit)
+
 	_update_item_ui(user)
 
 func _activate_buff(user: Champion):

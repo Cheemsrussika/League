@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk7hf2ehb6r76"]
+
+[ext_resource type="Script" uid="uid://bp1i8osd8g86k" path="res://Scripts/projectile.gd" id="1_661vy"]
+[ext_resource type="Texture2D" uid="uid://dwucuk24bcyqx" path="res://Icons/DayBygoneTExture/window on.png" id="1_uy0po"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_661vy"]
+radius = 23.086792
+
+[node name="Projectile" type="Area2D"]
+collision_mask = 8
+script = ExtResource("1_661vy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_661vy")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.12499972, 0.50000167)
+scale = Vector2(1.985294, 1.6666666)
+texture = ExtResource("1_uy0po")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -56,6 +56,7 @@ func handle_phantom_logic(owner: Unit, context: Dictionary):
 
 func trigger_phantom_hit(owner: Unit, original_context: Dictionary):
 	var phantom_context = original_context.duplicate()
+	phantom_context["on_hit_mult"] = 1.0
 	phantom_context["is_phantom"] = true
 	phantom_context["category"] = "proc" 
 	if owner.inventory and "items" in owner.inventory:
@@ -65,6 +66,8 @@ func trigger_phantom_hit(owner: Unit, original_context: Dictionary):
 					if effect == self: continue 
 					if effect.has_method("on_attack"):
 						effect.on_attack(owner, phantom_context)
+					elif effect.has_method("_execute_on_hit_logic"):
+						effect._execute_on_hit_logic(owner, phantom_context)
 func _trigger_kraken_damage(owner: Unit, target: Node2D):
 	if not target: return
 	var level_factor = (owner.level - 1) / 17.0 

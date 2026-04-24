@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://to0ydawglaba"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_ljs1w"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_mnhsp"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_omreo"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="3_7heug"]
+[ext_resource type="PackedScene" uid="uid://bk7hf2ehb6r76" path="res://Screen/projectile.tscn" id="4_p4362"]
+[ext_resource type="Script" uid="uid://c46y6treejpru" path="res://Scripts/Effects/SkillEffect/Effect_ShootProjectile.gd" id="5_bwd7u"]
+
+[sub_resource type="Resource" id="Resource_ujq5u"]
+script = ExtResource("3_7heug")
+is_on_hit = true
+allow_lifesteal = true
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
+[sub_resource type="Resource" id="Resource_ecdwd"]
+script = ExtResource("5_bwd7u")
+projectile_scene = ExtResource("4_p4362")
+effect_to_apply = SubResource("Resource_ujq5u")
+metadata/_custom_type_script = "uid://c46y6treejpru"
+
+[resource]
+script = ExtResource("2_omreo")
+targeting = 3
+cast_range = 1000.0
+is_on_hit = true
+allow_lifesteal = true
+base_cooldown = Array[float]([2.0])
+effects = Array[ExtResource("1_ljs1w")]([SubResource("Resource_ecdwd")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

@@ -15,12 +15,14 @@ func on_take_damage(user: Champion, context: Dictionary) -> void:
 	var source = context.get("attacker") 
 	var damage_amount = context.get("amount", 0.0)
 	var damage_type = context.get("type", "")     
+	var category = context.get("category", "")
 	
 	if not source or not is_instance_valid(source): return
 	if source == user: return 
 	if source.team == user.team: return
-	if damage_type != "physical": return 
-
+	if damage_type != "physical" or category != "attack": 
+		return
+	
 	var damage_to_return = reflect_flat
 
 	var armor = user.get_total(Unit.Stat.AR) 

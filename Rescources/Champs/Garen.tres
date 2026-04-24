@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b07kiciv5m5pd" path="res://Scripts/Champions/ChampionData.gd" id="1_p5ghc"]
 [ext_resource type="Resource" uid="uid://c73u1u6i2q23e" path="res://Rescources/Skill/Gare/GarenE.tres" id="1_v2k2y"]
 [ext_resource type="Resource" uid="uid://to0ydawglaba" path="res://Rescources/Skill/EzrealQ.tres" id="2_urhgj"]
-[ext_resource type="Resource" uid="uid://bwrn0rcoaw2ce" path="res://Rescources/Skill/Gare/GarenR.tres" id="3_urhgj"]
+[ext_resource type="Resource" uid="uid://c0fa7e8rtybbm" path="res://Rescources/Skill/MorganaW.tres" id="3_urhgj"]
 [ext_resource type="Resource" uid="uid://bppaee5mc6s3a" path="res://Rescources/Skill/Gare/GarenW.tres" id="4_adfde"]
 
 [resource]

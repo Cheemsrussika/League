@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dtsluwf34ojy2"]
+
+[ext_resource type="Script" uid="uid://ct0nn1fcjb2u5" path="res://aoe_zone.gd" id="1_n6pb3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cu1s7"]
+
+[node name="AOE_Zone" type="Area2D"]
+collision_layer = 15
+collision_mask = 15
+script = ExtResource("1_n6pb3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cu1s7")

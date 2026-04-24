@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://c0fa7e8rtybbm"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_hb01j"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_aus3c"]
+[ext_resource type="PackedScene" uid="uid://dtsluwf34ojy2" path="res://Screen/aoe_zone.tscn" id="2_rw2px"]
+[ext_resource type="Script" uid="uid://bkhsll10beot" path="res://Scripts/Effects/SkillEffect/Effect_SpawnAOE.gd" id="3_fa7ic"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_irq3k"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="4_l4bru"]
+
+[sub_resource type="Resource" id="Resource_l4bru"]
+script = ExtResource("4_l4bru")
+allow_lifesteal = true
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
+[sub_resource type="Resource" id="Resource_irq3k"]
+script = ExtResource("3_fa7ic")
+hitbox_scene = ExtResource("2_rw2px")
+hitbox_scale = 10.0
+is_persistent = true
+spawn_at_mouse = true
+effect_to_apply = SubResource("Resource_l4bru")
+metadata/_custom_type_script = "uid://bkhsll10beot"
+
+[resource]
+script = ExtResource("2_aus3c")
+is_on_hit = true
+allow_lifesteal = true
+effects = Array[ExtResource("1_hb01j")]([SubResource("Resource_irq3k")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

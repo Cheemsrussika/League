@@ -306,14 +306,21 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 		
 		# 3. CONSOLIDATED HEALING (The Fix)
 		var total_heal = 0.0
-		
+		var healing_mult = 1.0
 		# Life Steal (Physical only + must be allowed by Skill/Attack)
+		if context.get("is_aoe", false):
+			healing_mult = 0.33
+
+		# 1. Life Steal
 		if type == "physical" and context.get("allow_lifesteal", false):
-			total_heal += actual_lost * (get_total(Stat.LIFE_STEAL) / 100.0)
-		
-		# Omnivamp (All types)
-		total_heal += actual_lost * (get_total(Stat.OMNIVAMP) / 100.0)
-			
+			# (Lifesteal is rarely AoE, but we apply the mult just in case)
+			total_heal += actual_lost * (get_total(Stat.LIFE_STEAL) / 100.0) * healing_mult
+
+		# 2. Omnivamp
+		var omni = get_total(Stat.OMNIVAMP)
+		if omni > 0:
+			total_heal += actual_lost * (omni / 100.0) * healing_mult
+
 		if total_heal > 0:
 			heal(total_heal)
 

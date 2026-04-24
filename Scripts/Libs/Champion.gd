@@ -72,6 +72,8 @@ func _get_max_resource() -> float:
 @onready var skill_w: SkillSlot = $Skills/Skill_W
 @onready var skill_e: SkillSlot = $Skills/Skill_E
 @onready var skill_r: SkillSlot = $Skills/Skill_R
+@onready var skill_g: SkillSlot = $Skills/Skill_G
+@onready var skill_f: SkillSlot = $Skills/Skill_F
 
 func _ready():
 	super._ready() # Unit setup (Stats, Health, etc.)
@@ -116,7 +118,8 @@ func initialize_from_data(data: ChampionData) -> void:
 	if skill_w: skill_w.skill_data = data.w_skill
 	if skill_e: skill_e.skill_data = data.e_skill
 	if skill_r: skill_r.skill_data = data.r_skill
-
+	if skill_g: skill_g.skill_data = data.g_skill
+	if skill_f: skill_f.skill_data = data.f_skill
 	# 5. Initialize Resource starting value
 	match resource_type:
 		ResourceType.FURY: current_resource = 0.0
@@ -417,6 +420,20 @@ func heal(amount: float, source: Node2D = null):
 		var text_instance = FLOATING_TEXT_SCENE.instantiate()
 		get_tree().current_scene.add_child(text_instance)
 		text_instance.start(amount, global_position, "heal", false)
+#---Movements----
+func dash_to_position(target_pos: Vector2, speed: float, duration: float):
+	var direction = (target_pos - global_position).normalized()
+	var timer = 0.0
+	# Optional: Disable regular movement input here
+	# is_dashing = true 
+	while timer < duration:
+		velocity = direction * speed
+		move_and_slide() # Respects physics/walls
+		timer += get_process_delta_time()
+		await get_tree().process_frame
+	
+	velocity = Vector2.ZERO
+	# is_dashing = false
 
 func get_nearby_enemies(radius: float) -> Array:
 	var enemies = []

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://cq01odh57fvqa"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_lcimm"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_0nlah"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_84dyt"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="3_p5qvq"]
+[ext_resource type="PackedScene" uid="uid://dcogiksog13df" path="res://Screen/homing_projectile.tscn" id="4_45nn2"]
+[ext_resource type="Script" uid="uid://do7ksq5i8uwhq" path="res://Scripts/Effects/SkillEffect/Effect_SpawnHominProj.gd" id="5_jonkp"]
+
+[sub_resource type="Resource" id="Resource_5fmh8"]
+script = ExtResource("3_p5qvq")
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
+[sub_resource type="Resource" id="Resource_g678n"]
+script = ExtResource("5_jonkp")
+projectile_scene = ExtResource("4_45nn2")
+speed = 200.0
+damage_effect = SubResource("Resource_5fmh8")
+metadata/_custom_type_script = "uid://do7ksq5i8uwhq"
+
+[resource]
+script = ExtResource("2_84dyt")
+cast_range = 1000.0
+effects = Array[ExtResource("1_lcimm")]([SubResource("Resource_g678n")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

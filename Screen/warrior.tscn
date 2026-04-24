@@ -113,11 +113,17 @@ offset_bottom = 16.0
 [node name="Skill_Q" type="Node" parent="Skills" index="0"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_W" type="Node" parent="Skills" index="1"]
+[node name="Skill_G" type="Node" parent="Skills" index="1"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_E" type="Node" parent="Skills" index="2"]
+[node name="Skill_F" type="Node" parent="Skills" index="2"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_R" type="Node" parent="Skills" index="3"]
+[node name="Skill_W" type="Node" parent="Skills" index="3"]
+script = ExtResource("5_x7b8u")
+
+[node name="Skill_E" type="Node" parent="Skills" index="4"]
+script = ExtResource("5_x7b8u")
+
+[node name="Skill_R" type="Node" parent="Skills" index="5"]
 script = ExtResource("5_x7b8u")

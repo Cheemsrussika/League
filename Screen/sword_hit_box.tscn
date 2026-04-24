@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwgkws5w3k6uc"]
+
+[ext_resource type="Script" uid="uid://c1nt2mkrd8j4i" path="res://Scripts/HitBoxSkills/SkillHitbox.gd" id="1_8j521"]
+
+[node name="SwordHitBox" type="Area2D"]
+collision_mask = 10
+script = ExtResource("1_8j521")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -15, 0, 15, 110, 15, 223, 0, 110, -15)

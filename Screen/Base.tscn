@@ -372,32 +372,6 @@ passive_effects = Array[ExtResource("93_7e3vi")]([SubResource("Resource_fstwv"),
 position = Vector2(1566, 772)
 unit_type = 0
 team = 0
-base_stats = {
-"Energy": 0.0,
-"Mana": 100.0,
-"Mana_Regen": 2.0,
-"Slow_res": 0.0,
-"ability_power": 0.0,
-"all_dmg_take_modi": 0.0,
-"armor": 30.0,
-"armor_pen": 0.0,
-"attack_damage": 60.0,
-"attack_range": 175.0,
-"attack_speed": 0.625,
-"crit_chance": 0.0,
-"crit_damage": 1.75,
-"dmg_dealt_modifier": 0.0,
-"gold_gen": 5.0,
-"health": 100000.0,
-"health_regen": 5.0,
-"life_steal": 0.0,
-"magic_dmg_take__modi": 1.0,
-"magic_pen": 0.0,
-"magic_res": 30.0,
-"move_speed": 330.0,
-"omnivamp": 0.0,
-"phys_dmg_take_modi": 1.0
-}
 
 [node name="EnemyChampion" parent="." instance=ExtResource("66_6xwof")]
 position = Vector2(-748, 1028)
@@ -454,7 +428,6 @@ position = Vector2(2722, 1243)
 melee_scene = ExtResource("47_l1xab")
 melee_count = 2
 ranged_count = 0
-spawn_team = 3
 spawn_point = NodePath("Marker2D")
 assigned_path = NodePath("Top")
 
@@ -471,3 +444,7 @@ autostart = true
 
 [node name="EnemyChampion2" parent="." instance=ExtResource("66_6xwof")]
 position = Vector2(1002, 799)
+
+[node name="EnemyChampion3" parent="." instance=ExtResource("66_6xwof")]
+position = Vector2(1400, 1021)
+team = 3

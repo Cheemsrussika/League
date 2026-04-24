@@ -48,6 +48,10 @@ func _unhandled_input(event):
 		_handle_skill_cast(champion.skill_e)
 	elif event.is_action_pressed("r"):
 		_handle_skill_cast(champion.skill_r)
+	elif event.is_action_pressed("g"):
+		_handle_skill_cast(champion.skill_g)
+	elif event.is_action_pressed("f"):
+		_handle_skill_cast(champion.skill_f)
 
 	# --- KEYBOARD INPUT ---
 	elif event is InputEventKey and event.pressed and not event.echo:

@@ -22,7 +22,7 @@ static func get_effect_script(id: String):
 		
 		"armor_shred": return SHRED
 		
-		"stat_buff","Phage","SUFFERING","skill_speed","skill_stats", "rage_speed","Kraken" ,"conqueror", "stacking_buff", "riftmaker_ramp", "MADNESS","rageblade": return STAT_BUFF
+		"stat_buff","Phage","SUFFERING","skill_speed","skill_stats","skill_stats1", "rage_speed","Kraken" ,"conqueror", "stacking_buff", "riftmaker_ramp", "MADNESS","rageblade": return STAT_BUFF
 		
 		"frozen_heart": return FROZEN_HEART
 		

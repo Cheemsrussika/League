@@ -13,6 +13,8 @@ class_name ChampionData
 @export var w_skill: SkillData
 @export var e_skill: SkillData
 @export var r_skill: SkillData
+@export var g_skill: SkillData
+@export var f_skill: SkillData
 
 @export_group("Base Stats")
 # NEW: This allows you to pick Mana/Energy/Fury in the inspector

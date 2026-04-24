@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=11 format=3 uid="uid://cj2bb3lhojcgg"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_3c0mn"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_b4hq5"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_g38am"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="3_f8p6t"]
+[ext_resource type="PackedScene" uid="uid://cwgkws5w3k6uc" path="res://Screen/sword_hit_box.tscn" id="4_48mi2"]
+[ext_resource type="Script" uid="uid://2ioqgwq6681u" path="res://Scripts/Effects/SkillEffect/Effect_SpawnDirectional.gd" id="5_22cxm"]
+[ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStatus.gd" id="6_f8p6t"]
+
+[sub_resource type="Resource" id="Resource_23c1u"]
+script = ExtResource("3_f8p6t")
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
+[sub_resource type="Resource" id="Resource_yev2t"]
+script = ExtResource("5_22cxm")
+hitbox_scene = ExtResource("4_48mi2")
+duration = 3.0
+damage_effect = SubResource("Resource_23c1u")
+metadata/_custom_type_script = "uid://2ioqgwq6681u"
+
+[sub_resource type="Resource" id="Resource_48mi2"]
+script = ExtResource("6_f8p6t")
+target_stat = 5
+status_id = "skill_stats1"
+metadata/_custom_type_script = "uid://bko8vn7ypvpxm"
+
+[resource]
+script = ExtResource("2_b4hq5")
+effects = Array[ExtResource("1_3c0mn")]([SubResource("Resource_yev2t"), SubResource("Resource_48mi2")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

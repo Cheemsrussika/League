@@ -15,9 +15,10 @@ var _timer: float = 0.0
 
 func _ready() -> void:
 	if not is_persistent:
+		# Wait 2 frames to be absolutely safe for physics registration
+		await get_tree().physics_frame
 		await get_tree().physics_frame
 		_scan_and_apply()
-		queue_free()
 
 func _process(delta: float) -> void:
 	if is_persistent:

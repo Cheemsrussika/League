@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChampionData" load_steps=4 format=3 uid="uid://cbowweq8oh6ie"]
+
+[ext_resource type="Script" uid="uid://b07kiciv5m5pd" path="res://Scripts/Champions/ChampionData.gd" id="1_p5ghc"]
+[ext_resource type="Resource" uid="uid://c0ilxah02qad" path="res://Rescources/Skill/GarenQ.tres" id="1_ry6u7"]
+[ext_resource type="Resource" uid="uid://bppaee5mc6s3a" path="res://Rescources/Skill/GarenW.tres" id="3_stsuv"]
+
+[resource]
+script = ExtResource("1_p5ghc")
+q_skill = ExtResource("1_ry6u7")
+w_skill = ExtResource("3_stsuv")
+metadata/_custom_type_script = "uid://b07kiciv5m5pd"

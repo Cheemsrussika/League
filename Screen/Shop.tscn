@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8t4l5fufhnkd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xeh"]
+size = Vector2(340.5, 270.5)
+
+[node name="Area2D" type="Area2D" groups=["shop_zone"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g0xeh")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -120.0
+offset_top = -32.0
+offset_right = -41.0
+offset_bottom = 21.0
+scale = Vector2(3.011453, 2.7848628)
+theme_override_font_sizes/font_size = 30
+text = "Shop
+"

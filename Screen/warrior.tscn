@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://6cscgq2y2g21"]
+
+[ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_2olbg"]
+[ext_resource type="Resource" uid="uid://cbowweq8oh6ie" path="res://Rescources/Champs/Garen.tres" id="2_mrby3"]
+[ext_resource type="Script" uid="uid://if6imaeuhse2" path="res://Scripts/GameMob/PlayerInputComponent.gd" id="3_1obmu"]
+[ext_resource type="Texture2D" uid="uid://dsd63m0g581d" path="res://icon.svg" id="3_7o51j"]
+[ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="3_mrby3"]
+[ext_resource type="Script" uid="uid://ba6mqqk6fxjel" path="res://Scripts/Effects/SkillEffect/SkillSlot.gd" id="5_x7b8u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1obmu"]
+radius = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7b8u"]
+resource_local_to_scene = true
+shader = ExtResource("3_mrby3")
+shader_parameter/max_health = 1000.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1obmu"]
+bg_color = Color(0.6, 0.6, 0.6, 0.50980395)
+
+[node name="Warrior" groups=["champion", "unit"] instance=ExtResource("1_2olbg")]
+current_champion_data = ExtResource("2_mrby3")
+gold_reward = null
+exp_reward = null
+unit_type = 0
+team = 3
+base_stats = {
+"Energy": 10.0,
+"Mana": 100.0,
+"Mana_Regen": 2.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 30.0,
+"armor_pen": 0.0,
+"attack_damage": 60.0,
+"attack_range": 400.0,
+"attack_speed": 0.625,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"dmg_dealt_modifier": 0.0,
+"gold_gen": 5.0,
+"health": 500.0,
+"health_regen": 5.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 30.0,
+"move_speed": 330.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0
+}
+passive_effects = null
+
+[node name="ChampSelect" parent="." index="0"]
+scale = Vector2(1.8131905, 1.7385885)
+
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(0, -3.8146973e-06)
+scale = Vector2(0.34375003, 0.3359375)
+texture = ExtResource("3_7o51j")
+
+[node name="InventoryComponent" parent="." index="2" groups=["player"]]
+
+[node name="AttackRange" type="Area2D" parent="." index="3"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" index="0"]
+shape = SubResource("CircleShape2D_2olbg")
+debug_color = Color(6.8345666e-06, 0.6186841, 0.57870895, 0.41960785)
+
+[node name="PlayerInputComponent" type="Node" parent="." index="4"]
+script = ExtResource("3_1obmu")
+metadata/_custom_type_script = "uid://if6imaeuhse2"
+
+[node name="StatusContainer" type="Node" parent="." index="5"]
+
+[node name="InteractionArea" type="Area2D" parent="." index="6"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" index="0"]
+shape = SubResource("CircleShape2D_1obmu")
+debug_color = Color(1, 0.019449828, 0.00029224993, 0.41960785)
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+debug_color = Color(0.24314028, 0.6317096, 0.23221233, 0.41960785)
+
+[node name="HealthBarRoot" parent="." index="9"]
+offset_left = -76.0
+offset_top = -76.0
+offset_right = 87.0
+offset_bottom = -67.0
+
+[node name="ColorRect" parent="HealthBarRoot" index="3"]
+material = SubResource("ShaderMaterial_x7b8u")
+
+[node name="Resourcebar" parent="HealthBarRoot" index="4"]
+offset_left = 3.0
+offset_top = 11.0
+offset_right = 148.0
+offset_bottom = 16.0
+theme_override_styles/background = SubResource("StyleBoxFlat_1obmu")
+
+[node name="LevelBox" parent="HealthBarRoot" index="5"]
+offset_left = -45.0
+offset_top = -24.0
+offset_right = -5.0
+offset_bottom = 16.0
+
+[node name="Skills" type="Node" parent="." index="10"]
+
+[node name="Skill_Q" type="Node" parent="Skills" index="0"]
+script = ExtResource("5_x7b8u")
+
+[node name="Skill_W" type="Node" parent="Skills" index="1"]
+script = ExtResource("5_x7b8u")
+
+[node name="Skill_E" type="Node" parent="Skills" index="2"]
+script = ExtResource("5_x7b8u")
+
+[node name="Skill_R" type="Node" parent="Skills" index="3"]
+script = ExtResource("5_x7b8u")

@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://bppaee5mc6s3a"]
+
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_njw0v"]
+[ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStatus.gd" id="2_si8q2"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_uexsr"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_aydbs"]
+[ext_resource type="Script" uid="uid://duacggrxr0s4t" path="res://Scripts/Effects/SkillEffect/Skill_Effect_Shield.gd" id="3_ix4fc"]
+
+[sub_resource type="Resource" id="Resource_aydbs"]
+script = ExtResource("2_si8q2")
+status_id = "skill_stats"
+metadata/_custom_type_script = "uid://bko8vn7ypvpxm"
+
+[sub_resource type="Resource" id="Resource_u7b5p"]
+script = ExtResource("3_aydbs")
+scale_amount = 0.2
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_q8x1g"]
+script = ExtResource("3_ix4fc")
+shield_id = "Garen_Shield"
+shield_type = 2
+scaling_factors = Array[ExtResource("3_aydbs")]([SubResource("Resource_u7b5p")])
+metadata/_custom_type_script = "uid://duacggrxr0s4t"
+
+[resource]
+script = ExtResource("2_uexsr")
+targeting = 3
+effects = Array[ExtResource("1_njw0v")]([SubResource("Resource_aydbs"), SubResource("Resource_q8x1g")])
+metadata/_custom_type_script = "uid://dkxhdgal2mn65"

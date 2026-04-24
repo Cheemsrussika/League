@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dg3fxckaam80l"
+path="res://.godot/imported/B666 BGM.ogg-5d9ae39cb63debf1cbd14188365df31e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Rescources/AudioClip/B666 BGM.ogg"
+dest_files=["res://.godot/imported/B666 BGM.ogg-5d9ae39cb63debf1cbd14188365df31e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

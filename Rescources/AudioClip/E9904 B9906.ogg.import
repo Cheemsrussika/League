@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c8gynihxjtsgn"
+path="res://.godot/imported/E9904 B9906.ogg-1594fd14c9958e5db3c22519dfa1544e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Rescources/AudioClip/E9904 B9906.ogg"
+dest_files=["res://.godot/imported/E9904 B9906.ogg-1594fd14c9958e5db3c22519dfa1544e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

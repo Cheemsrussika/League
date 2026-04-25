@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cioe2e1uuo1mu"]
+
+[ext_resource type="Script" uid="uid://c1nt2mkrd8j4i" path="res://Scripts/HitBoxSkills/SkillHitbox.gd" id="1_6hccn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxt2o"]
+radius = 1.0
+
+[node name="ItemSKillZone" type="Area2D"]
+collision_layer = 0
+collision_mask = 10
+script = ExtResource("1_6hccn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dxt2o")

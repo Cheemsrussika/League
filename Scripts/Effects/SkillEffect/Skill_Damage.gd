@@ -7,6 +7,7 @@ class_name Effect_Damage
 
 # This is the magic part: a list of scaling LEGOs
 @export var scaling_factors: Array[ScalingFactor] = []
+
 @export_group("Execution Logic")
 ## Percentage of missing health to deal as bonus damage (e.g. 0.25 = 25%)
 @export var missing_hp_scaling: float = 0.0
@@ -30,16 +31,41 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 		if missing_hp_scaling > 0 and "current_health" in target and "max_health" in target:
 			var missing_hp = target.max_health - target.current_health
 			total_dmg += missing_hp * missing_hp_scaling
+			
 		var effective_on_hit = _ref.get("is_on_hit") if _ref else is_on_hit
 		var effective_lifesteal = _ref.get("allow_lifesteal") if _ref else allow_lifesteal
 		var effective_mult = _ref.get("on_hit_multiplier") if _ref else on_hit_multiplier
 
+		# Check if the hitbox told us this is an AoE spell!
+		var is_aoe = target_data.get("is_aoe", false)
+
+		if effective_on_hit:
+			# 1. Prepare the context for items like Sheen
+			var on_hit_context = {
+				"target": target,
+				"damage": total_dmg,
+				"is_crit": false,
+				"damage_type": damage_type,
+				"on_hit_mult": effective_mult
+			}
+
+			# 2. Trigger the passives that Sheen listens to
+			caster._trigger_passive_effects("on_attack", on_hit_context)
+
+			# 3. Update damage in case Sheen added bonus damage to the context
+			total_dmg = on_hit_context["damage"]
+
+		var final_category = "attack" if effective_on_hit else "spell"
+
+		# THE FIX: Pack EVERYTHING into the context so Items don't miss it!
 		var skill_context = {
 			"allow_on_hits": effective_on_hit,
 			"allow_lifesteal": effective_lifesteal,
-			"on_hit_mult": effective_mult
+			"on_hit_mult": effective_mult,
+			"is_aoe": is_aoe,               # Important for Omnivamp penalties
+			"amount": total_dmg,            # Black Cleaver needs this
+			"damage_type": damage_type,     # Burn and Cleaver need this
+			"category": final_category      # Burn needs this
 		}
 		
-		var final_category = "attack" if effective_on_hit else "spell"
-				
 		caster.deal_damage(target, total_dmg, damage_type, final_category, false, skill_context)

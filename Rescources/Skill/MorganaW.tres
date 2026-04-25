@@ -9,7 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_l4bru"]
 script = ExtResource("4_l4bru")
-allow_lifesteal = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
 [sub_resource type="Resource" id="Resource_irq3k"]
@@ -18,11 +17,13 @@ hitbox_scene = ExtResource("2_rw2px")
 hitbox_scale = 10.0
 is_persistent = true
 spawn_at_mouse = true
-effect_to_apply = SubResource("Resource_l4bru")
+effects_to_apply = Array[ExtResource("1_hb01j")]([SubResource("Resource_l4bru")])
 metadata/_custom_type_script = "uid://bkhsll10beot"
 
 [resource]
 script = ExtResource("2_aus3c")
+target_ground = true
+target_enemies = false
 is_on_hit = true
 allow_lifesteal = true
 effects = Array[ExtResource("1_hb01j")]([SubResource("Resource_irq3k")])

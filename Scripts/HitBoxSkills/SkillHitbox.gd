@@ -2,7 +2,7 @@
 extends Area2D
 
 var caster: Node2D
-var effect_to_apply: SkillEffect
+var effects_to_apply: Array[SkillEffect] = []
 var skill_level: int
 var tick_rate: float = 0.5
 var is_persistent: bool = false
@@ -44,6 +44,15 @@ func _scan_and_apply():
 		if body.unit_type == Unit.UnitType.TOWER and not can_hit_structures:
 			continue
 			
-		# 4. Apply the Effect (Damage/Status)
-		var context = {"target_unit": body}
-		effect_to_apply.on_execute(caster, skill_level, context, null)
+		if !effects_to_apply.is_empty():
+			# THE FIX: Provide BOTH keys so all effect types work
+			# Inside _apply_damage()
+			var context = { 
+				"target": body, 
+				"target_unit": body,
+				"category": "spell", # Tell the engine it's a spell
+				"is_aoe": false              # Tell the engine it's AoE
+			}
+			for effect in effects_to_apply:
+				if effect:
+					effect.on_execute(caster, skill_level, context, null)

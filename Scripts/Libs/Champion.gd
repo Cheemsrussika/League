@@ -53,6 +53,9 @@ var gold: float = 10000.0:
 var is_winding_up: bool = false
 var windup_timer: float = 0.0
 const WINDUP_PERCENT: float = 0.3
+var dash_tween: Tween
+var is_dashing: bool = false
+var can_cancel_dash: bool=false
 
 # --- CRIT SYSTEM ---
 var crit_pity_bonus: float = 0.0
@@ -420,20 +423,75 @@ func heal(amount: float, source: Node2D = null):
 		var text_instance = FLOATING_TEXT_SCENE.instantiate()
 		get_tree().current_scene.add_child(text_instance)
 		text_instance.start(amount, global_position, "heal", false)
-#---Movements----
-func dash_to_position(target_pos: Vector2, speed: float, duration: float):
-	var direction = (target_pos - global_position).normalized()
-	var timer = 0.0
-	# Optional: Disable regular movement input here
-	# is_dashing = true 
-	while timer < duration:
-		velocity = direction * speed
-		move_and_slide() # Respects physics/walls
-		timer += get_process_delta_time()
-		await get_tree().process_frame
-	
+#---Movements----# 
+
+
+func dash_to_position(target_pos: Vector2, dash_speed: float, _duration: float, arrival_effects: Array = [], context: Dictionary = {}):
+	nav_target = null
+	current_target = null
 	velocity = Vector2.ZERO
-	# is_dashing = false
+	if dash_tween: dash_tween.kill()
+	
+	is_dashing = true
+	var start_pos = global_position
+	var direction = (target_pos - start_pos).normalized()
+	var total_dist = start_pos.distance_to(target_pos)
+	
+	# Time = Distance / Speed
+	var final_duration = total_dist / dash_speed if dash_speed > 0 else 0.2
+	
+	dash_tween = create_tween()
+	
+	# We animate a simple value from 0 to 1 to act as our timer
+	dash_tween.tween_method(
+		func(_t: float):
+			# 1. Calculate how far we still need to go
+			var to_target = target_pos - global_position
+			var dist_remaining = to_target.length()
+			
+			# 2. Overshoot Protection: If we are basically there, stop.
+			if dist_remaining < 5.0:
+				global_position = target_pos # Snap the last few pixels
+				_on_dash_complete(arrival_effects, context)
+				dash_tween.kill()
+				return
+
+			# 3. Physics Move: Move using velocity so we don't 'teleport' through things
+			# We use move_and_collide to check for walls
+			velocity = direction * dash_speed
+			var collision = move_and_collide(velocity * get_process_delta_time())
+			
+			if collision:
+				# If we hit a wall, stop the dash immediately
+				dash_tween.kill()
+				_on_dash_complete(arrival_effects, context)
+	, 0.0, 1.0, final_duration
+	)
+	
+	dash_tween.finished.connect(func():
+		if is_dashing:
+			_on_dash_complete(arrival_effects, context)
+	)
+func _on_dash_complete(arrival_effects: Array, context: Dictionary):
+	is_dashing = false
+	velocity = Vector2.ZERO
+	
+	# Execute Arrival LEGOs
+	for effect in arrival_effects:
+		if effect is SkillEffect:
+			effect.on_execute(self, self.level, context, null)
+
+func stop_movement():
+	if is_dashing and not can_cancel_dash:
+		return
+	# This is the "Toggle/Cancel" trigger
+	if dash_tween and dash_tween.is_running():
+		dash_tween.kill() # Instantly stops the character where they are
+	
+	is_dashing = false
+	velocity = Vector2.ZERO
+	# Also stop pathfinding if you use NavigationAgent2D
+	# navigation_agent.set_target_position(global_position)
 
 func get_nearby_enemies(radius: float) -> Array:
 	var enemies = []

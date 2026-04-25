@@ -16,7 +16,7 @@ const EMPOWER = preload("res://StatusEffects/Status_On_Hit.gd")
 
 static func get_effect_script(id: String):
 	match id:
-		"generic_slow": return GENERIC_SLOW
+		"generic_slow","ice_slow","skill_slow": return GENERIC_SLOW
 		
 		"Lindrys", "item_burn", "bleed": return BURN
 		

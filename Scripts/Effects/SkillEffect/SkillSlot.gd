@@ -15,6 +15,9 @@ func activate(caster: Champion, target_data: Dictionary):
 	if skill_data == null: 
 		print("-> FAIL: skill_data is NULL! Did you put the Resource into the inspector?")
 		return 
+	if not skill_data.is_target_valid(target_data, caster):
+		print("-> FAIL: " + skill_data.skill_name + " requires a valid target!")
+		return
 	current_level=caster.level
 	if cooldown_timer > 0: 
 		print("-> FAIL: " + skill_data.skill_name + " is on cooldown!")

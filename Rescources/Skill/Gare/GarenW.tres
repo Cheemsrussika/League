@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://bppaee5mc6s3a"]
 
 [ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_njw0v"]
-[ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStatus.gd" id="2_si8q2"]
+[ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStats.gd" id="2_si8q2"]
 [ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_uexsr"]
 [ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_aydbs"]
 [ext_resource type="Script" uid="uid://duacggrxr0s4t" path="res://Scripts/Effects/SkillEffect/Skill_Effect_Shield.gd" id="3_ix4fc"]

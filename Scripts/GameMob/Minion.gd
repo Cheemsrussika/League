@@ -78,8 +78,8 @@ func _try_attack():
 			_trigger_passive_effects("on_damage_dealt", context)
 
 func die(killer: Unit = null):
-	#if is_dead: return
-	#is_dead = true
+	if is_dead: return
+	is_dead = true
 	
 	if is_instance_valid(killer) and killer.unit_type == UnitType.CHAMPION:
 		if killer.has_method("gain_experience"):
@@ -87,4 +87,4 @@ func die(killer: Unit = null):
 		if killer.has_method("add_gold"):
 			killer.add_gold(gold_drop)
 			
-	#queue_free()
+	queue_free()

@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=13 format=3 uid="uid://cafs5k7lht7ua"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_qsm0k"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_56rcu"]
+[ext_resource type="Script" uid="uid://cl7ixw6i7nquq" path="res://Scripts/Effects/ItemEffect/EffectSheen.gd" id="2_w57dl"]
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="3_gjbjg"]
+[ext_resource type="PackedScene" uid="uid://cioe2e1uuo1mu" path="res://Screen/item_skill_zone.tscn" id="4_gjbjg"]
+[ext_resource type="Texture2D" uid="uid://behkkty8usmjv" path="res://Icons/Legend Items/Iceborn_Gauntlet_item.png" id="4_i71xq"]
+[ext_resource type="Script" uid="uid://bkjc1lgylw2t0" path="res://Scripts/Effects/SkillEffect/Effect_ApplyStatus.gd" id="4_v7a1x"]
+[ext_resource type="Resource" uid="uid://b5iys7c072tbi" path="res://Item/Epic/Sheen.tres" id="6_v7a1x"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="7_f1frm"]
+[ext_resource type="Resource" uid="uid://c6cmdw4s7bsdc" path="res://Item/Epic/ChainVest.tres" id="8_g5q4w"]
+
+[sub_resource type="Resource" id="Resource_f1frm"]
+script = ExtResource("4_v7a1x")
+status_id = "ice_slow"
+max_stacks = 1
+metadata/_custom_type_script = "uid://bkjc1lgylw2t0"
+
+[sub_resource type="Resource" id="Resource_kllft"]
+script = ExtResource("2_w57dl")
+zone_scene = ExtResource("4_gjbjg")
+zone_tick_rate = 1.0
+zone_effects = Array[ExtResource("3_gjbjg")]([SubResource("Resource_f1frm")])
+metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
+
+[resource]
+script = ExtResource("2_56rcu")
+item_tier = 4
+item_name = "IceBorn Gauntlet"
+icon = ExtResource("4_i71xq")
+cost = 2900
+recipe = Array[ExtResource("2_56rcu")]([ExtResource("6_v7a1x"), ExtResource("7_f1frm"), ExtResource("8_g5q4w")])
+stats = {
+"ability_haste": 15.0,
+"armor": 50.0,
+"health": 300.0
+}
+effects = Array[ExtResource("1_qsm0k")]([SubResource("Resource_kllft")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -45,7 +45,7 @@ const BUFF_ID = "stat_buff"
 
 
 func on_attack(user: Unit, context: Dictionary) -> void:
-	_execute_on_hit_logic(user, context)
+	pass # Do nothing!
 
 # This handles on-hit skills (from deal_damage with category "attack")
 func on_attack_hit_post_mitigation(user: Unit, context: Dictionary) -> void:

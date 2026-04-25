@@ -1,25 +1,33 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://cq01odh57fvqa"]
+[gd_resource type="Resource" script_class="SkillData" load_steps=11 format=3 uid="uid://cq01odh57fvqa"]
 
 [ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_lcimm"]
 [ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_0nlah"]
 [ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_84dyt"]
 [ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="3_p5qvq"]
 [ext_resource type="PackedScene" uid="uid://dcogiksog13df" path="res://Screen/homing_projectile.tscn" id="4_45nn2"]
+[ext_resource type="Script" uid="uid://bkjc1lgylw2t0" path="res://Scripts/Effects/SkillEffect/Effect_ApplyStatus.gd" id="4_wn2l5"]
 [ext_resource type="Script" uid="uid://do7ksq5i8uwhq" path="res://Scripts/Effects/SkillEffect/Effect_SpawnHominProj.gd" id="5_jonkp"]
 
-[sub_resource type="Resource" id="Resource_5fmh8"]
+[sub_resource type="Resource" id="Resource_p5qvq"]
 script = ExtResource("3_p5qvq")
+is_on_hit = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
-[sub_resource type="Resource" id="Resource_g678n"]
+[sub_resource type="Resource" id="Resource_45nn2"]
+script = ExtResource("4_wn2l5")
+status_id = "skill_slow"
+metadata/_custom_type_script = "uid://bkjc1lgylw2t0"
+
+[sub_resource type="Resource" id="Resource_jonkp"]
 script = ExtResource("5_jonkp")
 projectile_scene = ExtResource("4_45nn2")
-speed = 200.0
-damage_effect = SubResource("Resource_5fmh8")
+speed = 600.0
+effects_to_apply = Array[ExtResource("1_lcimm")]([SubResource("Resource_p5qvq"), SubResource("Resource_45nn2")])
 metadata/_custom_type_script = "uid://do7ksq5i8uwhq"
 
 [resource]
 script = ExtResource("2_84dyt")
 cast_range = 1000.0
-effects = Array[ExtResource("1_lcimm")]([SubResource("Resource_g678n")])
+base_cooldown = Array[float]([1.0])
+effects = Array[ExtResource("1_lcimm")]([SubResource("Resource_jonkp")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

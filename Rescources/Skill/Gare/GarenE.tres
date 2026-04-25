@@ -9,8 +9,6 @@
 
 [sub_resource type="Resource" id="Resource_qu4te"]
 script = ExtResource("3_yr8mk")
-is_on_hit = true
-allow_lifesteal = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
 [sub_resource type="Resource" id="Resource_a5ybg"]
@@ -19,11 +17,13 @@ hitbox_scene = ExtResource("2_p5fim")
 hitbox_scale = 200.0
 is_persistent = true
 tick_rate = 0.25
-effect_to_apply = SubResource("Resource_qu4te")
+effects_to_apply = Array[ExtResource("1_vepns")]([SubResource("Resource_qu4te")])
 metadata/_custom_type_script = "uid://27p3t38xowvx"
 
 [resource]
 script = ExtResource("3_p5fim")
+target_ground = true
+target_enemies = false
 cast_range = 0.0
 effects = Array[ExtResource("1_vepns")]([SubResource("Resource_a5ybg")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

@@ -12,14 +12,16 @@ metadata/_custom_type_script = "uid://duacggrxr0s4t"
 
 [sub_resource type="Resource" id="Resource_yj4gr"]
 script = ExtResource("4_ecufr")
-effect_on_arrival = Array[ExtResource("1_y5cos")]([SubResource("Resource_12fg1")])
 speed = 800.0
-fixed_duration = 0.1
+effect_on_arrival = Array[ExtResource("1_y5cos")]([SubResource("Resource_12fg1")])
 metadata/_custom_type_script = "uid://m434itpnwili"
 
 [resource]
 script = ExtResource("2_a3gw7")
-targeting = 1
+target_ground = true
+target_enemies = false
+target_allies = true
+target_self = true
 base_cooldown = Array[float]([0.5])
 effects = Array[ExtResource("1_y5cos")]([SubResource("Resource_yj4gr")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

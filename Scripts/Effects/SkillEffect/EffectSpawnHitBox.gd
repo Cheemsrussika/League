@@ -15,7 +15,7 @@ class_name Effect_SpawnHitbox
 @export var spawn_at_mouse: bool = false
 @export_group("Application")
 ## The Damage or Status effect to apply to everyone inside
-@export var effect_to_apply: SkillEffect 
+@export var effects_to_apply: Array[SkillEffect] = []
 
 
 func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref: Resource) -> void:
@@ -24,15 +24,16 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 	var hitbox = hitbox_scene.instantiate()
 	
 	# Apply Logic
-	hitbox.set("caster", caster)
-	hitbox.set("skill_level", skill_level)
-	hitbox.set("effect_to_apply", effect_to_apply)
-	hitbox.set("is_persistent", is_persistent)
-	hitbox.set("tick_rate", tick_rate)
-	
-	# Apply Filters
-	hitbox.set("can_hit_teammates", can_hit_teammates)
-	hitbox.set("can_hit_structures", can_hit_structures)
+	if hitbox.has_method("set"):
+		hitbox.set("caster", caster)
+		hitbox.set("skill_level", skill_level)
+		hitbox.set("effects_to_apply", effects_to_apply) # Pass the array
+		hitbox.set("is_persistent", is_persistent)
+		hitbox.set("tick_rate", tick_rate)
+		
+		# Pass Filters
+		hitbox.set("can_hit_teammates", can_hit_teammates)
+		hitbox.set("can_hit_structures", can_hit_structures)
 	
 	# Apply Transform
 	hitbox.scale = Vector2(hitbox_scale, hitbox_scale)

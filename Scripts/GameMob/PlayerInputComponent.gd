@@ -13,9 +13,18 @@ func _physics_process(delta):
 
 func _unhandled_input(event):
 	if not is_instance_valid(champion) or champion.is_dead: return
-	
+	if champion.is_dashing:
+		if not champion.can_cancel_dash:
+			# UNSTOPPABLE: Ignore all inputs (Q, W, E, R, Right-Click)
+			return 
+		else:
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+				champion.stop_movement()
+			else:
+				return
 	# --- MOUSE INPUT (Movement/Attacking) ---
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		champion.stop_movement()
 		var target_enemy = _get_target_under_mouse()
 		
 		if target_enemy:
@@ -66,38 +75,55 @@ func _unhandled_input(event):
 			# KEY_Q: champion.cast_skill("Q")
 
 # --- HELPER ---
+# Inside your Input Handler script
+
 func _handle_skill_cast(slot: SkillSlot):
 	if not slot or not slot.skill_data: return
 	
-	# 1. Ask the SkillData what it wants to target
-	var filter = "ANY"
-	match slot.skill_data.targeting:
-		slot.skill_data.TargetType.ENEMY: filter = "ENEMY"
-		slot.skill_data.TargetType.ALLY:  filter = "ALLY"
-		slot.skill_data.TargetType.ANY:   filter = "ANY"
-		slot.skill_data.TargetType.SELF_ONLY: filter = "NONE" # Mouse ignored
-
-	# 2. Get the target based on that filter
+	var data = slot.skill_data
 	var found_unit = null
+	
+	# 1. Determine the search filter based on the new booleans
+	# If the skill can hit both, we search for "ANY"
+	var filter = "NONE"
+	if data.target_enemies and data.target_allies:
+		filter = "ANY"
+	elif data.target_enemies:
+		filter = "ENEMY"
+	elif data.target_allies:
+		filter = "ALLY"
+	# Note: target_self is handled separately in step 3
+	
+	# 2. Try to find a unit under the mouse
 	if filter != "NONE":
 		found_unit = _get_target_under_mouse(filter)
+	
+	# 3. Handle Range & Chasing
 	if found_unit:
 		var distance = champion.global_position.distance_to(found_unit.global_position)
-		
-		# Check if the skill has a range limit
-		if slot.skill_data.cast_range > 0:
-			if distance > slot.skill_data.cast_range:
-				print("Out of Range! Moving to target.")
-				# Tell the champion to chase the target and cast when close
-				champion.set_chase_and_cast(found_unit, slot)
-				return # Don't activate yet!
+		if data.cast_range > 0 and distance > data.cast_range:
+			print("Out of Range! Moving to target.")
+			champion.set_chase_and_cast(found_unit, slot)
+			return 
 
-	# If we are in range or it's a self-cast
+	# 4. Finalize target_data
+	# If we didn't click anyone, but 'target_self' is on, treat caster as target
+	if found_unit == null and data.target_self:
+		found_unit = champion
+
 	var target_data = {
 		"target_position": champion.get_global_mouse_position(),
 		"target_unit": found_unit
 	}
+	
+	# 5. Activate the Slot
 	slot.activate(champion, target_data)
+	
+	# Trigger event for costs/animations
+	var lvl_idx = clamp(slot.current_level - 1, 0, data.resource_cost.size() - 1)
+	var actual_cost = data.resource_cost[lvl_idx]
+	champion.on_skill_cast(data.skill_name, actual_cost, false)
+	
 func _get_target_under_mouse(filter_type: String = "ANY") -> Node2D:
 	var space = champion.get_world_2d().direct_space_state
 	var query = PhysicsPointQueryParameters2D.new()
@@ -111,8 +137,7 @@ func _get_target_under_mouse(filter_type: String = "ANY") -> Node2D:
 	for result in results:
 		var actual_unit = result.collider
 		if actual_unit is Area2D: actual_unit = actual_unit.get_parent()
-		
-		if actual_unit == champion: continue
+		if actual_unit == champion and not filter_type == "ANY": continue	
 		if not actual_unit is Unit or actual_unit.is_dead: continue
 
 		# --- TEAM FILTERING ---

@@ -3,7 +3,7 @@ extends Area2D
 
 var caster: Node2D # Changed to Node2D for safety
 var skill_level: int = 1
-var effect_to_apply: SkillEffect 
+var effects_to_apply: Array[SkillEffect] = []
 var tick_rate: float = 0.25
 var duration: float = 3.0
 var is_persistent: bool = true
@@ -40,7 +40,7 @@ func _apply_damage() -> void:
 		if not can_hit_teammates and body.team == caster.team: continue
 		if body.unit_type == Unit.UnitType.TOWER and not can_hit_structures: continue
 			
-		if effect_to_apply:
+		if !effects_to_apply.is_empty():
 			# THE FIX: Provide BOTH keys so all effect types work
 			# Inside _apply_damage()
 			var context = { 
@@ -49,4 +49,6 @@ func _apply_damage() -> void:
 				"category": "spell", # Tell the engine it's a spell
 				"is_aoe": true              # Tell the engine it's AoE
 			}
-			effect_to_apply.on_execute(caster, skill_level, context, null)
+			for effect in effects_to_apply:
+				if effect:
+					effect.on_execute(caster, skill_level, context, null)

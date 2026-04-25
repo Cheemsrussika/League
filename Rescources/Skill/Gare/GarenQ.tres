@@ -1,23 +1,24 @@
 [gd_resource type="Resource" script_class="SkillData" load_steps=8 format=3 uid="uid://c0ilxah02qad"]
 
 [ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_41dmi"]
-[ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStatus.gd" id="2_f1kdw"]
+[ext_resource type="Script" uid="uid://bko8vn7ypvpxm" path="res://Scripts/Effects/SkillEffect/Skill_ApplyStats.gd" id="2_f1kdw"]
 [ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="2_m5ium"]
 [ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_pkhpf"]
-[ext_resource type="Script" uid="uid://dthw5x2c5soji" path="res://Scripts/Effects/SkillEffect/Effect_ApplyOnHit.gd" id="4_pkhpf"]
+[ext_resource type="Script" uid="uid://dthw5x2c5soji" path="res://Scripts/Effects/SkillEffect/Effect_ApplyOnHit.gd" id="4_jc4vh"]
 
 [sub_resource type="Resource" id="Resource_pkhpf"]
 script = ExtResource("2_f1kdw")
 status_id = "skill_speed"
-power_per_level = Array[float]([100.0, 200.0, 200.0])
+power_per_level = Array[float]([200.0, 80.0, 160.0])
 metadata/_custom_type_script = "uid://bko8vn7ypvpxm"
 
-[sub_resource type="Resource" id="Resource_whwa4"]
-script = ExtResource("4_pkhpf")
+[sub_resource type="Resource" id="Resource_f7hml"]
+script = ExtResource("4_jc4vh")
 metadata/_custom_type_script = "uid://dthw5x2c5soji"
 
 [resource]
 script = ExtResource("2_m5ium")
-cast_range = 0.0
-effects = Array[ExtResource("1_41dmi")]([SubResource("Resource_pkhpf"), SubResource("Resource_whwa4")])
+target_enemies = false
+target_self = true
+effects = Array[ExtResource("1_41dmi")]([SubResource("Resource_pkhpf"), SubResource("Resource_f7hml")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

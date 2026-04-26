@@ -43,6 +43,7 @@ func _unhandled_input(event):
 				
 	# --- SKILL INPUT ---
 	# 1. Package the data the skill needs before casting
+	@warning_ignore("unused_variable")
 	var target_data = {
 		"target_position": champion.get_global_mouse_position(),
 		"target_unit": _get_target_under_mouse()

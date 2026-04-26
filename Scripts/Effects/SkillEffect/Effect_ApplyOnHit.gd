@@ -19,7 +19,7 @@ class_name Effect_ApplyOnHit
 ## e.g., {"silence_duration": 1.5, "slow_amount": 0.2}
 @export var extra_data: Dictionary = {}
 
-func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref: Resource) -> void:
+func on_execute(caster: Node2D, skill_level: int, _target_data: Dictionary, _ref: Resource) -> void:
 	# On-hit buffs are almost always applied to the caster (self)
 	var target = caster 
 	

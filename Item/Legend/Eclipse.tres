@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=15 format=3 uid="uid://cx3bjyde3ydji"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_t2ut1"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_7ejol"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_iukhj"]
+[ext_resource type="Texture2D" uid="uid://10cgqgp24887" path="res://Icons/Legend Items/40px-Eclipse_item.png" id="2_yjrjd"]
+[ext_resource type="Script" uid="uid://11l2btwwi6vp" path="res://Scripts/Effects/ItemEffect/EffectShield.gd" id="3_6o82b"]
+[ext_resource type="Resource" uid="uid://bb3qkihocwasx" path="res://Item/Epic/CaulfieldsWarhammer.tres" id="4_goht7"]
+[ext_resource type="Script" uid="uid://dcv57xef0aur7" path="res://Scripts/Effects/ItemEffect/ItemEffect_ThresholdProc.gd" id="4_p6l6o"]
+[ext_resource type="Script" uid="uid://du61tu737icc1" path="res://Scripts/Effects/ItemEffect/EffectProcing.gd" id="5_6o82b"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="5_ifsxk"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="6_iukhj"]
+
+[sub_resource type="Resource" id="Resource_23d2d"]
+script = ExtResource("3_6o82b")
+base_shield = 100.0
+metadata/_custom_type_script = "uid://11l2btwwi6vp"
+
+[sub_resource type="Resource" id="Resource_p6l6o"]
+script = ExtResource("2_iukhj")
+stat = 0
+scale_amount = 0.5
+source = 1
+mode = 4
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_6o82b"]
+script = ExtResource("5_6o82b")
+scalings = Array[ExtResource("2_iukhj")]([SubResource("Resource_p6l6o")])
+metadata/_custom_type_script = "uid://du61tu737icc1"
+
+[sub_resource type="Resource" id="Resource_4ufme"]
+script = ExtResource("4_p6l6o")
+payloads = Array[ExtResource("1_t2ut1")]([SubResource("Resource_23d2d"), SubResource("Resource_6o82b")])
+metadata/_custom_type_script = "uid://dcv57xef0aur7"
+
+[resource]
+script = ExtResource("2_7ejol")
+item_tier = 4
+item_name = "Eclipse"
+icon = ExtResource("2_yjrjd")
+cost = 2900
+recipe = Array[ExtResource("2_7ejol")]([ExtResource("4_goht7"), ExtResource("5_ifsxk"), ExtResource("6_iukhj")])
+stats = {
+"ability_haste": 15.0,
+"attack_damage": 60.0
+}
+effects = Array[ExtResource("1_t2ut1")]([SubResource("Resource_4ufme")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

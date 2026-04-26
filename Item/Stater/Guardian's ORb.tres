@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://dhukl1qu272av"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://dhukl1qu272av"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_wd7ex"]
 [ext_resource type="Texture2D" uid="uid://drx411gdpjlq3" path="res://Icons/StarterItem/40px-Guardian's_Orb_item.png" id="2_0q5qf"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_1jx08"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_5o2r4"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_olflf"]
 [ext_resource type="Script" uid="uid://d2d0s34kreliv" path="res://Scripts/Effects/ItemEffect/UniqueTag.gd" id="3_1jx08"]
 

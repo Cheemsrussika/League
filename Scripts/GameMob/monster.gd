@@ -181,7 +181,7 @@ func aggro_onto(target):
 	
 	# Optional: Show a "!" effect
 	_spawn_floating_text(0, "!", false) # Assuming your text handles strings
-func _process_reset(delta):
+func _process_reset(_delta):
 	var dist = global_position.distance_to(spawn_position)
 	
 	if dist < 15.0: # Increased threshold slightly for smoother arrival
@@ -287,11 +287,13 @@ func die(killer):
 	
 	# 3. Reward the Killer
 	if is_instance_valid(killer):
-		if killer.has_method("add_gold"):
-			killer.add_gold(gold_reward)
-		if killer.has_method("gain_experience"):
-			killer.gain_experience(exp_reward)
-	emit_signal("unit_died", self) 
+		# 1. Standard rewards
+		if killer.has_method("add_gold"): killer.add_gold(gold_reward)
+		if killer.has_method("gain_experience"): killer.gain_experience(exp_reward)
+		# 2. TRIGGER THE LEGO SYSTEM
+		if killer is Unit:
+			killer.on_kill_trigger(self) # <--- THIS IS THE KEY
+	emit_signal("unit_died", self)
 	var tween = create_tween()
 	tween.tween_property(self, "modulate:a", 0.0, 1.0)
 	tween.tween_callback(queue_free)

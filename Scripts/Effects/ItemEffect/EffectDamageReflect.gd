@@ -13,6 +13,7 @@ class_name EffectDamageReflect
 func on_take_damage(user: Champion, context: Dictionary) -> void:
 	# Match these to the keys in Champion.gd's post_context
 	var source = context.get("attacker") 
+	@warning_ignore("unused_variable")
 	var damage_amount = context.get("amount", 0.0)
 	var damage_type = context.get("type", "")     
 	var category = context.get("category", "")

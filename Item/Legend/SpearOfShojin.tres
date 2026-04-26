@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=12 format=3 uid="uid://bi8ebkgvw6kyv"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ds30l"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_jawu3"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_tpc4d"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="3_4qgnc"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="4_3y7y5"]
+[ext_resource type="Texture2D" uid="uid://cbn4qxo2gha8m" path="res://Icons/Legend Items/40px-Spear_of_Shojin_item.png" id="5_xp6co"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="7_a0swq"]
+[ext_resource type="Resource" uid="uid://b2c8p5wki6fdf" path="res://Item/Epic/Tunneler.tres" id="8_ecw2p"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="9_u2jok"]
+
+[sub_resource type="Resource" id="Resource_i7oat"]
+script = ExtResource("3_4qgnc")
+stat_type = 12
+flat_amount = 25.0
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_mrkvc"]
+script = ExtResource("4_3y7y5")
+status_id = "shojin"
+max_stacks = null
+stack_duration = null
+trigger_category = 2
+deal_damage_on_max = null
+stats_per_stack = {
+"skill_damage_multiplier": 0.03
+}
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[resource]
+script = ExtResource("2_tpc4d")
+item_tier = 4
+item_name = "Spear of ShoJin"
+icon = ExtResource("5_xp6co")
+cost = 3100
+recipe = Array[ExtResource("2_tpc4d")]([ExtResource("7_a0swq"), ExtResource("8_ecw2p"), ExtResource("9_u2jok")])
+stats = {
+"attack_damage": 45.0,
+"health": 450.0
+}
+effects = Array[ExtResource("1_ds30l")]([SubResource("Resource_i7oat"), SubResource("Resource_mrkvc")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

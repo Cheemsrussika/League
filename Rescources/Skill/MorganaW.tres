@@ -9,6 +9,7 @@
 
 [sub_resource type="Resource" id="Resource_l4bru"]
 script = ExtResource("4_l4bru")
+can_spell_crit = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
 [sub_resource type="Resource" id="Resource_irq3k"]

@@ -1,6 +1,6 @@
 extends StatusEffect
 
-func on_apply(unit):
+func on_apply(_unit):
 	type = "slow"
 func on_stat_calculation(unit):
 	unit.is_slowed = true

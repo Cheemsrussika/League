@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://bp63odeuiesc8"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_7hsy7"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_cc5m2"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_f5q8m"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_mf7hl"]
+[ext_resource type="Texture2D" uid="uid://dk71ksjo13ysx" path="res://Icons/Legend Items/Atma's_Reckoning_item.png" id="3_cc5m2"]
+[ext_resource type="Resource" uid="uid://dtu1xvq34a4pa" path="res://Item/Basic/CloakOfAgility.tres" id="5_5vedq"]
+[ext_resource type="Resource" uid="uid://4mnyc0u8hcjs" path="res://Item/Epic/GiantsBelt.tres" id="6_oxcow"]
+
+[sub_resource type="Resource" id="Resource_watgf"]
+script = ExtResource("2_mf7hl")
+stat_type = 13
+id = "Atma's Reckoning"
+is_unique = true
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("2_f5q8m")
+item_tier = 4
+item_name = "Atma's Reckoning"
+icon = ExtResource("3_cc5m2")
+cost = 2500
+recipe = Array[ExtResource("2_f5q8m")]([ExtResource("5_5vedq"), ExtResource("6_oxcow"), ExtResource("6_oxcow")])
+stats = {
+"crit_chance": 20.0,
+"health": 700.0
+}
+effects = Array[ExtResource("1_7hsy7")]([SubResource("Resource_watgf")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -54,7 +54,7 @@ func _physics_process(delta: float):
 
 # --- STATE LOGIC ---
 
-func _process_advancing(delta: float):
+func _process_advancing(_delta: float):
 	if mode != BehaviorMode.FOLLOW_PATH or path_points.is_empty(): return
 	
 	# 1. Look for enemies
@@ -72,7 +72,7 @@ func _process_advancing(delta: float):
 	if parent_unit.global_position.distance_to(target_pos) < 20.0:
 		current_path_index = min(current_path_index + 1, path_points.size() - 1)
 
-func _process_chasing(delta: float):
+func _process_chasing(_delta: float):
 	# 1. Validate Target
 	if not is_instance_valid(current_target) or current_target.is_dead:
 		current_target = null
@@ -97,7 +97,7 @@ func _process_chasing(delta: float):
 		# Move to target
 		_move_towards(current_target.global_position)
 
-func _process_attacking(delta: float):
+func _process_attacking(_delta: float):
 	if not is_instance_valid(current_target) or current_target.is_dead:
 		current_target = null
 		_change_state(State.RETURNING)
@@ -117,7 +117,7 @@ func _process_attacking(delta: float):
 	parent_unit.current_target = current_target 
 	# The parent_unit script should handle the actual cooldown/projectile firing
 
-func _process_returning(delta: float):
+func _process_returning(_delta: float):
 	if not lane_path:
 		_change_state(State.ADVANCING)
 		return
@@ -152,7 +152,7 @@ func _find_best_target() -> Unit:
 			return target
 	return valid_targets[0]
 
-func _on_global_unit_damaged(victim: Unit, attacker: Unit, amount: float):
+func _on_global_unit_damaged(victim: Unit, attacker: Unit, _amount: float):
 	# THE CALL FOR HELP MECHANIC
 	if not is_instance_valid(victim) or not is_instance_valid(attacker) or not is_instance_valid(parent_unit): return
 	if current_state == State.RETURNING: return 

@@ -63,7 +63,7 @@ func on_damage_dealt(user: Unit, context: Dictionary):
 				status._timer = 0.0
 
 
-func on_status_tick_damage(user: Unit, context: Dictionary):
+func on_status_tick_damage(_user: Unit, context: Dictionary):
 	if context.get("status_id") == burn_id:
 		total_damage += context["receipt"]["mitigated"]
 

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://cdvb15ce515t2"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_qpqhy"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_ahgpn"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_ll8xy"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_m2v16"]
+[ext_resource type="Texture2D" uid="uid://1miyo3ldbhqk" path="res://Icons/Legend Items/40px-Rabadon's_Deathcap_item.png" id="3_m2v16"]
+[ext_resource type="Resource" uid="uid://bhemcjx4ip1pb" path="res://Item/Basic/NeedlesslyLargeRod.tres" id="5_bhmyu"]
+
+[sub_resource type="Resource" id="Resource_rddke"]
+script = ExtResource("2_ll8xy")
+stat_type = 6
+id = "Rabadon's DeathCap"
+is_unique = true
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("2_ahgpn")
+item_tier = 4
+item_name = "Rabadon's DeathCap"
+icon = ExtResource("3_m2v16")
+cost = 3500
+recipe = Array[ExtResource("2_ahgpn")]([ExtResource("5_bhmyu"), ExtResource("5_bhmyu")])
+stats = {
+"ability_power": 130.0
+}
+effects = Array[ExtResource("1_qpqhy")]([SubResource("Resource_rddke")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

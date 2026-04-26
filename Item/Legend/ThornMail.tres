@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://dd5k56wq0ime4"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ik23y"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_5vckv"]
+[ext_resource type="Script" uid="uid://cyt60iiype847" path="res://Scripts/Effects/ItemEffect/EffectDamageReflect.gd" id="2_byco7"]
+[ext_resource type="Texture2D" uid="uid://n7a5pwt3y1nm" path="res://Icons/Legend Items/40px-Thornmail_item.png" id="2_owmi1"]
+[ext_resource type="Resource" uid="uid://b0t8vgxtmvl4f" path="res://Item/Epic/BrambleVest.tres" id="5_yq0fq"]
+[ext_resource type="Resource" uid="uid://c6cmdw4s7bsdc" path="res://Item/Epic/ChainVest.tres" id="6_0w5hn"]
+[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="7_22ksv"]
+
+[sub_resource type="Resource" id="Resource_ne72j"]
+script = ExtResource("2_byco7")
+reflect_flat = 20.0
+reflect_percent_bonus_armor = 0.1
+metadata/_custom_type_script = "uid://cyt60iiype847"
+
+[resource]
+script = ExtResource("2_5vckv")
+item_tier = 4
+item_name = "Thorn Mail"
+icon = ExtResource("2_owmi1")
+cost = 2450
+recipe = Array[ExtResource("2_5vckv")]([ExtResource("5_yq0fq"), ExtResource("6_0w5hn"), ExtResource("7_22ksv")])
+stats = {
+"armor": 75.0,
+"health": 150.0
+}
+effects = Array[ExtResource("1_ik23y")]([SubResource("Resource_ne72j")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

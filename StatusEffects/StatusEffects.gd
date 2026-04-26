@@ -14,7 +14,7 @@ var type: String = "buff"   # "buff", "debuff", "dot", "cc", "flag"
 var is_permanent: bool = false
 
 # --- LIFECYCLE ---
-func on_apply(unit):
+func on_apply(_unit):
 	# Override for immediate effects
 	pass
 
@@ -24,7 +24,7 @@ func refresh(new_duration, new_stacks_add, new_power):
 	if new_power > power:
 		power = new_power
 
-func on_stat_calculation(unit):
+func on_stat_calculation(_unit):
 	# Override to modify stats
 	pass
 func _ready():

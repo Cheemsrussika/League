@@ -20,8 +20,37 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("p"): 
-		visible = !visible
+		# Check if we are allowed to open it first!
+		if not visible:
+			if _is_player_in_shop_zone():
+				open_shop()
+			else:
+				print("You must be at a shop to open the catalog!")
+		else:
+			close_shop()
+func open_shop():
+	visible = true
+	# Close the backpack if it's open so they don't overlap
+	var backpack_ui = get_tree().root.find_child("BackpackPanel", true, false)
+	if backpack_ui:
+		backpack_ui.visible = true # Actually, in many games, opening Shop OPENS backpack too!
+		# If you want them to occupy different sides, just let them both be visible.
+		# If you want them to SWAP, use: backpack_ui.visible = false
 
+func close_shop():
+	visible = false
+
+func _is_player_in_shop_zone() -> bool:
+	var player = GameManager.player_champion
+	if not is_instance_valid(player): return false
+	
+	var interaction_area = player.get_node_or_null("InteractionArea")
+	if interaction_area:
+		for area in interaction_area.get_overlapping_areas():
+			if area.is_in_group("shop_zone"):
+				return true
+	return false
+	
 func populate_shop():
 	# Clear old items
 	for container in tier_containers.values():
@@ -42,17 +71,15 @@ func populate_shop():
 			
 		# CONNECT THE SIGNAL HERE
 		# This tells ShopPanel to run '_on_item_clicked' when the button is pressed
-		slot.pressed.connect(_on_item_clicked.bind(item))
+		#slot.pressed.connect(_on_item_clicked.bind(item))
 
-func _on_item_clicked(item: ItemData):
-	# 1. Get Player from Manager
+func _on_item_double_clicked(item: ItemData):
 	var player = GameManager.player_champion
 	if not is_instance_valid(player):
 		return
 
-	# --- NEW: Zone Check ---
+	# --- Zone Check (Keep this exactly as you had it!) ---
 	var in_shop_zone = false
-	# Look for the InteractionArea we discussed adding
 	var interaction_area = player.get_node_or_null("InteractionArea")
 	
 	if interaction_area:
@@ -66,13 +93,25 @@ func _on_item_clicked(item: ItemData):
 		return
 	# -----------------------
 
-	var inventory = null
-	for child in player.get_children():
-		if child is InventoryComponent:
-			inventory = child
-			break
+	# --- NEW: RPG Purchase Logic ---
+	# 1. Look for the Backpack, NOT the Equipment Inventory
+	var backpack = player.get_node_or_null("BackpackComponent")
+	if not backpack: 
+		print("Error: Player has no backpack!")
+		return
 
-	if inventory:
-		var success = inventory.try_purchase(player, item)
-		if success:
-			print("Shop: Purchase successful")
+	# 2. Check if they have the money
+	if player.gold < item.cost:
+		print("Not enough gold for ", item.item_name)
+		return
+
+	# 3. Try to add the item to the backpack FIRST
+	# (add_item returns the amount that couldn't fit. 0 means it all fit!)
+	var leftover = backpack.add_item(item, 1)
+
+	if leftover == 0:
+		# 4. If it successfully went into the bag, take their gold!
+		player.gold -= item.cost
+		print("Purchased ", item.item_name, " into backpack!")
+	else:
+		print("Your backpack is full! Cannot buy ", item.item_name)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6cscgq2y2g21"]
+[gd_scene load_steps=12 format=3 uid="uid://6cscgq2y2g21"]
 
 [ext_resource type="PackedScene" uid="uid://c06la7wb3y2ws" path="res://Screen/BetaChamp.tscn" id="1_2olbg"]
 [ext_resource type="Resource" uid="uid://cbowweq8oh6ie" path="res://Rescources/Champs/Garen.tres" id="2_mrby3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dsd63m0g581d" path="res://icon.svg" id="3_7o51j"]
 [ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="3_mrby3"]
 [ext_resource type="Script" uid="uid://ba6mqqk6fxjel" path="res://Scripts/Effects/SkillEffect/SkillSlot.gd" id="5_x7b8u"]
+[ext_resource type="Script" uid="uid://pjk03w4eamjv" path="res://Screen/back_pack_component.gd" id="7_te21c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
 radius = 1.0
@@ -26,32 +27,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0.50980395)
 current_champion_data = ExtResource("2_mrby3")
 unit_type = 0
 team = 3
-base_stats = {
-"Energy": 10.0,
-"Mana": 100.0,
-"Mana_Regen": 2.0,
-"Slow_res": 0.0,
-"ability_power": 0.0,
-"all_dmg_take_modi": 0.0,
-"armor": 30.0,
-"armor_pen": 0.0,
-"attack_damage": 60.0,
-"attack_range": 400.0,
-"attack_speed": 0.625,
-"crit_chance": 0.0,
-"crit_damage": 1.75,
-"dmg_dealt_modifier": 0.0,
-"gold_gen": 5.0,
-"health": 500.0,
-"health_regen": 5.0,
-"life_steal": 0.0,
-"magic_dmg_take__modi": 1.0,
-"magic_pen": 0.0,
-"magic_res": 30.0,
-"move_speed": 330.0,
-"omnivamp": 0.0,
-"phys_dmg_take_modi": 1.0
-}
 
 [node name="ChampSelect" parent="." index="0"]
 scale = Vector2(1.8131905, 1.7385885)
@@ -62,6 +37,7 @@ scale = Vector2(0.34375003, 0.3359375)
 texture = ExtResource("3_7o51j")
 
 [node name="InventoryComponent" parent="." index="2" groups=["player"]]
+max_slots = null
 
 [node name="AttackRange" type="Area2D" parent="." index="3"]
 collision_layer = 8
@@ -127,3 +103,6 @@ script = ExtResource("5_x7b8u")
 
 [node name="Skill_R" type="Node" parent="Skills" index="5"]
 script = ExtResource("5_x7b8u")
+
+[node name="BackpackComponent" type="Node" parent="." index="11"]
+script = ExtResource("7_te21c")

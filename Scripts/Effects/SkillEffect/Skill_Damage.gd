@@ -4,7 +4,7 @@ class_name Effect_Damage
 
 @export_enum("physical", "magic", "true") var damage_type: String = "physical"
 @export var base_damage: Array[float] = [80.0, 120.0, 160.0, 200.0, 240.0]
-
+@export var can_spell_crit: bool = false
 # This is the magic part: a list of scaling LEGOs
 @export var scaling_factors: Array[ScalingFactor] = []
 
@@ -25,12 +25,18 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 		
 		# 1. Standard Scaling (AD/AP)
 		for factor in scaling_factors:
-			total_dmg += caster.get_total(factor.stat) * factor.scale_amount
+			# --- BUG FIX: Use our smart function so Caps and Target scaling actually work! ---
+			total_dmg += factor.calculate_value(caster, target)
 		
 		# 2. Execution Scaling (Garen R Logic)
 		if missing_hp_scaling > 0 and "current_health" in target and "max_health" in target:
 			var missing_hp = target.max_health - target.current_health
 			total_dmg += missing_hp * missing_hp_scaling
+			
+		# 3. --- NEW: APPLY SKILL DAMAGE MULTIPLIER ---
+		# We multiply this AFTER all the flat base/scaling damage is added together!
+		var skill_mult = caster.get_total(Unit.Stat.SKILL_DAMAGE_MULT)
+		total_dmg *= (1.0 + skill_mult)
 			
 		var effective_on_hit = _ref.get("is_on_hit") if _ref else is_on_hit
 		var effective_lifesteal = _ref.get("allow_lifesteal") if _ref else allow_lifesteal
@@ -38,7 +44,14 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 
 		# Check if the hitbox told us this is an AoE spell!
 		var is_aoe = target_data.get("is_aoe", false)
-
+		var is_a_crit = false
+		
+		if can_spell_crit:
+			# Roll a random number between 0.0 and 100.0
+			var roll = randf() * 100.0
+			if roll <= caster.get_total(Unit.Stat.CRIT):
+				is_a_crit = true
+				
 		if effective_on_hit:
 			# 1. Prepare the context for items like Sheen
 			var on_hit_context = {
@@ -55,9 +68,10 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 			# 3. Update damage in case Sheen added bonus damage to the context
 			total_dmg = on_hit_context["damage"]
 
-		var final_category = "attack" if effective_on_hit else "spell"
+		var is_basic_attack = target_data.get("is_basic_attack", false)
+		var final_category = "attack" if is_basic_attack else "spell"
 
-		# THE FIX: Pack EVERYTHING into the context so Items don't miss it!
+		# Pack EVERYTHING into the context so Items don't miss it!
 		var skill_context = {
 			"allow_on_hits": effective_on_hit,
 			"allow_lifesteal": effective_lifesteal,
@@ -67,5 +81,6 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 			"damage_type": damage_type,     # Burn and Cleaver need this
 			"category": final_category      # Burn needs this
 		}
+		print("dmage: ",total_dmg)
 		
-		caster.deal_damage(target, total_dmg, damage_type, final_category, false, skill_context)
+		caster.deal_damage(target, total_dmg, damage_type, final_category, is_a_crit, skill_context)

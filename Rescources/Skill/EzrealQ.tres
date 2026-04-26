@@ -10,6 +10,7 @@
 [sub_resource type="Resource" id="Resource_mnhsp"]
 script = ExtResource("3_7heug")
 damage_type = "magic"
+is_on_hit = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
 [sub_resource type="Resource" id="Resource_ecdwd"]

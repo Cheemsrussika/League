@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://b0a1owia3oyvo"]
+[gd_scene load_steps=129 format=3 uid="uid://b0a1owia3oyvo"]
 
 [ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
 [ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
@@ -98,15 +98,27 @@
 [ext_resource type="Resource" uid="uid://dhukl1qu272av" path="res://Item/Stater/Guardian's ORb.tres" id="88_8ues4"]
 [ext_resource type="PackedScene" uid="uid://n7uw18mnnif0" path="res://Screen/tower.tscn" id="88_eco1f"]
 [ext_resource type="Resource" uid="uid://cafs5k7lht7ua" path="res://Item/Legend/IceBorn_Gauntlet.tres" id="89_tvy55"]
+[ext_resource type="Resource" uid="uid://bp63odeuiesc8" path="res://Item/Legend/AtmasReckoning.tres" id="90_4p1hy"]
+[ext_resource type="Resource" uid="uid://cdvb15ce515t2" path="res://Item/Legend/RabadonsDeathCap.tres" id="91_4sdk3"]
+[ext_resource type="Resource" uid="uid://bw3151qm17dy2" path="res://Item/Legend/LordDominicsRegards.tres" id="92_mvadb"]
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="93_7e3vi"]
+[ext_resource type="Resource" uid="uid://bi8ebkgvw6kyv" path="res://Item/Legend/SpearOfShojin.tres" id="93_xpe7d"]
 [ext_resource type="PackedScene" uid="uid://y31re3jctavs" path="res://Screen/monster_camp.tscn" id="93_yuddn"]
 [ext_resource type="Script" uid="uid://d2bj6cdhja8e8" path="res://Scripts/Effects/ItemEffect/EffectSlowOnHit.gd" id="94_cqp54"]
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="94_x0tvv"]
+[ext_resource type="Resource" uid="uid://y24rdnk8ofxf" path="res://Item/Legend/RiftMaker.tres" id="94_xb0f3"]
 [ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/ItemEffect/EffectBurn.gd" id="95_cqp54"]
+[ext_resource type="Resource" uid="uid://cx3bjyde3ydji" path="res://Item/Legend/Eclipse.tres" id="95_m37e3"]
+[ext_resource type="Resource" uid="uid://c5afbi06y7ufg" path="res://Item/Legend/TrinityForce.tres" id="96_go6rd"]
+[ext_resource type="Resource" uid="uid://c1h466iyfo0vl" path="res://Item/Stater/Cull.tres" id="97_sc6t1"]
+[ext_resource type="Resource" uid="uid://bu4lmbkd6niin" path="res://Item/Stater/DoranBlade.tres" id="98_2oq8i"]
+[ext_resource type="Resource" uid="uid://dueq1sw6i0oft" path="res://Item/Stater/DoranRing.tres" id="99_pk373"]
 [ext_resource type="PackedScene" uid="uid://bc5xg6ua1upbt" path="res://Screen/minion_spawner.tscn" id="100_fstwv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfvv7"]
-bg_color = Color(0.33675686, 0.66117305, 0.67245364, 1)
+[ext_resource type="Resource" uid="uid://dd5k56wq0ime4" path="res://Item/Legend/ThornMail.tres" id="100_u6spv"]
+[ext_resource type="Resource" uid="uid://di7e3456o25u6" path="res://Item/Legend/Phantom_Dancer.tres" id="101_6potp"]
+[ext_resource type="Script" uid="uid://xvbotifkgp2n" path="res://Screen/RecipeUi.gd" id="102_v3vd2"]
+[ext_resource type="Script" uid="uid://vnvslwd0qjx8" path="res://Screen/backpack_panel.gd" id="108_vc5ir"]
+[ext_resource type="PackedScene" uid="uid://bmnnin1pp8xmg" path="res://Screen/backpack_slot_ui.tscn" id="109_533d4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkpe8"]
 content_margin_left = 5.0
@@ -153,6 +165,8 @@ corner_radius_bottom_left = 5
 expand_margin_left = 15.0
 expand_margin_right = 15.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vc5ir"]
+
 [sub_resource type="Resource" id="Resource_fstwv"]
 script = ExtResource("94_cqp54")
 slow_ranged = 0.3
@@ -175,64 +189,61 @@ point_count = 3
 script = ExtResource("1_cfqj6")
 warrior_scene = ExtResource("2_i61t5")
 
-[node name="Panel" type="Panel" parent="."]
-offset_left = -46.0
-offset_top = -39.0
-offset_right = 49.0
-offset_bottom = 38.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_bfvv7")
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 42.0
 offset_top = 50.0
-offset_right = 430.0
-offset_bottom = 593.0
+offset_right = 362.0
+offset_bottom = 590.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_jkpe8")
 script = ExtResource("5_c08ud")
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_left = 236.0
-offset_top = 648.0
-offset_right = 276.0
-offset_bottom = 671.0
+[node name="Label" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 42.0
+offset_top = 590.0
+offset_right = 363.0
+offset_bottom = 613.0
+bbcode_enabled = true
+fit_content = true
 script = ExtResource("8_x8w0l")
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer" groups=["shop_ui"]]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 446.0
+offset_left = 439.0
 offset_top = 50.0
-offset_right = 486.0
+offset_right = 479.0
 offset_bottom = 90.0
 mouse_filter = 2
 
-[node name="ShopPanel" type="Panel" parent="CanvasLayer/Control" groups=["shop_ui"]]
+[node name="ShopPanel" type="Panel" parent="CanvasLayer/Control" groups=["shop_panel"]]
 layout_mode = 0
-offset_right = 1414.0
-offset_bottom = 641.0
+offset_left = -76.0
+offset_right = 1099.0
+offset_bottom = 887.0
 script = ExtResource("11_bfvbo")
-all_items = Array[ExtResource("12_pqdyi")]([ExtResource("3_bfvbo"), ExtResource("2_ky6x0"), ExtResource("9_opapx"), ExtResource("14_oo1lh"), ExtResource("15_lh7kg"), ExtResource("16_4yv0o"), ExtResource("17_c2424"), ExtResource("18_lh7kg"), ExtResource("19_4yv0o"), ExtResource("20_c2424"), ExtResource("21_tepqr"), ExtResource("22_n1fyg"), ExtResource("23_cqxy2"), ExtResource("24_w13fg"), ExtResource("25_w13fg"), ExtResource("26_l15fi"), ExtResource("27_qwdbk"), ExtResource("28_k2oju"), ExtResource("29_3aoee"), ExtResource("30_q7nm4"), ExtResource("31_11frw"), ExtResource("32_jkpe8"), ExtResource("33_kopp8"), ExtResource("30_jkpe8"), ExtResource("31_kopp8"), ExtResource("32_cfqj6"), ExtResource("33_ghclr"), ExtResource("34_8i3vq"), ExtResource("35_0cdmu"), ExtResource("36_sr40m"), ExtResource("37_4da42"), ExtResource("38_l1xab"), ExtResource("39_hc7ry"), ExtResource("40_hc7ry"), ExtResource("41_hy0ny"), ExtResource("42_2h5ek"), ExtResource("43_2scoa"), ExtResource("44_1nw2w"), ExtResource("45_u407m"), ExtResource("46_vho3s"), ExtResource("47_vskhq"), ExtResource("48_mvecn"), ExtResource("49_phy30"), ExtResource("50_dpq2r"), ExtResource("51_v3bt6"), ExtResource("52_v74rd"), ExtResource("53_1gd0u"), ExtResource("54_2vv1j"), ExtResource("55_73usx"), ExtResource("56_1m38t"), ExtResource("57_6xwof"), ExtResource("58_6xwof"), ExtResource("59_fnd0l"), ExtResource("60_xxp4e"), ExtResource("61_8cyjb"), ExtResource("62_gyato"), ExtResource("63_kfw8r"), ExtResource("64_87cmq"), ExtResource("65_rld22"), ExtResource("66_rld22"), ExtResource("67_1sylu"), ExtResource("68_ns61s"), ExtResource("69_j2xt6"), ExtResource("70_ns61s"), ExtResource("71_j2xt6"), ExtResource("72_yh16q"), ExtResource("73_rfvkr"), ExtResource("74_rba1e"), ExtResource("75_y6i5l"), ExtResource("76_gls4v"), ExtResource("77_7qi4f"), ExtResource("78_fgd83"), ExtResource("79_2tlit"), ExtResource("80_1ls0y"), ExtResource("81_mvcfj"), ExtResource("82_0lxbk"), ExtResource("83_0u3gt"), ExtResource("84_0u3gt"), ExtResource("85_x0tvv"), ExtResource("86_6jd7u"), ExtResource("87_b1bty"), ExtResource("88_8ues4"), ExtResource("89_tvy55")])
+all_items = Array[ExtResource("12_pqdyi")]([ExtResource("3_bfvbo"), ExtResource("2_ky6x0"), ExtResource("9_opapx"), ExtResource("14_oo1lh"), ExtResource("15_lh7kg"), ExtResource("16_4yv0o"), ExtResource("17_c2424"), ExtResource("18_lh7kg"), ExtResource("19_4yv0o"), ExtResource("20_c2424"), ExtResource("21_tepqr"), ExtResource("22_n1fyg"), ExtResource("23_cqxy2"), ExtResource("24_w13fg"), ExtResource("25_w13fg"), ExtResource("26_l15fi"), ExtResource("27_qwdbk"), ExtResource("28_k2oju"), ExtResource("29_3aoee"), ExtResource("30_q7nm4"), ExtResource("31_11frw"), ExtResource("32_jkpe8"), ExtResource("33_kopp8"), ExtResource("30_jkpe8"), ExtResource("31_kopp8"), ExtResource("32_cfqj6"), ExtResource("33_ghclr"), ExtResource("34_8i3vq"), ExtResource("35_0cdmu"), ExtResource("36_sr40m"), ExtResource("37_4da42"), ExtResource("38_l1xab"), ExtResource("39_hc7ry"), ExtResource("40_hc7ry"), ExtResource("41_hy0ny"), ExtResource("42_2h5ek"), ExtResource("43_2scoa"), ExtResource("44_1nw2w"), ExtResource("45_u407m"), ExtResource("46_vho3s"), ExtResource("47_vskhq"), ExtResource("48_mvecn"), ExtResource("49_phy30"), ExtResource("50_dpq2r"), ExtResource("51_v3bt6"), ExtResource("52_v74rd"), ExtResource("53_1gd0u"), ExtResource("54_2vv1j"), ExtResource("55_73usx"), ExtResource("56_1m38t"), ExtResource("57_6xwof"), ExtResource("58_6xwof"), ExtResource("59_fnd0l"), ExtResource("60_xxp4e"), ExtResource("61_8cyjb"), ExtResource("62_gyato"), ExtResource("63_kfw8r"), ExtResource("64_87cmq"), ExtResource("65_rld22"), ExtResource("66_rld22"), ExtResource("67_1sylu"), ExtResource("68_ns61s"), ExtResource("69_j2xt6"), ExtResource("70_ns61s"), ExtResource("71_j2xt6"), ExtResource("72_yh16q"), ExtResource("73_rfvkr"), ExtResource("74_rba1e"), ExtResource("75_y6i5l"), ExtResource("76_gls4v"), ExtResource("77_7qi4f"), ExtResource("78_fgd83"), ExtResource("79_2tlit"), ExtResource("80_1ls0y"), ExtResource("81_mvcfj"), ExtResource("82_0lxbk"), ExtResource("83_0u3gt"), ExtResource("84_0u3gt"), ExtResource("85_x0tvv"), ExtResource("86_6jd7u"), ExtResource("87_b1bty"), ExtResource("88_8ues4"), ExtResource("89_tvy55"), ExtResource("90_4p1hy"), ExtResource("91_4sdk3"), ExtResource("92_mvadb"), ExtResource("93_xpe7d"), ExtResource("94_xb0f3"), ExtResource("95_m37e3"), ExtResource("96_go6rd"), ExtResource("97_sc6t1"), ExtResource("98_2oq8i"), ExtResource("99_pk373"), ExtResource("100_u6spv"), ExtResource("101_6potp")])
 shop_slot_scene = ExtResource("13_fwvyv")
 
-[node name="TooltipLabel" type="Label" parent="CanvasLayer/Control/ShopPanel" groups=["shop_tooltip"]]
+[node name="TooltipLabel" type="RichTextLabel" parent="CanvasLayer/Control/ShopPanel" groups=["shop_tooltip"]]
 unique_name_in_owner = true
 z_index = 5
 layout_mode = 0
-offset_left = -1984.0
-offset_top = 1336.0
-offset_right = -1792.0
-offset_bottom = 1359.0
-theme_override_font_sizes/font_size = 11
+offset_left = -1817.0
+offset_top = 1309.0
+offset_right = -1542.0
+offset_bottom = 1332.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_fwvyv")
+bbcode_enabled = true
+fit_content = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/ShopPanel"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 24.0
-offset_right = 927.0
-offset_bottom = 568.0
+offset_right = 730.0
+offset_bottom = 842.0
 mouse_filter = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pqdyi")
 
@@ -246,7 +257,7 @@ theme_override_font_sizes/font_size = 13
 text = "BOOTS"
 
 [node name="Boots2" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-custom_minimum_size = Vector2(870, 0)
+custom_minimum_size = Vector2(650, 0)
 layout_mode = 2
 
 [node name="Potions" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
@@ -299,6 +310,80 @@ text = "Legendary"
 custom_minimum_size = Vector2(470, 0)
 layout_mode = 2
 
+[node name="RecipeUI" type="Control" parent="CanvasLayer/Control/ShopPanel" groups=["recipe_ui"]]
+anchors_preset = 0
+offset_left = 739.0
+offset_top = 25.0
+offset_right = 1162.0
+offset_bottom = 564.0
+script = ExtResource("102_v3vd2")
+component_slot_scene = ExtResource("13_fwvyv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ShopPanel/RecipeUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+text = "Next Tier"
+
+[node name="BuildsIntoContainer" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.2
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Current Item"
+
+[node name="TargetItemSlot" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer" instance=ExtResource("13_fwvyv")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+text = "Recipe"
+
+[node name="ComponentsContainer" type="HBoxContainer" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "
+"
+
+[node name="BuyButton" type="Button" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "Buy
+"
+
+[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
 [node name="ItemTooltip" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 50.0
 offset_top = 778.0
@@ -329,6 +414,82 @@ script = ExtResource("9_f5qwj")
 slot_scene = ExtResource("10_ky6x0")
 info_panel = NodePath("../../ItemTooltip")
 max_slots = 10
+
+[node name="BackpackPanel" type="Panel" parent="CanvasLayer"]
+offset_left = 1571.0
+offset_top = 50.0
+offset_right = 2045.0
+offset_bottom = 845.0
+mouse_filter = 1
+script = ExtResource("108_vc5ir")
+slot_scene = ExtResource("109_533d4")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BackpackPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BackpackPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "BACK PACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/tab_separation = 9
+theme_override_constants/icon_separation = 100
+current_tab = 0
+
+[node name="Materials" type="ScrollContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vc5ir")
+metadata/_tab_index = 0
+
+[node name="MatGrid" type="GridContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer/Materials"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
+columns = 7
+
+[node name="Equipment" type="ScrollContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="EquipGrid" type="GridContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer/Equipment"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
+columns = 7
+
+[node name="Consumables" type="ScrollContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="ConsGrid" type="GridContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer/Consumables"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
+columns = 7
 
 [node name="Area2D" parent="." instance=ExtResource("16_fwvyv")]
 position = Vector2(67, 204)
@@ -426,8 +587,8 @@ position = Vector2(206, 101)
 
 [node name="MinionSpawner" parent="." node_paths=PackedStringArray("spawn_point", "assigned_path") instance=ExtResource("100_fstwv")]
 position = Vector2(2722, 1243)
+spawn_interval = 15.0
 melee_scene = ExtResource("47_l1xab")
-melee_count = 2
 ranged_count = 0
 spawn_point = NodePath("Marker2D")
 assigned_path = NodePath("Top")
@@ -440,12 +601,11 @@ curve = SubResource("Curve2D_cqp54")
 position = Vector2(-3, 111)
 
 [node name="WaveTimer" type="Timer" parent="MinionSpawner"]
-one_shot = true
 autostart = true
 
 [node name="EnemyChampion2" parent="." instance=ExtResource("66_6xwof")]
-position = Vector2(1002, 799)
+position = Vector2(1242, 583)
 
 [node name="EnemyChampion3" parent="." instance=ExtResource("66_6xwof")]
-position = Vector2(1400, 1021)
+position = Vector2(1008, 986)
 team = 3

@@ -1,10 +1,12 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://6wthl07t5jds"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=15 format=3 uid="uid://6wthl07t5jds"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ljg3j"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_nmn5k"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_thq7o"]
-[ext_resource type="Script" uid="uid://dcox482gwq85a" path="res://Scripts/Effects/ItemEffect/EffectSpellblade.gd" id="3_edh88"]
+[ext_resource type="Script" uid="uid://cl7ixw6i7nquq" path="res://Scripts/Effects/ItemEffect/EffectSheen.gd" id="3_edh88"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_etgml"]
 [ext_resource type="Texture2D" uid="uid://dl45myt15m7ue" path="res://Icons/Legend Items/40px-Lich_Bane_item.png" id="4_etgml"]
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="4_isokk"]
 [ext_resource type="Resource" uid="uid://b5iys7c072tbi" path="res://Item/Epic/Sheen.tres" id="6_isokk"]
 [ext_resource type="Resource" uid="uid://b8o17p74qsy16" path="res://Item/Epic/AetherWisp.tres" id="7_xbppu"]
 [ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="8_g0ehf"]
@@ -12,17 +14,31 @@
 [sub_resource type="Resource" id="Resource_3so3m"]
 script = ExtResource("2_nmn5k")
 stat_type = 8
-scaling_factor = 0.04
-scaling_source = 8
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 
-[sub_resource type="Resource" id="Resource_837xa"]
+[sub_resource type="Resource" id="Resource_isokk"]
+script = ExtResource("3_etgml")
+scale_amount = 0.75
+mode = 1
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_g0ehf"]
+script = ExtResource("3_etgml")
+stat = 6
+scale_amount = 0.45
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_xbppu"]
 script = ExtResource("3_edh88")
-base_damage_percent = 0.75
-ap_ratio = 0.4
-damage_type = 1
-cooldown = 1.5
-metadata/_custom_type_script = "uid://dcox482gwq85a"
+damage_scaling = Array[ExtResource("3_etgml")]([SubResource("Resource_isokk"), SubResource("Resource_g0ehf")])
+is_magic_damage = true
+proc_buff_id = "LichBane"
+proc_buff_stats = {
+"attack_speed": 0.5
+}
+id = "Sheen"
+is_unique = true
+metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
 
 [resource]
 script = ExtResource("2_thq7o")
@@ -35,5 +51,5 @@ stats = {
 "ability_haste": 10.0,
 "ability_power": 100.0
 }
-effects = Array[ExtResource("1_ljg3j")]([SubResource("Resource_3so3m"), SubResource("Resource_837xa")])
+effects = Array[ExtResource("1_ljg3j")]([SubResource("Resource_3so3m"), SubResource("Resource_xbppu")])
 metadata/_custom_type_script = "uid://76cpvgsppjvf"

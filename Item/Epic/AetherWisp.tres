@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://b8o17p74qsy16"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://b8o17p74qsy16"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_7184s"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_e1ab4"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_fa8dd"]
 [ext_resource type="Texture2D" uid="uid://7a65rabjkwct" path="res://Icons/Epic Items/40px-Aether_Wisp_item.png" id="3_e1ab4"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="4_js6xc"]
@@ -9,8 +10,6 @@
 [sub_resource type="Resource" id="Resource_olaty"]
 script = ExtResource("2_fa8dd")
 stat_type = 8
-scaling_factor = 0.04
-scaling_source = 8
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 
 [resource]

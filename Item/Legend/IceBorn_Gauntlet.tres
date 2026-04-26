@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=13 format=3 uid="uid://cafs5k7lht7ua"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=14 format=3 uid="uid://cafs5k7lht7ua"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_qsm0k"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_56rcu"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_v7a1x"]
 [ext_resource type="Script" uid="uid://cl7ixw6i7nquq" path="res://Scripts/Effects/ItemEffect/EffectSheen.gd" id="2_w57dl"]
 [ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="3_gjbjg"]
 [ext_resource type="PackedScene" uid="uid://cioe2e1uuo1mu" path="res://Screen/item_skill_zone.tscn" id="4_gjbjg"]
@@ -22,6 +23,8 @@ script = ExtResource("2_w57dl")
 zone_scene = ExtResource("4_gjbjg")
 zone_tick_rate = 1.0
 zone_effects = Array[ExtResource("3_gjbjg")]([SubResource("Resource_f1frm")])
+id = "Sheen"
+is_unique = true
 metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
 
 [resource]

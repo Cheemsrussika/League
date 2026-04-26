@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://dwmol31xw4c4u"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=12 format=3 uid="uid://dwmol31xw4c4u"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_x3t4r"]
 [ext_resource type="Texture2D" uid="uid://dvflea41joh3i" path="res://Icons/Legend Items/40px-Kraken_Slayer_item.png" id="2_6sf3d"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_462lq"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_nsx53"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_pudel"]
 [ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="3_462lq"]
@@ -12,16 +13,22 @@
 [sub_resource type="Resource" id="Resource_l75du"]
 script = ExtResource("2_pudel")
 stat_type = 8
-scaling_factor = 0.04
-scaling_source = 8
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 
 [sub_resource type="Resource" id="Resource_lvgqp"]
 script = ExtResource("3_462lq")
 status_id = "Kraken"
 max_stacks = 3
-trigger_phantom_on_max = false
+stack_duration = null
+trigger_category = null
 deal_damage_on_max = true
+stats_per_stack = null
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
 metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
 
 [resource]

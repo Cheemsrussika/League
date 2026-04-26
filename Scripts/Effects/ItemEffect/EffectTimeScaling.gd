@@ -17,7 +17,7 @@ var time_accumulator: float = 0.0
 var _is_fully_stacked: bool = false
 
 # Reset state when equipped
-func on_equip(user: Champion) -> void:
+func on_equip(_user: Champion) -> void:
 	current_stacks = 0
 	time_accumulator = 0.0
 	_is_fully_stacked = false

@@ -192,7 +192,7 @@ func execute_combat_logic(delta: float):
 	move_and_slide()
 
 # --- ATTACK SEQUENCE ---
-func _start_windup(target: Node2D):
+func _start_windup(_target: Node2D):
 	is_winding_up = true
 	var aps = max(0.01, get_total(Stat.AS))
 	var total_attack_time = 1.0 / aps
@@ -292,14 +292,24 @@ func perform_auto_attack_hit(target: Node2D):
 # res://Scripts/Units/Champion.gd
 
 func deal_damage(target: Node2D, amount: float, type: String, category: String, is_crit: bool = false, skill_context: Dictionary = {}) -> float:
-	var receipt = target.take_damage(amount, type, self, is_crit, category)
+	
+	# --- 1. CRITICAL STRIKE MATH ---
+	var final_amount = amount
+	if is_crit:
+		# Multiply the base amount by the unit's Crit Damage stat (e.g., 1.75 or 2.0)
+		final_amount *= get_total(Stat.CRIT_DMG) 
+		print("CRITICAL HIT! Damage increased to: ", final_amount)
+
+	# --- 2. SEND DAMAGE TO TARGET ---
+	# Pass final_amount instead of amount!
+	var receipt = target.take_damage(final_amount, type, self, is_crit, category)
 	var actual_lost = receipt["health_lost"]
 	
 	if actual_lost > 0:
-		# 1. Create and Merge Context
+		# 3. Create and Merge Context
 		var context = {
 			"target": target, 
-			"amount": amount, 
+			"amount": final_amount, # Make sure context gets the big crit number!
 			"health_lost": actual_lost,
 			"damage_type": type, 
 			"category": category, 
@@ -307,22 +317,21 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 		}
 		context.merge(skill_context)
 
-		# 2. Trigger Global Passives
+		# 4. Trigger Global Passives
 		_trigger_passive_effects("on_damage_dealt", context)
 		
-		# 3. CONSOLIDATED HEALING (The Fix)
+		# 5. CONSOLIDATED HEALING
 		var total_heal = 0.0
 		var healing_mult = 1.0
-		# Life Steal (Physical only + must be allowed by Skill/Attack)
+		
 		if context.get("is_aoe", false):
 			healing_mult = 0.33
 
-		# 1. Life Steal
+		# Life Steal
 		if type == "physical" and context.get("allow_lifesteal", false):
-			# (Lifesteal is rarely AoE, but we apply the mult just in case)
 			total_heal += actual_lost * (get_total(Stat.LIFE_STEAL) / 100.0) * healing_mult
 
-		# 2. Omnivamp
+		# Omnivamp
 		var omni = get_total(Stat.OMNIVAMP)
 		if omni > 0:
 			total_heal += actual_lost * (omni / 100.0) * healing_mult
@@ -330,12 +339,12 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 		if total_heal > 0:
 			heal(total_heal)
 
-		# 4. Trigger Category Hooks
+		# 6. Trigger Category Hooks
 		if category == "spell":
 			_trigger_passive_effects("on_spell_hit", context) 
 		elif category == "attack":
 			_trigger_passive_effects("on_attack_hit_post_mitigation", context)
-				
+			
 	return actual_lost
 
 func take_damage(amount: float, type: String, source: Node, is_crit: bool = false, category: String = "spell") -> Dictionary:
@@ -579,6 +588,7 @@ func level_up():
 func get_current_move_speed() -> float: return get_total(Stat.MS) 
 
 func _roll_for_crit(base_chance: float) -> bool:
+	if base_chance<=0: return false
 	var effective_chance = (base_chance / 100.0) + crit_pity_bonus
 	effective_chance = min(effective_chance, 1.0)
 	if randf() < effective_chance:
@@ -603,11 +613,11 @@ func add_gold(amount: int):
 		get_tree().current_scene.add_child(text)
 		text.start(amount, global_position, "gold", false)
 
-func die(killer = null): unit_died.emit(self)
+func die(_killer = null): unit_died.emit(self)
 func is_ranged() -> bool: return get_total(Stat.RANGE) > 300.0
-
 func _refresh_ui_display():
-	var ui_text = "[b]STATS[/b]\n"
+	var ui_text = "[center][b]STATS[/b][/center]\n"
+	
 	for s in Stat.values():
 		if not STAT_MAP.has(s): continue
 		var total = get_total(s)
@@ -618,22 +628,30 @@ func _refresh_ui_display():
 		var stored_bonus = bonus_stats.get(key, 0.0)
 		var value_from_items = stored_bonus
 		
-		if key == "health_regen" or key == "Mana_Regen":
+		if key.to_lower() == "health_regen" or key.to_lower() == "mana_regen":
 			value_from_items = base_val * (stored_bonus / 100.0)
 			 
 		var temp_val = total - (base_val + value_from_items)
-		var line = "%s: %.2f" % [key.capitalize(), total]
+		
+		# --- GET COLOR AND ICON ---
+		var stat_color = StatStyle.get_color(key)
+		var stat_icon = StatStyle.get_icon_tag(key, 18) # Change 18 to make the icon bigger/smaller
+		
+		# Format: [Icon] Name: 100.00
+		var line = "%s[color=%s]%s:[/color] %.2f" % [stat_icon, stat_color, key.capitalize(), total]
 		
 		if abs(value_from_items) > 0.01:
 			var color = "green" if value_from_items > 0 else "red"
 			line += " [color=%s](%+.2f)[/color]" % [color, value_from_items]
+			
 		if abs(temp_val) > 0.01:
 			var color = "cornflower_blue" if temp_val > 0 else "red"
 			line += " [color=%s](%+.2f)[/color]" % [color, temp_val]
+			
 		ui_text += line + "\n"
+		
 	stats_updated.emit(ui_text)
 	if has_method("_update_attack_range_circle"): _update_attack_range_circle()
-
 func _update_attack_range_circle():
 	if not attack_range_area: return
 	var current_range = get_total(Stat.RANGE)

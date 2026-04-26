@@ -5,7 +5,7 @@ class_name EffectOnLevelUp
 @export var mana_restore_percent: float = 0.2
 @export var health_restore_percent: float = 0.2
 
-func on_level_up(user: Champion, context: Dictionary) -> void:
+func on_level_up(user: Champion, _context: Dictionary) -> void:
 	var max_mana = user.get_total(Champion.Stat.MANA)
 	var max_hp = user.get_total(Champion.Stat.HP)
 	var mana_to_restore = 0.0

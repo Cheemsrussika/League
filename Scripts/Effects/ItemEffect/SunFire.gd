@@ -2,6 +2,7 @@ extends ItemEffect
 class_name EffectSunfire
 
 @export var damage_per_second: float = 25.0
+@warning_ignore("shadowed_global_identifier")
 @export var range: float = 300.0
 @export var tick_rate: float = 1.0 
 @export var max_hp_rate:float=0.01

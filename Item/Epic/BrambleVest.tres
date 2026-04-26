@@ -8,6 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_1h2v7"]
 script = ExtResource("2_6ewdh")
+reflect_percent_bonus_armor = 0.05
 id = "Thorns"
 is_unique = true
 metadata/_custom_type_script = "uid://cyt60iiype847"

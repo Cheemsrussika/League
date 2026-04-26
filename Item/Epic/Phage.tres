@@ -4,14 +4,26 @@
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="1_fdk1e"]
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ola6l"]
 [ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="2_0jrvi"]
-[ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/ItemEffect/OnHitSpeed.gd" id="2_tnw8l"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="2_dgiip"]
 [ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="3_1lc6n"]
 
-[sub_resource type="Resource" id="Resource_k521a"]
-script = ExtResource("2_tnw8l")
-speed_id = "Phage"
-speed_bonus_on_kill = 0.0
-metadata/_custom_type_script = "uid://61k1qccw6je8"
+[sub_resource type="Resource" id="Resource_kqgtq"]
+script = ExtResource("2_dgiip")
+status_id = "rage_speed"
+max_stacks = 1
+stack_duration = 2.0
+trigger_category = 1
+deal_damage_on_max = null
+stats_per_stack = {
+"move_speed": 20.0
+}
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
 
 [resource]
 script = ExtResource("1_fdk1e")
@@ -24,5 +36,5 @@ stats = {
 "attack_damage": 15.0,
 "health": 200.0
 }
-effects = Array[ExtResource("1_ola6l")]([SubResource("Resource_k521a")])
+effects = Array[ExtResource("1_ola6l")]([SubResource("Resource_kqgtq")])
 metadata/_custom_type_script = "uid://76cpvgsppjvf"

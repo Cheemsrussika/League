@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://cr5n2skcy1k6u" path="res://Scripts/Libs/ai_input_component.gd" id="3_p17fj"]
 [ext_resource type="Texture2D" uid="uid://dsd63m0g581d" path="res://icon.svg" id="4_0vn4y"]
 [ext_resource type="Shader" uid="uid://c5808fr8a0tw6" path="res://Shader/ShaderMaterial.gdshader" id="4_6a1j5"]
-[ext_resource type="Resource" uid="uid://b0t8vgxtmvl4f" path="res://Item/Epic/BrambleVest.tres" id="4_gmwfg"]
+[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="4_feeeb"]
 [ext_resource type="Script" uid="uid://ba6mqqk6fxjel" path="res://Scripts/Effects/SkillEffect/SkillSlot.gd" id="5_el34r"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
@@ -27,7 +27,7 @@ team = 1
 
 [node name="AIInputComponent" type="Node" parent="." index="0" groups=["champion"]]
 script = ExtResource("3_p17fj")
-starting_items = Array[ExtResource("3_feeeb")]([ExtResource("4_gmwfg")])
+starting_items = Array[ExtResource("3_feeeb")]([ExtResource("4_feeeb"), ExtResource("4_feeeb"), ExtResource("4_feeeb"), ExtResource("4_feeeb"), ExtResource("4_feeeb"), ExtResource("4_feeeb"), ExtResource("4_feeeb"), ExtResource("4_feeeb")])
 
 [node name="Label" type="Label" parent="." index="1"]
 offset_left = -121.0

@@ -86,5 +86,6 @@ func die(killer: Unit = null):
 			killer.gain_experience(exp_value*20) # Fixed typo here!
 		if killer.has_method("add_gold"):
 			killer.add_gold(gold_drop)
+		killer.on_kill_trigger(self)
 			
 	queue_free()

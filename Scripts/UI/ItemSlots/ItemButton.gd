@@ -3,7 +3,7 @@ extends Button
 
 var item_data: ItemData
 var is_mouse_inside: bool = false
-var tooltip_node: Label = null
+var tooltip_node: RichTextLabel = null
 @onready var price_label: Label = $PriceLabel
 
 func setup(item: ItemData):
@@ -16,7 +16,9 @@ func setup(item: ItemData):
 
 func _ready():
 	add_to_group("shop_buttons")
-	pressed.connect(_on_pressed_show_recipe)
+	
+	# REMOVED: pressed.connect(_on_pressed_show_recipe)
+	# We will handle clicks in _gui_input now
 	
 	tooltip_node = get_tree().get_first_node_in_group("shop_tooltip")
 	mouse_entered.connect(_on_mouse_entered)
@@ -24,11 +26,29 @@ func _ready():
 	update_affordability()
 
 # Renamed to make it clear this DOES NOT buy items
-func _on_pressed_show_recipe():
+func _gui_input(event: InputEvent):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			if event.double_click:
+				# Double Click = BUY
+				_attempt_purchase()
+			else:
+				# Single Click = PREVIEW RECIPE
+				_show_recipe()
+
+func _show_recipe():
 	if not item_data: return
 	var recipe_ui = get_tree().get_first_node_in_group("recipe_ui") 
 	if recipe_ui:
 		recipe_ui.view_recipe(item_data)
+
+func _attempt_purchase():
+	if not item_data: return
+	# This calls a global method or tells the ShopPanel to buy it
+	# We will hook this up to your GameManager/Inventory logic
+	var shop = get_tree().get_first_node_in_group("shop_panel")
+	if shop and shop.has_method("_on_item_double_clicked"):
+		shop._on_item_double_clicked(item_data)
 
 func update_affordability():
 	if not is_inside_tree() or not item_data or not price_label: return
@@ -60,20 +80,47 @@ func _process(_delta):
 		tooltip_node.global_position = get_global_mouse_position() + Vector2(20, 20)
 
 func update_tooltip_text():
-	if not is_instance_valid(tooltip_node): return
-	var text = item_data.item_name + " (" + str(item_data.cost) + " Gold)\n"
-	if Input.is_key_pressed(KEY_SHIFT):
-		text += "--------------------\n"
-		text += "Stats: " + _get_stat_summary() + "\n"
-		text += str(item_data.get("description")) if item_data.get("description") else ""
-	else:
-		text += "[Hold Shift for Details]"
+	if not is_instance_valid(tooltip_node) or not item_data: 
+		return
+		
+	if tooltip_node is RichTextLabel:
+		tooltip_node.bbcode_enabled = true
+	# Inside your update_tooltip_text() function:
+
+	var gold_icon = StatStyle.get_icon_tag("gold", 18)
+	var gold_color = StatStyle.get_color("gold")
+
+	var text = "[center][b][color=gold]%s[/color][/b][/center]\n" % item_data.item_name
+	text += "[center]Cost: %s [color=%s]%d Gold[/color][/center]\n" % [gold_icon, gold_color, item_data.cost]
+
+	text += "[color=gray]--------------------[/color]\n"
+	
+	# Stats - Removed the aquamarine wrapper so the individual stat colors work!
+	if item_data.stats and item_data.stats.size() > 0:
+		text += _get_stat_summary()
+		
+	# Description
+	if item_data.get("description"):
+		text += "[color=lightgray][i]" + str(item_data.description) + "[/i][/color]\n"
+		
+
+
+		
 	tooltip_node.text = text
+
 
 func _get_stat_summary() -> String:
 	if not item_data or not item_data.stats: return ""
 	var s = ""
 	for key in item_data.stats:
 		var val = item_data.stats[key]
-		s += "+%s %s " % [str(val), key.replace("_", " ").capitalize()]
+		var formatted_name = key.replace("_", " ").capitalize()
+		
+		# Ask our helper for the icon and color!
+		var stat_color = StatStyle.get_color(key)
+		var stat_icon = StatStyle.get_icon_tag(key, 16) # 16x16 size for tooltips
+		
+		# Example output: [Icon] +10 Attack Damage (in orange!)
+		s += "%s[color=%s]+%s %s[/color]\n" % [stat_icon, stat_color, str(val), formatted_name]
+		
 	return s

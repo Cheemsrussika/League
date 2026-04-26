@@ -26,7 +26,7 @@ enum Stat {
 	TENACITY, OMNIVAMP, PHYSIC_VAMP, LIFE_STEAL,
 	GOLD_GEN, GOLD, SPELLHASTE, INC_PHYS_DMG_MOD, 
 	INC_MAGIC_DMG_MOD, INC_ALL_DMG_MOD, HEAL_AND_SHIELD,
-	ARMOR_PEN_PERCENT, MAGIC_PEN_PERCENT, OUTGOING_DMG_MOD
+	ARMOR_PEN_PERCENT, MAGIC_PEN_PERCENT, OUTGOING_DMG_MOD,SKILL_DAMAGE_MULT
 }
 
 # Maps Enum keys to String keys for the dictionaries
@@ -45,7 +45,7 @@ const STAT_MAP = {
 	Stat.INC_MAGIC_DMG_MOD: "magic_dmg_take__modi",
 	Stat.INC_ALL_DMG_MOD:  "all_dmg_take_modi", Stat.HEAL_AND_SHIELD:"heal_and_shield_power",
 	Stat.ARMOR_PEN_PERCENT:"armor_pen_percent", Stat.MAGIC_PEN_PERCENT:"magic_pen_percent",
-	Stat.OUTGOING_DMG_MOD: "dmg_dealt_modifier"
+	Stat.OUTGOING_DMG_MOD: "dmg_dealt_modifier",Stat.SKILL_DAMAGE_MULT: "skill_damage_multiplier"
 }
 
 # --- STAT VARIABLES ---
@@ -56,13 +56,13 @@ const STAT_MAP = {
 	"Slow_res": 0.0, "Mana": 100.0, "Mana_Regen": 2.0, "Energy": 0.0, 
 	"crit_chance": 0.0, "crit_damage": 1.75, "omnivamp": 0.0, "life_steal": 0.0,
 	"phys_dmg_take_modi": 1.0, "magic_dmg_take__modi": 1.0, 
-	"all_dmg_take_modi": 0.0, "gold_gen": 5.0,"dmg_dealt_modifier":0.0
+	"all_dmg_take_modi": 0.0, "gold_gen": 5.0,"dmg_dealt_modifier":0.0,"skill_damage_multiplier":1.0
 }
 
 var current_health: float = 0.0
 var bonus_stats: Dictionary = {}
 var stat_modifiers: Dictionary = {} # Temporary mods (buffs/debuffs)
-
+var percent_modifiers: Dictionary = {}
 # --- COMPONENTS ---
 # Defined here so Unit logic can see it. Champion will assign it.
 var inventory: Node = null 
@@ -157,38 +157,38 @@ func _recalc_total_shield():
 		total_shield_amount += s["amount"]
 
 # --- CORE STAT CALCULATION ---
+# --- CORE STAT CALCULATION ---
 func get_total(s: Stat) -> float:
 	if not STAT_MAP.has(s): return 0.0
 	var key = STAT_MAP[s]
 	
 	var base_val = base_stats.get(key, 0.0)
 	var bonus_val = bonus_stats.get(key, 0.0)
-	var modifier_val = stat_modifiers.get(key, 0.0)
 	
-	var total = base_val + bonus_val + modifier_val
+	# 1. Get our dynamic values
+	var flat_mod = stat_modifiers.get(key, 0.0)
+	var percent_mod = percent_modifiers.get(key, 0.0)
+	
+	# 2. Add all flat values together first
+	var total = base_val + bonus_val + flat_mod
 
-	# Special Logic
-	if s == Stat.MS:
-		var flat_bonus = stat_modifiers.get("flat_ms_bonus", 0.0)
-		total += flat_bonus
-		total = total * move_speed_modifier
-		
-	elif s == Stat.AR:
-		var shred = stat_modifiers.get("armor_reduction_percent", 0.0)
-		total = total * (1.0 - shred)
-		
-	elif key == "health_regen" or key == "Mana_Regen":
+	# 3. Apply percentage multipliers (Buffs are positive, Debuffs are negative)
+	total = total * (1.0 + percent_mod)
+
+	# Special Logic for Health/Mana Regen (Since their base math is unique)
+	if key == "health_regen" or key == "Mana_Regen":
 		var multiplier = 1.0 + (bonus_val / 100.0)
-		total = (base_val * multiplier) + modifier_val
+		total = (base_val * multiplier) + flat_mod
 
 	return max(0.0, total)
-
 func recalculate_stats():
+	# 1. Clear both dictionaries from the previous frame
 	stat_modifiers.clear()
+	percent_modifiers.clear() # <- You were missing this!
 	move_speed_modifier = 1.0
 	is_slowed = false
 	
-	# 1. Ask Items for stats
+	# 2. Ask Items for stats
 	if inventory and "items" in inventory:
 		for item in inventory.items:
 			if item and item.effects:
@@ -196,10 +196,9 @@ func recalculate_stats():
 					if effect.has_method("on_stat_calculation"):
 						effect.on_stat_calculation(self)
 
-
+	# 3. Read Stats from the Status Container
 	if status_container:
 		for status in status_container.get_children():
-			# Skip nodes that are currently being deleted
 			if status.is_queued_for_deletion():
 				continue
 
@@ -210,7 +209,24 @@ func recalculate_stats():
 			if status.get("type") == "slow":
 				is_slowed = true
 
-	# 3. Visual Updates
+			# --- A. Grab the Flat Stats ---
+			if "stats_to_buff" in status:
+				for stat_enum in status.stats_to_buff:
+					if STAT_MAP.has(stat_enum):
+						var string_key = STAT_MAP[stat_enum] # Convert Enum (2) to String ("armor")
+						var amount = status.stats_to_buff[stat_enum] * status.stacks
+						print("StatBuff:",string_key,"+",amount)
+						stat_modifiers[string_key] = stat_modifiers.get(string_key, 0.0) + amount
+					
+			# --- B. Grab the Percent Stats! ---
+			if "percent_stats_to_buff" in status:
+				for stat_enum in status.percent_stats_to_buff:
+					if STAT_MAP.has(stat_enum):
+						var string_key = STAT_MAP[stat_enum] # Convert Enum (2) to String ("armor")
+						var amount = status.percent_stats_to_buff[stat_enum] * status.stacks
+						percent_modifiers[string_key] = percent_modifiers.get(string_key, 0.0) + amount
+
+	# 4. Visual Updates
 	modulate = Color(0.5, 0.5, 1.0) if is_slowed else Color.WHITE
 
 	if has_method("_refresh_ui_display"):
@@ -223,7 +239,7 @@ func modify_stat(stat_name: String, amount: float):
 		stat_modifiers[stat_name] = amount
 
 # --- DAMAGE LOGIC ---
-func take_damage(raw_amount: float, dmg_type: String, source: Node, is_crit:bool, category: String = "spell"):
+func take_damage(raw_amount: float, dmg_type: String, source: Node, _is_crit:bool, _category: String = "spell"):
 	if is_dead: return {"health_lost": 0, "mitigated": 0, "shield_soaked": 0}
 	
 	var mitigated_damage = _calculate_mitigation(raw_amount, dmg_type, source)
@@ -324,9 +340,24 @@ func _absorb_damage_with_shields(damage: float, dmg_type: String) -> float:
 	if dirty_ui: _recalc_total_shield()
 	return damage_remaining
 
-func die(killer):
+func die(_killer):
 	pass
+# Inside Unit.gd
 
+# This is the "Hook" that items will listen to
+func on_kill_trigger(victim: Unit):
+	var context = {"victim": victim}
+	
+	# Trigger Items
+	if inventory and "items" in inventory:
+		for item in inventory.items:
+			if item:
+				for effect in item.effects:
+					if effect.has_method("on_kill"):
+						effect.on_kill(self, context)
+	
+	# Trigger Skills/Passives (If you have them)
+	# ... logic for skill passives ...
 func handle_regeneration(delta):
 	var max_hp = get_total(Stat.HP)
 	var hp5 = get_total(Stat.HP5)
@@ -382,29 +413,3 @@ func apply_status_effect(id: String, duration: float, stacks: int = 1, power: fl
 func has_status(id: String) -> bool:
 	if not status_container: return false
 	return status_container.has_node(id)
-
-# --- BACKWARDS COMPATIBILITY HELPERS ---
-func apply_temp_speed(amount: float, dur: float, id: String = "rage_speed"):
-	# 1. Look for the node by the specific ID passed (e.g., "Phage" or "Trinity")
-	var existing = status_container.get_node_or_null(id)
-	
-	if existing:
-		# If it exists, we just refresh it. This prevents 1 item from stacking itself.
-		existing.duration = dur
-		existing.power = amount
-		existing.stacks = 1 
-	else:
-		# If it doesn't exist, create it with that specific ID as the name
-		apply_status_effect(id, dur, 1, amount, self)
-	
-	# 2. Update the stats on that specific node
-	var status = status_container.get_node_or_null(id)
-	if status:
-		status.stats_to_buff = {"flat_ms_bonus": amount}
-		recalculate_stats()
-		
-func apply_slow(raw_percent: float, duration: float):
-	apply_status_effect("generic_slow", duration, 1, raw_percent, self)
-
-func apply_armor_shred(amount_per_stack: float, duration: float, max_stacks: int):
-	apply_status_effect("armor_shred", duration, 1, amount_per_stack, self)

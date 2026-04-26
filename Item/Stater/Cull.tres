@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://c1h466iyfo0vl"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_wbedr"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_c5qpo"]
+[ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/ItemEffect/EffectOnHitDamage.gd" id="2_p0w2i"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_b0oak"]
+[ext_resource type="Script" uid="uid://0bm2sb6nvf5v" path="res://Scripts/Effects/ItemEffect/Effect_OnKill.gd" id="4_a0kdt"]
+[ext_resource type="Texture2D" uid="uid://p1x8u7mna88q" path="res://Icons/StarterItem/40px-Cull_item.png" id="5_r8cvw"]
+
+[sub_resource type="Resource" id="Resource_yrqa6"]
+script = ExtResource("2_p0w2i")
+base_damage_on_hit = 0.0
+allow_buff = true
+buff_stat = 21
+buff_amount = 1.0
+buff_duration = 3.0
+buff_cooldown = 0.0
+cdr_on_hit = 0.0
+cdr_on_crit = 0.0
+metadata/_custom_type_script = "uid://dnywn2qxskb27"
+
+[sub_resource type="Resource" id="Resource_7o3r5"]
+script = ExtResource("4_a0kdt")
+gold_per_kill = 2
+metadata/_custom_type_script = "uid://0bm2sb6nvf5v"
+
+[resource]
+script = ExtResource("2_c5qpo")
+item_name = "Cull"
+icon = ExtResource("5_r8cvw")
+cost = 450
+stats = {
+"attack_damage": 7.0
+}
+effects = Array[ExtResource("1_wbedr")]([SubResource("Resource_yrqa6"), SubResource("Resource_7o3r5")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

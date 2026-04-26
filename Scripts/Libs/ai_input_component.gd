@@ -29,7 +29,7 @@ func _physics_process(delta):
 	_handle_shopping(delta)
 
 # --- SHOPPING LOGIC ---
-func _move_to_shop(delta):
+func _move_to_shop(_delta):
 	# Find the shop area in the scene
 	var shop = get_tree().get_first_node_in_group("shop_zone")
 	if shop:

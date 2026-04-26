@@ -12,7 +12,7 @@ class_name Effect_ApplyStatus
 @export var scaling_stat: Unit.Stat = Unit.Stat.AD
 @export var scaling_ratio: float = 0.1
 
-func on_execute(caster: Node2D, level: int, target_data: Dictionary, _ref: Resource):
+func on_execute(caster: Node2D, _level: int, target_data: Dictionary, _ref: Resource):
 	var target = target_data.get("target_unit")
 	if not is_instance_valid(target) or not target.has_method("apply_status_effect"):
 		return

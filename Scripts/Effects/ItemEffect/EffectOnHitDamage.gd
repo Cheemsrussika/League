@@ -3,34 +3,38 @@ class_name EffectOnHitAdvanced
 
 # --- ENUMS ---
 enum DamageType { PHYSICAL, MAGIC, TRUE }
-enum ScalingMode { TOTAL, BASE, BONUS }
 
 # --- EXPORTS ---
 @export_group("On Hit Damage")
 @export var damage_type: DamageType = DamageType.PHYSICAL
-@export var damage_on_hit: float = 15.0
+@export var base_damage_on_hit: float = 15.0
 
-@export_group("Scaling")
-@export var scaling_factor: float = 0.0   
-@export var scaling_source: Champion.Stat = Champion.Stat.AP 
-@export var scaling_mode: ScalingMode = ScalingMode.TOTAL
+@export_group("Slayer Logic (Target Multipliers)")
+## Multiplier for specific unit types (e.g., 1.5 = 50% more damage to Minions)
+@export var vs_minion_mult: float = 1.0
+@export var vs_monster_mult: float = 1.0
+@export var vs_champion_mult: float = 1.0
+@export var vs_structure_mult: float = 1.0
 
-@export_group("Crit Behavior")
-@export var can_this_item_crit: bool = false 
-
-@export_group("Targeting")
-@export var champions_only: bool = false 
-@export var affects_structures: bool = false
+@export_group("Advanced Scaling (LEGOs)")
+## Use your ScalingFactor array for dynamic damage (AP, HP, Level, etc.)
+@export var damage_scalings: Array[ScalingFactor] = []
 
 @export_group("Percent HP Damage")
-@export var damage_percent_melee: float = 0.0 
-@export var damage_percent_ranged: float = 0.0 
-@export var cap_vs_monsters: float = 60.0 
+@export var damage_percent_melee: float = 0.0  
+@export var damage_percent_ranged: float = 0.0  
+@export var cap_vs_monsters: float = 60.0  
 
-# --- BUFF EXPORTS ---
+@export_group("Crit & Targeting")
+@export var can_this_item_crit: bool = false 
+@export var champions_only: bool = false 
+@export var affects_structures: bool = true
+
 @export_group("On Hit Stat Buff")
+@export var BUFF_ID:String = "stat_buff" # Ensure this exists in your StatusLibrary!
 @export var allow_buff: bool = false
-@export var buff_stat: Champion.Stat = Champion.Stat.AS
+## The stat the buff provides (e.g., Attack Speed)
+@export var buff_stat: Unit.Stat = Unit.Stat.AS
 @export var buff_amount: float = 0.30     
 @export var buff_duration: float = 6.0    
 @export var buff_cooldown: float = 12.0   
@@ -41,32 +45,26 @@ enum ScalingMode { TOTAL, BASE, BONUS }
 var cooldown_ready_time: int = 0 
 var last_added_raw: float = 0.0
 var total_damage_added: float = 0.0
-const BUFF_ID = "stat_buff"
 
 
-func on_attack(user: Unit, context: Dictionary) -> void:
-	pass # Do nothing!
-
-# This handles on-hit skills (from deal_damage with category "attack")
 func on_attack_hit_post_mitigation(user: Unit, context: Dictionary) -> void:
 	_execute_on_hit_logic(user, context)
 
-# --- 2. MAIN ATTACK LOGIC ---
 func _execute_on_hit_logic(user: Unit, context: Dictionary) -> void:
 	var target = context.get("target")
-	if not target or not is_instance_valid(target): return
+	if not is_instance_valid(target): return
 	
-	if context.has("allow_on_hits") and not context["allow_on_hits"]:
-		return
-		
-	if not _try_start_cooldown(): return 
+	if context.get("allow_on_hits", true) == false: return
 	if champions_only and target.unit_type != Unit.UnitType.CHAMPION: return
 	
+	var is_structure = (target.unit_type == Unit.UnitType.TOWER)
+	if is_structure and not affects_structures: return
+
+	var current_time = Time.get_ticks_msec()
 	var effectiveness = context.get("on_hit_mult", 1.0)
 	var is_crit = context.get("is_crit", false)
-	var current_time = Time.get_ticks_msec()
 
-	# --- Buff ---
+	# --- 1. BUFF LOGIC ---
 	if allow_buff and effectiveness > 0:
 		if not user.has_status(BUFF_ID):
 			if current_time >= cooldown_ready_time:
@@ -74,98 +72,80 @@ func _execute_on_hit_logic(user: Unit, context: Dictionary) -> void:
 			else:
 				var reduction = cdr_on_crit if is_crit else cdr_on_hit
 				cooldown_ready_time -= int(reduction * 1000)
-				_update_item_ui(user)
 
-	# --- Damage ---
-	var calculated_damage = damage_on_hit
+	# --- 2. DAMAGE CALCULATION ---
+	var calculated_damage = base_damage_on_hit
 	
-	var is_structure = (target.unit_type == Unit.UnitType.TOWER)
-	if is_structure and not affects_structures:
-		return
+	# Apply LEGO Scalings
+	for factor in damage_scalings:
+		if factor:
+			calculated_damage += factor.calculate_value(user, target)
 
-	# Scaling
-	if scaling_factor != 0.0:
-		var source_value = 0.0
-		var stat_key = Champion.STAT_MAP.get(scaling_source, "")
-		if stat_key != "":
-			match scaling_mode:
-				ScalingMode.TOTAL: source_value = user.get_total(scaling_source)
-				ScalingMode.BASE:  source_value = user.base_stats.get(stat_key, 0.0)
-				ScalingMode.BONUS: source_value = user.bonus_stats.get(stat_key, 0.0)
-		calculated_damage += source_value * scaling_factor
-
-	# % HP
+	# % HP Logic
 	var percent_to_use = damage_percent_ranged if user.is_ranged() else damage_percent_melee
 	if percent_to_use > 0:
 		var percent_dmg = target.current_health * percent_to_use
-		
-		if cap_vs_monsters > 0 and target.unit_type in [Unit.UnitType.MINION, Unit.UnitType.MONSTER]:
+		# Cap vs non-champions
+		if target.unit_type in [Unit.UnitType.MINION, Unit.UnitType.MONSTER]:
 			percent_dmg = min(percent_dmg, cap_vs_monsters)
 		elif is_structure:
 			percent_dmg = 0.0
-			
 		calculated_damage += percent_dmg
 
-	# Multiplier
-	calculated_damage *= effectiveness
+	# --- 3. TARGET TYPE MULTIPLIERS ---
+	match target.unit_type:
+		Unit.UnitType.MINION:   calculated_damage *= vs_minion_mult
+		Unit.UnitType.MONSTER:  calculated_damage *= vs_monster_mult
+		Unit.UnitType.CHAMPION: calculated_damage *= vs_champion_mult
+		Unit.UnitType.TOWER:    calculated_damage *= vs_structure_mult
 
-	# Crit
+	# Final Adjustments
+	calculated_damage *= effectiveness
 	if can_this_item_crit and is_crit:
 		calculated_damage *= user.get_total(Unit.Stat.CRIT_DMG)
 
-	# Final apply
+	# --- 4. APPLY DAMAGE ---
+	# --- 4. APPLY DAMAGE ---
 	if calculated_damage > 0:
-		if damage_type == DamageType.PHYSICAL:
-			if not context.has("buckets"):
-				total_damage_added += user.deal_damage(target, calculated_damage, "physical", "proc", is_crit)
-			else:
-				context["buckets"]["physical"] += calculated_damage
-				last_added_raw = calculated_damage
-		else:
-			var type_str = "magic" if damage_type == DamageType.MAGIC else "true"
-			total_damage_added += user.deal_damage(target, calculated_damage, type_str, "proc", is_crit)
+		var type_str = "physical"
+		if damage_type == DamageType.MAGIC: type_str = "magic"
+		elif damage_type == DamageType.TRUE: type_str = "true"
+
+		# Pass a custom skill_context that explicitly allows Life Steal!
+		var proc_context = { "allow_lifesteal": true }
+		
+		# We deal the damage directly, and it will trigger its own lifesteal!
+		total_damage_added += user.deal_damage(target, calculated_damage, type_str, "proc", is_crit, proc_context)
+		last_added_raw = calculated_damage 
 
 	_update_item_ui(user)
 
-func _activate_buff(user: Champion):
-	if !allow_buff: return
-	user.add_status(BUFF_ID, buff_duration, 1, 1, 0.0, "flag")
+func _activate_buff(user: Unit):
+	# 1. Spawn the status node
+	user.add_status(BUFF_ID, buff_duration, 1, 1, 0.0)
 	var status_node = user.status_container.get_node_or_null(BUFF_ID)
+	
 	if status_node:
-		var stat_key = Champion.STAT_MAP.get(buff_stat, "")
+		if typeof(status_node.stats_to_buff) == TYPE_DICTIONARY:
+			status_node.stats_to_buff.clear()
+		
+		var stat_key = Unit.STAT_MAP.get(buff_stat, "")
 		if stat_key != "":
-			status_node.stats_to_buff = { stat_key: buff_amount }
+			status_node.stats_to_buff[stat_key] = buff_amount
+	
 	cooldown_ready_time = Time.get_ticks_msec() + int(buff_cooldown * 1000)
 	user.recalculate_stats()
-	_update_item_ui(user)
 
 func _update_item_ui(user):
 	if user.inventory: user.inventory.request_ui_refresh()
 
-func on_bucket_damage_landed(user: Champion, report: Dictionary):
-
-	if damage_type != DamageType.PHYSICAL: return 
-	
-	if report["type"] == "physical" and last_added_raw > 0:
-		var post_mitigation_contribution = last_added_raw * report.get("ratio", 1.0)
-		total_damage_added += post_mitigation_contribution
-		last_added_raw = 0.0 
-		_update_item_ui(user)
-
 func get_tooltip_extra() -> String:
-	var text = ""
-	if total_damage_added > 0:
-		text += "Damage: %d\n" % int(total_damage_added)
+	var text = "Total Damage: %d\n" % int(total_damage_added)
 	if allow_buff:
 		var current_time = Time.get_ticks_msec()
-		var cd_left = (cooldown_ready_time - current_time) / 1000.0
-		var active_time_assumed = cd_left - (buff_cooldown - buff_duration)
-		
-		if active_time_assumed > 0:
-			text += "[color=green]BUFF DURATION LEFT: %.1f[/color]"%active_time_assumed
-		elif cd_left > 0:
-			text += "[color=red]CD: %.1fs[/color]" % cd_left
+		if current_time < cooldown_ready_time:
+			var cd = (cooldown_ready_time - current_time) / 1000.0
+			text += "[color=red]Buff CD: %.1fs[/color]" % cd
 		else:
 			text += "[color=cyan]Buff Ready[/color]"
-			
 	return text

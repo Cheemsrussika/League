@@ -24,9 +24,7 @@ func on_update(user: Unit, delta: float) -> void:
 		user.heal(heal_amount, null) 
 		healed+=heal_amount
 		time_accumulator -= tick_rate
-func _update_item_ui(user):
-	if user.inventory and user.inventory.has_method("request_ui_refresh"):
-		user.inventory.request_ui_refresh()
+
 
 func get_tooltip_extra() -> String:
 	var text = "\nHealing Done: %d" % healed

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://bu4lmbkd6niin"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_xsw2g"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_aehl0"]
+[ext_resource type="Texture2D" uid="uid://df7kp8u6gt76e" path="res://Icons/StarterItem/40px-Doran's_Blade_item.png" id="2_fatl4"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_plsbn"]
+[ext_resource type="Script" uid="uid://dnywn2qxskb27" path="res://Scripts/Effects/ItemEffect/EffectOnHitDamage.gd" id="3_kbia2"]
+
+[sub_resource type="Resource" id="Resource_7h2lh"]
+script = ExtResource("3_kbia2")
+vs_minion_mult = 1.1
+affects_structures = false
+BUFF_ID = ""
+metadata/_custom_type_script = "uid://dnywn2qxskb27"
+
+[resource]
+script = ExtResource("2_plsbn")
+item_name = "Doran's Blade"
+icon = ExtResource("2_fatl4")
+cost = 450
+stats = {
+"attack_damage": 10.0,
+"health": 80.0,
+"omnivamp": 5.0
+}
+effects = Array[ExtResource("1_xsw2g")]([SubResource("Resource_7h2lh")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

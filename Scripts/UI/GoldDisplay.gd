@@ -1,4 +1,4 @@
-extends Label
+extends RichTextLabel
 
 var champion: Champion
 
@@ -24,4 +24,6 @@ func _setup_connection():
 		print("Error: Champion is missing 'gold_updated' signal")
 
 func _on_gold_updated(amount: float):
-	text = "GOLD: %.0f" % [amount]
+	var gold_icon = StatStyle.get_icon_tag("gold", 18)
+	var gold_color = StatStyle.get_color("gold")
+	text = "[center]Total Gold: %s [color=%s]%d Gold[/color][/center]\n" % [gold_icon, gold_color, amount]

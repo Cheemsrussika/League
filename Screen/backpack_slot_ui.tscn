@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmnnin1pp8xmg"]
+
+[ext_resource type="Script" uid="uid://ctdydxl4x6byw" path="res://Screen/backpack_slot_ui.gd" id="1_jnw7w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jnw7w"]
+bg_color = Color(0.6, 0.6, 0.6, 0.38039216)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.9647059, 0.7764706, 0.09411765, 0.59607846)
+expand_margin_top = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jnw7w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_87x0w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l18ej"]
+
+[node name="BackpackSlotUI" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 80.0
+offset_bottom = 80.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_jnw7w")
+script = ExtResource("1_jnw7w")
+
+[node name="IconTexture" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+expand_mode = 1
+
+[node name="AmountLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(30, 10)
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "12"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jnw7w")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_87x0w")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l18ej")

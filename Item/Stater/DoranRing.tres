@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://dueq1sw6i0oft"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_cf16e"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_2svgs"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_7rtcr"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="3_x6uxq"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="4_ep3tv"]
+[ext_resource type="Texture2D" uid="uid://b1tctbrusqlxa" path="res://Icons/StarterItem/40px-Doran's_Ring_item.png" id="5_reaql"]
+
+[sub_resource type="Resource" id="Resource_03c5e"]
+script = ExtResource("3_x6uxq")
+stat_type = 10
+flat_amount = 1.0
+requires_mana = true
+alternate_stat_type = 1
+alternate_flat_amount = 0.45
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_8rilu"]
+script = ExtResource("4_ep3tv")
+status_id = "doran_ring"
+max_stacks = 1
+stack_duration = 5.0
+trigger_category = null
+deal_damage_on_max = null
+stats_per_stack = {
+"Mana_Regen": 2.0,
+"health_regen": 1.5
+}
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[resource]
+script = ExtResource("2_2svgs")
+item_name = "Doran's Ring"
+icon = ExtResource("5_reaql")
+cost = 450
+stats = {
+"ability_power": 18.0,
+"health": 80.0
+}
+effects = Array[ExtResource("1_cf16e")]([SubResource("Resource_03c5e"), SubResource("Resource_8rilu")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=12 format=3 uid="uid://di7e3456o25u6"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_eg0rd"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_ex7wt"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_nvm4c"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="3_kxoxe"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="4_h02qv"]
+[ext_resource type="Texture2D" uid="uid://gkhrdimj7r1j" path="res://Icons/Legend Items/40px-Phantom_Dancer_item.png" id="5_viwmh"]
+[ext_resource type="Resource" uid="uid://ciseabtuq4b50" path="res://Item/Epic/Zeal.tres" id="7_sy2c8"]
+[ext_resource type="Resource" uid="uid://dqiqf0h3qihyj" path="res://Item/Epic/Rectrix.tres" id="8_l52ch"]
+
+[sub_resource type="Resource" id="Resource_u8ahd"]
+script = ExtResource("2_ex7wt")
+stat = 8
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_6npif"]
+script = ExtResource("3_kxoxe")
+stat_type = 8
+scaling_factors = Array[ExtResource("2_ex7wt")]([SubResource("Resource_u8ahd")])
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_cr5m8"]
+script = ExtResource("4_h02qv")
+status_id = "Spectral Waltz"
+max_stacks = 5
+stack_duration = 3.5
+trigger_category = 1
+deal_damage_on_max = null
+stats_per_stack = {
+"attack_speed": 0.07
+}
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[resource]
+script = ExtResource("2_nvm4c")
+item_tier = 4
+item_name = "Phantom Dancer"
+icon = ExtResource("5_viwmh")
+cost = 2800
+recipe = Array[ExtResource("2_nvm4c")]([ExtResource("7_sy2c8"), ExtResource("8_l52ch")])
+stats = {
+"attack_damage": 25.0,
+"attack_speed": 0.3,
+"crit_chance": 20.0
+}
+effects = Array[ExtResource("1_eg0rd")]([SubResource("Resource_6npif"), SubResource("Resource_cr5m8")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,58 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=12 format=3 uid="uid://y24rdnk8ofxf"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_mfcrk"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_8q7fu"]
+[ext_resource type="Texture2D" uid="uid://cfhb5fqvr1vem" path="res://Icons/Legend Items/40px-Riftmaker_item.png" id="2_ts7uq"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="2_tudxu"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_r2t87"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="4_g6h4g"]
+[ext_resource type="Resource" uid="uid://cksugq2a4v8o1" path="res://Item/Epic/HauntingGuise.tres" id="5_cor5a"]
+[ext_resource type="Resource" uid="uid://83mrwjhg4cmh" path="res://Item/Epic/FiendishCodex.tres" id="6_r2t87"]
+
+[sub_resource type="Resource" id="Resource_g6h4g"]
+script = ExtResource("2_tudxu")
+status_id = "riftmaker_ramp"
+max_stacks = 8
+stack_duration = null
+trigger_category = null
+deal_damage_on_max = null
+stats_per_stack = {
+"dmg_dealt_modifier": 0.01
+}
+stats_at_max = {
+"omnivamp": 8.0
+}
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
+
+[sub_resource type="Resource" id="Resource_07jqr"]
+script = ExtResource("3_r2t87")
+stat = 0
+scale_amount = 0.02
+mode = 2
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_y2eeo"]
+script = ExtResource("4_g6h4g")
+stat_type = 6
+scaling_factors = Array[ExtResource("3_r2t87")]([SubResource("Resource_07jqr")])
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("2_8q7fu")
+item_tier = 4
+item_name = "RiftMaker"
+icon = ExtResource("2_ts7uq")
+cost = 3100
+recipe = Array[ExtResource("2_8q7fu")]([ExtResource("5_cor5a"), ExtResource("6_r2t87")])
+stats = {
+"ability_haste": 15.0,
+"ability_power": 70.0,
+"health": 350.0
+}
+effects = Array[ExtResource("1_mfcrk")]([SubResource("Resource_g6h4g"), SubResource("Resource_y2eeo")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -11,6 +11,8 @@
 script = ExtResource("2_vurxu")
 aura_range = 500.0
 aura_power = 0.2
+id = "Abyssal"
+is_unique = true
 metadata/_custom_type_script = "uid://cm12ioael5m4s"
 
 [resource]

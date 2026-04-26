@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=12 format=3 uid="uid://c5afbi06y7ufg"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_lw47v"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_dxif0"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_wy23c"]
+[ext_resource type="Script" uid="uid://cl7ixw6i7nquq" path="res://Scripts/Effects/ItemEffect/EffectSheen.gd" id="3_wkxm4"]
+[ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="4_l50m6"]
+[ext_resource type="Texture2D" uid="uid://c754t4eu6cktv" path="res://Icons/Legend Items/40px-Trinity_Force_item.png" id="6_n254k"]
+[ext_resource type="Resource" uid="uid://b5iys7c072tbi" path="res://Item/Epic/Sheen.tres" id="8_bxyh4"]
+[ext_resource type="Resource" uid="uid://t6kyb7sdshu" path="res://Item/Epic/Phage.tres" id="9_bm718"]
+[ext_resource type="Resource" uid="uid://bmbihwpvfepda" path="res://Item/Epic/HeartboundAxe.tres" id="10_e0u7d"]
+
+[sub_resource type="Resource" id="Resource_18cc4"]
+script = ExtResource("2_dxif0")
+scale_amount = 2.0
+mode = 1
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_yuke3"]
+script = ExtResource("3_wkxm4")
+damage_scaling = Array[ExtResource("2_dxif0")]([SubResource("Resource_18cc4")])
+metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
+
+[resource]
+script = ExtResource("2_wy23c")
+item_tier = 4
+item_name = "Tritiny Force"
+icon = ExtResource("6_n254k")
+cost = 3333
+recipe = Array[ExtResource("2_wy23c")]([ExtResource("8_bxyh4"), ExtResource("9_bm718"), ExtResource("10_e0u7d")])
+stats = {
+"ability_haste": 15.0,
+"attack_damage": 36.0,
+"attack_speed": 0.3,
+"health": 333.0
+}
+effects = Array[ExtResource("1_lw47v")]([SubResource("Resource_yuke3")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

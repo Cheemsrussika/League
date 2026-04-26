@@ -1,22 +1,25 @@
 extends ItemEffect
 class_name EffectStatMod
 
-# --- ENUMS ---
-enum ScalingMode { TOTAL, BASE, BONUS }
-
 @export_group("Stat Settings")
 @export var stat_type: Champion.Stat      
 @export var flat_amount: float = 0.0   
 
 @export_group("Scaling Settings")
-@export var scaling_factor: float = 0.0   
-@export var scaling_source: Champion.Stat 
-@export var scaling_mode: ScalingMode = ScalingMode.TOTAL
+@export var scaling_factors: Array[ScalingFactor] = []
+
+@export_group("Target Scaling Settings")
+## Check this ONLY if this item scales off an enemy's stats!
+
+## How long the stats last after you stop hitting them.
+@export var combat_buff_duration: float = 3.0
 
 @export_group("Resource Conversion")
 @export var requires_mana: bool = false
 @export var alternate_stat_type: Champion.Stat 
 @export var alternate_flat_amount: float = 0.0
+
+var active_target: Unit = null
 
 func on_stat_calculation(user: Node2D) -> void:
 	if not user is Champion: return
@@ -30,21 +33,39 @@ func on_stat_calculation(user: Node2D) -> void:
 		if current_stat_to_give == null: 
 			return
 
-	# 2. Safety check mapping
 	if not Champion.STAT_MAP.has(current_stat_to_give): return
 	var target_stat_string = Champion.STAT_MAP[current_stat_to_give]
-	if scaling_factor != 0.0:
-		if Champion.STAT_MAP.has(scaling_source):
-			var source_key = Champion.STAT_MAP[scaling_source]
-			var source_value = 0.0
-			match scaling_mode:
-				ScalingMode.TOTAL:
-					source_value = user.get_total(scaling_source)
-				ScalingMode.BASE:
-					source_value = user.base_stats.get(source_key, 0.0)
-				ScalingMode.BONUS:
-					source_value = user.bonus_stats.get(source_key, 0.0)
-			final_amount += source_value * scaling_factor
+	
+	for factor in scaling_factors:
+		final_amount += factor.calculate_value(user, active_target)
 
 	if not is_zero_approx(final_amount):
 		user.modify_stat(target_stat_string, final_amount)
+
+func on_attack(user: Unit, context: Dictionary) -> void:
+	# --- SMART PERFORMANCE CHECK ---
+	# Automatically scan our ScalingFactors. 
+	# If NONE of them are looking at the target, we abort to save performance!
+	var needs_target = false
+	for factor in scaling_factors:
+		if factor.source == 1: 
+			needs_target = true
+			break
+			
+	if not needs_target: return 
+	
+	# --- PROCEED WITH STAT STEALING ---
+	var target = context.get("target")
+	
+	if is_instance_valid(target) and target is Unit:
+		active_target = target
+		
+		if user.has_method("recalculate_stats"):
+			user.recalculate_stats()
+			
+		user.get_tree().create_timer(combat_buff_duration).timeout.connect(func():
+			if active_target == target: 
+				active_target = null
+				if is_instance_valid(user) and user.has_method("recalculate_stats"):
+					user.recalculate_stats()
+		)

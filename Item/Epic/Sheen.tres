@@ -1,17 +1,21 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://b5iys7c072tbi"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=9 format=3 uid="uid://b5iys7c072tbi"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_8yws4"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_53e0s"]
 [ext_resource type="Script" uid="uid://cl7ixw6i7nquq" path="res://Scripts/Effects/ItemEffect/EffectSheen.gd" id="2_em6bm"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_wpoiu"]
 [ext_resource type="Texture2D" uid="uid://buvqgrst7b4je" path="res://Icons/Epic Items/40px-Sheen_item.png" id="3_jta4a"]
 [ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="3_ntpcc"]
 
+[sub_resource type="Resource" id="Resource_1jcoh"]
+script = ExtResource("2_wpoiu")
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
 [sub_resource type="Resource" id="Resource_ntpcc"]
 script = ExtResource("2_em6bm")
-scaling_stats = Array[int]([0])
-scaling_ratios = Array[float]([2.0])
-restore_stats = Array[int]([])
-restore_ratios = Array[float]([])
+damage_scaling = Array[ExtResource("2_wpoiu")]([SubResource("Resource_1jcoh")])
+id = "Sheen"
+is_unique = true
 metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
 
 [resource]

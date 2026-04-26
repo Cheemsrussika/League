@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://betbe4m7utd5l"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=13 format=3 uid="uid://betbe4m7utd5l"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_f0hxd"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_2f1do"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_m8we3"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_suxct"]
 [ext_resource type="Script" uid="uid://11l2btwwi6vp" path="res://Scripts/Effects/ItemEffect/EffectShield.gd" id="3_2f1do"]
@@ -12,16 +13,18 @@
 [sub_resource type="Resource" id="Resource_7ppa3"]
 script = ExtResource("2_suxct")
 stat_type = 5
-scaling_factor = 0.5
-scaling_source = 5
-scaling_mode = 1
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[sub_resource type="Resource" id="Resource_2f1do"]
+script = ExtResource("2_2f1do")
+stat = 0
+scale_amount = 0.6
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
 
 [sub_resource type="Resource" id="Resource_xofiu"]
 script = ExtResource("3_2f1do")
-use_level_scaling = false
-use_range_difference = false
-scale_percent_max_hp = 0.6
+is_lifeline = true
+scalings = Array[ExtResource("2_2f1do")]([SubResource("Resource_2f1do")])
 id = "LifeLine"
 is_unique = true
 cooldown = 90.0

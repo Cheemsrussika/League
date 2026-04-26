@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=10 format=3 uid="uid://bw3151qm17dy2"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_13n4i"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_b65e3"]
+[ext_resource type="Texture2D" uid="uid://cdoxjfvblc41i" path="res://Icons/Legend Items/40px-Lord_Dominik's_Regards_item.png" id="2_tgajs"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_tv4nu"]
+[ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="3_gwwdc"]
+[ext_resource type="Resource" uid="uid://d4kuvr38mim0l" path="res://Item/Epic/LastWhisper.tres" id="6_iu8vs"]
+[ext_resource type="Resource" uid="uid://bvn4rojfkhj1s" path="res://Item/Epic/NoonQuiver.tres" id="7_jhh1u"]
+
+[sub_resource type="Resource" id="Resource_tv4nu"]
+script = ExtResource("2_tv4nu")
+stat = 0
+scale_amount = 0.0001
+source = 1
+mode = 2
+max_value = 0.15
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
+[sub_resource type="Resource" id="Resource_iu8vs"]
+script = ExtResource("3_gwwdc")
+stat_type = 31
+scaling_factors = Array[ExtResource("2_tv4nu")]([SubResource("Resource_tv4nu")])
+combat_buff_duration = 0.2
+id = "Dominik"
+is_unique = true
+metadata/_custom_type_script = "uid://0yr3fmnumy7u"
+
+[resource]
+script = ExtResource("2_b65e3")
+item_tier = 4
+item_name = "Lord Dominik's Regard"
+icon = ExtResource("2_tgajs")
+cost = 3300
+recipe = Array[ExtResource("2_b65e3")]([ExtResource("6_iu8vs"), ExtResource("7_jhh1u")])
+effects = Array[ExtResource("1_13n4i")]([SubResource("Resource_iu8vs")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://c5wm3fo1jljrm"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_0qath"]
+[ext_resource type="Texture2D" uid="uid://cqvpktdvw0t1h" path="res://Icons/Legend Items/IE.png" id="2_4rxxa"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_tkfc5"]
+[ext_resource type="Resource" uid="uid://bvkgk3b7dqhb" path="res://Item/Basic/B.F.Sword.tres" id="4_ru1e7"]
+[ext_resource type="Resource" uid="uid://dtu1xvq34a4pa" path="res://Item/Basic/CloakOfAgility.tres" id="5_5cic5"]
+[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="6_ghxig"]
+
+[resource]
+script = ExtResource("2_tkfc5")
+item_tier = 4
+item_name = "Infinity Edge"
+icon = ExtResource("2_4rxxa")
+cost = 3500
+recipe = Array[ExtResource("2_tkfc5")]([ExtResource("4_ru1e7"), ExtResource("5_5cic5"), ExtResource("6_ghxig")])
+stats = {
+"attack_damage": 75.0,
+"crit_chance": 25.0,
+"crit_damage": 0.35
+}
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

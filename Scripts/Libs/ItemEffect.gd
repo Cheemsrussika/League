@@ -31,38 +31,40 @@ func get_tooltip_extra() -> String:
 	if tracker.procs:
 		text+=str("Time procs:%.1f\n"%[tracker.procs])
 	return text
-	
-func on_equip(user: Champion) -> void:
+func _update_item_ui(user):
+	if user.inventory and user.inventory.has_method("request_ui_refresh"):
+		user.inventory.request_ui_refresh()
+func on_equip(_user: Champion) -> void:
 	pass
 
-func on_unequip(user: Champion) -> void:
+func on_unequip(_user: Champion) -> void:
 	pass
 
-func on_attack(user: Unit, context: Dictionary) -> void:
+func on_attack(_user: Unit, _context: Dictionary) -> void:
 	pass
 
-func on_hit_received(user: Unit, context: Dictionary) -> void:
+func on_hit_received(_user: Unit, _context: Dictionary) -> void:
 	pass
 
-func on_kill(user: Unit, context: Dictionary) -> void:
+func on_kill(_user: Unit, _context: Dictionary) -> void:
 	pass
-func on_update(user: Unit, delta: float) -> void:
+func on_update(_user: Unit, _delta: float) -> void:
 	pass
-func on_active(user: Unit, context: Dictionary) -> void:
+func on_active(_user: Unit, _context: Dictionary) -> void:
 	pass
-func on_ability_cast(user: Champion, context: Dictionary) -> void:
+func on_ability_cast(_user: Champion, _context: Dictionary) -> void:
 	pass
-func on_incoming_damage_calculation(user: Champion, damage: float, type: String) -> float:
+func on_incoming_damage_calculation(_user: Champion, damage: float, _type: String) -> float:
 	return damage
-func on_stat_calculation(unit):
+func on_stat_calculation(_unit):
 	pass
-func on_calculate_hit_damage(unit, context):
+func on_calculate_hit_damage(_unit, _context):
 	pass
-func on_hit(user: Unit, context: Dictionary) -> void:
+func on_hit(_user: Unit, _context: Dictionary) -> void:
 	pass
-func on_damage_dealt(user: Unit, context: Dictionary):
+func on_damage_dealt(_user: Unit, _context: Dictionary):
 	pass
-func on_attack_hit_post_mitigation(user:Unit,context:Dictionary):
+func on_attack_hit_post_mitigation(_user:Unit,_context:Dictionary):
 	pass
 
 	

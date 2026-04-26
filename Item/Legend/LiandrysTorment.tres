@@ -20,11 +20,18 @@ metadata/_custom_type_script = "uid://do21qcd0yt5ih"
 script = ExtResource("3_c3yb2")
 status_id = "SUFFERING"
 max_stacks = 3
-trigger_phantom_on_max = false
+stack_duration = null
+trigger_category = null
+deal_damage_on_max = null
 stats_per_stack = {
 "dmg_dealt_modifier": 0.02
 }
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
 id = "TORMENT"
+is_unique = null
+cooldown = null
 metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
 
 [resource]

@@ -3,7 +3,7 @@ extends PanelContainer
 signal hovered(slot_instance)
 signal unhovered()
 @onready var icon_rect = $IconTexture 
-
+signal slot_clicked(index)
 var stored_item: ItemData = null
 var slot_index: int = -1 
 
@@ -61,9 +61,11 @@ func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			sell_item()
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			slot_clicked.emit(slot_index)
 func sell_item():
 	if stored_item == null: return
-	
+	if stored_item.is_locked(): return
 	var player = GameManager.player_champion
 	if not is_instance_valid(player): return
 	var in_shop_zone = false

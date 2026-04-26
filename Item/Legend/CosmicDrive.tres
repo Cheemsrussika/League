@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="ItemData" load_steps=11 format=3 uid="uid://de2t6fmkkifc2"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=12 format=3 uid="uid://de2t6fmkkifc2"]
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_ll8qd"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_8ndq8"]
 [ext_resource type="Script" uid="uid://0yr3fmnumy7u" path="res://Scripts/Effects/ItemEffect/EffectStats.gd" id="2_60ogb"]
-[ext_resource type="Script" uid="uid://61k1qccw6je8" path="res://Scripts/Effects/ItemEffect/OnHitSpeed.gd" id="3_rxuv4"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_rxuv4"]
 [ext_resource type="Texture2D" uid="uid://cjuemoe0hs4db" path="res://Icons/Legend Items/40px-Cosmic_Drive_item.png" id="4_a0lqp"]
+[ext_resource type="Script" uid="uid://bmrpdt1qsmw8s" path="res://Scripts/Effects/ItemEffect/EffectStacking.gd" id="4_rxuv4"]
 [ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="6_qtueg"]
 [ext_resource type="Resource" uid="uid://b8o17p74qsy16" path="res://Item/Epic/AetherWisp.tres" id="7_3q2oi"]
 [ext_resource type="Resource" uid="uid://83mrwjhg4cmh" path="res://Item/Epic/FiendishCodex.tres" id="8_yhhh7"]
@@ -12,18 +13,23 @@
 [sub_resource type="Resource" id="Resource_3fcqn"]
 script = ExtResource("2_60ogb")
 stat_type = 8
-scaling_factor = 0.04
-scaling_source = 8
 metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 
-[sub_resource type="Resource" id="Resource_apaeg"]
-script = ExtResource("3_rxuv4")
-trigger_type = 1
-speed_bonus_on_kill = 0.0
-duration = 4.0
-id = "SPELLDANCE"
-is_unique = true
-metadata/_custom_type_script = "uid://61k1qccw6je8"
+[sub_resource type="Resource" id="Resource_a0lqp"]
+script = ExtResource("4_rxuv4")
+status_id = null
+max_stacks = null
+stack_duration = null
+trigger_category = null
+deal_damage_on_max = null
+stats_per_stack = null
+stats_at_max = null
+dmg_increase_per_stack = null
+max_dmg_increase = null
+id = null
+is_unique = null
+cooldown = null
+metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
 
 [resource]
 script = ExtResource("2_8ndq8")
@@ -37,5 +43,5 @@ stats = {
 "ability_power": 70.0,
 "health": 350.0
 }
-effects = Array[ExtResource("1_ll8qd")]([SubResource("Resource_3fcqn"), SubResource("Resource_apaeg")])
+effects = Array[ExtResource("1_ll8qd")]([SubResource("Resource_3fcqn"), SubResource("Resource_a0lqp")])
 metadata/_custom_type_script = "uid://76cpvgsppjvf"

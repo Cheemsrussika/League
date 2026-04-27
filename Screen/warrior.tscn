@@ -37,7 +37,7 @@ scale = Vector2(0.34375003, 0.3359375)
 texture = ExtResource("3_7o51j")
 
 [node name="InventoryComponent" parent="." index="2" groups=["player"]]
-max_slots = null
+max_slots = 10
 
 [node name="AttackRange" type="Area2D" parent="." index="3"]
 collision_layer = 8

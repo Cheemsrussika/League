@@ -1,152 +1,31 @@
-[gd_scene load_steps=129 format=3 uid="uid://b0a1owia3oyvo"]
+[gd_scene load_steps=34 format=3 uid="uid://b0a1owia3oyvo"]
 
 [ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
 [ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
-[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="2_ky6x0"]
-[ext_resource type="Resource" uid="uid://b2p1o7bhugx2m" path="res://Item/Basic/RubyCrystal.tres" id="3_bfvbo"]
+[ext_resource type="PackedScene" uid="uid://das0xecbq73o8" path="res://Screen/forge_panel.tscn" id="3_oo1lh"]
+[ext_resource type="PackedScene" uid="uid://nhff3k7as7cr" path="res://Screen/shop_panel.tscn" id="3_qhspy"]
 [ext_resource type="Script" uid="uid://dtgrxjbcvbpgb" path="res://Scripts/UI/StatDisplayUI.gd" id="5_c08ud"]
 [ext_resource type="Script" uid="uid://cwjqrmdplxmtp" path="res://Scripts/UI/GoldDisplay.gd" id="8_x8w0l"]
 [ext_resource type="Script" uid="uid://c2uhtaydlbtft" path="res://Scripts/UI/ItemSlots/InventoryUI.gd" id="9_f5qwj"]
-[ext_resource type="Resource" uid="uid://t6kyb7sdshu" path="res://Item/Epic/Phage.tres" id="9_opapx"]
 [ext_resource type="PackedScene" uid="uid://dh1kg7jb5q3p1" path="res://Screen/ItemSlot.tscn" id="10_ky6x0"]
-[ext_resource type="Script" uid="uid://ckx25w4bojv7t" path="res://Scripts/Shop/shop_panel.gd" id="11_bfvbo"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="12_pqdyi"]
-[ext_resource type="PackedScene" uid="uid://dbmc5700nwao0" path="res://Screen/ItemButton.tscn" id="13_fwvyv"]
-[ext_resource type="FontFile" uid="uid://byogv8vles4k1" path="res://League.otf" id="13_pqdyi"]
-[ext_resource type="Resource" uid="uid://emtayeu5gx1h" path="res://Item/Basic/AmpliftingTome.tres" id="14_oo1lh"]
-[ext_resource type="Resource" uid="uid://bvkgk3b7dqhb" path="res://Item/Basic/B.F.Sword.tres" id="15_lh7kg"]
-[ext_resource type="Resource" uid="uid://cicc0gajkf6vy" path="res://Item/Basic/BlastingWand.tres" id="16_4yv0o"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="12_c2424"]
+[ext_resource type="Resource" uid="uid://12wnypp1l3bv" path="res://Item/Boots/BerserkerGreaves.tres" id="13_c2424"]
+[ext_resource type="Resource" uid="uid://dvlv75lxkf2mb" path="res://Item/Legend/AbyssalMask.tres" id="15_n1fyg"]
 [ext_resource type="PackedScene" uid="uid://b8t4l5fufhnkd" path="res://Screen/Shop.tscn" id="16_fwvyv"]
-[ext_resource type="Resource" uid="uid://dtu1xvq34a4pa" path="res://Item/Basic/CloakOfAgility.tres" id="17_c2424"]
-[ext_resource type="Resource" uid="uid://bhofbu1d3ehs4" path="res://Item/Basic/ClothArmor.tres" id="18_lh7kg"]
-[ext_resource type="Resource" uid="uid://j4bwmiv0beuq" path="res://Item/Basic/Dagger.tres" id="19_4yv0o"]
-[ext_resource type="Resource" uid="uid://tvoqqved45nb" path="res://Item/Basic/FaerieCharm.tres" id="20_c2424"]
-[ext_resource type="Resource" uid="uid://bvbx3wwcnos83" path="res://Item/Basic/GlowingMote.tres" id="21_tepqr"]
-[ext_resource type="Resource" uid="uid://bhemcjx4ip1pb" path="res://Item/Basic/NeedlesslyLargeRod.tres" id="22_n1fyg"]
-[ext_resource type="Resource" uid="uid://cpd6ls73e25ay" path="res://Item/Basic/NullMagicMantle.tres" id="23_cqxy2"]
-[ext_resource type="Resource" uid="uid://b06nc3sdi6utb" path="res://Item/Basic/Pickaxe.tres" id="24_w13fg"]
-[ext_resource type="Resource" uid="uid://c0lsbtuebutnd" path="res://Item/Basic/RejuvenationBead.tres" id="25_w13fg"]
-[ext_resource type="Resource" uid="uid://ddj1rhowauinx" path="res://Item/Basic/SapphireCrystal.tres" id="26_l15fi"]
-[ext_resource type="Resource" uid="uid://l8v8o36i0asj" path="res://Item/Boots/LeatherBoot.tres" id="27_qwdbk"]
-[ext_resource type="Resource" uid="uid://12wnypp1l3bv" path="res://Item/Boots/BerserkerGreaves.tres" id="28_k2oju"]
-[ext_resource type="Resource" uid="uid://ilej0hp42lwb" path="res://Item/Boots/SwiftnessBoot.tres" id="29_3aoee"]
-[ext_resource type="Resource" uid="uid://blvndo0ism4fp" path="res://Item/Epic/RecurveBow.tres" id="30_jkpe8"]
-[ext_resource type="Resource" uid="uid://dfw5fq3o5i0j4" path="res://Item/Boots/IoniaBootOfLucidity.tres" id="30_q7nm4"]
-[ext_resource type="Resource" uid="uid://cfe7ks0fdixch" path="res://Item/Boots/MecurysTread.tres" id="31_11frw"]
-[ext_resource type="Resource" uid="uid://rnw0a64y1qq1" path="res://Item/Epic/VampiricScepter.tres" id="31_kopp8"]
-[ext_resource type="Resource" uid="uid://bj0jju3mvggyd" path="res://Item/Legend/BoRK.tres" id="32_cfqj6"]
-[ext_resource type="Resource" uid="uid://bsd2midqtbnvg" path="res://Item/Boots/PlatedSteelCaps.tres" id="32_jkpe8"]
-[ext_resource type="Resource" uid="uid://4mnyc0u8hcjs" path="res://Item/Epic/GiantsBelt.tres" id="33_ghclr"]
-[ext_resource type="Resource" uid="uid://cun1bhbdw7vrv" path="res://Item/Boots/SorcerersShoes.tres" id="33_kopp8"]
-[ext_resource type="Resource" uid="uid://bwvat6atcwi88" path="res://Item/Legend/Warmogs.tres" id="34_8i3vq"]
-[ext_resource type="Resource" uid="uid://vu42dfuc6g14" path="res://Item/Epic/BamisCinder.tres" id="35_0cdmu"]
-[ext_resource type="Resource" uid="uid://b0t8vgxtmvl4f" path="res://Item/Epic/BrambleVest.tres" id="36_sr40m"]
-[ext_resource type="Resource" uid="uid://cbqxtl71vdy16" path="res://Item/Legend/SunfireAegis.tres" id="37_4da42"]
-[ext_resource type="Resource" uid="uid://cnxlipbdml3m5" path="res://Item/Legend/BlackCleaver.tres" id="38_l1xab"]
-[ext_resource type="Resource" uid="uid://1hoggkg1prbt" path="res://Item/Epic/KindleGem.tres" id="39_hc7ry"]
+[ext_resource type="PackedScene" uid="uid://db7u67k2jtjjj" path="res://Screen/forge.tscn" id="20_lh7kg"]
+[ext_resource type="Resource" uid="uid://vu42dfuc6g14" path="res://Item/Epic/BamisCinder.tres" id="24_vdrp4"]
+[ext_resource type="PackedScene" uid="uid://dlv118fpxky34" path="res://Screen/inspect_panel.tscn" id="25_tepqr"]
 [ext_resource type="Script" uid="uid://cdqw43cfvb8kb" path="res://Scripts/UI/ItemSlots/item_tooltip.gd" id="40_2ix4f"]
-[ext_resource type="Resource" uid="uid://ciseabtuq4b50" path="res://Item/Epic/Zeal.tres" id="40_hc7ry"]
-[ext_resource type="Resource" uid="uid://jels4131atyy" path="res://Item/Epic/WingedMoonplate.tres" id="41_hy0ny"]
-[ext_resource type="Resource" uid="uid://duengeiu1h2l0" path="res://Item/Epic/WardensMail.tres" id="42_2h5ek"]
-[ext_resource type="Resource" uid="uid://cvjp2l6isdf1k" path="res://Item/Legend/Nashor'sTooth.tres" id="43_2scoa"]
-[ext_resource type="Resource" uid="uid://b2c8p5wki6fdf" path="res://Item/Epic/Tunneler.tres" id="44_1nw2w"]
-[ext_resource type="Resource" uid="uid://b8o17p74qsy16" path="res://Item/Epic/AetherWisp.tres" id="45_u407m"]
-[ext_resource type="Resource" uid="uid://c76wymbcjw2dd" path="res://Item/Epic/BandleGlassMirror.tres" id="46_vho3s"]
 [ext_resource type="PackedScene" uid="uid://ptaf7yvgd4q7" path="res://Screen/Minion.tscn" id="47_l1xab"]
-[ext_resource type="Resource" uid="uid://j5c88js16ijc" path="res://Item/Epic/BlightingJewel.tres" id="47_vskhq"]
-[ext_resource type="Resource" uid="uid://caa8em6kaon6n" path="res://Item/Epic/ForbiddenIdol.tres" id="48_mvecn"]
-[ext_resource type="Resource" uid="uid://7frorhb4bnmg" path="res://Item/Epic/CatalystOfAeon.tres" id="49_phy30"]
-[ext_resource type="Resource" uid="uid://d4khfbq8depp3" path="res://Item/Legend/RodOfAge.tres" id="50_dpq2r"]
-[ext_resource type="Resource" uid="uid://dhotscub3g83g" path="res://Item/Epic/theBrutalizer.tres" id="51_v3bt6"]
-[ext_resource type="Resource" uid="uid://bb3qkihocwasx" path="res://Item/Epic/CaulfieldsWarhammer.tres" id="52_v74rd"]
-[ext_resource type="Resource" uid="uid://tesngflvqw88" path="res://Item/Epic/ExecutionersCalling.tres" id="53_1gd0u"]
-[ext_resource type="Resource" uid="uid://sqyxsria5ulb" path="res://Item/Epic/SteelSigil.tres" id="54_2vv1j"]
-[ext_resource type="Resource" uid="uid://83mrwjhg4cmh" path="res://Item/Epic/FiendishCodex.tres" id="55_73usx"]
-[ext_resource type="Resource" uid="uid://c3q8hki3rgnpr" path="res://Item/Epic/GlacialBuckler.tres" id="56_1m38t"]
-[ext_resource type="Resource" uid="uid://bmbihwpvfepda" path="res://Item/Epic/HeartboundAxe.tres" id="57_6xwof"]
-[ext_resource type="Resource" uid="uid://bndfuylav5ivl" path="res://Item/Epic/HexDrinker.tres" id="58_6xwof"]
-[ext_resource type="Resource" uid="uid://betbe4m7utd5l" path="res://Item/Legend/SteraksGage.tres" id="59_fnd0l"]
-[ext_resource type="Resource" uid="uid://dh0hwda8anp1x" path="res://Item/Epic/SpectresCowl.tres" id="60_xxp4e"]
-[ext_resource type="Resource" uid="uid://1vd2lkrpdy6n" path="res://Item/Epic/HextechAlternator.tres" id="61_8cyjb"]
-[ext_resource type="Resource" uid="uid://cksugq2a4v8o1" path="res://Item/Epic/HauntingGuise.tres" id="62_gyato"]
-[ext_resource type="Resource" uid="uid://b6o0cqp4qm3ud" path="res://Item/Epic/FatedAshes.tres" id="63_kfw8r"]
-[ext_resource type="Resource" uid="uid://tkxp1snombks" path="res://Item/Epic/SerratedDirk.tres" id="64_87cmq"]
-[ext_resource type="Resource" uid="uid://d4kuvr38mim0l" path="res://Item/Epic/LastWhisper.tres" id="65_rld22"]
 [ext_resource type="PackedScene" uid="uid://b15dqfi6udv6p" path="res://Screen/enemy_champion.tscn" id="66_6xwof"]
-[ext_resource type="Resource" uid="uid://dc1y3q3k7kfei" path="res://Item/Epic/LostChapter.tres" id="66_rld22"]
-[ext_resource type="Resource" uid="uid://cllonhjofmq3g" path="res://Item/Epic/NegatronCloak.tres" id="67_1sylu"]
-[ext_resource type="Resource" uid="uid://bvn4rojfkhj1s" path="res://Item/Epic/NoonQuiver.tres" id="68_ns61s"]
-[ext_resource type="Resource" uid="uid://dqiqf0h3qihyj" path="res://Item/Epic/Rectrix.tres" id="69_j2xt6"]
-[ext_resource type="Resource" uid="uid://batsdjv2308jp" path="res://Item/Epic/ScoutsSlingshot.tres" id="70_ns61s"]
-[ext_resource type="Resource" uid="uid://dpiuc4su5pfuq" path="res://Item/Legend/YuntalWildArrow.tres" id="71_j2xt6"]
-[ext_resource type="Resource" uid="uid://b5iys7c072tbi" path="res://Item/Epic/Sheen.tres" id="72_yh16q"]
-[ext_resource type="Resource" uid="uid://bokhv2ehnaa67" path="res://Item/Epic/OblivionOrb.tres" id="73_rfvkr"]
-[ext_resource type="Resource" uid="uid://dvlv75lxkf2mb" path="res://Item/Legend/AbyssalMask.tres" id="74_rba1e"]
-[ext_resource type="Resource" uid="uid://5iktadxqw6n" path="res://Item/Legend/Guinsoo'sRageBlade.tres" id="75_y6i5l"]
-[ext_resource type="Resource" uid="uid://dwmol31xw4c4u" path="res://Item/Legend/KrakenSlayer.tres" id="76_gls4v"]
-[ext_resource type="Resource" uid="uid://bjtnw7sxxojxm" path="res://Item/Legend/FrozenHeart.tres" id="77_7qi4f"]
-[ext_resource type="Resource" uid="uid://b1jgquod6absv" path="res://Item/Legend/LiandrysTorment.tres" id="78_fgd83"]
-[ext_resource type="Resource" uid="uid://de2t6fmkkifc2" path="res://Item/Legend/CosmicDrive.tres" id="79_2tlit"]
-[ext_resource type="Resource" uid="uid://6wthl07t5jds" path="res://Item/Legend/LichBane.tres" id="80_1ls0y"]
-[ext_resource type="Resource" uid="uid://botd0k4rxiupq" path="res://Item/Legend/VoidStaff.tres" id="81_mvcfj"]
-[ext_resource type="Resource" uid="uid://jpv8vyn8b4td" path="res://Item/Legend/Morellonomicon.tres" id="82_0lxbk"]
-[ext_resource type="Resource" uid="uid://ce2spmok436t6" path="res://Item/Legend/Mortal Reminder.tres" id="83_0u3gt"]
-[ext_resource type="Resource" uid="uid://djqid12n2y33w" path="res://Item/Legend/BloodThirster.tres" id="84_0u3gt"]
-[ext_resource type="Resource" uid="uid://4o6e1thgumx1" path="res://Item/Legend/ImmortalShieldBow.tres" id="85_x0tvv"]
-[ext_resource type="Resource" uid="uid://d24tbxhlqoosq" path="res://Item/Stater/GuardiansBlade.tres" id="86_6jd7u"]
-[ext_resource type="Resource" uid="uid://bknckavkhsejm" path="res://Item/Stater/Gaurdian'sHammer.tres" id="87_b1bty"]
-[ext_resource type="Resource" uid="uid://dhukl1qu272av" path="res://Item/Stater/Guardian's ORb.tres" id="88_8ues4"]
 [ext_resource type="PackedScene" uid="uid://n7uw18mnnif0" path="res://Screen/tower.tscn" id="88_eco1f"]
-[ext_resource type="Resource" uid="uid://cafs5k7lht7ua" path="res://Item/Legend/IceBorn_Gauntlet.tres" id="89_tvy55"]
-[ext_resource type="Resource" uid="uid://bp63odeuiesc8" path="res://Item/Legend/AtmasReckoning.tres" id="90_4p1hy"]
-[ext_resource type="Resource" uid="uid://cdvb15ce515t2" path="res://Item/Legend/RabadonsDeathCap.tres" id="91_4sdk3"]
-[ext_resource type="Resource" uid="uid://bw3151qm17dy2" path="res://Item/Legend/LordDominicsRegards.tres" id="92_mvadb"]
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="93_7e3vi"]
-[ext_resource type="Resource" uid="uid://bi8ebkgvw6kyv" path="res://Item/Legend/SpearOfShojin.tres" id="93_xpe7d"]
 [ext_resource type="PackedScene" uid="uid://y31re3jctavs" path="res://Screen/monster_camp.tscn" id="93_yuddn"]
 [ext_resource type="Script" uid="uid://d2bj6cdhja8e8" path="res://Scripts/Effects/ItemEffect/EffectSlowOnHit.gd" id="94_cqp54"]
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="94_x0tvv"]
-[ext_resource type="Resource" uid="uid://y24rdnk8ofxf" path="res://Item/Legend/RiftMaker.tres" id="94_xb0f3"]
 [ext_resource type="Script" uid="uid://do21qcd0yt5ih" path="res://Scripts/Effects/ItemEffect/EffectBurn.gd" id="95_cqp54"]
-[ext_resource type="Resource" uid="uid://cx3bjyde3ydji" path="res://Item/Legend/Eclipse.tres" id="95_m37e3"]
-[ext_resource type="Resource" uid="uid://c5afbi06y7ufg" path="res://Item/Legend/TrinityForce.tres" id="96_go6rd"]
-[ext_resource type="Resource" uid="uid://c1h466iyfo0vl" path="res://Item/Stater/Cull.tres" id="97_sc6t1"]
-[ext_resource type="Resource" uid="uid://bu4lmbkd6niin" path="res://Item/Stater/DoranBlade.tres" id="98_2oq8i"]
-[ext_resource type="Resource" uid="uid://dueq1sw6i0oft" path="res://Item/Stater/DoranRing.tres" id="99_pk373"]
 [ext_resource type="PackedScene" uid="uid://bc5xg6ua1upbt" path="res://Screen/minion_spawner.tscn" id="100_fstwv"]
-[ext_resource type="Resource" uid="uid://dd5k56wq0ime4" path="res://Item/Legend/ThornMail.tres" id="100_u6spv"]
-[ext_resource type="Resource" uid="uid://di7e3456o25u6" path="res://Item/Legend/Phantom_Dancer.tres" id="101_6potp"]
-[ext_resource type="Script" uid="uid://xvbotifkgp2n" path="res://Screen/RecipeUi.gd" id="102_v3vd2"]
-[ext_resource type="Script" uid="uid://vnvslwd0qjx8" path="res://Screen/backpack_panel.gd" id="108_vc5ir"]
-[ext_resource type="PackedScene" uid="uid://bmnnin1pp8xmg" path="res://Screen/backpack_slot_ui.tscn" id="109_533d4"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkpe8"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-bg_color = Color(1, 1, 1, 0.20784314)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fwvyv"]
-bg_color = Color(0, 0, 0, 0.50980395)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqdyi"]
-content_margin_left = 6.0
-bg_color = Color(0.6, 0.6, 0.6, 0.21960784)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.6862745, 0.57254905, 0.15686275, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr40m"]
-bg_color = Color(0.6, 0.6, 0.6, 0.6745098)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="PackedScene" uid="uid://0ci8hcfgf7ci" path="res://Screen/backpack_panel.tscn" id="108_8r6bt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11frw"]
 content_margin_left = 2.0
@@ -165,7 +44,20 @@ corner_radius_bottom_left = 5
 expand_margin_left = 15.0
 expand_margin_right = 15.0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vc5ir"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkpe8"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+bg_color = Color(1, 1, 1, 0.20784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr40m"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6745098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh7kg"]
+bg_color = Color(0, 0, 0, 0.50980395)
 
 [sub_resource type="Resource" id="Resource_fstwv"]
 script = ExtResource("94_cqp54")
@@ -191,24 +83,9 @@ warrior_scene = ExtResource("2_i61t5")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 42.0
-offset_top = 50.0
-offset_right = 362.0
-offset_bottom = 590.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_jkpe8")
-script = ExtResource("5_c08ud")
+[node name="WindowUI" type="Node" parent="CanvasLayer"]
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 42.0
-offset_top = 590.0
-offset_right = 363.0
-offset_bottom = 613.0
-bbcode_enabled = true
-fit_content = true
-script = ExtResource("8_x8w0l")
-
-[node name="Control" type="Control" parent="CanvasLayer" groups=["shop_ui"]]
+[node name="Control" type="Control" parent="CanvasLayer/WindowUI"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 439.0
@@ -217,174 +94,65 @@ offset_right = 479.0
 offset_bottom = 90.0
 mouse_filter = 2
 
-[node name="ShopPanel" type="Panel" parent="CanvasLayer/Control" groups=["shop_panel"]]
+[node name="ShopPanel" parent="CanvasLayer/WindowUI/Control" instance=ExtResource("3_qhspy")]
+visible = false
 layout_mode = 0
-offset_left = -76.0
-offset_right = 1099.0
-offset_bottom = 887.0
-script = ExtResource("11_bfvbo")
-all_items = Array[ExtResource("12_pqdyi")]([ExtResource("3_bfvbo"), ExtResource("2_ky6x0"), ExtResource("9_opapx"), ExtResource("14_oo1lh"), ExtResource("15_lh7kg"), ExtResource("16_4yv0o"), ExtResource("17_c2424"), ExtResource("18_lh7kg"), ExtResource("19_4yv0o"), ExtResource("20_c2424"), ExtResource("21_tepqr"), ExtResource("22_n1fyg"), ExtResource("23_cqxy2"), ExtResource("24_w13fg"), ExtResource("25_w13fg"), ExtResource("26_l15fi"), ExtResource("27_qwdbk"), ExtResource("28_k2oju"), ExtResource("29_3aoee"), ExtResource("30_q7nm4"), ExtResource("31_11frw"), ExtResource("32_jkpe8"), ExtResource("33_kopp8"), ExtResource("30_jkpe8"), ExtResource("31_kopp8"), ExtResource("32_cfqj6"), ExtResource("33_ghclr"), ExtResource("34_8i3vq"), ExtResource("35_0cdmu"), ExtResource("36_sr40m"), ExtResource("37_4da42"), ExtResource("38_l1xab"), ExtResource("39_hc7ry"), ExtResource("40_hc7ry"), ExtResource("41_hy0ny"), ExtResource("42_2h5ek"), ExtResource("43_2scoa"), ExtResource("44_1nw2w"), ExtResource("45_u407m"), ExtResource("46_vho3s"), ExtResource("47_vskhq"), ExtResource("48_mvecn"), ExtResource("49_phy30"), ExtResource("50_dpq2r"), ExtResource("51_v3bt6"), ExtResource("52_v74rd"), ExtResource("53_1gd0u"), ExtResource("54_2vv1j"), ExtResource("55_73usx"), ExtResource("56_1m38t"), ExtResource("57_6xwof"), ExtResource("58_6xwof"), ExtResource("59_fnd0l"), ExtResource("60_xxp4e"), ExtResource("61_8cyjb"), ExtResource("62_gyato"), ExtResource("63_kfw8r"), ExtResource("64_87cmq"), ExtResource("65_rld22"), ExtResource("66_rld22"), ExtResource("67_1sylu"), ExtResource("68_ns61s"), ExtResource("69_j2xt6"), ExtResource("70_ns61s"), ExtResource("71_j2xt6"), ExtResource("72_yh16q"), ExtResource("73_rfvkr"), ExtResource("74_rba1e"), ExtResource("75_y6i5l"), ExtResource("76_gls4v"), ExtResource("77_7qi4f"), ExtResource("78_fgd83"), ExtResource("79_2tlit"), ExtResource("80_1ls0y"), ExtResource("81_mvcfj"), ExtResource("82_0lxbk"), ExtResource("83_0u3gt"), ExtResource("84_0u3gt"), ExtResource("85_x0tvv"), ExtResource("86_6jd7u"), ExtResource("87_b1bty"), ExtResource("88_8ues4"), ExtResource("89_tvy55"), ExtResource("90_4p1hy"), ExtResource("91_4sdk3"), ExtResource("92_mvadb"), ExtResource("93_xpe7d"), ExtResource("94_xb0f3"), ExtResource("95_m37e3"), ExtResource("96_go6rd"), ExtResource("97_sc6t1"), ExtResource("98_2oq8i"), ExtResource("99_pk373"), ExtResource("100_u6spv"), ExtResource("101_6potp")])
-shop_slot_scene = ExtResource("13_fwvyv")
+offset_left = -55.0
+offset_right = 1120.0
 
-[node name="TooltipLabel" type="RichTextLabel" parent="CanvasLayer/Control/ShopPanel" groups=["shop_tooltip"]]
-unique_name_in_owner = true
-z_index = 5
+[node name="ForgePanel" parent="CanvasLayer/WindowUI/Control" instance=ExtResource("3_oo1lh")]
+visible = false
 layout_mode = 0
-offset_left = -1817.0
-offset_top = 1309.0
-offset_right = -1542.0
-offset_bottom = 1332.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_fwvyv")
+offset_left = -56.0
+offset_right = 1119.0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/WindowUI"]
+z_index = 4
+offset_left = 60.0
+offset_top = 955.0
+offset_right = 130.0
+offset_bottom = 1025.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_11frw")
+
+[node name="InventoryIcons" type="HBoxContainer" parent="CanvasLayer/WindowUI/PanelContainer" node_paths=PackedStringArray("info_panel") groups=["player"]]
+z_index = 5
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+script = ExtResource("9_f5qwj")
+slot_scene = ExtResource("10_ky6x0")
+info_panel = NodePath("../../../StatsDisplay/ItemTooltip")
+
+[node name="BackpackPanel" parent="CanvasLayer/WindowUI" instance=ExtResource("108_8r6bt")]
+mouse_filter = 0
+
+[node name="StatsDisplay" type="Node" parent="CanvasLayer"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/StatsDisplay"]
+z_index = 4
+offset_left = 42.0
+offset_top = 50.0
+offset_right = 362.0
+offset_bottom = 590.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jkpe8")
+script = ExtResource("5_c08ud")
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/StatsDisplay"]
+z_index = 4
+offset_left = 42.0
+offset_top = 590.0
+offset_right = 363.0
+offset_bottom = 613.0
 bbcode_enabled = true
 fit_content = true
+script = ExtResource("8_x8w0l")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Control/ShopPanel"]
-layout_mode = 0
-offset_left = 48.0
-offset_top = 24.0
-offset_right = 730.0
-offset_bottom = 842.0
-mouse_filter = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_pqdyi")
-
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer"]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="Boots" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-text = "BOOTS"
-
-[node name="Boots2" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-custom_minimum_size = Vector2(650, 0)
-layout_mode = 2
-
-[node name="Potions" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("13_pqdyi")
-theme_override_font_sizes/font_size = 13
-text = "Consumable"
-
-[node name="Consumable" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Starter" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-layout_mode = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 13
-text = "Starter Item"
-
-[node name="StaterRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-clip_contents = true
-custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
-
-[node name="Basic" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-text = "Basic Item"
-
-[node name="BasicRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
-
-[node name="Epic" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-text = "Epic Item"
-
-[node name="EpicRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Legend" type="Label" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 13
-text = "Legendary"
-
-[node name="LegendaryRow" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/ScrollContainer/VBox"]
-custom_minimum_size = Vector2(470, 0)
-layout_mode = 2
-
-[node name="RecipeUI" type="Control" parent="CanvasLayer/Control/ShopPanel" groups=["recipe_ui"]]
-anchors_preset = 0
-offset_left = 739.0
-offset_top = 25.0
-offset_right = 1162.0
-offset_bottom = 564.0
-script = ExtResource("102_v3vd2")
-component_slot_scene = ExtResource("13_fwvyv")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/ShopPanel/RecipeUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = 274.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-text = "Next Tier"
-
-[node name="BuildsIntoContainer" type="HFlowContainer" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 4
-size_flags_stretch_ratio = 0.2
-
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-
-[node name="Label3" type="Label" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "Current Item"
-
-[node name="TargetItemSlot" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer" instance=ExtResource("13_fwvyv")]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-text = "Recipe"
-
-[node name="ComponentsContainer" type="HBoxContainer" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="DescriptionLabel" type="RichTextLabel" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-bbcode_enabled = true
-text = "
-"
-
-[node name="BuyButton" type="Button" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-text = "Buy
-"
-
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/Control/ShopPanel/RecipeUI/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="ItemTooltip" type="RichTextLabel" parent="CanvasLayer"]
+[node name="ItemTooltip" type="RichTextLabel" parent="CanvasLayer/StatsDisplay"]
+z_index = 4
 offset_left = 50.0
 offset_top = 778.0
 offset_right = 287.0
@@ -394,105 +162,25 @@ bbcode_enabled = true
 fit_content = true
 script = ExtResource("40_2ix4f")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-offset_left = 60.0
-offset_top = 955.0
-offset_right = 130.0
-offset_bottom = 1025.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_11frw")
-
-[node name="InventoryIcons" type="HBoxContainer" parent="CanvasLayer/PanelContainer" node_paths=PackedStringArray("info_panel") groups=["player"]]
+[node name="TooltipLabel" type="RichTextLabel" parent="CanvasLayer" groups=["shop_tooltip"]]
 z_index = 5
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-script = ExtResource("9_f5qwj")
-slot_scene = ExtResource("10_ky6x0")
-info_panel = NodePath("../../ItemTooltip")
-max_slots = 10
+offset_left = -1817.0
+offset_top = 1309.0
+offset_right = -1542.0
+offset_bottom = 1332.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_lh7kg")
+bbcode_enabled = true
+fit_content = true
 
-[node name="BackpackPanel" type="Panel" parent="CanvasLayer"]
-offset_left = 1571.0
-offset_top = 50.0
-offset_right = 2045.0
-offset_bottom = 845.0
-mouse_filter = 1
-script = ExtResource("108_vc5ir")
-slot_scene = ExtResource("109_533d4")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BackpackPanel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -2.0
-offset_bottom = -1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BackpackPanel/MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-text = "BACK PACK"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/tab_separation = 9
-theme_override_constants/icon_separation = 100
-current_tab = 0
-
-[node name="Materials" type="ScrollContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_vc5ir")
-metadata/_tab_index = 0
-
-[node name="MatGrid" type="GridContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer/Materials"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 1
-columns = 7
-
-[node name="Equipment" type="ScrollContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="EquipGrid" type="GridContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer/Equipment"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 1
-columns = 7
-
-[node name="Consumables" type="ScrollContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer"]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="ConsGrid" type="GridContainer" parent="CanvasLayer/BackpackPanel/MarginContainer/VBoxContainer/TabContainer/Consumables"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_constants/h_separation = 0
-theme_override_constants/v_separation = 1
-columns = 7
+[node name="InspectPanel" parent="CanvasLayer" instance=ExtResource("25_tepqr")]
+offset_left = 1444.0
+offset_top = 658.0
+offset_right = 1916.0
+offset_bottom = 1083.0
 
 [node name="Area2D" parent="." instance=ExtResource("16_fwvyv")]
-position = Vector2(67, 204)
+position = Vector2(840, -69)
+available_items = Array[ExtResource("12_c2424")]([ExtResource("13_c2424"), ExtResource("15_n1fyg")])
 
 [node name="Tower" parent="." instance=ExtResource("88_eco1f")]
 position = Vector2(-261, 1030)
@@ -539,6 +227,7 @@ team = 0
 position = Vector2(-748, 1028)
 collision_layer = 1
 collision_mask = 1
+input_pickable = false
 team = 0
 base_stats = {
 "Energy": 0.0,
@@ -609,3 +298,7 @@ position = Vector2(1242, 583)
 [node name="EnemyChampion3" parent="." instance=ExtResource("66_6xwof")]
 position = Vector2(1008, 986)
 team = 3
+
+[node name="Forge" parent="." instance=ExtResource("20_lh7kg")]
+position = Vector2(335, -82)
+available_items = Array[ExtResource("12_c2424")]([ExtResource("24_vdrp4")])

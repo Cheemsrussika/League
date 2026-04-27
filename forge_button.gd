@@ -84,6 +84,7 @@ func _process(_delta):
 func update_tooltip_text():
 	if not is_instance_valid(tooltip_node) or not item_data: 
 		return
+		
 	if tooltip_node is RichTextLabel:
 		tooltip_node.bbcode_enabled = true
 	# Inside your update_tooltip_text() function:

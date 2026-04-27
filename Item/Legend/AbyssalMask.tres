@@ -17,7 +17,6 @@ metadata/_custom_type_script = "uid://cm12ioael5m4s"
 
 [resource]
 script = ExtResource("2_6fibn")
-item_tier = 4
 item_name = "Abyssal Mask"
 icon = ExtResource("2_dgr6l")
 cost = 2650

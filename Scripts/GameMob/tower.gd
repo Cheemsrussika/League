@@ -94,7 +94,7 @@ func _check_plating_break(context:Dictionary):
 		plate_broke(killer)
 		bonus_stats["armor"] += armor_per_plate * plates_to_break
 		bonus_stats["magic_res"] += mr_per_plate * plates_to_break
-		print("Plate broken! Tower gained resistance. Current Armor: ", get_total(Stat.AR))
+		DevMenu.add_log("Plate broken! Tower gained resistance. Current Armor: %s"% get_total(Stat.AR))
 		recalculate_stats()
 
 # --- COMBAT ---
@@ -105,9 +105,9 @@ func plate_broke(_killer: Unit = null):
 		for champ in eligible_champions:
 			if champ.has_method("add_gold"):
 				champ.add_gold(split_gold)
-				print(champ.name, " received ", split_gold, " plate gold!")
+				DevMenu.add_log("%s received %s plate gold!" %[champ.name ,split_gold])
 	else:
-		print("Plate broke, but no champions were around to claim the gold.")
+		DevMenu.add_log("Plate broke, but no champions were around to claim the gold.")
 
 func _attack():
 	if not projectile_scene or not is_instance_valid(current_target): return
@@ -261,5 +261,5 @@ func _on_unit_damaged(victim: Unit, attacker: Unit, _amount: float):
 	if victim.team == self.team and victim.unit_type == UnitType.CHAMPION:
 		if attacker.team != self.team and attacker.unit_type == UnitType.CHAMPION:
 			if targets_in_range.has(attacker):
-				print("TOWER AGGRO TRIGGERED ON: ", attacker.name)
+				DevMenu.add_log("TOWER AGGRO TRIGGERED ON: %s"% attacker.name)
 				next_priority_target = attacker

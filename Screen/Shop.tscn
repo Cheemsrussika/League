@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8t4l5fufhnkd"]
+[gd_scene load_steps=3 format=3 uid="uid://b8t4l5fufhnkd"]
+
+[ext_resource type="Script" uid="uid://c3enltjpc2lsd" path="res://Screen/MerchantZone.gd" id="1_iarww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xeh"]
 size = Vector2(340.5, 270.5)
 
-[node name="Area2D" type="Area2D" groups=["shop_zone"]]
+[node name="Shop" type="Area2D" groups=["shop_zone"]]
+script = ExtResource("1_iarww")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g0xeh")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://db7u67k2jtjjj"]
+
+[ext_resource type="Script" uid="uid://c3enltjpc2lsd" path="res://Screen/MerchantZone.gd" id="1_v7xk7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xeh"]
+size = Vector2(340.5, 270.5)
+
+[node name="Forge" type="Area2D" groups=["forge_zone"]]
+script = ExtResource("1_v7xk7")
+shop_type = "forge_zone"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_g0xeh")
+
+[node name="Label" type="Label" parent="." groups=["forge_zone"]]
+offset_left = -139.0
+offset_top = -50.0
+offset_right = -43.0
+offset_bottom = 3.0
+scale = Vector2(3.011453, 2.7848628)
+theme_override_font_sizes/font_size = 30
+text = "Forge
+"

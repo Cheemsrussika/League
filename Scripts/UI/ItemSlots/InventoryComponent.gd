@@ -79,6 +79,7 @@ func add_item(item: ItemData) -> bool:
 				parent.recalculate_stats()
 				
 			inventory_changed.emit()
+			get_tree().call_group("shop_buttons", "update_affordability")
 			return true
 	return false
 
@@ -95,6 +96,7 @@ func remove_item(index: int) -> ItemData:
 				parent.recalculate_stats()
 				
 			inventory_changed.emit()
+			get_tree().call_group("shop_buttons", "update_affordability")
 			return item
 	return null
 

@@ -1,7 +1,7 @@
 extends Node
 
 var player_champion: Champion 
-
+var selected_unit: Node = null
 
 func start_game(champion_scene: PackedScene, spawn_parent: Node2D, start_position: Vector2):
 	var new_hero = champion_scene.instantiate()
@@ -15,4 +15,4 @@ func start_game(champion_scene: PackedScene, spawn_parent: Node2D, start_positio
 	spawn_parent.add_child(new_hero)
 
 	player_champion = new_hero
-	print("Game Started! Player spawned at ", start_position)
+	DevMenu.add_log("Game Started! Player spawned at %s" % start_position)

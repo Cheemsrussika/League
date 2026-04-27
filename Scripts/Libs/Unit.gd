@@ -413,3 +413,16 @@ func apply_status_effect(id: String, duration: float, stacks: int = 1, power: fl
 func has_status(id: String) -> bool:
 	if not status_container: return false
 	return status_container.has_node(id)
+	
+#--Selection
+# Add this to your unit/enemy/player script
+func _input_event(viewport, event, shape_idx):
+	# Check if it's a right mouse button click
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		
+		# Tell the global manager that THIS unit is now the selected one
+		GameManager.selected_unit = self
+		print("Dev/Inspect Target Selected: ", GameManager.selected_unit.name)
+		var inspect_ui = get_tree().get_first_node_in_group("inspect_panel")
+		if inspect_ui:
+			inspect_ui.open_panel(self)

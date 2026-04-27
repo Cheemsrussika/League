@@ -29,6 +29,7 @@ func add_item(new_item: ItemData, amount: int = 1) -> int:
 				
 				if amount_left <= 0:
 					backpack_changed.emit()
+					get_tree().call_group("shop_buttons", "update_affordability")
 					return 0 # All items successfully added!
 
 	# Step 2: If we still have items left, find an empty slot
@@ -38,6 +39,7 @@ func add_item(new_item: ItemData, amount: int = 1) -> int:
 			# We duplicate the item so it doesn't share references with global DB
 			slots[i] = { "item": new_item.duplicate(true), "amount": amount_left }
 			backpack_changed.emit()
+			
 			return 0 
 
 	# If we get here, the backpack is completely full and we couldn't fit everything
@@ -86,3 +88,13 @@ func swap_slots(index_a: int, index_b: int):
 	slots[index_a] = slots[index_b]
 	slots[index_b] = temp
 	backpack_changed.emit()
+	
+# Add this to BackpackComponent.gd
+func has_item(target_name: String, required_amount: int) -> bool:
+	var count = 0
+	for slot_data in slots:
+		if slot_data != null and slot_data.item.item_name == target_name:
+			count += slot_data.amount
+			if count >= required_amount:
+				return true
+	return false

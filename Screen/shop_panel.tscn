@@ -1,0 +1,132 @@
+[gd_scene load_steps=6 format=3 uid="uid://nhff3k7as7cr"]
+
+[ext_resource type="Script" uid="uid://ckx25w4bojv7t" path="res://Scripts/Shop/shop_panel.gd" id="1_d5fmb"]
+[ext_resource type="PackedScene" uid="uid://dbmc5700nwao0" path="res://Screen/ItemButton.tscn" id="98_mng37"]
+[ext_resource type="FontFile" uid="uid://byogv8vles4k1" path="res://League.otf" id="99_phhax"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6pe4"]
+bg_color = Color(0.6, 0.6, 0.6, 0.1764706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqdyi"]
+content_margin_left = 6.0
+bg_color = Color(0.6, 0.6, 0.6, 0.21960784)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6862745, 0.57254905, 0.15686275, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ShopPanel" type="Panel" groups=["shop_panel", "shop_ui"]]
+z_index = 2
+offset_left = -76.0
+offset_right = 1099.0
+offset_bottom = 887.0
+script = ExtResource("1_d5fmb")
+shop_slot_scene = ExtResource("98_mng37")
+
+[node name="Panel" type="Panel" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = -410.0
+offset_top = -92.0
+offset_right = 2089.0
+offset_bottom = 1307.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m6pe4")
+
+[node name="Shop" type="ScrollContainer" parent="."]
+z_index = 4
+layout_mode = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 730.0
+offset_bottom = 842.0
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqdyi")
+
+[node name="VBox" type="VBoxContainer" parent="Shop"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Starter Boot" type="Label" parent="Shop/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "BOOTS"
+
+[node name="Boots2" type="HFlowContainer" parent="Shop/VBox"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+
+[node name="Potions" type="Label" parent="Shop/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("99_phhax")
+theme_override_font_sizes/font_size = 13
+text = "Consumable"
+
+[node name="Consumable" type="HFlowContainer" parent="Shop/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Starter" type="Label" parent="Shop/VBox"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 13
+text = "Starter Item"
+
+[node name="StarterRow" type="HFlowContainer" parent="Shop/VBox"]
+clip_contents = true
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+
+[node name="ActionPanel" type="VBoxContainer" parent="."]
+z_index = 4
+layout_mode = 0
+offset_left = 747.0
+offset_top = 24.0
+offset_right = 1157.0
+offset_bottom = 680.0
+
+[node name="HSeparator" type="HSeparator" parent="ActionPanel"]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="ActionPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HSeparator2" type="HSeparator" parent="ActionPanel"]
+layout_mode = 2
+
+[node name="ItemDetails" type="RichTextLabel" parent="ActionPanel"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+bbcode_enabled = true
+text = "Testing
+"
+fit_content = true
+
+[node name="HSeparator3" type="HSeparator" parent="ActionPanel"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ActionPanel"]
+layout_mode = 2
+alignment = 1
+
+[node name="BuyButton" type="Button" parent="ActionPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Buy
+"
+
+[node name="SellButton" type="Button" parent="ActionPanel/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Sell
+"

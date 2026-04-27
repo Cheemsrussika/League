@@ -103,7 +103,7 @@ func _handle_skill_cast(slot: SkillSlot):
 	if found_unit:
 		var distance = champion.global_position.distance_to(found_unit.global_position)
 		if data.cast_range > 0 and distance > data.cast_range:
-			print("Out of Range! Moving to target.")
+			DevMenu.add_log("Out of Range! Moving to target.")
 			champion.set_chase_and_cast(found_unit, slot)
 			return 
 

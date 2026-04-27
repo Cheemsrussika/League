@@ -14,7 +14,15 @@ var current_preview_item: ItemData = null
 @export var component_slot_scene: PackedScene 
 
 func _ready():
+	add_to_group("shop_buttons") # <-- NEW: Listen to the backpack's shout!
 	buy_button.pressed.connect(_on_buy_button_pressed)
+	
+# --- NEW: Triggered whenever the backpack moves an item ---
+func update_affordability():
+	# If we are currently looking at a recipe...
+	if current_preview_item != null:
+		# Re-run the description function to update the green/red text instantly!
+		_update_description(current_preview_item)
 
 func view_recipe(item: ItemData):
 	if not item: return
@@ -43,17 +51,17 @@ func view_recipe(item: ItemData):
 
 	# 5. Update Text & Button
 	_update_description(item)
-	buy_button.text = "Buy (" + str(item.cost) + "G)"
+	buy_button.text = "Crafting Fee: " + str(item.cost) + "G)"
 	
 	
 	
 func _populate_builds_into(target_item: ItemData):
 	# Grab the shop panel to access the main list of all items
-	var shop = get_tree().get_first_node_in_group("shop_panel")
-	if not shop or not "all_items" in shop: return
+	var shop = get_tree().get_first_node_in_group("forge_panel")
+	if not shop or not "current_items" in shop: return
 	
 	# Check every item in the game
-	for potential_upgrade in shop.all_items:
+	for potential_upgrade in shop.current_items:
 		if potential_upgrade.recipe and potential_upgrade.recipe.size() > 0:
 			# Does this potential upgrade require our target_item?
 			for ingredient in potential_upgrade.recipe:
@@ -64,7 +72,6 @@ func _populate_builds_into(target_item: ItemData):
 					if slot.has_method("setup"):
 						slot.setup(potential_upgrade)
 					break # Break the inner loop, move to the next potential upgrade
-
 func _update_description(item: ItemData):
 	var text = ""
 	
@@ -72,14 +79,20 @@ func _update_description(item: ItemData):
 	text += "[b][font_size=20]%s[/font_size][/b]  [color=gold]%dG[/color]\n" % [item.item_name, item.cost]
 	text += "[color=gray]--------------------------------------[/color]\n"
 	
-	# 2. Base Stats (Auto-fetched from your Dictionary)
+	# 2. Base Stats (Upgraded with StatStyle!)
 	if item.stats and not item.stats.is_empty():
 		for key in item.stats:
 			var val = item.stats[key]
 			var stat_name = key.replace("_", " ").capitalize()
-			text += "[color=lightgreen]+%s %s[/color]\n" % [str(val), stat_name]
+			
+			# Fetch the icon and color from your helper script
+			var icon_bbcode = StatStyle.get_icon_tag(key)
+			var color_code = StatStyle.get_color(key)
+			
+			# Inject the icon and custom color instead of the hardcoded lightgreen
+			text += "%s[color=%s]+%s %s[/color]\n" % [icon_bbcode, color_code, str(val), stat_name]
 	
-	# 3. The Description "Box"
+	# 3. The Description "Box" (For Lore, Passives, and Drop Locations)
 	if item.get("description") and item.description != "":
 		text += "\n" # Space between stats and passive
 		# We use a background color tag to create a visual "box" for the text
@@ -90,13 +103,48 @@ func _update_description(item: ItemData):
 		text += "\n" + item.description + "\n"
 		text += "[/indent]"
 		
-		text += "[/color][/bgcolor]"
+		text += "[/color][/bgcolor]\n"
 		
+# 4. Recipe Preview (Dynamically colored based on inventory!)
+	if item.get("recipe") and not item.recipe.is_empty():
+		text += "\n[color=cyan][u]Forging Recipe:[/u][/color]\n"
+		
+		# Tally up duplicates (e.g., 2x Longsword)
+		var reqs = {}
+		for req in item.recipe:
+			if reqs.has(req.item_name):
+				reqs[req.item_name] += 1
+			else:
+				reqs[req.item_name] = 1
+				
+		# --- NEW: Get the player's backpack to check inventory ---
+		var player = GameManager.player_champion
+		var backpack = null
+		if is_instance_valid(player):
+			backpack = player.get_node_or_null("BackpackComponent")
+				
+		# Build the text with dynamic colors
+		for req_name in reqs:
+			var needed_amount = reqs[req_name]
+			var has_enough = false
+			
+			# Check if the backpack exists and has the required amount
+			if backpack and backpack.has_item(req_name, needed_amount):
+				has_enough = true
+				
+			# Pick the color based on the check
+			var color_code = "green" if has_enough else "red"
+			
+			# Inject the color code into the string
+			text += "- [color=%s]%sx %s[/color]\n" % [color_code, str(needed_amount), req_name]
+	# Apply to your RichTextLabel
+	# Note: If you renamed it to %ItemDetails earlier, change this to: %ItemDetails.text = text
 	desc_label.text = text
-
+	
 func _on_buy_button_pressed():
 	if current_preview_item:
-		var shop = get_tree().get_first_node_in_group("shop_panel")
-		# Ensure your ShopPanel script has this function!
-		if shop and shop.has_method("_on_item_double_clicked"):
-			shop._on_item_double_clicked(current_preview_item)
+		var forge = get_tree().get_first_node_in_group("forge_panel")
+		
+		# We changed the function name to _attempt_craft in the previous step!
+		if forge and forge.has_method("_attempt_craft"):
+			forge._attempt_craft(current_preview_item)

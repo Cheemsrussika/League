@@ -28,7 +28,8 @@ func on_stat_calculation(_unit):
 	# Override to modify stats
 	pass
 func _ready():
-	print("Status Node Created: ", name)
+	var text= "Status Node Created: "+ name
+	DevMenu.add_log(text)
 
 func _process(delta):
 	if is_permanent: return

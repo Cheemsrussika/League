@@ -25,6 +25,7 @@ shader_parameter/broken_color = Color(0.1, 0.1, 0.1, 1)
 shader_parameter/divider_color = Color(0, 0, 0, 1)
 
 [node name="Tower" type="CharacterBody2D" groups=["unit"]]
+input_pickable = true
 script = ExtResource("1_kj2vm")
 projectile_scene = ExtResource("2_wuxap")
 armor_per_plate = 100.0

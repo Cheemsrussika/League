@@ -1,0 +1,169 @@
+[gd_scene load_steps=6 format=3 uid="uid://das0xecbq73o8"]
+
+[ext_resource type="Script" uid="uid://br7ctqbndwfdp" path="res://Screen/forge_panel.gd" id="1_uogqo"]
+[ext_resource type="PackedScene" uid="uid://dbmc5700nwao0" path="res://Screen/ItemButton.tscn" id="98_h0nd0"]
+[ext_resource type="Script" uid="uid://xvbotifkgp2n" path="res://Screen/RecipeUi.gd" id="100_twsqq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qr0g"]
+bg_color = Color(0.6, 0.6, 0.6, 0.1764706)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqdyi"]
+content_margin_left = 6.0
+bg_color = Color(0.6, 0.6, 0.6, 0.21960784)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6862745, 0.57254905, 0.15686275, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="ForgePanel" type="Panel" groups=["forge_panel", "shop_ui"]]
+z_index = 4
+offset_left = -76.0
+offset_right = 1099.0
+offset_bottom = 887.0
+script = ExtResource("1_uogqo")
+forge_slot_scene = ExtResource("98_h0nd0")
+
+[node name="Panel" type="Panel" parent="."]
+z_index = -1
+layout_mode = 0
+offset_left = -417.0
+offset_top = -218.0
+offset_right = 2082.0
+offset_bottom = 1181.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_1qr0g")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+z_index = 4
+layout_mode = 0
+offset_left = 48.0
+offset_top = 24.0
+offset_right = 730.0
+offset_bottom = 842.0
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqdyi")
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Boots" type="Label" parent="ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "BOOTS"
+
+[node name="BootsRow" type="HFlowContainer" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(650, 0)
+layout_mode = 2
+
+[node name="Basic" type="Label" parent="ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Basic Item"
+
+[node name="BasicRow" type="HFlowContainer" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+
+[node name="Epic" type="Label" parent="ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Epic Item"
+
+[node name="EpicRow" type="HFlowContainer" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Legend" type="Label" parent="ScrollContainer/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "Legendary"
+
+[node name="LegendaryRow" type="HFlowContainer" parent="ScrollContainer/VBox"]
+custom_minimum_size = Vector2(470, 0)
+layout_mode = 2
+
+[node name="RecipeUI" type="Control" parent="." groups=["recipe_ui"]]
+z_index = 4
+anchors_preset = 0
+offset_left = 739.0
+offset_top = 25.0
+offset_right = 1162.0
+offset_bottom = 564.0
+script = ExtResource("100_twsqq")
+component_slot_scene = ExtResource("98_h0nd0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RecipeUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator3" type="HSeparator" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+text = "Next Tier"
+
+[node name="BuildsIntoContainer" type="HFlowContainer" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.2
+
+[node name="HSeparator2" type="HSeparator" parent="RecipeUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Current Item"
+
+[node name="TargetItemSlot" parent="RecipeUI/VBoxContainer" instance=ExtResource("98_h0nd0")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="HSeparator" type="HSeparator" parent="RecipeUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+text = "Recipe"
+
+[node name="ComponentsContainer" type="HBoxContainer" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HSeparator5" type="HSeparator" parent="RecipeUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="DescriptionLabel" type="RichTextLabel" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "
+"
+
+[node name="BuyButton" type="Button" parent="RecipeUI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "Buy
+"
+
+[node name="HSeparator4" type="HSeparator" parent="RecipeUI/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2

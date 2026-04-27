@@ -39,3 +39,23 @@ static func get_effect_script(id: String):
 		_:
 			print("StatusLibrary: ID '%s' not found!" % id)
 			return null
+# --- ADD YOUR IMAGE CONSTANTS HERE ---
+const ICON_BUFF = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_mytarget.png")
+const ICON_BURN = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_ogury_presage.png")
+const ICON_SLOW = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_linkedin.png")
+# (Add more as you make them)
+
+static func get_effect_icon(id: String) -> Texture2D:
+	match id:
+		# Mechanics
+		"generic_slow", "ice_slow", "skill_slow": 
+			return ICON_SLOW
+			
+		"Lindrys", "item_burn", "bleed", "yuntal_bleed": 
+			return ICON_BURN
+			
+		# Add your Grievous, Empower, etc. here as you get icons for them!
+		
+		# Default Catch-all for regular stat buffs
+		_: 
+			return ICON_BUFF

@@ -40,6 +40,7 @@ text = "12"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_jnw7w")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_87x0w")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_l18ej")

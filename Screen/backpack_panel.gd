@@ -44,17 +44,12 @@ func _fill_grid(grid: GridContainer, count: int):
 	for i in range(count):
 		var slot = slot_scene.instantiate()
 		grid.add_child(slot)
-
 func refresh_slots():
 	if not backpack_component: return
-	
-	# Reset all UI slots first
 	_clear_all_ui_slots()
 
-	# Tracking how many slots we've filled in each tab UI
 	var counters = { "mat": 0, "equip": 0, "cons": 0 }
 
-	# Sort items from the single backpack array into the 3 UI grids
 	for i in range(backpack_component.slots.size()):
 		var slot_data = backpack_component.slots[i]
 		if slot_data == null: continue
@@ -63,7 +58,6 @@ func refresh_slots():
 		var target_grid = null
 		var current_idx = 0
 
-		# SORTING LOGIC
 		match item.item_type:
 			ItemData.ItemType.MATERIAL, ItemData.ItemType.QUEST_ITEM:
 				target_grid = mat_grid
@@ -78,16 +72,35 @@ func refresh_slots():
 				current_idx = counters.cons
 				counters.cons += 1
 		
-		# Assign to UI
 		if target_grid and current_idx < target_grid.get_child_count():
 			var slot_ui = target_grid.get_child(current_idx)
 			if slot_ui.has_method("set_item"):
+				slot_ui.source_panel = "backpack"
+				slot_ui.slot_index = i 
 				slot_ui.set_item(slot_data)
 				
-				# Disconnect old signals then connect new one with the REAL index 'i'
-				for connection in slot_ui.pressed.get_connections():
-					slot_ui.pressed.disconnect(connection.callable)
-				slot_ui.pressed.connect(_on_slot_clicked.bind(i))
+				# 1. Clear old connections to avoid double-firing
+				for connection in slot_ui.slot_double_clicked.get_connections():
+					slot_ui.slot_double_clicked.disconnect(connection.callable)
+				for connection in slot_ui.slot_dropped.get_connections():
+					slot_ui.slot_dropped.disconnect(connection.callable)
+					
+				# 2. Connect BOTH signals!
+				slot_ui.slot_double_clicked.connect(_on_slot_double_clicked.bind(i))
+				slot_ui.slot_dropped.connect(_on_slot_dropped.bind(i)) # <-- NEW LINE
+
+# --- SWAP IN BACKPACK ON DROP ---
+func _on_slot_dropped(drag_data: Dictionary, target_index: int):
+	if drag_data.has("source") and drag_data["source"] == "backpack":
+		var from_index = drag_data["index"]
+		
+		# Swap the slots in the actual BackpackComponent array
+		var temp = backpack_component.slots[target_index]
+		backpack_component.slots[target_index] = backpack_component.slots[from_index]
+		backpack_component.slots[from_index] = temp
+		
+		# Emit the signal to force the UI to redraw the grids
+		backpack_component.backpack_changed.emit()
 
 func _clear_all_ui_slots():
 	for g in [mat_grid, equip_grid, cons_grid]:
@@ -95,24 +108,21 @@ func _clear_all_ui_slots():
 			if slot.has_method("set_item"):
 				slot.set_item(null)
 
-func _on_slot_clicked(backpack_index: int):
+func _on_slot_double_clicked(backpack_index: int):
 	var slot_data = backpack_component.slots[backpack_index]
 	if slot_data == null: return
 	
 	var item = slot_data.item
 	var player = GameManager.player_champion
 	
-	# 1. Equipment Logic
 	if item.item_type == ItemData.ItemType.EQUIPMENT:
 		var inventory = player.get_node_or_null("InventoryComponent")
 		if inventory and inventory.add_item(item):
 			backpack_component.remove_item(item.item_name, 1)
 			
-	# 2. Consumable Logic
+			
 	elif item.item_type == ItemData.ItemType.CONSUMABLE:
-		# Trigger item use effect here
 		backpack_component.remove_item(item.item_name, 1)
 		
-	# 3. Quest Logic
 	elif item.item_type == ItemData.ItemType.QUEST_ITEM:
 		print("Cannot use quest item directly from backpack!")

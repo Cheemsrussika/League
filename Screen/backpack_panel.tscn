@@ -1,0 +1,83 @@
+[gd_scene load_steps=4 format=3 uid="uid://0ci8hcfgf7ci"]
+
+[ext_resource type="Script" uid="uid://vnvslwd0qjx8" path="res://Screen/backpack_panel.gd" id="1_wba7a"]
+[ext_resource type="PackedScene" uid="uid://bmnnin1pp8xmg" path="res://Screen/backpack_slot_ui.tscn" id="2_k8y32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vc5ir"]
+
+[node name="BackpackPanel" type="Panel"]
+z_index = 5
+offset_left = 1571.0
+offset_top = 50.0
+offset_right = 2045.0
+offset_bottom = 845.0
+mouse_filter = 1
+script = ExtResource("1_wba7a")
+slot_scene = ExtResource("2_k8y32")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "BACK PACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/tab_separation = 9
+theme_override_constants/icon_separation = 100
+current_tab = 0
+
+[node name="Materials" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_vc5ir")
+metadata/_tab_index = 0
+
+[node name="MatGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Materials"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
+columns = 7
+
+[node name="Equipment" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="EquipGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Equipment"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
+columns = 7
+
+[node name="Consumables" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="ConsGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Consumables"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 1
+columns = 7

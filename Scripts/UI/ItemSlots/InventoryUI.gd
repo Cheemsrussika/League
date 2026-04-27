@@ -3,52 +3,64 @@ extends HBoxContainer
 var player_inventory: InventoryComponent
 @export var slot_scene: PackedScene 
 @export var info_panel: Control
-@export var max_slots:int=6
+@export var max_slots:int=10
 
 func _ready():
 	for i in range(max_slots):
 		var slot = slot_scene.instantiate()
 		add_child(slot)
+		
+		# Tell the slot it lives in the Inventory!
+		slot.source_panel = "inventory"
 		slot.slot_index = i
 		slot.stored_item = null
 		slot.set_item(null)
-		slot.hovered.connect(_on_slot_hovered)
-		slot.unhovered.connect(_on_slot_unhovered)
+		if slot.has_signal("hovered"): slot.hovered.connect(_on_slot_hovered)
+		if slot.has_signal("unhovered"): slot.unhovered.connect(_on_slot_unhovered)
 		
-		# --- NEW: Connect a click signal to unequip ---
-		# (Assuming your slot UI has a button or gui_input you can link here)
-		if slot.has_signal("slot_clicked"): # Or whatever your click signal is named
-			slot.slot_clicked.connect(_on_slot_clicked)
+		# Connect our new universal signals
+		slot.slot_double_clicked.connect(_on_slot_double_clicked.bind(i))
+		slot.slot_dropped.connect(_on_slot_dropped.bind(i))
 
-# --- NEW UNEQUIP LOGIC ---
-func _on_slot_clicked(slot_index: int):
+# --- UNEQUIP ON DOUBLE CLICK ---
+func _on_slot_double_clicked(slot_index: int):
 	if not is_instance_valid(player_inventory): return
 	
 	var item = player_inventory.items[slot_index]
-	if item == null: return # Nothing to unequip
+	if item == null: return
 	
 	var player = GameManager.player_champion
 	var backpack = player.get_node_or_null("BackpackComponent")
 	
 	if backpack:
-		# Try to put it in the backpack
 		var overflow = backpack.add_item(item, 1)
 		if overflow == 0:
-			# It fit! Remove it from our equipment slots
 			player_inventory.remove_item(slot_index)
+			
 		else:
 			print("Backpack is full! Cannot unequip.")
 
-# ... (The rest of your script: _on_slot_hovered, _process, _setup_connection, refresh_slots remain exactly the same) ...
+# --- SWAP ON DROP ---
+func _on_slot_dropped(drag_data: Dictionary, target_index: int):
+	# Only allow swapping if the item came from the inventory panel itself
+	if drag_data["source"] == "inventory":
+		var from_index = drag_data["origin_index"]
+		
+		# Swap the items in the data array
+		var temp = player_inventory.items[target_index]
+		player_inventory.items[target_index] = player_inventory.items[from_index]
+		player_inventory.items[from_index] = temp
+		
+		# Tell the system to redraw
+		player_inventory.inventory_changed.emit()
 
 func _on_slot_hovered(slot_node):
-	if info_panel and slot_node.stored_item:
+	if info_panel and slot_node.get("stored_item"):
 		info_panel.display(slot_node.stored_item)
 
 func _on_slot_unhovered():
 	if info_panel:
 		info_panel.hide_tooltip()
-
 
 func _process(_delta):
 	if is_instance_valid(player_inventory):
@@ -69,9 +81,7 @@ func _setup_connection():
 
 func refresh_slots():
 	if not player_inventory: return
-	
 	var slots = get_children()
-
 	for i in range(player_inventory.items.size()):
 		if i < slots.size():
 			var item_data = player_inventory.items[i]
@@ -79,6 +89,4 @@ func refresh_slots():
 			
 			if slot_ui.has_method("set_item"):
 				slot_ui.set_item(item_data)
-				
-			# ADD THIS LINE so the slot knows what it is holding for the hover tooltip!
 			slot_ui.stored_item = item_data

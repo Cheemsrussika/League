@@ -24,7 +24,7 @@ func on_stat_calculation(unit):
 			var amount = stats_to_buff[key] * stacks
 			unit.modify_stat(stat_name, amount)
 		else:
-			print("WARNING: Status %s has invalid stat key: %s" % [name, key])
+			DevMenu.add_log("WARNING: Status %s has invalid stat key: %s" % [name, key])
 	# --- 2. DAMAGE RAMPING ---
 	if damage_ramp_per_stack > 0:
 		var total_ramp = stacks * damage_ramp_per_stack

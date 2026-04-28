@@ -37,7 +37,7 @@ static func get_effect_script(id: String):
 			return EMPOWER
 	
 		_:
-			print("StatusLibrary: ID '%s' not found!" % id)
+			DevMenu.add_log("StatusLibrary: ID '%s' not found!" % id)
 			return null
 # --- ADD YOUR IMAGE CONSTANTS HERE ---
 const ICON_BUFF = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_mytarget.png")

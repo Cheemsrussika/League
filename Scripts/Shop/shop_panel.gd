@@ -61,7 +61,7 @@ func _input(event):
 				
 				_clear_action_panel()
 			else:
-				print("You must be at the Merchant to open the Shop!")
+				DevMenu.add_log("You must be at the Merchant to open the Shop!")
 		else:
 			open_shop(false)
 			
@@ -155,19 +155,20 @@ func _on_buy_pressed():
 	
 	var player = GameManager.player_champion
 	var backpack = player.get_node_or_null("BackpackComponent")
-	
+	if not backpack.can_purchase(selected_item):
+		return 
 	if player.gold < selected_item.cost:
-		print("Not enough gold!")
+		DevMenu.add_log("Not enough gold!")
 		return
 
 	var leftover = backpack.add_item(selected_item, 1)
 	if leftover == 0:
 		player.gold -= selected_item.cost
-		print("Bought ", selected_item.item_name)
+		DevMenu.add_log("Bought %s"% selected_item.item_name)
 		# Re-select to refresh the Sell button status
 		_on_item_selected(selected_item) 
 	else:
-		print("Backpack full!")
+		DevMenu.add_log("Backpack full!")
 
 func _on_sell_pressed():
 	if not selected_item or not _is_player_in_zone("shop_zone"): return

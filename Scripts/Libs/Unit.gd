@@ -5,15 +5,18 @@ class_name Unit
 signal unit_died(unit: Unit)
 signal damage_taken(source: Node, amount: float, type: String)
 signal stats_updated(text: String)
-
+@export_group("Loot")
+@export var drop_items: Array[ItemData] = []
+@export var drop_chances: Array[float] = []
 # --- CONSTANTS & PRELOADS ---
 const FLOATING_TEXT_SCENE = preload("res://Screen/floating_text.tscn")
+
 @export_group("Reward")
 @export var gold_reward: float = 210.0
 @export var exp_reward: float = 100.0
 # --- ENUMS ---
 @export_group("Unit setting")
-enum UnitType { CHAMPION, MINION, MONSTER, TOWER, DUMMY }
+enum UnitType { CHAMPION, MINION, MONSTER, TOWER, RESOURCE }
 @export var unit_type: UnitType = UnitType.MINION
 enum Team { BLUE, RED, NEUTRAL, PURPLE }
 @export var team: Team = Team.NEUTRAL
@@ -82,7 +85,7 @@ var current_target: Node2D = null
 var nav_target = null
 
 # --- STATUS EFFECT SYSTEM ---
-var move_speed_modifier: float = 1.0
+
 var is_slowed: bool = false
 @export var passive_effects: Array[ItemEffect] 
 @onready var status_container: Node = $StatusContainer # Ensure this child node exists in Scene!
@@ -110,7 +113,6 @@ func add_shield(amount: float, duration: float, type: int = ShieldType.ALL, deca
 	# 1. Check if a shield with this ID already exists
 	if shield_id != "":
 		for s in active_shields:
-			print("Shield W\n")
 			if s.has("id") and s["id"] == shield_id:
 				# REFRESH LOGIC:
 				# Option A: Take the highest amount (standard)
@@ -185,7 +187,6 @@ func recalculate_stats():
 	# 1. Clear both dictionaries from the previous frame
 	stat_modifiers.clear()
 	percent_modifiers.clear() # <- You were missing this!
-	move_speed_modifier = 1.0
 	is_slowed = false
 	
 	# 2. Ask Items for stats
@@ -201,7 +202,7 @@ func recalculate_stats():
 		for status in status_container.get_children():
 			if status.is_queued_for_deletion():
 				continue
-
+			
 			if status.has_method("on_stat_calculation"):
 				status.on_stat_calculation(self)
 				
@@ -215,7 +216,7 @@ func recalculate_stats():
 					if STAT_MAP.has(stat_enum):
 						var string_key = STAT_MAP[stat_enum] # Convert Enum (2) to String ("armor")
 						var amount = status.stats_to_buff[stat_enum] * status.stacks
-						print("StatBuff:",string_key,"+",amount)
+						DevMenu.add_log("StatBuff: %s + %s"%[string_key,amount])
 						stat_modifiers[string_key] = stat_modifiers.get(string_key, 0.0) + amount
 					
 			# --- B. Grab the Percent Stats! ---
@@ -340,9 +341,18 @@ func _absorb_damage_with_shields(damage: float, dmg_type: String) -> float:
 	if dirty_ui: _recalc_total_shield()
 	return damage_remaining
 
-func die(_killer):
-	pass
-# Inside Unit.gd
+
+func die(killer) -> void:
+	if is_dead: return   # Guard against double-death
+	is_dead = true
+ 
+	# Emit the signal — LootTableComponent listens to this
+	unit_died.emit(self)
+ 
+	# Trigger on_kill on the killer (existing logic)
+	if killer and killer.has_method("on_kill_trigger"):
+		killer.on_kill_trigger(self)
+
 
 # This is the "Hook" that items will listen to
 func on_kill_trigger(victim: Unit):
@@ -422,7 +432,7 @@ func _input_event(viewport, event, shape_idx):
 		
 		# Tell the global manager that THIS unit is now the selected one
 		GameManager.selected_unit = self
-		print("Dev/Inspect Target Selected: ", GameManager.selected_unit.name)
+		DevMenu.add_log("Dev/Inspect Target Selected: %s"% GameManager.selected_unit.name)
 		var inspect_ui = get_tree().get_first_node_in_group("inspect_panel")
 		if inspect_ui:
 			inspect_ui.open_panel(self)

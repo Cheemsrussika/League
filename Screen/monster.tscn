@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw53eopscb1l0"]
+[gd_scene load_steps=9 format=3 uid="uid://dw53eopscb1l0"]
 
 [ext_resource type="Script" uid="uid://cshsmtpt6rxcs" path="res://Scripts/GameMob/monster.gd" id="1_bgb31"]
 [ext_resource type="Texture2D" uid="uid://bl2n7d0lwxh1c" path="res://Icons/Texture2D/2.png" id="2_0r8oe"]
+[ext_resource type="Script" uid="uid://dqrydoqgqx6x8" path="res://Screen/loot_table_component.gd" id="3_4c6s8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yh3sy"]
 
@@ -62,3 +63,6 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SeparationArea"]
 shape = SubResource("CircleShape2D_0r8oe")
+
+[node name="LootTableComponent" type="Node" parent="."]
+script = ExtResource("3_4c6s8")

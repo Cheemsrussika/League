@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LootBagData" load_steps=4 format=3 uid="uid://cntqf21smq2cy"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_dtbbb"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_kt5gy"]
+[ext_resource type="Script" uid="uid://c8a81lq5siamh" path="res://Rescources/LootBag.gd" id="3_e8c3x"]
+
+[resource]
+script = ExtResource("3_e8c3x")
+metadata/_custom_type_script = "uid://c8a81lq5siamh"

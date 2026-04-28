@@ -37,7 +37,7 @@ func on_damage_dealt(user: Unit, context: Dictionary):
 
 	# 4. Add a stack!
 	target_stacks[target]["count"] += 1
-	print("Stacks on ", target.name, ": ", target_stacks[target]["count"])
+	DevMenu.add_log("Stacks on "+ target.name + ": "+ target_stacks[target]["count"])
 
 	# 5. DID WE HIT THE THRESHOLD?
 	if target_stacks[target]["count"] >= stacks_required:
@@ -51,7 +51,7 @@ func on_damage_dealt(user: Unit, context: Dictionary):
 
 
 func _trigger_proc(user: Unit, target: Unit, context: Dictionary):
-	print("THRESHOLD MET! Triggering Item Payload!")
+	DevMenu.add_log("THRESHOLD MET! Triggering Item Payload!")
 	
 	# We still package the context just in case a payload needs to know who we hit
 	var trigger_context = context.duplicate()
@@ -62,4 +62,4 @@ func _trigger_proc(user: Unit, target: Unit, context: Dictionary):
 		if effect and effect.has_method("execute_payload"):
 			effect.execute_payload(user, target, trigger_context)
 		else:
-			print("WARNING: Payload %s does not have an execute_payload function!" % effect.resource_name)
+			DevMenu.add_log("WARNING: Payload %s does not have an execute_payload function!" % effect.resource_name)

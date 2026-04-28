@@ -27,7 +27,7 @@ func on_damage_dealt(user: Unit, context: Dictionary):
 
 	# 3. Apply the effect if physical damage was actually dealt
 	if physical_damage_dealt > 0:
-		print("Black Cleaver Triggered! Applying Shred to: ", target.name)
+		DevMenu.add_log("Black Cleaver Triggered! Applying Shred to: %s"% target.name)
 		
 		if target.has_method("apply_status_effect"):
 			target.apply_status_effect("armor_shred", duration, 1, shred_per_stack, user)

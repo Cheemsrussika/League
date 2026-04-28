@@ -8,7 +8,8 @@ radius = 17.117243
 
 [node name="Homing_projectile" type="Area2D"]
 scale = Vector2(1.634099, 1.5332404)
-collision_mask = 10
+collision_layer = 0
+collision_mask = 31
 script = ExtResource("1_y51xx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

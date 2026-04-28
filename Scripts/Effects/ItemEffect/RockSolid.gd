@@ -18,5 +18,5 @@ func on_incoming_damage(user: Champion, data: Dictionary) -> void:
 	
 	var final_reduction = min(flat_reduction, cap)
 	data["amount"] = max(0.0, incoming_damage - final_reduction)
-	print(data["amount"])
+	DevMenu.add_log(data["amount"])
 	

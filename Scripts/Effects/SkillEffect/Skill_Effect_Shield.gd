@@ -29,6 +29,6 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 				if factor:
 					total_shield += caster.get_total(factor.stat) * factor.scale_amount
 		target.add_shield(total_shield, duration, shield_type, decay_mode, shield_id)
-		print("Skill Shield Applied: ", total_shield)
+		DevMenu.add_log("Skill Shield Applied: %s"% total_shield)
 	else:
-		print("Shield Fail: Target has no add_shield method!")
+		DevMenu.add_log("Shield Fail: Target has no add_shield method!")

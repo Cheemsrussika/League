@@ -6,7 +6,7 @@
 [node name="InspectPanel" type="Panel" groups=["inspect_panel"]]
 offset_right = 472.0
 offset_bottom = 525.0
-mouse_filter = 2
+mouse_filter = 1
 script = ExtResource("1_25umf")
 
 [node name="Close" type="Button" parent="."]
@@ -84,6 +84,7 @@ grow_vertical = 0
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
+z_index = 2
 layout_mode = 0
 offset_right = 29.0
 offset_bottom = 29.0

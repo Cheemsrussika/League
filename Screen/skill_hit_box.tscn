@@ -6,7 +6,8 @@
 radius = 1.0
 
 [node name="SkillHitBox" type="Area2D"]
-collision_mask = 10
+collision_layer = 0
+collision_mask = 31
 script = ExtResource("1_tcxv4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

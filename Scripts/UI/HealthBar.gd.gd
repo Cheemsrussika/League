@@ -14,16 +14,15 @@ var max_hp
 func _ready() -> void:
 	if not champion and get_parent() is Champion:
 		champion = get_parent()
-		
-	# Debug print to verify
+
 	if is_instance_valid(champion):
-		print("Champion linked successfully: ", champion.name)
+		DevMenu.add_log("Champion linked successfully: %s"% champion.name)
 		champion.level_updated.connect(_on_level_updated)
 		
 		# 3. Set the initial level immediately
 		_on_level_updated(champion.level)
 	else:
-		print("Warning: UI could not find Champion parent!")
+		DevMenu.add_log("Warning: UI could not find Champion parent!")
 		
 	max_hp = champion.get_total(Champion.Stat.HP)
 	champion.stats_recalculated.connect(update_shader_stats)

@@ -132,7 +132,7 @@ func _get_target_under_mouse(filter_type: String = "ANY") -> Node2D:
 	query.position = champion.get_global_mouse_position()
 	query.collide_with_areas = true 
 	query.collide_with_bodies = true
-	query.collision_mask = 4
+	query.collision_mask = 4 + 8 + 16
 	
 	var results = space.intersect_point(query)
 	for result in results:

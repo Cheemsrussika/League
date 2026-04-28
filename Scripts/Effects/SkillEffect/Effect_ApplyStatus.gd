@@ -22,4 +22,4 @@ func on_execute(caster: Node2D, _level: int, target_data: Dictionary, _ref: Reso
 	
 	# Apply it to the target
 	target.apply_status_effect(status_id, duration, max_stacks, power, caster)
-	print("Applied status: ", status_id, " to ", target.name)
+	DevMenu.add_log("Applied status: %s to %s"% [status_id, target.name])

@@ -38,7 +38,7 @@ func _on_slot_double_clicked(slot_index: int):
 			player_inventory.remove_item(slot_index)
 			
 		else:
-			print("Backpack is full! Cannot unequip.")
+			DevMenu.add_log("Backpack is full! Cannot unequip.")
 
 # --- SWAP ON DROP ---
 func _on_slot_dropped(drag_data: Dictionary, target_index: int):
@@ -76,7 +76,7 @@ func _process(_delta):
 
 func _setup_connection():
 	if player_inventory.inventory_changed.connect(refresh_slots) != OK:
-		print("Error connecting signal")
+		DevMenu.add_log("Error connecting signal")
 	refresh_slots()
 
 func refresh_slots():

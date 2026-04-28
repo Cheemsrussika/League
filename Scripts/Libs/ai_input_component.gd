@@ -55,7 +55,7 @@ func _buy_item(item_data: ItemData):
 	champion.gold -= item_data.cost
 	champion.inventory.add_item(item_data.duplicate(true))
 	target_build.remove_at(0)
-	# print(champion.name, " bought ", item_data.item_name)
+	DevMenu.add_log("%s bought %s"% [champion.name,item_data.item_name])
 	
 func _should_go_to_shop() -> bool:
 	if target_build.is_empty(): return false

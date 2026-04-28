@@ -15,12 +15,12 @@ func _process(_delta):
 		_setup_connection()
 
 func _setup_connection():
-	print("UI: Found Champion ", champion.name)
+	DevMenu.add_log("UI: Found Champion %s"% champion.name)
 	if champion.has_signal("stats_updated"):
 		champion.stats_updated.connect(_update_text)
 		champion._refresh_ui_display()
 	else:
-		print("Error: Champion is missing 'stats_updated' signal")
+		DevMenu.add_log("Error: Champion is missing 'stats_updated' signal")
 
 func _update_text(new_text: String):
 	text = new_text

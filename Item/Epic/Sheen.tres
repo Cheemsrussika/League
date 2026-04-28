@@ -20,7 +20,6 @@ metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
 
 [resource]
 script = ExtResource("2_53e0s")
-item_tier = 3
 item_name = "Sheen"
 icon = ExtResource("3_jta4a")
 cost = 900

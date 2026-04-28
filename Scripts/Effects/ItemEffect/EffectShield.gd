@@ -45,4 +45,4 @@ func trigger_shield(user: Unit):
 		
 	if user.has_method("add_shield"):
 		user.add_shield(total_shield, shield_duration, shield_damage_type, shield_decay_mode)
-		print("SHIELD GRANTED! Amount: ", total_shield)
+		DevMenu.add_log("SHIELD GRANTED! Amount: %s"% total_shield)

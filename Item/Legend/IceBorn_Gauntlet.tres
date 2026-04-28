@@ -29,7 +29,7 @@ metadata/_custom_type_script = "uid://cl7ixw6i7nquq"
 
 [resource]
 script = ExtResource("2_56rcu")
-item_tier = 4
+is_unique_item = true
 item_name = "IceBorn Gauntlet"
 icon = ExtResource("4_i71xq")
 cost = 2900

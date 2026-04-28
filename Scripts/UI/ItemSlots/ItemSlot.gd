@@ -98,7 +98,7 @@ func sell_item():
 				break
 	
 	if not in_shop_zone:
-		print("You must stand in the shop zone to sell!")
+		DevMenu.add_log("You must stand in the shop zone to sell!")
 		return
 
 	# 2. Check if UI is open

@@ -57,9 +57,8 @@ func request_ui_refresh():
 
 # --- REFACTORED ITEM MANAGEMENT ---
 func add_item(item: ItemData) -> bool:
-	# 1. Check for duplicate uniques BEFORE adding
 	if _would_cause_duplicate_unique(item):
-		print("Cannot equip: Unique passive conflict!")
+		DevMenu.add_log("Cannot equip: Unique passive conflict!")
 		return false
 
 	for i in range(max_slots):

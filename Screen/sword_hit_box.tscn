@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://c1nt2mkrd8j4i" path="res://Scripts/HitBoxSkills/SkillHitbox.gd" id="1_8j521"]
 
 [node name="SwordHitBox" type="Area2D"]
-collision_mask = 10
+collision_layer = 0
+collision_mask = 31
 script = ExtResource("1_8j521")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]

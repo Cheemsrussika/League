@@ -205,7 +205,7 @@ func _complete_attack():
 		if dist <= get_total(Stat.RANGE) + 50.0:
 			perform_auto_attack_hit(current_target)
 		else:
-			print("Missed! Target moved out of range.")
+			DevMenu.add_log("Missed! Target moved out of range.")
 	
 	var aps = max(0.01, get_total(Stat.AS))
 	var total_time = 1.0 / aps
@@ -298,7 +298,7 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 	if is_crit:
 		# Multiply the base amount by the unit's Crit Damage stat (e.g., 1.75 or 2.0)
 		final_amount *= get_total(Stat.CRIT_DMG) 
-		print("CRITICAL HIT! Damage increased to: ", final_amount)
+		DevMenu.add_log("CRITICAL HIT! Damage increased to: %s"% final_amount)
 
 	# --- 2. SEND DAMAGE TO TARGET ---
 	# Pass final_amount instead of amount!
@@ -582,7 +582,7 @@ func level_up():
 	_trigger_passive_effects("on_level_up", { "new_level": level })
 	_on_inventory_updated() 
 	level_updated.emit(level)
-	print(name, " leveled up to ", level, "!")
+	DevMenu.add_log("%s leveled up to %s!"% [name, level])
 
 # --- UTILS ---
 func get_current_move_speed() -> float: return get_total(Stat.MS) 
@@ -613,7 +613,9 @@ func add_gold(amount: int):
 		get_tree().current_scene.add_child(text)
 		text.start(amount, global_position, "gold", false)
 
-func die(_killer = null): unit_died.emit(self)
+func die(_killer = null): 
+	super.die(_killer)
+	queue_free()
 func is_ranged() -> bool: return get_total(Stat.RANGE) > 300.0
 func _refresh_ui_display():
 	var ui_text = "[center][b]STATS[/b][/center]\n"

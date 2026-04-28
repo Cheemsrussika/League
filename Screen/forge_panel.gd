@@ -96,7 +96,8 @@ func _attempt_craft(target_item: ItemData):
 	var player = GameManager.player_champion
 	var backpack = player.get_node_or_null("BackpackComponent")
 	if not backpack: return
-
+	if not backpack.can_purchase(target_item):
+		return # DevMenu log is handled inside can_purchase
 	if player.gold < target_item.cost:
 		DevMenu.add_log("Not enough gold to pay the forging fee! Need: %s" % target_item.cost)
 		return

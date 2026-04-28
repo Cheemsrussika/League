@@ -15,13 +15,13 @@ func _process(_delta):
 		_setup_connection()
 
 func _setup_connection():
-	print("Gold UI: Found Champion ", champion.name)
+	DevMenu.add_log("Gold UI: Found Champion %s"% champion.name)
 	
 	if champion.has_signal("gold_updated"):
 		champion.gold_updated.connect(_on_gold_updated)
 		_on_gold_updated(champion.gold)
 	else:
-		print("Error: Champion is missing 'gold_updated' signal")
+		DevMenu.add_log("Error: Champion is missing 'gold_updated' signal")
 
 func _on_gold_updated(amount: float):
 	var gold_icon = StatStyle.get_icon_tag("gold", 18)

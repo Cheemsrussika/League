@@ -41,7 +41,7 @@ func _on_button_gui_input(event):
 				slot_double_clicked.emit()
 				get_tree().call_group("shop_buttons", "update_affordability")
 			else:
-				print("The slot is empty")
+				DevMenu.add_log("The slot is empty")
 			
 
 # --- DRAG AND DROP MAGIC ---

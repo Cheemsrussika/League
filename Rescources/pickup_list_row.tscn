@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://br5cju58xvaj3"]
+
+[ext_resource type="Script" uid="uid://bh7svafln3jsb" path="res://pickup_list_row.gd" id="1_o7lwg"]
+
+[node name="PickupListRow" type="HBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_o7lwg")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="AmountLabel" type="Label" parent="."]
+layout_mode = 2
+
+[node name="PickupButton" type="Button" parent="."]
+layout_mode = 2

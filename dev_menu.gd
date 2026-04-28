@@ -51,8 +51,7 @@ func add_log(message: String):
 	# Send to the UI log
 	if has_node("%LogText"):
 		%LogText.append_text(formatted_msg)
-		
-	# Still print to Godot's normal output!
+
 	print(message) 
 
 # --- STAT MODIFICATION ---

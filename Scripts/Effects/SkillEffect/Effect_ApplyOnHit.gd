@@ -47,5 +47,5 @@ func on_execute(caster: Node2D, skill_level: int, _target_data: Dictionary, _ref
 			for key in extra_data:
 				if key in status_node:
 					status_node.set(key, extra_data[key])
+			DevMenu.add_log("On hit status applied: %s (%s :%s)"%[status_id,base_power,damage_type])
 			
-			print("On-Hit Status Applied: ", status_id, " (", base_power, " ", damage_type, ")")

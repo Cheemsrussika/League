@@ -81,6 +81,6 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 			"damage_type": damage_type,     # Burn and Cleaver need this
 			"category": final_category      # Burn needs this
 		}
-		print("dmage: ",total_dmg)
+
 		
 		caster.deal_damage(target, total_dmg, damage_type, final_category, is_a_crit, skill_context)

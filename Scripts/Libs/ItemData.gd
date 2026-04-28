@@ -1,6 +1,8 @@
 extends Resource
 class_name ItemData
 
+# Inside ItemData.gd
+@export var is_unique_item: bool = false 
 # Added QUEST_ITEM type
 enum ItemType { EQUIPMENT, MATERIAL, CONSUMABLE, QUEST_ITEM }
 @export var item_type: ItemType = ItemType.EQUIPMENT

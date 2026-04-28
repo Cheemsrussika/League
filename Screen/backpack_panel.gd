@@ -125,4 +125,4 @@ func _on_slot_double_clicked(backpack_index: int):
 		backpack_component.remove_item(item.item_name, 1)
 		
 	elif item.item_type == ItemData.ItemType.QUEST_ITEM:
-		print("Cannot use quest item directly from backpack!")
+		DevMenu.add_log("Cannot use quest item directly from backpack!")

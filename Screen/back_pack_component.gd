@@ -73,7 +73,17 @@ func remove_item(item_name: String, amount: int) -> bool:
 				return true
 				
 	return false
-
+# 1. FIXED: The check for the Shop/Forge
+func can_purchase(item: ItemData) -> bool:
+	if item.is_unique_item:
+		# Loop through 'slots', not 'items'
+		for slot_data in slots:
+			# Check if slot has data, then check the 'item' key inside the dictionary
+			if slot_data != null and slot_data.item.item_name == item.item_name:
+				DevMenu.add_log("You already own a %s!" % item.item_name)
+				return false
+	return true
+	
 # --- HELPER: COUNT ITEMS ---
 func count_item(item_name: String) -> int:
 	var total = 0

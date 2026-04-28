@@ -46,4 +46,3 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 		elif "current_hp" in target:
 			target.current_hp = min(target.current_hp + amount, target.get_total(Unit.Stat.HP))
 			
-		print("Healed for: ", amount)

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c3enltjpc2lsd" path="res://Screen/MerchantZone.gd" id="1_iarww"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xeh"]
-size = Vector2(340.5, 270.5)
+size = Vector2(320, 256)
 
 [node name="Shop" type="Area2D" groups=["shop_zone"]]
 script = ExtResource("1_iarww")

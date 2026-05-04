@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_dtbbb"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_kt5gy"]
-[ext_resource type="Script" uid="uid://c8a81lq5siamh" path="res://Rescources/LootBag.gd" id="3_e8c3x"]
+[ext_resource type="Script" uid="uid://c8a81lq5siamh" path="res://Scripts/UI/LootBag.gd" id="3_e8c3x"]
 
 [resource]
 script = ExtResource("3_e8c3x")

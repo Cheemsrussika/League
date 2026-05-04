@@ -9,18 +9,21 @@ class_name MonsterCamp
 @export_subgroup("Melee Monsters")
 @export var melee_scene: PackedScene
 @export var melee_count: int = 2
-@export var melee_loot: Array[ItemData] = []
+@export var melee_equipment: Array[ItemData] = [] # NEW: Items added to inventory for STATS
+@export var melee_loot: Array[ItemData] = []      # EXISTING: Items that drop on death
 @export var melee_chances: Array[float] = []
 
 @export_subgroup("Ranged Monsters")
 @export var ranged_scene: PackedScene
 @export var ranged_count: int = 1
+@export var ranged_equipment: Array[ItemData] = []
 @export var ranged_loot: Array[ItemData] = []
 @export var ranged_chances: Array[float] = []
 
 @export_subgroup("Siege/Elite Monsters")
 @export var siege_scene: PackedScene
 @export var siege_count: int = 0
+@export var siege_equipment: Array[ItemData] = []
 @export var siege_loot: Array[ItemData] = []
 @export var siege_chances: Array[float] = []
 
@@ -59,22 +62,22 @@ func spawn_camp():
 
 	var current_point_idx = 0
 	
-	# Spawn Melee
+	# Spawn Melee (Passing equipment AND loot)
 	for i in range(melee_count):
-		_create_monster(melee_scene, melee_loot, melee_chances, current_point_idx)
+		_create_monster(melee_scene, melee_equipment, melee_loot, melee_chances, current_point_idx)
 		current_point_idx += 1
 		
 	# Spawn Ranged
 	for i in range(ranged_count):
-		_create_monster(ranged_scene, ranged_loot, ranged_chances, current_point_idx)
+		_create_monster(ranged_scene, ranged_equipment, ranged_loot, ranged_chances, current_point_idx)
 		current_point_idx += 1
 		
 	# Spawn Siege
 	for i in range(siege_count):
-		_create_monster(siege_scene, siege_loot, siege_chances, current_point_idx)
+		_create_monster(siege_scene, siege_equipment, siege_loot, siege_chances, current_point_idx)
 		current_point_idx += 1
 
-func _create_monster(scene: PackedScene, loot: Array, chances: Array, p_idx: int):
+func _create_monster(scene: PackedScene, equipment: Array, loot: Array, chances: Array, p_idx: int):
 	if not scene: return
 	
 	var monster = scene.instantiate()
@@ -86,14 +89,31 @@ func _create_monster(scene: PackedScene, loot: Array, chances: Array, p_idx: int
 	else:
 		monster.position = Vector2(randf_range(-50, 50), randf_range(-50, 50))
 	
-	# LOOT INJECTION (The Fallback Logic)
+	# 1. LOOT INJECTION (Your original code, untouched)
 	if not loot.is_empty():
 		monster.set("drop_items", loot.duplicate())
 		monster.set("drop_chances", chances.duplicate())
 	
-	# Init and Connect
+	# 2. Init Level Scaling First
 	if monster.has_method("initialize_stats"):
 		monster.initialize_stats(current_camp_level)
+
+	# 3. EQUIPMENT INJECTION (Add items to inventory -> Calculate Stats -> Stop)
+	if not equipment.is_empty():
+		var inv = monster.get("inventory")
+		if inv != null and inv.has_method("add_item"):
+			for item in equipment:
+				inv.add_item(item)
+			
+			if monster.has_method("recalculate_stats"):
+				monster.recalculate_stats()
+				# Ensure the monster gets the bonus Max HP immediately
+				if "current_health" in monster:
+					monster.current_health = monster.get_total(Unit.Stat.HP)
+					if monster.has_method("_update_health_bar"):
+						monster._update_health_bar()
+
+	# Connect and track
 	monster.unit_died.connect(_on_monster_died)
 	living_monsters.append(monster)
 
@@ -112,3 +132,9 @@ func start_respawn_timer():
 func is_source_allowed(source_unit: Node2D) -> bool:
 	if pit_area: return pit_area.overlaps_body(source_unit)
 	return global_position.distance_to(source_unit.global_position) <= 450.0
+
+func alert_pack(target: Node, caller: Node):
+	for monster in living_monsters:
+		if is_instance_valid(monster) and monster != caller:
+			if monster.current_state != Monster.State.COMBAT:
+				monster.aggro_onto(target)

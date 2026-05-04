@@ -1,0 +1,117 @@
+[gd_scene load_steps=14 format=3 uid="uid://cv51hvtkc062u"]
+
+[ext_resource type="PackedScene" uid="uid://nhff3k7as7cr" path="res://Screen/shop_panel.tscn" id="1_gdtec"]
+[ext_resource type="PackedScene" uid="uid://das0xecbq73o8" path="res://Screen/forge_panel.tscn" id="2_p0blb"]
+[ext_resource type="PackedScene" uid="uid://n6j4it1xw6de" path="res://Screen/Inventorys.tscn" id="3_men4w"]
+[ext_resource type="PackedScene" uid="uid://0ci8hcfgf7ci" path="res://Screen/backpack_panel.tscn" id="4_o71ym"]
+[ext_resource type="PackedScene" uid="uid://bt6bcw53aub00" path="res://Screen/consumale_inventory.tscn" id="5_hoylw"]
+[ext_resource type="Script" uid="uid://dtgrxjbcvbpgb" path="res://Scripts/UI/StatDisplayUI.gd" id="6_3os3l"]
+[ext_resource type="Script" uid="uid://cwjqrmdplxmtp" path="res://Scripts/UI/GoldDisplay.gd" id="7_0o8oy"]
+[ext_resource type="Script" uid="uid://cdqw43cfvb8kb" path="res://Scripts/UI/ItemSlots/item_tooltip.gd" id="8_edd2n"]
+[ext_resource type="PackedScene" uid="uid://dlv118fpxky34" path="res://Screen/inspect_panel.tscn" id="9_jdk88"]
+[ext_resource type="PackedScene" uid="uid://umd2uo2w6npt" path="res://Scripts/UI/PickupListPanel.tscn" id="10_us4ta"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkpe8"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+bg_color = Color(1, 1, 1, 0.20784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr40m"]
+bg_color = Color(0.6, 0.6, 0.6, 0.6745098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh7kg"]
+bg_color = Color(0, 0, 0, 0.50980395)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="WindowUI" type="Node" parent="."]
+
+[node name="SHOPS" type="Control" parent="WindowUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 439.0
+offset_top = 50.0
+offset_right = 479.0
+offset_bottom = 90.0
+mouse_filter = 2
+
+[node name="ShopPanel" parent="WindowUI/SHOPS" instance=ExtResource("1_gdtec")]
+visible = false
+layout_mode = 0
+offset_left = -55.0
+offset_right = 1120.0
+
+[node name="ForgePanel" parent="WindowUI/SHOPS" instance=ExtResource("2_p0blb")]
+visible = false
+layout_mode = 0
+offset_left = -56.0
+offset_right = 1119.0
+
+[node name="PanelContainer" parent="WindowUI" instance=ExtResource("3_men4w")]
+
+[node name="BackpackPanel" parent="WindowUI" instance=ExtResource("4_o71ym")]
+mouse_filter = 0
+
+[node name="ConsumaleInventory" parent="WindowUI" instance=ExtResource("5_hoylw")]
+offset_left = 62.0
+offset_top = 701.0
+offset_right = 132.0
+offset_bottom = 771.0
+
+[node name="StatsDisplay" type="Node" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="StatsDisplay"]
+z_index = 4
+offset_left = 42.0
+offset_top = 50.0
+offset_right = 362.0
+offset_bottom = 590.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_jkpe8")
+script = ExtResource("6_3os3l")
+
+[node name="Label" type="RichTextLabel" parent="StatsDisplay"]
+z_index = 4
+offset_left = 42.0
+offset_top = 590.0
+offset_right = 363.0
+offset_bottom = 613.0
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("7_0o8oy")
+
+[node name="ItemTooltip" type="RichTextLabel" parent="StatsDisplay" groups=["item_tooltip"]]
+z_index = 4
+offset_left = 50.0
+offset_top = 778.0
+offset_right = 287.0
+offset_bottom = 954.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_sr40m")
+bbcode_enabled = true
+fit_content = true
+script = ExtResource("8_edd2n")
+
+[node name="TooltipLabel" type="RichTextLabel" parent="." groups=["shop_tooltip"]]
+z_index = 5
+offset_left = -1817.0
+offset_top = 1309.0
+offset_right = -1542.0
+offset_bottom = 1332.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_lh7kg")
+bbcode_enabled = true
+fit_content = true
+
+[node name="InspectPanel" parent="." instance=ExtResource("9_jdk88")]
+offset_left = 1444.0
+offset_top = 658.0
+offset_right = 1916.0
+offset_bottom = 1083.0
+
+[node name="PickupListPanels" parent="." instance=ExtResource("10_us4ta")]
+offset_left = 910.0
+offset_top = 740.0
+offset_right = 1125.0
+offset_bottom = 1017.0

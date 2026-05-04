@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_qx3il"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_scw6c"]
-[ext_resource type="Texture2D" uid="uid://dwlxoh0h2woye" path="res://Icons/Texture2D/칩1.png" id="2_u7y42"]
+[ext_resource type="Texture2D" uid="uid://cbj2r5l54g7o4" path="res://Icons/Ingredient Icons/raw_gold.png" id="2_u7y42"]
 
 [resource]
 script = ExtResource("2_scw6c")

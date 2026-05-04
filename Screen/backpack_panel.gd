@@ -120,9 +120,23 @@ func _on_slot_double_clicked(backpack_index: int):
 		if inventory and inventory.add_item(item):
 			backpack_component.remove_item(item.item_name, 1)
 			
-			
 	elif item.item_type == ItemData.ItemType.CONSUMABLE:
-		backpack_component.remove_item(item.item_name, 1)
+		var potion_inventory = player.get_node_or_null("ConsumablesComponent")
+		if not potion_inventory: return
 		
+		var stack_amount = slot_data.amount 
+		var amount_to_send = 1 # Default to 1
+		
+		# Check if Shift is held down to send 5 at a time
+		if Input.is_key_pressed(KEY_SHIFT):
+			amount_to_send = 5
+			
+		# Safety check: Don't try to send 5 if we only have 3 left!
+		amount_to_send = min(amount_to_send, stack_amount)
+		
+		# Pass the calculated amount to BOTH functions
+		if potion_inventory.add_consumable(item, amount_to_send):
+			backpack_component.remove_item(item.item_name, amount_to_send)
+			
 	elif item.item_type == ItemData.ItemType.QUEST_ITEM:
 		DevMenu.add_log("Cannot use quest item directly from backpack!")

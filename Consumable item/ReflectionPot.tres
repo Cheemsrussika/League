@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://ccfagdxtyy56t"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_d4otw"]
+[ext_resource type="Script" uid="uid://bgr7ubun8rm1c" path="res://Consumable item/Effect/ElixirEffect.gd" id="2_k2t64"]
+[ext_resource type="PackedScene" uid="uid://bj1lbiqwj7npe" path="res://Consumable item/EffectScreen/BrambleElixirBuff.tscn" id="2_p0o20"]
+[ext_resource type="Texture2D" uid="uid://bevrmbwk8ktc0" path="res://Icons/Texture2D/01.png" id="2_w8r0b"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_k2t64"]
+
+[sub_resource type="Resource" id="Resource_p0o20"]
+script = ExtResource("2_k2t64")
+buff_scene = ExtResource("2_p0o20")
+metadata/_custom_type_script = "uid://bgr7ubun8rm1c"
+
+[resource]
+script = ExtResource("3_k2t64")
+item_type = 2
+item_name = "Reflection Pot"
+icon = ExtResource("2_w8r0b")
+cost = 100
+effects = Array[ExtResource("1_d4otw")]([SubResource("Resource_p0o20")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

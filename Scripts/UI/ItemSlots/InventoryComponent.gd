@@ -1,6 +1,8 @@
 extends Node
 class_name InventoryComponent
 
+
+signal item_went_on_cooldown(slot_index: int, duration: float)
 signal inventory_changed
 
 @export var max_slots: int = 6 # Set to 6 to match your UI!
@@ -25,8 +27,41 @@ func swap_items(index_a: int, index_b: int):
 	items[index_a] = items[index_b]
 	items[index_b] = temp
 	inventory_changed.emit()
-	
+# --- ADD THIS TO INVENTORYCOMPONENT.GD ---
 
+func use_active_slot(slot_index: int):
+	if slot_index < 0 or slot_index >= items.size(): return
+	var item = items[slot_index]
+	if item == null or not item.effects: return
+	
+	var owner_node = get_parent()
+	var current_time = Time.get_ticks_msec()
+	
+	for effect in item.effects:
+		# Check if this effect is an "Active" ability
+		if effect.has_method("on_active_use"):
+			# Handle Cooldowns
+			if effect.id != "" and effect.cooldown > 0:
+				var next_ready_time = effect_cooldowns.get(effect.id, 0.0)
+				if current_time < next_ready_time:
+					DevMenu.add_log("Item is on cooldown!")
+					continue
+				# Assuming effect.cooldown is in milliseconds. If it's seconds, multiply by 1000!
+				effect_cooldowns[effect.id] = current_time + (effect.cooldown * 1000)
+				item_went_on_cooldown.emit(slot_index, effect.cooldown)
+			effect.call("on_active_use", owner_node)
+			DevMenu.add_log("Used active item: " + item.item_name)
+			
+			# Optional: Emit a signal if you want the UI slot to show a cooldown sweep animation
+			# item_went_on_cooldown.emit(slot_index, effect.cooldown)
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory_1"): use_active_slot(0)
+	elif event.is_action_pressed("inventory_2"): use_active_slot(1)
+	elif event.is_action_pressed("inventory_3"): use_active_slot(2)
+	elif event.is_action_pressed("inventory_4"): use_active_slot(3)
+	elif event.is_action_pressed("inventory_5"): use_active_slot(4)
+	elif event.is_action_pressed("inventory_6"): use_active_slot(5)
+	elif event.is_action_pressed("inventory_7"): use_active_slot(6)
 # --- TRIGGER FUNCTIONS REMAIN UNCHANGED ---
 func trigger_item_passive(item: ItemData, trigger_name: String):
 	var owner_node = get_parent()
@@ -118,3 +153,34 @@ func _would_cause_duplicate_unique(new_item: ItemData) -> bool:
 				if eff.is_unique and eff.id in unique_ids_found:
 					return true
 	return false
+# --- SAVE/LOAD SYSTEM ---
+func get_save_data() -> Array:
+	var save_array = []
+	for item in items:
+		if item != null:
+			save_array.append(item.item_id)
+		else:
+			save_array.append("") # Empty slot
+	return save_array
+
+func load_save_data(saved_array: Array):
+	# Clear current items safely
+	for i in range(max_slots):
+		remove_item(i)
+		
+	for i in range(max_slots):
+		if i < saved_array.size() and saved_array[i] != "":
+			var item_resource = ItemDB.get_item_resource(saved_array[i])
+			if item_resource:
+				var unique_item = item_resource.duplicate(true)
+				items[i] = unique_item
+				trigger_item_passive(unique_item, "on_equip")
+				
+				# Re-link active effects for the tooltip/use
+				if unique_item.effects:
+					for effect in unique_item.effects:
+						if effect.has_method("get_tooltip_extra"):
+							unique_item.active_effect_instance = effect
+							break
+							
+	inventory_changed.emit()

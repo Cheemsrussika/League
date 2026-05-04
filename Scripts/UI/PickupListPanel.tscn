@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://umd2uo2w6npt"]
+
+[ext_resource type="Script" uid="uid://8effb0jbxi1i" path="res://Scripts/UI/item_list.gd" id="1_yix7f"]
+
+[node name="PickupListPanels" type="Panel"]
+offset_right = 215.0
+offset_bottom = 277.0
+script = ExtResource("1_yix7f")
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 74.0
+offset_top = 256.0
+offset_right = 133.0
+offset_bottom = 278.0
+text = "Close"
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -29.5
+offset_right = 29.5
+offset_bottom = 14.0
+grow_horizontal = 2
+text = "name"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 26.0
+offset_right = -2.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemList" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2

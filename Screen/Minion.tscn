@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c0617ugrmsrr8" path="res://Icons/RedSword_Images/Texture2D/Soft.png" id="2_ps5dh"]
 [ext_resource type="Script" uid="uid://dsh5wwt03h1ua" path="res://Scripts/GameMob/minions_ai.gd" id="3_53gvd"]
 [ext_resource type="Script" uid="uid://dqrydoqgqx6x8" path="res://Screen/loot_table_component.gd" id="4_uvkha"]
-[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="5_h1sis"]
+[ext_resource type="Script" uid="uid://b02ds6kwg5inp" path="res://Scripts/UI/ItemSlots/InventoryComponent.gd" id="5_uvkha"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cie5s"]
 radius = 57.271286
@@ -16,6 +16,7 @@ radius = 54.74486
 collision_layer = 8
 collision_mask = 11
 input_pickable = true
+motion_mode = 1
 script = ExtResource("1_ktxfn")
 base_stats = {
 "Energy": 0.0,
@@ -68,7 +69,9 @@ script = ExtResource("3_53gvd")
 
 [node name="LootTableComponent" type="Node" parent="."]
 script = ExtResource("4_uvkha")
-drop_items = Array[ExtResource("5_h1sis")]([null])
-drop_chances = null
 max_drops_per_death = null
 drop_scatter_radius = null
+
+[node name="InventoryComponent" type="Node2D" parent="." groups=["player"]]
+script = ExtResource("5_uvkha")
+max_slots = 10

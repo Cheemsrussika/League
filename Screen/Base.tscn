@@ -1,63 +1,38 @@
-[gd_scene load_steps=35 format=4 uid="uid://b0a1owia3oyvo"]
+[gd_scene load_steps=40 format=4 uid="uid://b0a1owia3oyvo"]
 
 [ext_resource type="Script" uid="uid://c4cy16gifhogl" path="res://Scripts/World.gd" id="1_cfqj6"]
 [ext_resource type="PackedScene" uid="uid://6cscgq2y2g21" path="res://Screen/warrior.tscn" id="2_i61t5"]
-[ext_resource type="PackedScene" uid="uid://das0xecbq73o8" path="res://Screen/forge_panel.tscn" id="3_oo1lh"]
-[ext_resource type="PackedScene" uid="uid://nhff3k7as7cr" path="res://Screen/shop_panel.tscn" id="3_qhspy"]
-[ext_resource type="Script" uid="uid://dtgrxjbcvbpgb" path="res://Scripts/UI/StatDisplayUI.gd" id="5_c08ud"]
-[ext_resource type="Script" uid="uid://cwjqrmdplxmtp" path="res://Scripts/UI/GoldDisplay.gd" id="8_x8w0l"]
-[ext_resource type="Script" uid="uid://c2uhtaydlbtft" path="res://Scripts/UI/ItemSlots/InventoryUI.gd" id="9_f5qwj"]
-[ext_resource type="PackedScene" uid="uid://dh1kg7jb5q3p1" path="res://Screen/ItemSlot.tscn" id="10_ky6x0"]
-[ext_resource type="PackedScene" uid="uid://umd2uo2w6npt" path="res://Rescources/PickupListPanel.tscn" id="12_4yv0o"]
 [ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="12_c2424"]
-[ext_resource type="PackedScene" uid="uid://w0j22gt8s83j" path="res://Rescources/havestable_unit.tscn" id="13_c2424"]
+[ext_resource type="PackedScene" uid="uid://w0j22gt8s83j" path="res://Screen/havestable_unit.tscn" id="13_c2424"]
+[ext_resource type="PackedScene" uid="uid://npcpkuksuhat" path="res://Screen/save_load_menu.tscn" id="14_2ix4f"]
 [ext_resource type="Texture2D" uid="uid://cjakqn4vqixj4" path="res://Icons/TileSet/BetaFloor.png" id="14_b650v"]
+[ext_resource type="Resource" uid="uid://bteiaxdulb84w" path="res://Rescources/Champs/Test.tres" id="15_q7nm4"]
 [ext_resource type="PackedScene" uid="uid://b8t4l5fufhnkd" path="res://Screen/Shop.tscn" id="16_fwvyv"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="19_11frw"]
 [ext_resource type="Resource" uid="uid://bk50dypoe2thl" path="res://Ingredients/TestIngredient1.tres" id="19_lh7kg"]
 [ext_resource type="Resource" uid="uid://7rf0oosuocpi" path="res://Ingredients/TestIngredient2.tres" id="20_4yv0o"]
 [ext_resource type="PackedScene" uid="uid://db7u67k2jtjjj" path="res://Screen/forge.tscn" id="20_lh7kg"]
-[ext_resource type="Script" uid="uid://c8a81lq5siamh" path="res://Rescources/LootBag.gd" id="25_n1fyg"]
-[ext_resource type="PackedScene" uid="uid://dlv118fpxky34" path="res://Screen/inspect_panel.tscn" id="25_tepqr"]
+[ext_resource type="Resource" uid="uid://d24tbxhlqoosq" path="res://Item/Stater/GuardiansBlade.tres" id="22_l15fi"]
+[ext_resource type="Resource" uid="uid://dhukl1qu272av" path="res://Item/Stater/Guardian's ORb.tres" id="23_qwdbk"]
+[ext_resource type="Resource" uid="uid://xxa48bfat4mp" path="res://Consumable item/HealthPot.tres" id="24_k2oju"]
+[ext_resource type="Script" uid="uid://c8a81lq5siamh" path="res://Scripts/UI/LootBag.gd" id="25_n1fyg"]
+[ext_resource type="Resource" uid="uid://ccfagdxtyy56t" path="res://Consumable item/ReflectionPot.tres" id="25_qwdbk"]
 [ext_resource type="Resource" uid="uid://y24rdnk8ofxf" path="res://Item/Legend/RiftMaker.tres" id="26_cqxy2"]
-[ext_resource type="Script" uid="uid://cdqw43cfvb8kb" path="res://Scripts/UI/ItemSlots/item_tooltip.gd" id="40_2ix4f"]
+[ext_resource type="Resource" uid="uid://c6jbbv5q8senp" path="res://Consumable item/StrenghtPotion.tres" id="26_k2oju"]
+[ext_resource type="Resource" uid="uid://c08kuwkci3arx" path="res://Item/Epic/Tiamat.tres" id="27_3aoee"]
+[ext_resource type="PackedScene" uid="uid://y31re3jctavs" path="res://Screen/monster_camp.tscn" id="37_cfqj6"]
+[ext_resource type="PackedScene" uid="uid://b2rul6opysou6" path="res://Screen/SlimeNormal.tscn" id="38_i61t5"]
+[ext_resource type="PackedScene" uid="uid://c3g4myqhm8hpb" path="res://Screen/fire_slime_normal.tscn" id="39_8i3vq"]
+[ext_resource type="PackedScene" uid="uid://dutmt2p4uggnv" path="res://Screen/SlimeNormal2.tscn" id="39_ghclr"]
+[ext_resource type="PackedScene" uid="uid://dfy31dfkgea4m" path="res://Screen/fire_slime_normal_2.tscn" id="40_0cdmu"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="41_2ix4f"]
+[ext_resource type="Script" uid="uid://cbdb2dledsdi" path="res://Scripts/Effects/SkillEffect/Skill_Damage.gd" id="42_sr40m"]
+[ext_resource type="PackedScene" uid="uid://b4vf45eob2247" path="res://level_transition.tscn" id="43_sr40m"]
 [ext_resource type="PackedScene" uid="uid://ptaf7yvgd4q7" path="res://Screen/Minion.tscn" id="47_l1xab"]
 [ext_resource type="PackedScene" uid="uid://b15dqfi6udv6p" path="res://Screen/enemy_champion.tscn" id="66_6xwof"]
 [ext_resource type="PackedScene" uid="uid://n7uw18mnnif0" path="res://Screen/tower.tscn" id="88_eco1f"]
 [ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="93_7e3vi"]
 [ext_resource type="PackedScene" uid="uid://bc5xg6ua1upbt" path="res://Screen/minion_spawner.tscn" id="100_fstwv"]
-[ext_resource type="PackedScene" uid="uid://0ci8hcfgf7ci" path="res://Screen/backpack_panel.tscn" id="108_8r6bt"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11frw"]
-content_margin_left = 2.0
-content_margin_top = 2.0
-content_margin_right = 2.0
-content_margin_bottom = 2.0
-bg_color = Color(0.74415547, 0.57367885, 1.92523e-07, 1)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 15.0
-expand_margin_right = 15.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jkpe8"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-bg_color = Color(1, 1, 1, 0.20784314)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sr40m"]
-bg_color = Color(0.6, 0.6, 0.6, 0.6745098)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lh7kg"]
-bg_color = Color(0, 0, 0, 0.50980395)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pqdyi"]
 texture = ExtResource("14_b650v")
@@ -83,6 +58,8 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_pqdyi")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3aoee"]
+
 [sub_resource type="Curve2D" id="Curve2D_cqp54"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 242, -107, 0, 0, 0, 0, -214, 21, 0, 0, 0, 0, -1237, -107)
@@ -94,112 +71,13 @@ script = ExtResource("25_n1fyg")
 gold_reward = 100
 metadata/_custom_type_script = "uid://c8a81lq5siamh"
 
+[sub_resource type="Resource" id="Resource_4da42"]
+script = ExtResource("42_sr40m")
+metadata/_custom_type_script = "uid://cbdb2dledsdi"
+
 [node name="Base" type="Node2D"]
 script = ExtResource("1_cfqj6")
 warrior_scene = ExtResource("2_i61t5")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="WindowUI" type="Node" parent="CanvasLayer"]
-
-[node name="SHOPS" type="Control" parent="CanvasLayer/WindowUI"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 439.0
-offset_top = 50.0
-offset_right = 479.0
-offset_bottom = 90.0
-mouse_filter = 2
-
-[node name="ShopPanel" parent="CanvasLayer/WindowUI/SHOPS" instance=ExtResource("3_qhspy")]
-visible = false
-layout_mode = 0
-offset_left = -55.0
-offset_right = 1120.0
-
-[node name="ForgePanel" parent="CanvasLayer/WindowUI/SHOPS" instance=ExtResource("3_oo1lh")]
-visible = false
-layout_mode = 0
-offset_left = -56.0
-offset_right = 1119.0
-
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/WindowUI"]
-z_index = 4
-offset_left = 60.0
-offset_top = 955.0
-offset_right = 130.0
-offset_bottom = 1025.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_11frw")
-
-[node name="InventoryIcons" type="HBoxContainer" parent="CanvasLayer/WindowUI/PanelContainer" node_paths=PackedStringArray("info_panel") groups=["player"]]
-z_index = 5
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 20
-script = ExtResource("9_f5qwj")
-slot_scene = ExtResource("10_ky6x0")
-info_panel = NodePath("../../../StatsDisplay/ItemTooltip")
-
-[node name="BackpackPanel" parent="CanvasLayer/WindowUI" instance=ExtResource("108_8r6bt")]
-mouse_filter = 0
-
-[node name="StatsDisplay" type="Node" parent="CanvasLayer"]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/StatsDisplay"]
-z_index = 4
-offset_left = 42.0
-offset_top = 50.0
-offset_right = 362.0
-offset_bottom = 590.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_jkpe8")
-script = ExtResource("5_c08ud")
-
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/StatsDisplay"]
-z_index = 4
-offset_left = 42.0
-offset_top = 590.0
-offset_right = 363.0
-offset_bottom = 613.0
-bbcode_enabled = true
-fit_content = true
-script = ExtResource("8_x8w0l")
-
-[node name="ItemTooltip" type="RichTextLabel" parent="CanvasLayer/StatsDisplay"]
-z_index = 4
-offset_left = 50.0
-offset_top = 778.0
-offset_right = 287.0
-offset_bottom = 954.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_sr40m")
-bbcode_enabled = true
-fit_content = true
-script = ExtResource("40_2ix4f")
-
-[node name="TooltipLabel" type="RichTextLabel" parent="CanvasLayer" groups=["shop_tooltip"]]
-z_index = 5
-offset_left = -1817.0
-offset_top = 1309.0
-offset_right = -1542.0
-offset_bottom = 1332.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_lh7kg")
-bbcode_enabled = true
-fit_content = true
-
-[node name="InspectPanel" parent="CanvasLayer" instance=ExtResource("25_tepqr")]
-offset_left = 1444.0
-offset_top = 658.0
-offset_right = 1916.0
-offset_bottom = 1083.0
-
-[node name="PickupListPanels" parent="CanvasLayer" instance=ExtResource("12_4yv0o")]
-offset_left = 910.0
-offset_top = 740.0
-offset_right = 1125.0
-offset_bottom = 1017.0
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -5
@@ -211,23 +89,53 @@ offset_left = -32.0
 offset_top = -32.0
 offset_right = 32.0
 offset_bottom = 32.0
+mouse_filter = 1
 color = Color(0, 0, 0, 1)
 
-[node name="EnemyChampion" parent="." instance=ExtResource("66_6xwof")]
+[node name="SaveLoadMenu" parent="." instance=ExtResource("14_2ix4f")]
+offset_left = 366.0
+offset_top = 802.0
+offset_right = 486.0
+offset_bottom = 889.0
+
+[node name="WorldBorder" type="StaticBody2D" parent="."]
+position = Vector2(-3982, -118)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorder"]
+position = Vector2(557, 118)
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_3aoee")
+
+[node name="EnemyChampion" parent="." groups=["player"] instance=ExtResource("66_6xwof")]
 position = Vector2(192, -320)
 
-[node name="EnemyChampion2" parent="." instance=ExtResource("66_6xwof")]
-position = Vector2(3649, 193)
+[node name="MonsterCamp" parent="." instance=ExtResource("37_cfqj6")]
+position = Vector2(-306, 1746)
+melee_scene = ExtResource("38_i61t5")
+melee_equipment = Array[ExtResource("12_c2424")]([ExtResource("19_11frw")])
+ranged_scene = ExtResource("39_ghclr")
+ranged_count = 2
 
-[node name="AllyChampion" parent="." instance=ExtResource("66_6xwof")]
-position = Vector2(706, -321)
-team = 3
+[node name="Pos1" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(-209, -149)
+
+[node name="Pos2" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(159, -138)
+
+[node name="Pos3" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(153, 120)
+
+[node name="Pos4" type="Marker2D" parent="MonsterCamp"]
+position = Vector2(-214, 101)
 
 [node name="MinionSpawner" parent="." node_paths=PackedStringArray("spawn_point", "assigned_path") instance=ExtResource("100_fstwv")]
 position = Vector2(2460, 1687)
 spawn_interval = 15.0
 spawn_delay = 300.0
 melee_scene = ExtResource("47_l1xab")
+melee_equipped_items = Array[ExtResource("12_c2424")]([ExtResource("19_11frw")])
 ranged_count = 0
 spawn_point = NodePath("Marker2D")
 assigned_path = NodePath("Top")
@@ -242,12 +150,27 @@ position = Vector2(-3, 111)
 [node name="WaveTimer" type="Timer" parent="MinionSpawner"]
 one_shot = true
 
+[node name="EnemyChampion3" parent="." groups=["player"] instance=ExtResource("66_6xwof")]
+position = Vector2(313, -332)
+current_champion_data = ExtResource("15_q7nm4")
+unit_tags = Array[String](["undead"])
+
+[node name="EnemyChampion4" parent="." groups=["player"] instance=ExtResource("66_6xwof")]
+position = Vector2(242, -390)
+
+[node name="EnemyChampion2" parent="." groups=["player"] instance=ExtResource("66_6xwof")]
+position = Vector2(3649, 193)
+
+[node name="AllyChampion" parent="." groups=["player"] instance=ExtResource("66_6xwof")]
+position = Vector2(706, -321)
+team = 3
+
 [node name="Forge" parent="." instance=ExtResource("20_lh7kg")]
 position = Vector2(-192, 224)
 
 [node name="Shop" parent="." instance=ExtResource("16_fwvyv")]
-position = Vector2(-192, 672)
-available_items = Array[ExtResource("12_c2424")]([ExtResource("19_lh7kg"), ExtResource("20_4yv0o")])
+position = Vector2(-205, 683)
+available_items = Array[ExtResource("12_c2424")]([ExtResource("19_lh7kg"), ExtResource("20_4yv0o"), ExtResource("22_l15fi"), ExtResource("23_qwdbk"), ExtResource("24_k2oju"), ExtResource("25_qwdbk"), ExtResource("26_k2oju"), ExtResource("27_3aoee")])
 
 [node name="AllyTower" parent="." instance=ExtResource("88_eco1f")]
 position = Vector2(1940, 1)
@@ -260,7 +183,7 @@ unit_type = 3
 team = 1
 
 [node name="EnemyMinion" parent="." instance=ExtResource("47_l1xab")]
-position = Vector2(193, -639)
+position = Vector2(206, -722)
 drop_items = Array[ExtResource("12_c2424")]([null])
 drop_chances = Array[float]([0.0])
 team = 1
@@ -273,3 +196,29 @@ team = 3
 position = Vector2(761, 211)
 drop_items = Array[ExtResource("12_c2424")]([SubResource("Resource_w13fg"), ExtResource("26_cqxy2")])
 drop_chances = Array[float]([1.0, 1.0])
+
+[node name="Slime" parent="." instance=ExtResource("38_i61t5")]
+position = Vector2(553, 1253)
+
+[node name="Slime2" parent="." instance=ExtResource("39_ghclr")]
+position = Vector2(397, 1304)
+
+[node name="FireSlimeNormal" parent="." instance=ExtResource("39_8i3vq")]
+position = Vector2(395, 1415)
+
+[node name="FireSlimeNormal2" parent="." instance=ExtResource("40_0cdmu")]
+position = Vector2(1101, 1380)
+attack_range = 600.0
+attack_damage_delay = 0.0
+hop_rest_time = 1.0
+hop_speed_multiplier = 1.5
+attack_type = 1
+recovery_time = 0.0
+attack_effect = SubResource("Resource_4da42")
+
+[node name="LevelTransition" parent="." instance=ExtResource("43_sr40m")]
+position = Vector2(1304, 970)
+next_map_path = "uid://3dyh02jsb70u"
+spawn_marker_name = "Spawn_FromMap1"
+
+[node name="TestGround" type="Marker2D" parent="."]

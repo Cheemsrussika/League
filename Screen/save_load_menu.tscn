@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://npcpkuksuhat"]
+
+[ext_resource type="Script" uid="uid://c13bq8sf3rm7t" path="res://save_load_menu.gd" id="1_lmk5o"]
+
+[node name="SaveLoadMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 87.0
+script = ExtResource("1_lmk5o")
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 53.0
+offset_right = 51.0
+offset_bottom = 86.0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 54.0
+offset_right = 120.0
+offset_bottom = 87.0
+text = "Load"
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 3.0
+offset_right = 71.0
+offset_bottom = 17.0
+text = "Status"

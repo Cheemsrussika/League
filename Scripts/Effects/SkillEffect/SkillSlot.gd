@@ -10,35 +10,47 @@ func _process(delta: float):
 		cooldown_timer -= delta
 
 func activate(caster: Champion, target_data: Dictionary):
-	DevMenu.add_log("1. SkillSlot received activate command!")
-	
 	if skill_data == null: 
 		DevMenu.add_log("-> FAIL: skill_data is NULL! Did you put the Resource into the inspector?")
 		return 
 	if not skill_data.is_target_valid(target_data, caster):
 		DevMenu.add_log("-> FAIL: %s requires a valid target!"% skill_data.skill_name )
 		return
-	current_level=caster.level
+		
+	current_level = caster.level
+	
 	if cooldown_timer > 0: 
-		DevMenu.add_log("-> FAIL: %s is on cooldown!" %  skill_data.skill_name)
 		return 
 		
 	var lvl_idx = clamp(current_level - 1, 0, skill_data.base_cooldown.size() - 1)
 	var cost = skill_data.resource_cost[lvl_idx]
 	
-	# Safely check mana using your Unit.gd get_total method
-	# (Assuming you added a 'current_mana' variable. If not, bypass this check for now)
-	if "current_mana" in caster and caster.current_mana < cost:
-		DevMenu.add_log("-> FAIL: Not enough mana!")
+	# Check resources
+	if "current_resource" in caster and caster.current_resource < cost:
 		return 
-		
-	DevMenu.add_log("2. Checks passed! Setting cooldown and executing...")
 	
 	# Consume Resources & Set Cooldown
-	if "current_mana" in caster:
-		caster.current_mana -= cost
-	cooldown_timer = skill_data.base_cooldown[lvl_idx]
-	
-	# EXECUTE!
-	DevMenu.add_log("3. Calling skill_data.execute() NOW!")
+	if "current_resource" in caster:
+		caster.current_resource -= cost
+		
+	if skill_data.get("is_auto_attack") == true and caster.has_method("get_total"):
+		# Auto-attacks scale with Attack Speed (AS)
+		var aps = max(0.01, caster.get_total(caster.Stat.AS)) 
+		cooldown_timer = 1.0 / aps
+	else:
+		# Skills scale with Ability Haste (AH)
+		var base_cd = skill_data.base_cooldown[lvl_idx]
+		
+		if caster.has_method("get_total"):
+			var ah = max(0.0, caster.get_total(caster.Stat.AH))
+			# The standard formula: Base Cooldown * (100 / (100 + Ability Haste))
+			cooldown_timer = base_cd * (100.0 / (100.0 + ah))
+		else:
+			cooldown_timer = base_cd
 	skill_data.execute(caster, current_level, target_data)
+
+# ==========================================
+# --- MISSING HELPER FUNCTION ADDED HERE ---
+# ==========================================
+func is_ready() -> bool:
+	return skill_data != null and cooldown_timer <= 0.0

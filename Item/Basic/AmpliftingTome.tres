@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_qtj1u")
 item_tier = 2
+item_id = "magic_tome"
 item_name = "Amplifying Tome"
 icon = ExtResource("2_110xd")
 cost = 400

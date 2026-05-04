@@ -53,20 +53,28 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 				is_a_crit = true
 				
 		if effective_on_hit:
-			# 1. Prepare the context for items like Sheen
+			# 1. Prepare the context 
 			var on_hit_context = {
 				"target": target,
-				"damage": total_dmg,
-				"is_crit": false,
+				"damage": total_dmg, # Passive can modify this directly
+				"is_crit": is_a_crit,
 				"damage_type": damage_type,
-				"on_hit_mult": effective_mult
+				"on_hit_mult": effective_mult,
+				# ADD THIS: Create a fake bucket so passives don't crash!
+				"buckets": { damage_type: total_dmg } 
 			}
 
-			# 2. Trigger the passives that Sheen listens to
+			# 2. Trigger passives
 			caster._trigger_passive_effects("on_attack", on_hit_context)
 
-			# 3. Update damage in case Sheen added bonus damage to the context
-			total_dmg = on_hit_context["damage"]
+			# 3. Update damage in case a passive or item changed it
+			# We check both the flat 'damage' and the 'buckets' to be safe
+			if on_hit_context.has("buckets"):
+				total_dmg = 0
+				for type in on_hit_context["buckets"]:
+					total_dmg += on_hit_context["buckets"][type]
+			else:
+				total_dmg = on_hit_context["damage"]
 
 		var is_basic_attack = target_data.get("is_basic_attack", false)
 		var final_category = "attack" if is_basic_attack else "spell"
@@ -82,5 +90,13 @@ func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref:
 			"category": final_category      # Burn needs this
 		}
 
+# --- THE FIX ---
+		# Check if the CASTER is the player (who has the complex deal_damage math)
+		if caster.has_method("deal_damage"):
+			caster.deal_damage(target, total_dmg, damage_type, final_category, is_a_crit, skill_context)
 		
-		caster.deal_damage(target, total_dmg, damage_type, final_category, is_a_crit, skill_context)
+		# If the caster is a Monster, tell the target to take the damage directly!
+		else:
+			if target.has_method("take_damage"):
+				# FIX: We now pass all 3 required arguments: amount, type, and source!
+				target.take_damage(total_dmg, damage_type, caster)

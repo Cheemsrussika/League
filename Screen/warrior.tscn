@@ -8,9 +8,7 @@
 [ext_resource type="Script" uid="uid://r240qjp4jluq" path="res://Screen/interaction_area.gd" id="5_oxxa4"]
 [ext_resource type="Script" uid="uid://ba6mqqk6fxjel" path="res://Scripts/Effects/SkillEffect/SkillSlot.gd" id="5_x7b8u"]
 [ext_resource type="Script" uid="uid://pjk03w4eamjv" path="res://Screen/back_pack_component.gd" id="7_te21c"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_2olbg"]
-radius = 1.0
+[ext_resource type="Script" uid="uid://de0swnsrnv4d6" path="res://Screen/consumables_component.gd" id="9_n4rmn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1obmu"]
 radius = 32.0
@@ -24,11 +22,43 @@ shader_parameter/line_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1obmu"]
 bg_color = Color(0.6, 0.6, 0.6, 0.50980395)
 
-[node name="Warrior" groups=["champion", "unit"] instance=ExtResource("1_2olbg")]
+[node name="Warrior" groups=["champion", "player", "unit"] instance=ExtResource("1_2olbg")]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(0.5, 0.5)
+collision_layer = 258
 collision_mask = 31
+motion_mode = 1
 current_champion_data = ExtResource("2_mrby3")
 unit_type = 0
 team = 3
+base_stats = {
+"Energy": 0.0,
+"Mana": 100.0,
+"Mana_Regen": 2.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 30.0,
+"armor_pen": 0.0,
+"attack_damage": 60.0,
+"attack_range": 175.0,
+"attack_speed": 2.0,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"dmg_dealt_modifier": 0.0,
+"gold_gen": 5.0,
+"health": 500.0,
+"health_regen": 5.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 30.0,
+"move_speed": 330.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0,
+"skill_damage_multiplier": 1.0
+}
 
 [node name="ChampSelect" parent="." index="0"]
 scale = Vector2(1.8131905, 1.7385885)
@@ -41,31 +71,28 @@ texture = ExtResource("3_7o51j")
 [node name="InventoryComponent" parent="." index="2" groups=["player"]]
 max_slots = 10
 
-[node name="AttackRange" type="Area2D" parent="." index="3"]
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" index="0"]
-shape = SubResource("CircleShape2D_2olbg")
-debug_color = Color(6.8345666e-06, 0.6186841, 0.57870895, 0.41960785)
-
-[node name="PlayerInputComponent" type="Node" parent="." index="4"]
+[node name="PlayerInputComponent" type="Node" parent="." index="3"]
 script = ExtResource("3_1obmu")
 metadata/_custom_type_script = "uid://if6imaeuhse2"
 
-[node name="StatusContainer" type="Node" parent="." index="5"]
+[node name="StatusContainer" type="Node" parent="." index="4"]
 
-[node name="InteractionArea" type="Area2D" parent="." index="6"]
-collision_layer = 2
+[node name="InteractionArea" type="Area2D" parent="." index="5"]
+collision_layer = 0
 script = ExtResource("5_oxxa4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" index="0"]
 shape = SubResource("CircleShape2D_1obmu")
 debug_color = Color(1, 0.019449828, 0.00029224993, 0.41960785)
 
+[node name="Hurtbox" parent="." index="6"]
+collision_layer = 0
+collision_mask = 0
+
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 debug_color = Color(0.24314028, 0.6317096, 0.23221233, 0.41960785)
 
-[node name="HealthBarRoot" parent="." index="9"]
+[node name="HealthBarRoot" parent="." index="8"]
 offset_left = -76.0
 offset_top = -76.0
 offset_right = 87.0
@@ -87,25 +114,29 @@ offset_top = -24.0
 offset_right = -5.0
 offset_bottom = 16.0
 
-[node name="Skills" type="Node" parent="." index="10"]
+[node name="Skills" type="Node" parent="." index="9"]
 
 [node name="Skill_Q" type="Node" parent="Skills" index="0"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_G" type="Node" parent="Skills" index="1"]
+[node name="Skill_H" type="Node" parent="Skills" index="1"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_F" type="Node" parent="Skills" index="2"]
+[node name="Skill_T" type="Node" parent="Skills" index="2"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_W" type="Node" parent="Skills" index="3"]
+[node name="Skill_E" type="Node" parent="Skills" index="3"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_E" type="Node" parent="Skills" index="4"]
+[node name="Skill_R" type="Node" parent="Skills" index="4"]
 script = ExtResource("5_x7b8u")
 
-[node name="Skill_R" type="Node" parent="Skills" index="5"]
+[node name="AutoAttack" type="Node" parent="Skills" index="5"]
 script = ExtResource("5_x7b8u")
 
-[node name="BackpackComponent" type="Node" parent="." index="11"]
+[node name="BackpackComponent" type="Node" parent="." index="10"]
 script = ExtResource("7_te21c")
+
+[node name="ConsumablesComponent" type="Node" parent="." index="11"]
+script = ExtResource("9_n4rmn")
+max_slots = 3

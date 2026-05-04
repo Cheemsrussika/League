@@ -1,20 +1,23 @@
-[gd_resource type="Resource" script_class="ChampionData" load_steps=8 format=3 uid="uid://cbowweq8oh6ie"]
+[gd_resource type="Resource" script_class="ChampionData" load_steps=9 format=3 uid="uid://cbowweq8oh6ie"]
 
+[ext_resource type="Resource" uid="uid://bmjf8r65w028b" path="res://Rescources/ChampPassive/ClassTest.tres" id="1_addme"]
+[ext_resource type="Script" uid="uid://dkxhdgal2mn65" path="res://Scripts/Libs/SkillData.gd" id="1_eh7uk"]
 [ext_resource type="Script" uid="uid://b07kiciv5m5pd" path="res://Scripts/Champions/ChampionData.gd" id="1_p5ghc"]
 [ext_resource type="Resource" uid="uid://c73u1u6i2q23e" path="res://Rescources/Skill/Gare/GarenE.tres" id="1_v2k2y"]
 [ext_resource type="Resource" uid="uid://bcxfdib0lbai1" path="res://Rescources/Skill/LucianE.tres" id="2_adfde"]
-[ext_resource type="Resource" uid="uid://c0ilxah02qad" path="res://Rescources/Skill/Gare/GarenQ.tres" id="2_eh7uk"]
 [ext_resource type="Resource" uid="uid://to0ydawglaba" path="res://Rescources/Skill/EzrealQ.tres" id="2_urhgj"]
 [ext_resource type="Resource" uid="uid://c0fa7e8rtybbm" path="res://Rescources/Skill/MorganaW.tres" id="3_urhgj"]
 [ext_resource type="Resource" uid="uid://cj2bb3lhojcgg" path="res://Rescources/Skill/YasuoQ.tres" id="7_eh7uk"]
 
 [resource]
 script = ExtResource("1_p5ghc")
+primary_classes = Array[int]([1])
+champion_passive = ExtResource("1_addme")
+auto_attack_sequence = Array[ExtResource("1_eh7uk")]([ExtResource("2_urhgj"), ExtResource("7_eh7uk"), ExtResource("3_urhgj")])
 q_skill = ExtResource("2_urhgj")
-w_skill = ExtResource("7_eh7uk")
-e_skill = ExtResource("1_v2k2y")
+t_skill = ExtResource("1_v2k2y")
+e_skill = ExtResource("2_adfde")
 r_skill = ExtResource("3_urhgj")
-g_skill = ExtResource("2_adfde")
-f_skill = ExtResource("2_eh7uk")
 resource_type = 3
+base_range = 300.0
 metadata/_custom_type_script = "uid://b07kiciv5m5pd"

@@ -40,9 +40,9 @@ static func get_effect_script(id: String):
 			DevMenu.add_log("StatusLibrary: ID '%s' not found!" % id)
 			return null
 # --- ADD YOUR IMAGE CONSTANTS HERE ---
-const ICON_BUFF = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_mytarget.png")
-const ICON_BURN = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_ogury_presage.png")
-const ICON_SLOW = preload("res://Icons/RedSword_Images/AppIcons/applovin_ic_mediation_linkedin.png")
+const ICON_BUFF = preload("res://Icons/DayBygoneTExture/rarebg.png")
+const ICON_BURN = preload("res://Icons/Texture2D/fire2.png")
+const ICON_SLOW = preload("res://Icons/Texture2D/snowFlake.png")
 # (Add more as you make them)
 
 static func get_effect_icon(id: String) -> Texture2D:

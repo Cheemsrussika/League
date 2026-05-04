@@ -24,11 +24,20 @@ func on_execute(caster: Node2D, level: int, target_data: Dictionary, _ref: Resou
 	var direction = (target_pos - caster.global_position).normalized()
 	
 	var hitbox = hitbox_scene.instantiate()
-	caster.add_child(hitbox) # Directional hitboxes usually follow caster rotation
+	caster.add_child(hitbox) 
 	
 	hitbox.position = Vector2.ZERO 
 	hitbox.rotation = direction.angle()
-	hitbox.scale = Vector2(hitbox_scale, hitbox_scale)
+	# --- DYNAMIC RANGE SCALING ---
+
+	var dynamic_length = hitbox_scale
+	if "is_auto_attack" in _ref and _ref.is_auto_attack and caster.has_method("get_total"):
+		var actual_range = caster.get_total(Unit.Stat.RANGE)
+		var base_melee_range = 175.0 # The range the hitbox was originally drawn for
+		dynamic_length = hitbox_scale * (actual_range/1.5 / base_melee_range)
+		
+	# Scale X (length) dynamically, keep Y (width) at default hitbox_scale
+	hitbox.scale = Vector2(dynamic_length, hitbox_scale)
 	
 	# Match plural naming
 	hitbox.set("caster", caster)

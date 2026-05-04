@@ -6,6 +6,7 @@ enum TargetType { ENEMY, ALLY, ANY, SELF_ONLY }
 @export var skill_name: String = ""
 @export var icon: Texture2D
 @export_group("Targeting Logic")
+@export var is_auto_attack: bool = false
 ## If true, can be cast on empty ground.
 @export var target_ground: bool = false
 ## If true, can target enemy units.

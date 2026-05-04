@@ -11,7 +11,7 @@ var total_damage_dealt: float = 0.0
 # This ID must exist in your StatusLibrary!
 const BLEED_ID = "yuntal_bleed" 
 
-func on_attack_landed(user: Unit, context: Dictionary) -> void:
+func on_attack(user: Unit, context: Dictionary) -> void:
 	if not context.get("is_crit", false): return
 	if not user.status_damage_dealt.is_connected(_on_status_damage_heard):
 		user.status_damage_dealt.connect(_on_status_damage_heard)

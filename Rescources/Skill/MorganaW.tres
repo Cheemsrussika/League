@@ -23,9 +23,8 @@ metadata/_custom_type_script = "uid://bkhsll10beot"
 
 [resource]
 script = ExtResource("2_aus3c")
+is_auto_attack = true
 target_ground = true
 target_enemies = false
-is_on_hit = true
-allow_lifesteal = true
 effects = Array[ExtResource("1_hb01j")]([SubResource("Resource_irq3k")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

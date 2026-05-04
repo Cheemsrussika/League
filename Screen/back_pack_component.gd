@@ -108,3 +108,28 @@ func has_item(target_name: String, required_amount: int) -> bool:
 			if count >= required_amount:
 				return true
 	return false
+# --- SAVE/LOAD SYSTEM ---
+func get_save_data() -> Array:
+	var save_array = []
+	for slot in slots:
+		if slot != null:
+			# We save a dictionary containing the ID and the amount
+			save_array.append({"id": slot.item.item_id, "amount": slot.amount})
+		else:
+			save_array.append(null)
+	return save_array
+
+func load_save_data(saved_array: Array):
+	slots.fill(null) # Clear backpack
+	
+	for i in range(max_slots):
+		if i < saved_array.size() and saved_array[i] != null:
+			var saved_dict = saved_array[i]
+			var item_resource = ItemDB.get_item_resource(saved_dict["id"])
+			if item_resource:
+				slots[i] = {
+					"item": item_resource.duplicate(true),
+					"amount": int(saved_dict["amount"])
+				}
+				
+	backpack_changed.emit()

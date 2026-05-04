@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PassiveClassTest" load_steps=2 format=3 uid="uid://bmjf8r65w028b"]
+
+[ext_resource type="Script" uid="uid://dtn7xrpahxo1" path="res://Rescources/ChampPassive/Passive_class_test.gd" id="1_aogn3"]
+
+[resource]
+script = ExtResource("1_aogn3")
+metadata/_custom_type_script = "uid://dtn7xrpahxo1"

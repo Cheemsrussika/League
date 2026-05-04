@@ -11,10 +11,10 @@ func on_execute(caster: Node2D, level: int, target_data: Dictionary, _ref: Resou
 	var target = target_data.get("target_unit")
 	if not is_instance_valid(target): return
 	
-	var proj = projectile_scene.instantiate()
-	caster.get_parent().add_child(proj)
+	# 1. Ask the pool for a projectile
+	var proj = ProjectilePool.get_projectile(projectile_scene)
+	
 	proj.global_position = caster.global_position
 	
-	# Pass the array through the setup function
 	if proj.has_method("setup"):
 		proj.setup(caster, target, speed, effects_to_apply, level)

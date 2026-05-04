@@ -5,7 +5,7 @@ class_name LootTableComponent
 ## Drop data (drop_items, drop_chances) lives on the PARENT UNIT, not here.
 ## This component is pure behavior — it just reads, rolls, and spawns.
 
-const WORLD_ITEM_SCENE = preload("res://Rescources/WorldItem.tscn")
+const WORLD_ITEM_SCENE = preload("res://Scripts/UI/WorldItem.tscn")
 
 @export_group("Drop Settings")
 ## Max items that can drop in one death. 0 = no limit.

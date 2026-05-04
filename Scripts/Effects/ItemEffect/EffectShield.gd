@@ -36,6 +36,7 @@ func execute_payload(user: Unit, _target: Unit, _context: Dictionary):
 
 # 3. The actual Shield Math
 func trigger_shield(user: Unit):
+	@warning_ignore("narrowing_conversion")
 	last_trigger_time = Time.get_ticks_msec() / 1000.0
 	var total_shield = base_shield
 	

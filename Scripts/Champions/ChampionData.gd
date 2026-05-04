@@ -6,15 +6,17 @@ class_name ChampionData
 @export var portrait: Texture2D
 # NEW: Drag the scene with Sprite2D/AnimationPlayer here
 @export var visual_scene: PackedScene 
-
+@export_group("RPG Classification")
+@export var primary_classes: Array[ItemData.ItemClass] = []
 @export_group("Skills")
-@export var passive_skill: SkillData # Don't forget the passive!
+@export var champion_passive: ChampionPassive
+@export var auto_attack_sequence: Array[SkillData] = []
 @export var q_skill: SkillData
-@export var w_skill: SkillData
+@export var t_skill: SkillData
 @export var e_skill: SkillData
 @export var r_skill: SkillData
-@export var g_skill: SkillData
-@export var f_skill: SkillData
+@export var h_skill: SkillData
+
 
 @export_group("Base Stats")
 # NEW: This allows you to pick Mana/Energy/Fury in the inspector
@@ -26,6 +28,7 @@ class_name ChampionData
 @export var base_armor: float = 30.0
 @export var base_mr: float = 30.0
 @export var base_range: float = 175.0
+@export var base_as: float = 0.625
 
 @export_group("Growth")
 @export var hp_growth: float = 80.0

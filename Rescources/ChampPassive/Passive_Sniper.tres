@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PassiveSniper" load_steps=2 format=3 uid="uid://csioic620krer"]
+
+[ext_resource type="Script" uid="uid://bjvk8wvx0dwtu" path="res://Rescources/ChampPassive/Passive_Sniper.gd" id="1_s7yyy"]
+
+[resource]
+script = ExtResource("1_s7yyy")
+metadata/_custom_type_script = "uid://bjvk8wvx0dwtu"

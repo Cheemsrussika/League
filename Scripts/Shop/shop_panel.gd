@@ -149,24 +149,35 @@ func _on_item_selected(item: ItemData):
 	%ItemDetails.text = info_text
 
 # --- BUY & SELL EXECUTION ---
+# --- BUY & SELL EXECUTION ---
 
 func _on_buy_pressed():
 	if not selected_item or not _is_player_in_zone("shop_zone"): return
 	
 	var player = GameManager.player_champion
 	var backpack = player.get_node_or_null("BackpackComponent")
-	if not backpack.can_purchase(selected_item):
-		return 
-	if player.gold < selected_item.cost:
+	
+	# 1. Determine how many they want to buy
+	var amount_to_buy = 5 if Input.is_key_pressed(KEY_SHIFT) else 1
+	
+	# 2. Check how many they can actually afford
+	var max_affordable = floor(player.gold / selected_item.cost)
+	amount_to_buy = min(amount_to_buy, max_affordable)
+	
+	if amount_to_buy <= 0:
 		DevMenu.add_log("Not enough gold!")
 		return
 
-	var leftover = backpack.add_item(selected_item, 1)
-	if leftover == 0:
-		player.gold -= selected_item.cost
-		DevMenu.add_log("Bought %s"% selected_item.item_name)
-		# Re-select to refresh the Sell button status
+	# 3. Add to backpack and calculate how many actually fit
+	var leftover = backpack.add_item(selected_item, amount_to_buy)
+	var actually_bought = amount_to_buy - leftover
+
+	if actually_bought > 0:
+		# Only charge them for the items that fit in the backpack!
+		player.gold -= actually_bought * selected_item.cost
+		DevMenu.add_log("Bought %s x%d" % [selected_item.item_name, actually_bought])
 		_on_item_selected(selected_item) 
+		get_tree().call_group("shop_buttons", "update_affordability")
 	else:
 		DevMenu.add_log("Backpack full!")
 
@@ -175,16 +186,24 @@ func _on_sell_pressed():
 	
 	var player = GameManager.player_champion
 	var backpack = player.get_node_or_null("BackpackComponent")
+	var sell_price = floor(selected_item.cost * 0.5)
 	
-	# Safety check: ensure they didn't drop it or equip it
-	if backpack.has_item(selected_item.item_name, 1):
-		backpack.remove_item(selected_item.item_name, 1)
-		
-		var sell_price = floor(selected_item.cost * 0.5)
-		player.gold += sell_price
-		DevMenu.add_log("Sold %s for %s" %[selected_item.item_name,sell_price])
-		
-		# Refresh the panel to see if they have more to sell
+	# 1. Determine how many they want to sell
+	var amount_to_sell = 5 if Input.is_key_pressed(KEY_SHIFT) else 1
+	var actually_sold = 0
+	
+	# 2. Safely remove them one by one, stopping if they run out
+	for i in range(amount_to_sell):
+		if backpack.has_item(selected_item.item_name, 1):
+			backpack.remove_item(selected_item.item_name, 1)
+			actually_sold += 1
+		else:
+			break # They ran out of the item before hitting 5!
+			
+	if actually_sold > 0:
+		player.gold += actually_sold * sell_price
+		DevMenu.add_log("Sold %s x%d for %dG" % [selected_item.item_name, actually_sold, (actually_sold * sell_price)])
 		_on_item_selected(selected_item)
+		get_tree().call_group("shop_buttons", "update_affordability")
 	else:
 		DevMenu.add_log("You don't have this item in your backpack!")

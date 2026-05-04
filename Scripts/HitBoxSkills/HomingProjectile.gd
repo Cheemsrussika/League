@@ -5,7 +5,6 @@ var caster: Node2D
 var target: Node2D
 var speed: float = 1200.0
 var skill_level: int = 1
-## THE FIX: Plural array
 var effects_to_apply: Array[SkillEffect] = []
 
 func setup(p_caster: Node2D, p_target: Node2D, p_speed: float, p_effects: Array, p_level: int):
@@ -17,7 +16,8 @@ func setup(p_caster: Node2D, p_target: Node2D, p_speed: float, p_effects: Array,
 
 func _process(delta: float):
 	if not is_instance_valid(target) or target.is_dead:
-		queue_free()
+		# SEND BACK TO POOL INSTEAD OF queue_free()
+		ProjectilePool.call_deferred("return_projectile", self) 
 		return
 
 	var direction = (target.global_position - global_position).normalized()
@@ -39,4 +39,5 @@ func _on_impact():
 		if effect:
 			effect.on_execute(caster, skill_level, context, null)
 	
-	queue_free()
+	# SEND BACK TO POOL INSTEAD OF queue_free()
+	ProjectilePool.call_deferred("return_projectile", self)		

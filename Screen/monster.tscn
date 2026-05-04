@@ -1,10 +1,63 @@
-[gd_scene load_steps=9 format=3 uid="uid://dw53eopscb1l0"]
+[gd_scene load_steps=23 format=3 uid="uid://dw53eopscb1l0"]
 
 [ext_resource type="Script" uid="uid://cshsmtpt6rxcs" path="res://Scripts/GameMob/monster.gd" id="1_bgb31"]
-[ext_resource type="Texture2D" uid="uid://bl2n7d0lwxh1c" path="res://Icons/Texture2D/2.png" id="2_0r8oe"]
 [ext_resource type="Script" uid="uid://dqrydoqgqx6x8" path="res://Screen/loot_table_component.gd" id="3_4c6s8"]
+[ext_resource type="Script" uid="uid://b02ds6kwg5inp" path="res://Scripts/UI/ItemSlots/InventoryComponent.gd" id="4_xiib3"]
+[ext_resource type="PackedScene" uid="uid://bt6bcw53aub00" path="res://Screen/consumale_inventory.tscn" id="5_pfial"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yh3sy"]
+
+[sub_resource type="Animation" id="Animation_46m7r"]
+resource_name = "attack_Down"
+
+[sub_resource type="Animation" id="Animation_mjlt0"]
+resource_name = "attack_Left"
+
+[sub_resource type="Animation" id="Animation_fscnj"]
+resource_name = "attack_Right"
+
+[sub_resource type="Animation" id="Animation_rgo71"]
+resource_name = "attack_Up"
+
+[sub_resource type="Animation" id="Animation_im4cl"]
+resource_name = "idle_Down"
+
+[sub_resource type="Animation" id="Animation_bhro1"]
+resource_name = "idle_Left"
+
+[sub_resource type="Animation" id="Animation_pfial"]
+resource_name = "idle_Right"
+
+[sub_resource type="Animation" id="Animation_0uhnq"]
+resource_name = "idle_Up"
+
+[sub_resource type="Animation" id="Animation_jo73y"]
+resource_name = "walk_Down"
+
+[sub_resource type="Animation" id="Animation_b4t8s"]
+resource_name = "walk_Left"
+
+[sub_resource type="Animation" id="Animation_u2dbo"]
+resource_name = "walk_Right"
+
+[sub_resource type="Animation" id="Animation_ktqj3"]
+resource_name = "walk_up"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0qjdw"]
+_data = {
+&"attack_Down": SubResource("Animation_46m7r"),
+&"attack_Left": SubResource("Animation_mjlt0"),
+&"attack_Right": SubResource("Animation_fscnj"),
+&"attack_Up": SubResource("Animation_rgo71"),
+&"idle_Down": SubResource("Animation_im4cl"),
+&"idle_Left": SubResource("Animation_bhro1"),
+&"idle_Right": SubResource("Animation_pfial"),
+&"idle_Up": SubResource("Animation_0uhnq"),
+&"walk_Down": SubResource("Animation_jo73y"),
+&"walk_Left": SubResource("Animation_b4t8s"),
+&"walk_Right": SubResource("Animation_u2dbo"),
+&"walk_Up": SubResource("Animation_ktqj3")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgb31"]
 radius = 39.0
@@ -19,20 +72,23 @@ bg_color = Color(0.86898494, 0.86898494, 0.8689847, 1)
 radius = 46.0
 
 [node name="Monster" type="CharacterBody2D"]
-collision_layer = 260
+collision_layer = 4
 collision_mask = 2
 input_pickable = true
+motion_mode = 1
 script = ExtResource("1_bgb31")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yh3sy")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-3, -29)
-texture = ExtResource("2_0r8oe")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0qjdw")
+}
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 shape = SubResource("CircleShape2D_bgb31")
@@ -66,3 +122,14 @@ shape = SubResource("CircleShape2D_0r8oe")
 
 [node name="LootTableComponent" type="Node" parent="."]
 script = ExtResource("3_4c6s8")
+
+[node name="InventoryComponent" type="Node2D" parent="." groups=["player"]]
+script = ExtResource("4_xiib3")
+max_slots = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 1.762)
+
+[node name="ConsumaleInventory" parent="." instance=ExtResource("5_pfial")]
+visible = false
+mouse_filter = 1

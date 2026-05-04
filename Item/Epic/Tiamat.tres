@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=8 format=3 uid="uid://c08kuwkci3arx"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_68g51"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_7ymob"]
+[ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_05106"]
+[ext_resource type="Script" uid="uid://duc1voxmsts8m" path="res://Scripts/Effects/ItemEffect/ItemTiamaActive.gd" id="3_uxb8l"]
+[ext_resource type="Texture2D" uid="uid://bwwxog4i0xwy" path="res://Icons/Epic Items/40px-Tiamat_item.png" id="4_xhjru"]
+[ext_resource type="Resource" uid="uid://bm1t10eki6njp" path="res://Item/Basic/LongSword.tres" id="6_78r6i"]
+
+[sub_resource type="Resource" id="Resource_xhjru"]
+script = ExtResource("3_uxb8l")
+active_radius = 600.0
+passive_radius = 300.0
+metadata/_custom_type_script = "uid://duc1voxmsts8m"
+
+[resource]
+script = ExtResource("2_7ymob")
+item_name = "Tiamat"
+icon = ExtResource("4_xhjru")
+cost = 1350
+recipe = Array[ExtResource("2_7ymob")]([ExtResource("6_78r6i"), ExtResource("6_78r6i")])
+stats = {
+"attack_damage": 20.0
+}
+effects = Array[ExtResource("1_68g51")]([SubResource("Resource_xhjru")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

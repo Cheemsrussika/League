@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bawjqydsqmbkk"]
 
-[ext_resource type="Script" uid="uid://bmgixa4y5jnje" path="res://dev_menu.gd" id="1_1aaah"]
+[ext_resource type="Script" uid="uid://bmgixa4y5jnje" path="res://Scripts/UI/dev_menu.gd" id="1_1aaah"]
 
 [node name="DevMenu" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_1aaah")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -56,6 +57,7 @@ text = "Apply Stat"
 
 [node name="ClearLogButton" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
 unique_name_in_owner = true
+z_index = 10
 layout_mode = 2
 text = "Clear Log"
 

@@ -15,13 +15,19 @@ enum MinionRole { MELEE, RANGED, SIEGE, SUPER }
 var attack_timer: float = 0.0
 
 func _ready():
-	super._ready() 
-	unit_type = UnitType.MINION
+	super._ready() # Sets unit_type, tags, etc.
+	
+	# 1. Find the component if it exists
+	inventory = $InventoryComponent if has_node("InventoryComponent") else null
+	if inventory:
+		recalculate_stats()
+	
+	# 3. Initialize health AFTER stats are calculated (in case items gave bonus HP)
 	current_health = get_total(Stat.HP)
+
 	if progress_bar:
 		progress_bar.max_value = current_health
 		progress_bar.value = current_health
-
 func set_lane_path(path: Path2D):
 	if ai and ai.has_method("set_lane_path"):
 		ai.set_lane_path(path)
@@ -77,15 +83,15 @@ func _try_attack():
 			var context = {"target": current_target, "category": "attack", "type": "physical"}
 			_trigger_passive_effects("on_damage_dealt", context)
 
+# For MINION:
 func die(killer: Unit = null):
 	if is_dead: return
-	is_dead = true
+	# Don't set is_dead here if super.die() does it!
 	
 	if is_instance_valid(killer) and killer.unit_type == UnitType.CHAMPION:
-		if killer.has_method("gain_experience"):
-			killer.gain_experience(exp_value*20) # Fixed typo here!
-		if killer.has_method("add_gold"):
-			killer.add_gold(gold_drop)
+		if killer.has_method("gain_experience"): killer.gain_experience(exp_value) 
+		if killer.has_method("add_gold"): killer.add_gold(gold_drop)
 		killer.on_kill_trigger(self)
 			
-	queue_free()
+	super.die(killer) # Let the Unit class handle the actual deletion/signals
+	queue_free() # Only keep this here if Unit.gd doesn't already delete it.

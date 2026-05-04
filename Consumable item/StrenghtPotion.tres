@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=7 format=3 uid="uid://c6jbbv5q8senp"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_4v3n8"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="2_b14rg"]
+[ext_resource type="PackedScene" uid="uid://b031di3v8k4nf" path="res://Consumable item/EffectScreen/GenericStatBuff.tscn" id="2_khiam"]
+[ext_resource type="Script" uid="uid://b8shhb2s1yu0y" path="res://Consumable item/Effect/StatElixerBuff.gd" id="3_aolbp"]
+[ext_resource type="Texture2D" uid="uid://jpbjap563tnx" path="res://Icons/Texture2D/칩4.png" id="4_jyyvm"]
+
+[sub_resource type="Resource" id="Resource_jyyvm"]
+script = ExtResource("3_aolbp")
+buff_scene = ExtResource("2_khiam")
+buff_id = "streght_potion"
+metadata/_custom_type_script = "uid://b8shhb2s1yu0y"
+
+[resource]
+script = ExtResource("2_b14rg")
+item_type = 2
+item_name = "Strenght Pot"
+icon = ExtResource("4_jyyvm")
+cost = 150
+effects = Array[ExtResource("1_4v3n8")]([SubResource("Resource_jyyvm")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

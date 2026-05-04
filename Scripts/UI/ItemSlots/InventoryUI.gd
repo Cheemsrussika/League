@@ -9,7 +9,8 @@ func _ready():
 	for i in range(max_slots):
 		var slot = slot_scene.instantiate()
 		add_child(slot)
-		
+		if info_panel == null:
+				info_panel = get_tree().get_first_node_in_group("item_tooltip")
 		# Tell the slot it lives in the Inventory!
 		slot.source_panel = "inventory"
 		slot.slot_index = i
@@ -77,8 +78,22 @@ func _process(_delta):
 func _setup_connection():
 	if player_inventory.inventory_changed.connect(refresh_slots) != OK:
 		DevMenu.add_log("Error connecting signal")
+	
+	# CONNECT THE COOLDOWN SIGNAL HERE:
+	if not player_inventory.item_went_on_cooldown.is_connected(_on_item_went_on_cooldown):
+		player_inventory.item_went_on_cooldown.connect(_on_item_went_on_cooldown)
+		
 	refresh_slots()
 
+# AND ADD THIS FUNCTION AT THE BOTTOM OF THAT SCRIPT:
+func _on_item_went_on_cooldown(slot_index: int, duration: float):
+	var slots = get_children()
+	if slot_index >= 0 and slot_index < slots.size():
+		var slot_ui = slots[slot_index]
+		if slot_ui.has_method("start_cooldown"):
+			slot_ui.start_cooldown(duration)
+			
+			
 func refresh_slots():
 	if not player_inventory: return
 	var slots = get_children()

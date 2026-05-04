@@ -7,7 +7,7 @@ var scaling_factors: Array = [] # Can hold ScalingFactor resources
 var damage_type: String = "physical"
 var silence_duration: float = 0.0
 
-func on_attack_landed(caster: Unit, context: Dictionary) -> void:
+func on_attack(caster: Unit, context: Dictionary) -> void:
 	var target = context.get("target")
 	var buckets = context.get("buckets") # Get the bucket from the Champion
 	

@@ -46,7 +46,7 @@ func _on_button_gui_input(event):
 
 # --- DRAG AND DROP MAGIC ---
 
-func _get_drag_data(at_position: Vector2) -> Variant:
+func _get_drag_data(_at_position: Vector2) -> Variant:
 	if current_slot_data == null: return null
 	
 	var item = current_slot_data if current_slot_data is ItemData else current_slot_data.item
@@ -65,8 +65,8 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	# Package the info so the drop target knows what is arriving
 	return {"source": source_panel, "index": slot_index, "data": current_slot_data}
 
-func _can_drop_data(at_position: Vector2, data: Variant) -> bool:
+func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	return typeof(data) == TYPE_DICTIONARY and data.has("source")
 
-func _drop_data(at_position: Vector2, data: Variant):
+func _drop_data(_at_position: Vector2, data: Variant):
 	slot_dropped.emit(data)

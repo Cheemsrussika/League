@@ -20,8 +20,36 @@ shader_parameter/max_health = 1000.0
 shader_parameter/line_color = Color(0, 0, 0, 1)
 
 [node name="EnemyChampion" groups=["champion", "unit"] instance=ExtResource("1_j1rd1")]
+motion_mode = 1
 unit_type = 0
 team = 1
+base_stats = {
+"Energy": 0.0,
+"Mana": 100.0,
+"Mana_Regen": 2.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 30.0,
+"armor_pen": 0.0,
+"attack_damage": 60.0,
+"attack_range": 175.0,
+"attack_speed": 0.625,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"dmg_dealt_modifier": 0.0,
+"gold_gen": 5.0,
+"health": 5000.0,
+"health_regen": 5.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 30.0,
+"move_speed": 330.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0,
+"skill_damage_multiplier": 1.0
+}
 
 [node name="AIInputComponent" type="Node" parent="." index="0" groups=["champion"]]
 script = ExtResource("3_p17fj")
@@ -45,7 +73,9 @@ texture = ExtResource("4_0vn4y")
 [node name="InventoryComponent" parent="." index="4" groups=["player"]]
 
 [node name="AttackRange" type="Area2D" parent="." index="5"]
-collision_layer = 8
+visible = false
+collision_layer = 0
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRange" index="0"]
 shape = SubResource("CircleShape2D_2olbg")
@@ -83,10 +113,10 @@ offset_bottom = 15.0
 [node name="Skill_Q" type="Node" parent="Skills" index="0"]
 script = ExtResource("5_el34r")
 
-[node name="Skill_G" type="Node" parent="Skills" index="1"]
+[node name="Skill_H" type="Node" parent="Skills" index="1"]
 script = ExtResource("5_el34r")
 
-[node name="Skill_W" type="Node" parent="Skills" index="2"]
+[node name="Skill_T" type="Node" parent="Skills" index="2"]
 script = ExtResource("5_el34r")
 
 [node name="Skill_E" type="Node" parent="Skills" index="3"]
@@ -95,5 +125,5 @@ script = ExtResource("5_el34r")
 [node name="Skill_R" type="Node" parent="Skills" index="4"]
 script = ExtResource("5_el34r")
 
-[node name="Skill_F" type="Node" parent="Skills" index="5"]
+[node name="AutoAttack" type="Node" parent="Skills" index="5"]
 script = ExtResource("5_el34r")

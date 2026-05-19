@@ -33,7 +33,7 @@ func _gui_input(event: InputEvent):
 				# Double Click = BUY
 				_attempt_purchase()
 			else:
-				# Single Click = PREVIEW RECIPE
+				
 				_show_recipe()
 
 func _show_recipe():

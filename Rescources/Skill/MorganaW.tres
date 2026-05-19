@@ -18,6 +18,7 @@ hitbox_scene = ExtResource("2_rw2px")
 hitbox_scale = 10.0
 is_persistent = true
 spawn_at_mouse = true
+clamp_to_cast_range = true
 effects_to_apply = Array[ExtResource("1_hb01j")]([SubResource("Resource_l4bru")])
 metadata/_custom_type_script = "uid://bkhsll10beot"
 

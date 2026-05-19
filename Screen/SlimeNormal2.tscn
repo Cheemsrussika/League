@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://dutmt2p4uggnv"]
+[gd_scene load_steps=17 format=3 uid="uid://dutmt2p4uggnv"]
 
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="1_2mc63"]
-[ext_resource type="Texture2D" uid="uid://dbuej3o5ykxxk" path="res://Icons/Enemy/SmallSlime.png" id="2_57kr6"]
 
 [sub_resource type="Animation" id="Animation_v31su"]
 length = 0.001
@@ -216,24 +215,13 @@ libraries = {
 }
 
 [node name="HealthBar" parent="." index="4"]
-offset_left = -46.0
-offset_top = -22.0
-offset_right = 51.0
-offset_bottom = -12.0
+offset_top = -24.0
 
 [node name="PatienceBar" parent="." index="5"]
-offset_left = -43.0
-offset_top = -10.0
-offset_right = 39.0
-offset_bottom = -3.0
+offset_left = -16.0
+offset_right = 16.0
 
 [node name="Sprite2D" parent="." index="9"]
-position = Vector2(0, 7.1054274e-15)
-scale = Vector2(1.9893229, 1.7770456)
-texture = ExtResource("2_57kr6")
-hframes = 9
-vframes = 12
 frame = 16
 region_enabled = true
-region_rect = Rect2(0, 0, 288, 384)
 region_filter_clip_enabled = true

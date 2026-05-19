@@ -26,6 +26,7 @@ func update_affordability():
 
 func view_recipe(item: ItemData):
 	if not item: return
+	
 	current_preview_item = item
 	
 	# 1. Clear old layouts (Both Upgrades and Ingredients)
@@ -59,7 +60,7 @@ func _populate_builds_into(target_item: ItemData):
 	# Grab the shop panel to access the main list of all items
 	var shop = get_tree().get_first_node_in_group("forge_panel")
 	if not shop or not "current_items" in shop: return
-	
+
 	# Check every item in the game
 	for potential_upgrade in shop.current_items:
 		if potential_upgrade.recipe and potential_upgrade.recipe.size() > 0:

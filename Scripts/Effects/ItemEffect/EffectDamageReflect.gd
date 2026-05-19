@@ -35,7 +35,7 @@ func on_take_damage(user: Champion, context: Dictionary) -> void:
 	if damage_to_return > 0:
 		# Note: We don't need to capture the receipt here unless we're tracking stats
 		source.take_damage(damage_to_return, "magic", user, false)
-		
+		tracker.damage=damage_to_return
 		if apply_grevious_wounds and source.has_method("apply_status_effect"):
 			# Ensure the power (3rd param) is passed if your status needs it
 			source.apply_status_effect("grevious_wounds", wound_duration, 1, 0.40)

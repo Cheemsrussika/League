@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://cd2xn40yjrytd"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_w2enk"]
+[ext_resource type="Texture2D" uid="uid://dblnh2nvhwxie" path="res://Icons/Ingredient Icons/copper_ingot.png" id="2_w2enk"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_fit73"]
+[ext_resource type="Resource" uid="uid://cxc8fs3qc36qo" path="res://Ingredients/Shop/rawCopper.tres" id="4_mcsap"]
+[ext_resource type="Resource" uid="uid://b7lx6jeidfjp3" path="res://Ingredients/Shop/Coal.tres" id="5_g564b"]
+
+[resource]
+script = ExtResource("3_fit73")
+item_type = 1
+item_tier = 2
+item_id = "copper_ingot"
+item_name = "Copper Ingot"
+icon = ExtResource("2_w2enk")
+cost = 12
+recipe = Array[ExtResource("3_fit73")]([ExtResource("4_mcsap"), ExtResource("5_g564b")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

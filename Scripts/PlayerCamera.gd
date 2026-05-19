@@ -6,8 +6,8 @@ class_name PlayerCamera
 @export var is_locked: bool = true
 
 @export_group("Zoom")
-@export var min_zoom: float = 0.3
-@export var max_zoom: float = 2.0
+@export var min_zoom: float = 1
+@export var max_zoom: float = 4.0
 @export var zoom_speed: float = 0.1
 
 var target_unit: Node2D = null

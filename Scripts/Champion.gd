@@ -15,7 +15,9 @@ signal stats_recalculated(unit: Unit)
 enum ResourceType { MANA, ENERGY, FURY, NONE }
 
 @export var current_champion_data: Resource # Typed as Resource to prevent circular dependency errors
-
+@onready var anim_player: AnimationPlayer = $AnimationPlayer # Adjust path as needed
+@onready var sprite: Sprite2D = $Sprite2D
+var portrait_texture: Texture2D
 # ==========================================
 # --- STATE VARIABLES ---
 # ==========================================
@@ -117,10 +119,13 @@ func initialize_from_data(data: ChampionData) -> void:
 		active_passive = data.champion_passive.duplicate()
 		if active_passive.has_method("connect_combat_hooks"):
 			active_passive.connect_combat_hooks(self)
-			
+	portrait_texture = data.portrait
+	if "sprite_sheet" in data and data.sprite_sheet:
+		sprite.texture = data.sprite_sheet
 	# Map Base Stats (The "Item Way")
 	base_stats[STAT_MAP[Stat.HP]] = data.base_hp
 	current_health = data.base_hp
+
 	base_stats[STAT_MAP[Stat.AD]] = data.base_ad
 	base_stats[STAT_MAP[Stat.AR]] = data.base_armor
 	base_stats[STAT_MAP[Stat.MR]] = data.base_mr
@@ -152,7 +157,8 @@ func initialize_from_data(data: ChampionData) -> void:
 		ResourceType.FURY, ResourceType.NONE: 
 			current_resource = 0.0
 		_: 
-			current_resource = data.base_resource # Mana/Energy start full
+			current_resource = data.base_resource 
+
 			
 	for c_enum in data.primary_classes:
 		var class_name_str = ItemData.ItemClass.keys()[c_enum]
@@ -229,62 +235,57 @@ func reset_combo():
 	if auto_attack_sequence.size() > 0:
 		auto_attack_slot.skill_data = auto_attack_sequence[0]
 		
+
+
 func _start_windup(_target: Node2D):
 	is_winding_up = true
 	var aps = max(0.01, get_total(Stat.AS))
 	var total_attack_time = 1.0 / aps
 	windup_timer = total_attack_time * WINDUP_PERCENT
+	
+	# Scale AnimationPlayer speed dynamically
+	if is_instance_valid(anim_player):
+		anim_player.speed_scale = aps
+		
+		var anim_name = "attack_" + str(combo_index)
+		
+		if anim_player.has_animation(anim_name):
+			anim_player.play(anim_name)
+		else:
+			anim_player.play("attack_0") # Fallback to first swing
 
 func _complete_attack():
 	is_winding_up = false 
-	if is_instance_valid(current_target):
-		var dist = global_position.distance_to(current_target.global_position)
-		if dist <= get_total(Stat.RANGE) + 50.0:
-			perform_auto_attack_hit(current_target)
-		else:
-			DevMenu.add_log("Missed! Target moved out of range.")
 	
+	# 1. Fire the modular SkillData logic!
+	if auto_attack_slot and auto_attack_slot.skill_data:
+		# Determine where to aim. Default to mouse position for skillshots.
+		var target_pos = get_global_mouse_position()
+		
+		# If we hard-locked onto a target, aim exactly at them instead
+		if is_instance_valid(current_target):
+			target_pos = current_target.global_position
+			
+		var target_data = {
+			"target_position": target_pos,
+			"target_unit": current_target # Might be null, and that's okay!
+		}
+		
+		# Pull the trigger! This spawns your directional slash or projectile hitbox.
+		auto_attack_slot.activate(self, target_data)
+		
+	# 2. Setup the next attack in the combo sequence
+	advance_combo()
+	
+	# 3. Calculate recovery cooldown based on Attack Speed
 	var aps = max(0.01, get_total(Stat.AS))
 	var total_time = 1.0 / aps
-	
 	attack_cooldown_timer = total_time - (total_time * WINDUP_PERCENT)
 
 
 # ==========================================
 # 3. DAMAGE, SPELLCASTING & COMBAT MATH
 # ==========================================
-func perform_auto_attack_hit(target: Node2D):
-	if not is_instance_valid(target): return
-	if "team" in target and target.team == team: return
-	
-	var damage_buckets = { "physical": get_total(Stat.AD), "magic": 0.0, "true": 0.0 }
-	
-	if get_total(Stat.AP) > get_total(Stat.AD):
-		damage_buckets["magic"] = get_total(Stat.AP) * 0.6
-		damage_buckets["physical"] = 0.0
-		
-	var is_crit = _roll_for_crit(get_total(Stat.CRIT))
-	if is_crit:
-		var crit_mult = get_total(Stat.CRIT_DMG)
-		if damage_buckets["physical"] > 0: damage_buckets["physical"] *= crit_mult
-		if damage_buckets["magic"] > 0: damage_buckets["magic"] *= crit_mult
-		
-	var context = { "target": target, "is_crit": is_crit, "buckets": damage_buckets }
-	_trigger_passive_effects("on_attack", context)
-	_trigger_passive_effects("on_attack_landed", context)
-	
-	@warning_ignore("unused_variable")
-	var total_damage_dealt = 0.0
-	@warning_ignore("unused_variable")
-	var physical_damage_dealt = 0.0
-	last_combat_time = Time.get_ticks_msec()
-
-	for type in damage_buckets.keys():
-		var raw_amount = damage_buckets[type]
-		if raw_amount > 0:
-			var health_lost = deal_damage(target, raw_amount, type, "attack", is_crit, {"allow_lifesteal": true})
-			total_damage_dealt += health_lost 
-			if type == "physical": physical_damage_dealt += health_lost
 
 func on_skill_cast(ability_identifier: String, mana_cost: float = 0.0, is_toggle: bool = false):
 	var context = {
@@ -293,47 +294,10 @@ func on_skill_cast(ability_identifier: String, mana_cost: float = 0.0, is_toggle
 	}
 	_trigger_passive_effects("on_ability_activated", context)
 
-func apply_physical_spell_hit(target: Node2D, base_damage: float, scaling_ratio: float = 1.0, can_crit: bool = false, crit_mod: float = 1.0):
-	if not is_instance_valid(target) or target.is_queued_for_deletion(): return
-	if "team" in target and target.team == team: return
-
-	var total_ad = get_total(Stat.AD)
-	var raw_damage = base_damage + (total_ad * scaling_ratio)
-	
-	var is_crit = false
-	if can_crit:
-		is_crit = _roll_for_crit(get_total(Stat.CRIT))
-		if is_crit:
-			raw_damage *= (get_total(Stat.CRIT_DMG) * crit_mod)
-			
-	var context = { 
-		"target": target, "damage": raw_damage,
-		"is_crit": is_crit, "is_spell": true, "damage_type": "physical"
-	}
-	
-	_trigger_passive_effects("on_attack", context)
-	raw_damage = context["damage"]
-	return deal_damage(target, raw_damage, "physical", "spell", is_crit)
-
-func apply_spell_damage(target: Node2D, base_damage: float, type: String, scaling_stat: Stat = Stat.AD, scaling_ratio: float = 0.0):
-	if not is_instance_valid(target): return
-	if "team" in target and target.team == team: return
-	
-	var total_damage = base_damage
-	if scaling_ratio > 0.0:
-		total_damage += get_total(scaling_stat) * scaling_ratio
-		
-	var context = { "target": target, "damage": total_damage, "type": type, "is_aoe": false }
-	_trigger_passive_effects("on_spell_hit", context)
-	total_damage = context["damage"]
-	
-	return deal_damage(target, total_damage, type, "spell", false)
-
 func deal_damage(target: Node2D, amount: float, type: String, category: String, is_crit: bool = false, skill_context: Dictionary = {}) -> float:
 	var final_amount = amount
 	if is_crit:
 		final_amount *= get_total(Stat.CRIT_DMG) 
-		DevMenu.add_log("CRITICAL HIT! Damage increased to: %s"% final_amount)
 
 	var receipt = target.take_damage(final_amount, type, self, is_crit, category)
 	var actual_lost = receipt["health_lost"]
@@ -351,12 +315,11 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 
 		_trigger_passive_effects("on_damage_dealt", context)
 		
-		# CONSOLIDATED HEALING
+		# Consolidated Healing Calculations
 		var total_heal = 0.0
 		var healing_mult = 1.0
 		if context.get("is_aoe", false): healing_mult = 0.33
 
-		# Life Steal & Omnivamp
 		if type == "physical" and context.get("allow_lifesteal", false):
 			total_heal += actual_lost * (get_total(Stat.LIFE_STEAL) / 100.0) * healing_mult
 			
@@ -366,10 +329,11 @@ func deal_damage(target: Node2D, amount: float, type: String, category: String, 
 
 		if total_heal > 0: heal(total_heal)
 
-		# Trigger Hooks
+		# --- RE-ROUTED ITEM HOOKS ---
 		if category == "spell":
 			_trigger_passive_effects("on_spell_hit", context) 
 		elif category == "attack":
+			# This is exactly where our Kraken item will listen and activate!
 			_trigger_passive_effects("on_attack_hit_post_mitigation", context)
 			
 	return actual_lost

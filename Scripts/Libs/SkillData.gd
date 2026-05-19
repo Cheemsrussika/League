@@ -27,6 +27,9 @@ enum TargetType { ENEMY, ALLY, ANY, SELF_ONLY }
 @export_group("Effects")
 # This is the LEGO way. You drag-and-drop Effect resources here.
 @export var effects: Array[SkillEffect] = []
+@export_group("Visuals & Audio")
+## The base name of the animation this skill forces the body to play (e.g., "attack", "channel", "cast")
+@export var body_animation: String = "attack"
 
 func execute(caster: Node2D, skill_level: int, target_data: Dictionary):
 	# Optional: Inject current cost into target_data so effects can use it

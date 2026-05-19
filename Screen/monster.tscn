@@ -1,11 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://dw53eopscb1l0"]
+[gd_scene load_steps=24 format=3 uid="uid://dw53eopscb1l0"]
 
 [ext_resource type="Script" uid="uid://cshsmtpt6rxcs" path="res://Scripts/GameMob/monster.gd" id="1_bgb31"]
 [ext_resource type="Script" uid="uid://dqrydoqgqx6x8" path="res://Screen/loot_table_component.gd" id="3_4c6s8"]
+[ext_resource type="Texture2D" uid="uid://dbuej3o5ykxxk" path="res://Icons/Enemy/SmallSlime.png" id="4_pfial"]
 [ext_resource type="Script" uid="uid://b02ds6kwg5inp" path="res://Scripts/UI/ItemSlots/InventoryComponent.gd" id="4_xiib3"]
 [ext_resource type="PackedScene" uid="uid://bt6bcw53aub00" path="res://Screen/consumale_inventory.tscn" id="5_pfial"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yh3sy"]
+radius = 13.0
 
 [sub_resource type="Animation" id="Animation_46m7r"]
 resource_name = "attack_Down"
@@ -60,7 +62,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bgb31"]
-radius = 39.0
+radius = 13.038404
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4c6s8"]
 bg_color = Color(0.35213405, 0.6923274, 0.3231413, 1)
@@ -69,7 +71,7 @@ bg_color = Color(0.35213405, 0.6923274, 0.3231413, 1)
 bg_color = Color(0.86898494, 0.86898494, 0.8689847, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0r8oe"]
-radius = 46.0
+radius = 14.035668
 
 [node name="Monster" type="CharacterBody2D"]
 collision_layer = 4
@@ -77,6 +79,41 @@ collision_mask = 2
 input_pickable = true
 motion_mode = 1
 script = ExtResource("1_bgb31")
+aggro_radius = 100.0
+leash_radius = 100.0
+attack_range = 60.0
+hop_speed_multiplier = 1.0
+lunge_speed = 100.0
+max_lunge_range = 30.0
+gold_reward = 10.0
+exp_reward = 10.0
+base_stats = {
+"Energy": 0.0,
+"Mana": 0.0,
+"Mana_Regen": 0.0,
+"Slow_res": 0.0,
+"ability_power": 0.0,
+"all_dmg_take_modi": 0.0,
+"armor": 0.0,
+"armor_pen": 0.0,
+"attack_damage": 10.0,
+"attack_range": 175.0,
+"attack_speed": 0.625,
+"crit_chance": 0.0,
+"crit_damage": 1.75,
+"dmg_dealt_modifier": 0.0,
+"gold_gen": 0.0,
+"health": 100.0,
+"health_regen": 1.0,
+"life_steal": 0.0,
+"magic_dmg_take__modi": 1.0,
+"magic_pen": 0.0,
+"magic_res": 0.0,
+"move_speed": 96.0,
+"omnivamp": 0.0,
+"phys_dmg_take_modi": 1.0,
+"skill_damage_multiplier": 1.0
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_yh3sy")
@@ -96,19 +133,19 @@ shape = SubResource("CircleShape2D_bgb31")
 [node name="StatusContainer" type="Node" parent="."]
 
 [node name="HealthBar" type="ProgressBar" parent="."]
-offset_left = -73.0
-offset_top = -87.0
-offset_right = 78.0
-offset_bottom = -60.0
+offset_left = -18.0
+offset_top = -25.0
+offset_right = 18.0
+offset_bottom = -18.0
 mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_4c6s8")
 show_percentage = false
 
 [node name="PatienceBar" type="ProgressBar" parent="."]
-offset_left = -70.0
-offset_top = -58.0
-offset_right = 62.0
-offset_bottom = -51.0
+offset_left = -17.0
+offset_top = -16.0
+offset_right = 17.0
+offset_bottom = -12.0
 mouse_filter = 2
 theme_override_styles/fill = SubResource("StyleBoxFlat_xiib3")
 show_percentage = false
@@ -128,8 +165,16 @@ script = ExtResource("4_xiib3")
 max_slots = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 1.762)
+position = Vector2(0, -10)
+texture = ExtResource("4_pfial")
+hframes = 9
+vframes = 12
+region_rect = Rect2(0, 0, 288, 384)
 
 [node name="ConsumaleInventory" parent="." instance=ExtResource("5_pfial")]
 visible = false
 mouse_filter = 1
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(38, -79)
+rect = Rect2(-57, 50, 37, 44)

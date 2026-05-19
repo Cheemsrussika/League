@@ -14,7 +14,6 @@ func activate(caster: Champion, target_data: Dictionary):
 		DevMenu.add_log("-> FAIL: skill_data is NULL! Did you put the Resource into the inspector?")
 		return 
 	if not skill_data.is_target_valid(target_data, caster):
-		DevMenu.add_log("-> FAIL: %s requires a valid target!"% skill_data.skill_name )
 		return
 		
 	current_level = caster.level

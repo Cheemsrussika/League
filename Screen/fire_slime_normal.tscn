@@ -242,12 +242,7 @@ libraries = {
 }
 
 [node name="Sprite2D" parent="." index="9"]
-position = Vector2(0, 7.1054274e-15)
-scale = Vector2(1.9893229, 1.7770456)
 texture = ExtResource("2_v6ido")
-hframes = 9
-vframes = 12
 frame = 16
 region_enabled = true
-region_rect = Rect2(0, 0, 288, 384)
 region_filter_clip_enabled = true

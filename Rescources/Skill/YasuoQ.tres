@@ -9,13 +9,17 @@
 
 [sub_resource type="Resource" id="Resource_48mi2"]
 script = ExtResource("3_f8p6t")
+base_damage = Array[float]([10.0])
 is_on_hit = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
 [sub_resource type="Resource" id="Resource_yev2t"]
 script = ExtResource("5_22cxm")
 hitbox_scene = ExtResource("4_48mi2")
+hitbox_scale = 20.0
+spawn_offset = 0.0
 duration = 3.0
+flipped = true
 effects_to_apply = Array[ExtResource("1_3c0mn")]([SubResource("Resource_48mi2")])
 metadata/_custom_type_script = "uid://2ioqgwq6681u"
 
@@ -25,6 +29,6 @@ is_auto_attack = true
 target_ground = true
 target_enemies = false
 is_on_hit = true
-base_cooldown = Array[float]([1.0])
+base_cooldown = Array[float]([0.5])
 effects = Array[ExtResource("1_3c0mn")]([SubResource("Resource_yev2t")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

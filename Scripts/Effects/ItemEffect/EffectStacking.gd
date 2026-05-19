@@ -28,12 +28,13 @@ enum TriggerCategory { ANY, ATTACK, SPELL ,ON_HIT}
 @export var max_dmg_increase: float = 0.0    
   
 var _is_processing: bool = false
-func on_damage_dealt(owner: Unit, context: Dictionary):
+
+func on_damage_dealt(owner: Unit, context: Dictionary) -> void:
 	# 1. Basic Guards
-	if context.get("category") == "proc": return
-	
-	
-	# 2. Filter Logic (Same as yours)
+	if context.get("category") == "proc": 
+		return
+		
+	# 2. Filter Category Validation
 	var damage_category = context.get("category", "")
 	var applies_on_hit = context.get("allow_on_hits", false)
 	
@@ -44,14 +45,28 @@ func on_damage_dealt(owner: Unit, context: Dictionary):
 			if damage_category != "spell": return
 		TriggerCategory.ON_HIT:
 			if not applies_on_hit: return    
-			
-	# --- NEW: THE ANTI-LOOP LOCK ---
-	# If we are currently processing damage, ignore any new damage triggers
+
 	if _is_processing: return
-	_is_processing = true # Lock the script!
 	
-	owner.apply_status_effect(status_id, stack_duration, 1, 1.0, owner)
+	var target = context.get("target")
+	if not is_instance_valid(target): return
+
+	# Fetch or apply the status effect node branch
 	var status = owner.status_container.get_node_or_null(status_id)
+	
+	# OPTIMIZATION: If we are already at max stacks AND this item deals damage on max,
+	# trigger the Kraken proc immediately, reset, and skip status re-application calculations!
+	if status and status.stacks >= max_stacks and deal_damage_on_max:
+		status.stacks = 0 # Reset ONLY for Kraken-style items!
+		_is_processing = true
+		_trigger_kraken_damage(owner, target)
+		_is_processing = false
+		owner.recalculate_stats()
+		return # Exit early!
+
+	# Otherwise, standard building logic applies (e.g. Rageblade updates or building up to Kraken)
+	owner.apply_status_effect(status_id, stack_duration, 1, 1.0, owner)
+	status = owner.status_container.get_node_or_null(status_id)
 	
 	if status:
 		status.max_stacks = max_stacks 
@@ -60,24 +75,24 @@ func on_damage_dealt(owner: Unit, context: Dictionary):
 		status.damage_ramp_per_stack = dmg_increase_per_stack
 		status.damage_ramp_cap = max_dmg_increase
 		
-		if status.stacks >= max_stacks:
-			if deal_damage_on_max:
-				# --- NEW: RESET STACKS FIRST! ---
-				# You MUST reset stacks to 0 before dealing the damage
-				status.stacks = 0 
-				_trigger_kraken_damage(owner, context.get("target"))
+		# Secondary Check: If we just hit max stacks on this hit and it is a Kraken item
+		if status.stacks >= max_stacks and deal_damage_on_max:
+			status.stacks = 0 
+			_is_processing = true
+			_trigger_kraken_damage(owner, target)
+			_is_processing = false
 			
 		owner.recalculate_stats()
 
-	# Unlock the script so it can listen for the next real attack
-	_is_processing = false
-
-func _trigger_kraken_damage(owner: Unit, target: Node2D):
-	if not target: return
+func _trigger_kraken_damage(owner: Unit, target: Node2D) -> void:
+	if not is_instance_valid(target): return
 	var level_factor = (owner.level - 1) / 17.0 
 	var base_dmg = lerp(140.0, 310.0, level_factor)
 	var hp_ratio = target.current_health / target.get_total(Unit.Stat.HP)
 	var missing_hp_ratio = 1.0 - hp_ratio
 	var multiplier = 1.0 + (missing_hp_ratio * 0.5)
 	var final_damage = base_dmg * multiplier
-	owner.deal_damage(target, final_damage, "physical", "attack")
+	
+	# NOTE: We pass "proc" as the category so item effects don't infinite-loop!
+	owner.deal_damage(target, final_damage, "physical", "proc")
+	tracker.proc_damage+=final_damage

@@ -161,8 +161,7 @@ text = "
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
-text = "Buy
-"
+text = "Craft"
 
 [node name="HSeparator4" type="HSeparator" parent="RecipeUI/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)

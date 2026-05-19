@@ -43,6 +43,7 @@ func _input(event):
 				current_items = active_forge.available_items
 				open_forge(true)
 				populate_forge()
+				
 			else:
 				DevMenu.add_log("You must be at an Anvil to craft!")
 		else:

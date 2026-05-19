@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://dcogiksog13df"]
 
-[ext_resource type="Texture2D" uid="uid://c3l2lnc5lgsa1" path="res://addons/GitGodot/vodafone-icon.svg" id="1_g7g58"]
 [ext_resource type="Script" uid="uid://cmy6x7dnvskvy" path="res://Scripts/HitBoxSkills/HomingProjectile.gd" id="1_y51xx"]
+[ext_resource type="Texture2D" uid="uid://3qqneu48s6sn" path="res://Icons/Texture2D/warningArrow.png" id="2_y51xx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_y51xx"]
-radius = 17.117243
+radius = 8.0
 
 [node name="Homing_projectile" type="Area2D"]
 scale = Vector2(1.634099, 1.5332404)
@@ -17,5 +17,5 @@ shape = SubResource("CircleShape2D_y51xx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.7881393e-06, 0)
-scale = Vector2(0.06746033, 0.06706115)
-texture = ExtResource("1_g7g58")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_y51xx")

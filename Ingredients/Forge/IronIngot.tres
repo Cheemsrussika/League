@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://b4woqui65vm8d"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_3l40w"]
+[ext_resource type="Texture2D" uid="uid://lfser6jo272b" path="res://Icons/Ingredient Icons/iron_ingot.png" id="2_lttsc"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_w03bc"]
+[ext_resource type="Resource" uid="uid://va2bbnng020b" path="res://Ingredients/Shop/rawIron.tres" id="4_cu3l7"]
+[ext_resource type="Resource" uid="uid://b7lx6jeidfjp3" path="res://Ingredients/Shop/Coal.tres" id="5_couak"]
+
+[resource]
+script = ExtResource("3_w03bc")
+item_type = 1
+item_tier = 2
+item_id = "iron_ingot"
+item_name = "Iron Ingot"
+icon = ExtResource("2_lttsc")
+cost = 14
+recipe = Array[ExtResource("3_w03bc")]([ExtResource("4_cu3l7"), ExtResource("5_couak"), ExtResource("5_couak")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

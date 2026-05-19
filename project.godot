@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="League2D"
-run/main_scene="uid://b0a1owia3oyvo"
+run/main_scene="uid://3dyh02jsb70u"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -40,6 +40,7 @@ version_control/autoload_on_startup=true
 
 [gui]
 
+theme/default_font_multichannel_signed_distance_field=true
 theme/custom_font="uid://byogv8vles4k1"
 
 [input]

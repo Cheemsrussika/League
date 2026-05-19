@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillData" load_steps=9 format=3 uid="uid://to0ydawglaba"]
+[gd_resource type="Resource" script_class="SkillData" load_steps=10 format=3 uid="uid://to0ydawglaba"]
 
 [ext_resource type="Script" uid="uid://3kxrywhco315" path="res://Scripts/Libs/SkillEffect.gd" id="1_ljs1w"]
 [ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="2_mnhsp"]
@@ -7,14 +7,22 @@
 [ext_resource type="PackedScene" uid="uid://bk7hf2ehb6r76" path="res://Screen/projectile.tscn" id="4_p4362"]
 [ext_resource type="Script" uid="uid://c46y6treejpru" path="res://Scripts/Effects/SkillEffect/Effect_ShootProjectile.gd" id="5_bwd7u"]
 
+[sub_resource type="Resource" id="Resource_7heug"]
+script = ExtResource("2_mnhsp")
+stat = 6
+metadata/_custom_type_script = "uid://kxhidfcg30kg"
+
 [sub_resource type="Resource" id="Resource_mnhsp"]
 script = ExtResource("3_7heug")
+base_damage = Array[float]([10.0, 15.0, 20.0, 30.0, 50.0])
+scaling_factors = Array[ExtResource("2_mnhsp")]([SubResource("Resource_7heug")])
 is_on_hit = true
 metadata/_custom_type_script = "uid://cbdb2dledsdi"
 
 [sub_resource type="Resource" id="Resource_ecdwd"]
 script = ExtResource("5_bwd7u")
 projectile_scene = ExtResource("4_p4362")
+max_dis_plus = 200.0
 effects_to_apply = Array[ExtResource("1_ljs1w")]([SubResource("Resource_mnhsp")])
 metadata/_custom_type_script = "uid://c46y6treejpru"
 
@@ -25,5 +33,6 @@ target_ground = true
 target_enemies = false
 is_on_hit = true
 base_cooldown = Array[float]([2.0])
+resource_cost = Array[float]([0.0])
 effects = Array[ExtResource("1_ljs1w")]([SubResource("Resource_ecdwd")])
 metadata/_custom_type_script = "uid://dkxhdgal2mn65"

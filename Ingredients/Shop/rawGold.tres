@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://2ilrt2ovsyvn"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_j31dk"]
+[ext_resource type="Texture2D" uid="uid://cbj2r5l54g7o4" path="res://Icons/Ingredient Icons/raw_gold.png" id="2_j31dk"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_ftt0a"]
+
+[resource]
+script = ExtResource("3_ftt0a")
+item_type = 1
+item_id = "raw_gold"
+item_name = "Raw Gold"
+icon = ExtResource("2_j31dk")
+cost = 21
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

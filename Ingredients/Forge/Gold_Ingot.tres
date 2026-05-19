@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=6 format=3 uid="uid://dbhtklux84ag3"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_y5ed4"]
+[ext_resource type="Texture2D" uid="uid://dhgjy3j70tua6" path="res://Icons/Ingredient Icons/gold_ingot.png" id="2_jpk7k"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_jpk7k"]
+[ext_resource type="Resource" uid="uid://2ilrt2ovsyvn" path="res://Ingredients/Shop/rawGold.tres" id="4_52kv3"]
+[ext_resource type="Resource" uid="uid://b7lx6jeidfjp3" path="res://Ingredients/Shop/Coal.tres" id="5_u5b1n"]
+
+[resource]
+script = ExtResource("3_jpk7k")
+item_type = 1
+item_tier = 2
+item_id = "gold_ingot"
+item_name = "Gold Ingot"
+icon = ExtResource("2_jpk7k")
+cost = 27
+recipe = Array[ExtResource("3_jpk7k")]([ExtResource("4_52kv3"), ExtResource("5_u5b1n"), ExtResource("5_u5b1n"), ExtResource("5_u5b1n")])
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

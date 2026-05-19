@@ -14,7 +14,7 @@ static func get_effect_script(id: String):
 	match id:
 		# --- 1. THE DYNAMIC STAT MODIFIERS ---
 		# ALL of these just use the single STAT_BUFF script now!
-		"stat_buff","doran_ring","Spectral Waltz","kill_tracker_buff", "Phage", "SUFFERING", "shojin", "skill_speed","LichBane", "skill_stats", "skill_stats1", "rage_speed", "Kraken", "conqueror", "stacking_buff", "riftmaker_ramp", "MADNESS", "rageblade","armor_shred","rage_speed", "frozen_heart", "abyssal_curse": 
+		"stat_buff","doran_ring","Spectral Waltz","kill_tracker_buff", "Phage", "SUFFERING", "shojin", "skill_speed","LichBane", "skill_stats", "skill_stats1", "rage_speed", "Kraken", "conqueror", "stacking_buff", "riftmaker_ramp", "MADNESS", "rageblade","armor_shred","rage_speed", "frozen_heart", "abyssal_curse","conqueror_buff": 
 			return STAT_BUFF
 		
 		# --- 2. THE UNIQUE MECHANICS ---

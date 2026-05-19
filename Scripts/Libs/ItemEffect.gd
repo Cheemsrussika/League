@@ -10,6 +10,7 @@ var last_trigger_time: int = -9999999
 
 var tracker: Dictionary = {
 	"damage": 0.0,
+	"proc_damage":0.0,
 	"healing": 0.0,
 	"procs": 0
 }
@@ -26,6 +27,8 @@ func get_tooltip_extra() -> String:
 	var text=""
 	if tracker.damage>0:
 		text+= str("Damage dealt:%.1f\n"%[tracker.damage])
+	if tracker.proc_damage>0:
+		text+=str("Damge proc:%1.f\n"%[tracker.proc_damage])
 	if tracker.healing:
 		text+= str("Healed:%.1f\n"%[tracker.healing])
 	if tracker.procs:

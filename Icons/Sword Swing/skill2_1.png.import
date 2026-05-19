@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crch75027qrrw"
-path="res://.godot/imported/lapis_lazuli.png-15322cecd2eff14bf6c2a112bd3c280a.ctex"
+uid="uid://c67wmvtodj4e1"
+path="res://.godot/imported/skill2_1.png-aa95ebd255cea76b013eb0e898ffe333.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Ingredients/lapis_lazuli.png"
-dest_files=["res://.godot/imported/lapis_lazuli.png-15322cecd2eff14bf6c2a112bd3c280a.ctex"]
+source_file="res://Icons/Sword Swing/skill2_1.png"
+dest_files=["res://.godot/imported/skill2_1.png-aa95ebd255cea76b013eb0e898ffe333.ctex"]
 
 [params]
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://b2rul6opysou6"]
+[gd_scene load_steps=17 format=3 uid="uid://b2rul6opysou6"]
 
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="1_es06s"]
-[ext_resource type="Texture2D" uid="uid://dbuej3o5ykxxk" path="res://Icons/Enemy/SmallSlime.png" id="2_2j1k6"]
 
 [sub_resource type="Animation" id="Animation_2j1k6"]
 length = 0.001
@@ -242,12 +241,5 @@ libraries = {
 }
 
 [node name="Sprite2D" parent="." index="9"]
-position = Vector2(0, 7.1054274e-15)
-scale = Vector2(1.9893229, 1.7770456)
-texture = ExtResource("2_2j1k6")
-hframes = 9
-vframes = 12
 frame = 16
-region_enabled = true
-region_rect = Rect2(0, 0, 288, 384)
 region_filter_clip_enabled = true

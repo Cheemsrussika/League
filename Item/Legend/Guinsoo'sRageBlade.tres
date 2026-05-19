@@ -29,6 +29,7 @@ script = ExtResource("3_d1sdp")
 status_id = "rageblade"
 stack_duration = 3.0
 trigger_category = 1
+deal_damage_on_max = true
 stats_per_stack = {
 "attack_speed": 0.08
 }
@@ -39,6 +40,7 @@ metadata/_custom_type_script = "uid://bmrpdt1qsmw8s"
 [resource]
 script = ExtResource("2_sfvo4")
 item_tier = 4
+item_id = "rage_blade"
 item_name = "Guinsoo's Rageblade"
 icon = ExtResource("3_qobr8")
 cost = 3000

@@ -1,11 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://cwgkws5w3k6uc"]
+[gd_scene load_steps=7 format=3 uid="uid://cwgkws5w3k6uc"]
 
 [ext_resource type="Script" uid="uid://c1nt2mkrd8j4i" path="res://Scripts/HitBoxSkills/SkillHitbox.gd" id="1_8j521"]
+[ext_resource type="Texture2D" uid="uid://c67wmvtodj4e1" path="res://Icons/Sword Swing/skill2_1.png" id="2_tpsly"]
+[ext_resource type="Texture2D" uid="uid://cgvqy4lfwkj61" path="res://Icons/Sword Swing/skill2_2.png" id="3_eria3"]
+[ext_resource type="Texture2D" uid="uid://bj07er3f20qjg" path="res://Icons/Sword Swing/skill2_3.png" id="4_2bp4x"]
+[ext_resource type="Texture2D" uid="uid://biq8gabit5av5" path="res://Icons/Sword Swing/skill2_4.png" id="5_4w5s2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8j521"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tpsly")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2bp4x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_eria3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4w5s2")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
 
 [node name="SwordHitBox" type="Area2D"]
+rotation = -0.30342722
 collision_layer = 0
 collision_mask = 31
 script = ExtResource("1_8j521")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -15, 0, 15, 110, 15, 223, 0, 110, -15)
+position = Vector2(0, 5.2)
+scale = Vector2(1, 1.5416666)
+polygon = PackedVector2Array(9, -18.94054, 10, -37.751354, 30, -18.94054, 39, -1.427027, 33, 15.4378395, 5, 37.491894, -18, 26.464867, 4, 4.410811)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 0)
+rotation = 0.62717235
+sprite_frames = SubResource("SpriteFrames_8j521")
+frame = 3
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

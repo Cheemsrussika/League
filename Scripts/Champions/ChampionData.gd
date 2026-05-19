@@ -4,6 +4,7 @@ class_name ChampionData
 @export_group("Identity")
 @export var champion_name: String
 @export var portrait: Texture2D
+@export var sprite_sheet: Texture2D
 # NEW: Drag the scene with Sprite2D/AnimationPlayer here
 @export var visual_scene: PackedScene 
 @export_group("RPG Classification")

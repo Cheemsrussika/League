@@ -45,6 +45,7 @@ metadata/_custom_type_script = "uid://0yr3fmnumy7u"
 [resource]
 script = ExtResource("2_8q7fu")
 item_tier = 4
+item_id = "rift_maker"
 item_name = "RiftMaker"
 icon = ExtResource("2_ts7uq")
 cost = 3100

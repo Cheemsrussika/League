@@ -2,7 +2,7 @@ extends Node
 class_name PlayerInputComponent
 
 @export var champion: Champion 
-
+var last_facing: String = "down"
 func _ready():
 	if not champion and get_parent() is Champion:
 		champion = get_parent()
@@ -11,9 +11,7 @@ func _physics_process(delta):
 	if not is_instance_valid(champion) or champion.is_dead: return
 	
 	# --- WASD MOVEMENT ---
-	# We only process keyboard movement if the player isn't locked in an animation/dash
 	if not champion.is_dashing and not champion.is_winding_up and not champion.pending_skill_slot:
-		# NOTE: You will need to set these 4 actions in your Project Settings -> Input Map
 		var input_dir = Vector2(
 			Input.get_axis("move_left", "move_right"),
 			Input.get_axis("move_up", "move_down")
@@ -21,17 +19,16 @@ func _physics_process(delta):
 		
 		if input_dir != Vector2.ZERO:
 			champion.velocity = input_dir * champion.get_current_move_speed()
+			# NEW: Tell the body to walk!
+			update_movement_anim(input_dir, true)
 		else:
-			# Apply friction to stop when keys are released
 			champion.velocity = champion.velocity.move_toward(Vector2.ZERO, 2000 * delta)
-	# ---------------------------------------------------------
+			# NEW: Tell the body to idle!
+			update_movement_anim(Vector2.ZERO, false)
+			
 	# --- NEW: CONTINUOUS "HOLD-TO-ATTACK" LOGIC ---
-	# ---------------------------------------------------------
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if champion.auto_attack_slot and champion.auto_attack_slot.skill_data:
-			
-			# The game checks this every frame, but the combo will 
-			# ONLY advance when the Attack Speed cooldown finishes!
 			if champion.auto_attack_slot.is_ready():
 				champion.stop_movement()
 				champion.current_target = null 
@@ -39,13 +36,12 @@ func _physics_process(delta):
 				if champion.is_winding_up: 
 					champion.is_winding_up = false
 				
+				# FIX: Remove face_mouse_direction() from here.
+				# Let _handle_skill_cast manage the facing direction cleanly!
 				_handle_skill_cast(champion.auto_attack_slot)
-				
-				# Advance to the next attack in the combo!
 				champion.advance_combo()
-	# Execute combat processing (which now just handles dashing, winding up, and move_and_slide)
+				
 	champion.execute_combat_logic(delta)
-
 
 func _unhandled_input(event):
 	if not is_instance_valid(champion) or champion.is_dead: return
@@ -83,7 +79,7 @@ func _unhandled_input(event):
 # --- HELPER ---
 func _handle_skill_cast(slot: SkillSlot):
 	if not slot or not slot.skill_data: return
-	
+
 	var data = slot.skill_data
 	var found_unit = null
 	
@@ -94,13 +90,14 @@ func _handle_skill_cast(slot: SkillSlot):
 	
 	if filter != "NONE":
 		found_unit = _get_target_under_mouse(filter)
-	
 
 	if found_unit:
 		var distance = champion.global_position.distance_to(found_unit.global_position)
 		var current_cast_range = data.cast_range
+		
 		if data.is_auto_attack:
-			current_cast_range = champion.get_total_stat(Unit.Stat.RANGE)
+			var stat_range = champion.get_total(Unit.Stat.RANGE)
+			current_cast_range = max(stat_range, data.cast_range)
 			
 		if current_cast_range > 0 and distance > current_cast_range:
 			DevMenu.add_log("Out of Range! Moving to target.")
@@ -115,12 +112,25 @@ func _handle_skill_cast(slot: SkillSlot):
 		"target_unit": found_unit
 	}
 	
+	calculate_facing_direction()
+
+	# 2. Build the dynamic body animation name (e.g., "attack_up", "cast_left")
+	var full_anim_name = data.body_animation + "_" + last_facing
+	
+	# 3. Play the directional animation, or gracefully drop back to a directional idle
+	if champion.anim_player and champion.anim_player.has_animation(full_anim_name):
+		champion.anim_player.play(full_anim_name)
+	elif champion.anim_player:
+		# If your character sheet doesn't have "attack_up", they will just 
+		# look up in their "idle_up" pose while the VFX sword slash handles the 360 visual!
+		champion.anim_player.play("idle_" + last_facing)
+		
+	# 4. Activate the skill rules (Spawns your 360-degree rotated VFX hitboxes!)
 	slot.activate(champion, target_data)
 	
 	var lvl_idx = clamp(slot.current_level - 1, 0, data.resource_cost.size() - 1)
 	var actual_cost = data.resource_cost[lvl_idx]
 	champion.on_skill_cast(data.skill_name, actual_cost, false)
-	
 func _get_target_under_mouse(filter_type: String = "ANY") -> Node2D:
 	var space = champion.get_world_2d().direct_space_state
 	var query = PhysicsPointQueryParameters2D.new()
@@ -146,3 +156,60 @@ func _get_target_under_mouse(filter_type: String = "ANY") -> Node2D:
 				return actual_unit
 			
 	return null
+# --- ANIMATION HELPERS ---
+
+# --- ANIMATION HELPERS ---
+
+func update_movement_anim(input_dir: Vector2, is_moving: bool):
+	# Use 'animator' instead of checking the node tree every frame via string strings
+	if not is_instance_valid(champion) or not champion.anim_player: return
+	
+	if input_dir.x > 0: last_facing = "right"
+	elif input_dir.x < 0: last_facing = "left"
+	elif input_dir.y < 0: last_facing = "up"
+	elif input_dir.y > 0: last_facing = "down"
+	
+	var anim_state = "walk_" if is_moving else "idle_"
+	champion.anim_player.play(anim_state + last_facing)
+
+
+func calculate_facing_direction() -> String:
+	if not is_instance_valid(champion): return last_facing
+	
+	var mouse_pos = champion.get_global_mouse_position()
+	var dir_to_mouse = (mouse_pos - champion.global_position).normalized()
+	var angle = dir_to_mouse.angle() 
+	
+	const QUARTER_PI = PI / 4.0
+	if angle >= -QUARTER_PI and angle < QUARTER_PI:
+		last_facing = "right"
+	elif angle >= QUARTER_PI and angle < 3 * QUARTER_PI:
+		last_facing = "down"
+	elif angle >= -3 * QUARTER_PI and angle < -QUARTER_PI:
+		last_facing = "up"
+	else:
+		last_facing = "left"
+		
+	return last_facing
+	
+func face_mouse_direction():
+	if not is_instance_valid(champion): return
+	
+	var mouse_pos = champion.get_global_mouse_position()
+	var dir_to_mouse = (mouse_pos - champion.global_position).normalized()
+	var angle = dir_to_mouse.angle() 
+	
+	# Convert 360 degree angle into 4 quadrants
+	const QUARTER_PI = PI / 4.0
+	if angle >= -QUARTER_PI and angle < QUARTER_PI:
+		last_facing = "right"
+	elif angle >= QUARTER_PI and angle < 3 * QUARTER_PI:
+		last_facing = "down"
+	elif angle >= -3 * QUARTER_PI and angle < -QUARTER_PI:
+		last_facing = "up"
+	else:
+		last_facing = "left"
+		
+	# Snap the body to an idle pose facing the mouse while the weapon handles the 360 slash
+	if champion.has_node("AnimationPlayer"):
+		champion.get_node("AnimationPlayer").play("idle_" + last_facing)

@@ -1,7 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://dfy31dfkgea4m"]
 
 [ext_resource type="PackedScene" uid="uid://dw53eopscb1l0" path="res://Screen/monster.tscn" id="1_rcf7s"]
-[ext_resource type="Texture2D" uid="uid://1r2d88r6v8qu" path="res://Icons/Enemy/SmallSlimeFire.png" id="2_rcf7s"]
 [ext_resource type="PackedScene" uid="uid://bk7hf2ehb6r76" path="res://Screen/projectile.tscn" id="2_rj16r"]
 [ext_resource type="Script" uid="uid://kxhidfcg30kg" path="res://Scripts/Libs/ScalingFactor.gd" id="3_7ci42"]
 [ext_resource type="Script" uid="uid://dthw5x2c5soji" path="res://Scripts/Effects/SkillEffect/Effect_ApplyOnHit.gd" id="4_uh3fy"]
@@ -209,6 +208,9 @@ _data = {
 &"walk_Up": SubResource("Animation_kgfbn")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xrkga"]
+load_path = "res://.godot/imported/SmallSlimeFire.png-befd8e8031b07d27afaadbcc7684b6ba.ctex"
+
 [node name="FireSlimeNormal2" instance=ExtResource("1_rcf7s")]
 scale = Vector2(0.5, 0.5)
 attack_range = 300.0
@@ -225,12 +227,7 @@ libraries = {
 }
 
 [node name="Sprite2D" parent="." index="9"]
-position = Vector2(0, 7.1054274e-15)
-scale = Vector2(1.9893229, 1.7770456)
-texture = ExtResource("2_rcf7s")
-hframes = 9
-vframes = 12
+texture = SubResource("CompressedTexture2D_xrkga")
 frame = 16
 region_enabled = true
-region_rect = Rect2(0, 0, 288, 384)
 region_filter_clip_enabled = true

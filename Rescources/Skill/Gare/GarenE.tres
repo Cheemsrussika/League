@@ -15,14 +15,13 @@ metadata/_custom_type_script = "uid://cbdb2dledsdi"
 [sub_resource type="Resource" id="Resource_a5ybg"]
 script = ExtResource("2_4arlh")
 hitbox_scene = ExtResource("2_p5fim")
-hitbox_scale = 200.0
-is_persistent = true
-tick_rate = 0.25
+hitbox_scale = 40.0
 effects_to_apply = Array[ExtResource("1_vepns")]([SubResource("Resource_qu4te")])
 metadata/_custom_type_script = "uid://27p3t38xowvx"
 
 [resource]
 script = ExtResource("3_p5fim")
+is_auto_attack = true
 target_ground = true
 target_enemies = false
 cast_range = 0.0

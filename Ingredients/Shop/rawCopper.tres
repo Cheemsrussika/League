@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cxc8fs3qc36qo"]
+
+[ext_resource type="Script" uid="uid://b7quvsdvkjvdu" path="res://Scripts/Libs/ItemEffect.gd" id="1_574k5"]
+[ext_resource type="Texture2D" uid="uid://qc6aqdpk0wjt" path="res://Icons/Ingredient Icons/raw_copper.png" id="2_574k5"]
+[ext_resource type="Script" uid="uid://76cpvgsppjvf" path="res://Scripts/Libs/ItemData.gd" id="3_myks8"]
+
+[resource]
+script = ExtResource("3_myks8")
+item_type = 1
+item_id = "raw_copper"
+item_name = "Raw Copper"
+icon = ExtResource("2_574k5")
+cost = 6
+metadata/_custom_type_script = "uid://76cpvgsppjvf"

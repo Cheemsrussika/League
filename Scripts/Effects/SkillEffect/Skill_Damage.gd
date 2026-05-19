@@ -5,11 +5,9 @@ class_name Effect_Damage
 @export_enum("physical", "magic", "true") var damage_type: String = "physical"
 @export var base_damage: Array[float] = [80.0, 120.0, 160.0, 200.0, 240.0]
 @export var can_spell_crit: bool = false
-# This is the magic part: a list of scaling LEGOs
 @export var scaling_factors: Array[ScalingFactor] = []
 
 @export_group("Execution Logic")
-## Percentage of missing health to deal as bonus damage (e.g. 0.25 = 25%)
 @export var missing_hp_scaling: float = 0.0
 
 @export_group("On-Hit Settings")
@@ -19,84 +17,79 @@ class_name Effect_Damage
 
 func on_execute(caster: Node2D, skill_level: int, target_data: Dictionary, _ref: Resource) -> void:
 	var target = target_data.get("target_unit")
+	if target and target.team == caster.team: 
+		return
 	if target and target.has_method("take_damage"):
 		var lvl_idx = clamp(skill_level - 1, 0, base_damage.size() - 1)
 		var total_dmg = base_damage[lvl_idx]
 		
-		# 1. Standard Scaling (AD/AP)
+		# 1. Standard Scaling
 		for factor in scaling_factors:
-			# --- BUG FIX: Use our smart function so Caps and Target scaling actually work! ---
 			total_dmg += factor.calculate_value(caster, target)
 		
-		# 2. Execution Scaling (Garen R Logic)
+		# 2. Execution Scaling
 		if missing_hp_scaling > 0 and "current_health" in target and "max_health" in target:
 			var missing_hp = target.max_health - target.current_health
 			total_dmg += missing_hp * missing_hp_scaling
 			
-		# 3. --- NEW: APPLY SKILL DAMAGE MULTIPLIER ---
-		# We multiply this AFTER all the flat base/scaling damage is added together!
+		# 3. Apply Skill Multiplier
 		var skill_mult = caster.get_total(Unit.Stat.SKILL_DAMAGE_MULT)
 		total_dmg *= (1.0 + skill_mult)
 			
 		var effective_on_hit = _ref.get("is_on_hit") if _ref else is_on_hit
 		var effective_lifesteal = _ref.get("allow_lifesteal") if _ref else allow_lifesteal
 		var effective_mult = _ref.get("on_hit_multiplier") if _ref else on_hit_multiplier
-
-		# Check if the hitbox told us this is an AoE spell!
 		var is_aoe = target_data.get("is_aoe", false)
 		var is_a_crit = false
 		
 		if can_spell_crit:
-			# Roll a random number between 0.0 and 100.0
 			var roll = randf() * 100.0
 			if roll <= caster.get_total(Unit.Stat.CRIT):
 				is_a_crit = true
+
+		# --- FIX 1: NATIVE BUCKET CREATION ---
+		# We start our bucket with the primary skill damage
+		var damage_buckets = { damage_type: total_dmg }
 				
 		if effective_on_hit:
-			# 1. Prepare the context 
+			# 1. Prepare Context (Pass the bucket by reference!)
 			var on_hit_context = {
 				"target": target,
-				"damage": total_dmg, # Passive can modify this directly
 				"is_crit": is_a_crit,
-				"damage_type": damage_type,
+				"damage_type": damage_type, # The primary type
 				"on_hit_mult": effective_mult,
-				# ADD THIS: Create a fake bucket so passives don't crash!
-				"buckets": { damage_type: total_dmg } 
+				"buckets": damage_buckets 
 			}
 
 			# 2. Trigger passives
+			# Items like your example will now safely inject new keys into 'damage_buckets'
 			caster._trigger_passive_effects("on_attack", on_hit_context)
-
-			# 3. Update damage in case a passive or item changed it
-			# We check both the flat 'damage' and the 'buckets' to be safe
-			if on_hit_context.has("buckets"):
-				total_dmg = 0
-				for type in on_hit_context["buckets"]:
-					total_dmg += on_hit_context["buckets"][type]
-			else:
-				total_dmg = on_hit_context["damage"]
 
 		var is_basic_attack = target_data.get("is_basic_attack", false)
 		var final_category = "attack" if is_basic_attack else "spell"
 
-		# Pack EVERYTHING into the context so Items don't miss it!
-		var skill_context = {
-			"allow_on_hits": effective_on_hit,
-			"allow_lifesteal": effective_lifesteal,
-			"on_hit_mult": effective_mult,
-			"is_aoe": is_aoe,               # Important for Omnivamp penalties
-			"amount": total_dmg,            # Black Cleaver needs this
-			"damage_type": damage_type,     # Burn and Cleaver need this
-			"category": final_category      # Burn needs this
-		}
+		# --- FIX 2: LOOP AND EXECUTE THE BUCKETS ---
+		for current_type in damage_buckets.keys():
+			var amount = damage_buckets[current_type]
+			
+			# Skip empty buckets so we don't spawn "0" damage floating texts
+			if amount <= 0: 
+				continue
 
-# --- THE FIX ---
-		# Check if the CASTER is the player (who has the complex deal_damage math)
-		if caster.has_method("deal_damage"):
-			caster.deal_damage(target, total_dmg, damage_type, final_category, is_a_crit, skill_context)
+			var skill_context = {
+				"allow_on_hits": effective_on_hit,
+				"allow_lifesteal": effective_lifesteal,
+				"on_hit_mult": effective_mult,
+				"is_aoe": is_aoe,               
+				"amount": amount,             
+				"damage_type": current_type, # <-- CRUCIAL: Uses the specific bucket type
+				"category": final_category      
+			}
 		
-		# If the caster is a Monster, tell the target to take the damage directly!
-		else:
-			if target.has_method("take_damage"):
-				# FIX: We now pass all 3 required arguments: amount, type, and source!
-				target.take_damage(total_dmg, damage_type, caster)
+			if caster.has_method("deal_damage"):
+				# Champion routing pipeline
+				caster.deal_damage(target, amount, current_type, final_category, is_a_crit, skill_context)
+			else:
+				# Monster direct pipeline
+				if target.has_method("take_damage"):
+					target.take_damage(amount, current_type, caster)

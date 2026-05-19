@@ -74,10 +74,10 @@ func _update_resource_logic():
 	
 	match champion.resource_type:
 		Champion.ResourceType.MANA:
-			max_res = champion.get_total(Champion.Stat.MANA)
+			max_res = champion.current_resource
 			resource_color = Color("1a75ff") # Blue
 		Champion.ResourceType.ENERGY:
-			max_res = champion.get_total(Champion.Stat.ENERGY)
+			max_res = champion.current_resource
 			resource_color = Color("fff300") # Yellow
 		Champion.ResourceType.FURY:
 			max_res = 100.0 # Example cap, change if Fury scales!

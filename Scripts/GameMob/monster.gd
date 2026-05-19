@@ -324,7 +324,7 @@ func _process_attacking(delta):
 				# --- MELEE LUNGE LOGIC ---
 				velocity = lunge_direction * lunge_speed 
 				if is_instance_valid(current_target) and not current_target.is_dead:
-					var hit_distance = 60.0 
+					var hit_distance = 20
 					if global_position.distance_to(current_target.global_position) <= hit_distance:
 						current_target.take_damage(get_total(Stat.AD), "physical", self)
 						current_attack_phase = AttackPhase.RECOVERY

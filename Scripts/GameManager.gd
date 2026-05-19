@@ -28,7 +28,7 @@ func start_game(champion_scene: PackedScene, spawn_parent: Node2D, fallback_posi
 	var cam = Camera2D.new()
 	cam.set_script(load("res://Scripts/PlayerCamera.gd")) 
 	cam.enabled = true
-	cam.zoom = Vector2(0.5, 0.5)
+	cam.zoom = Vector2(2, 2)
 	spawn_parent.add_child(cam)
 	cam.target_unit = new_hero
 	cam.global_position = final_pos 
